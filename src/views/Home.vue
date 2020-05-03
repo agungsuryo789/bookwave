@@ -6,9 +6,9 @@
             <v-container class="my-12">
                 <v-row>
                     <v-col class="col-banner-text">
-                        <h2 class="my-5">Halo Saya AHA</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente unde dolorum iste optio, repellendus laborum recusandae sit natus voluptate, tempore magni aliquam voluptatum illo magnam corporis doloremque! Cupiditate, alias hic.</p>
-                        <v-btn rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
+                        <h1 class="my-5">Halo Saya AHA</h1>
+                        <p class="my-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente unde dolorum iste optio, repellendus laborum recusandae sit natus voluptate, tempore magni aliquam voluptatum illo magnam corporis doloremque! Cupiditate, alias hic.</p>
+                        <v-btn x-large="true" block="true" rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
                     </v-col>
                     <v-col class="col-banner-img">
                         <v-img class="banner-img-1" src="../assets/image/aha-mobile.png"></v-img>
@@ -23,9 +23,9 @@
                     <v-col>
                         <v-img class="hero-img-1" src="../assets/image/aha-hero.png" alt="AHA Description Section" aspect-ratio="3" contain></v-img>
                     </v-col>
-                    <v-col>
-                        <h2 class="my-5">Apa yang AHA miliki ?</h2>
-                        <p style="font-size:18px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis laborum ex atque in libero. Libero eum labore illum ipsa blanditiis earum, aliquid mollitia doloremque quidem, odit quas animi dolores consequuntur!</p>
+                    <v-col class="col-hero-text">
+                        <h1 class="my-5">Apa yang AHA miliki ?</h1>
+                        <p class="pr-5" style="font-size:18px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis laborum ex atque in libero. Libero eum labore illum ipsa blanditiis earum, aliquid mollitia doloremque quidem, odit quas animi dolores consequuntur!</p>
                         <a href="">Lihat Lebih Banyak</a>
                     </v-col>
                 </v-row>
@@ -98,6 +98,7 @@ export default {
             font-size: 20px;
             letter-spacing: 1px;
         }
+
     }
 
     .col-banner-img {
@@ -115,7 +116,12 @@ export default {
 .HeroSection {
 
     .row-hero-1,
-    .row-hero-2 {}
+    .row-hero-2 {
+        h1 {
+            color: #D65F5F;
+            font-weight: bold;
+        }
+    }
 
     .hero-2 {
         border: 1px solid green;

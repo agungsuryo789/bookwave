@@ -4,7 +4,15 @@
       <v-row>
         <v-col>
           <v-app-bar flat fixed class="app-bar">
-            <v-toolbar-title>AHA</v-toolbar-title>
+            <!-- <v-toolbar-title>AHA</v-toolbar-title> -->
+            <v-img
+              alt="Vuetify Logo"
+              class="shrink ml-5 mr-2"
+              contain
+              src="../assets/image/Union.png"
+              transition="scale-transition"
+              width="100"
+            />
             <v-spacer></v-spacer>
             <v-btn rounded color="#39DF8C" depressed>Start Trial</v-btn>
           </v-app-bar>
