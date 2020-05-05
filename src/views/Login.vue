@@ -1,7 +1,7 @@
 <template>
 <div class="Login">
     <v-app>
-        <Navbar />
+        <NavbarSection />
         <v-container fluid>
             <v-row>
                 <v-col cols="12">
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import NavbarSection from '@/components/NavbarSection.vue'
 /* eslint-disable */
 export default {
     name: 'Login',
     components: {
-        Navbar
+        NavbarSection
     }
 }
 </script>

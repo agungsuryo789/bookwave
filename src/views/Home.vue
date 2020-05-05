@@ -1,6 +1,6 @@
 <template>
 <div class="home">
-    <Navbar />
+    <NavbarSection />
     <header class="banner">
         <img class="banner-bg-img-1" src="@/assets/image/banner-1.png">
         <img class="banner-bg-img-2" src="@/assets/image/banner-2.png">
@@ -9,7 +9,7 @@
                 <v-col class="col-banner-text">
                     <h1 class="my-5">Halo Saya AHA</h1>
                     <p class="my-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente unde dolorum iste optio, repellendus laborum recusandae sit natus voluptate, tempore magni aliquam voluptatum illo magnam corporis doloremque! Cupiditate, alias hic.</p>
-                    <v-btn x-large="true" rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
+                    <v-btn x-large rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
                 </v-col>
                 <v-col class="col-banner-img">
                     <v-img class="banner-img-1" src="@/assets/image/aha-mobile.png"></v-img>
@@ -22,7 +22,7 @@
         <v-container fluid>
             <v-row class="row-hero-1">
                 <v-col>
-                    <v-img class="hero-img-1" src="@/assets/image/aha-hero.png" alt="AHA Description Section" aspect-ratio="3" contain></v-img>
+                    <v-img class="hero-img-1" src="@/assets/image/aha-hero.svg" alt="AHA Description Section" aspect-ratio="3" contain></v-img>
                 </v-col>
                 <v-col class="col-hero-text">
                     <h1 class="my-5">Apa yang AHA miliki ?</h1>
@@ -83,7 +83,7 @@
             </v-row>
             <v-row>
                 <v-col class="text-center d-flex flex-column justify-center align-center">
-                    <v-btn x-large="true" rounded color="#39DF8C" depressed>Lihat lebih banyak</v-btn>
+                    <v-btn x-large rounded color="#39DF8C" depressed>Lihat lebih banyak</v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -93,13 +93,13 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import NavbarSection from '@/components/NavbarSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 /* eslint-disable */
 export default {
     name: 'Home',
     components: {
-        Navbar,
+        NavbarSection,
         FooterSection
     },
     data: () => ({
