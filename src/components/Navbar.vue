@@ -44,7 +44,6 @@ export default {
     .app-bar {
         color: white;
         background-color: #D65F5F;
-
         button {
             color: white;
             text-transform: none;
