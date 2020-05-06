@@ -55,7 +55,9 @@
             "parser": "babel-eslint"
         },
         "rules": {
-            "no-tabs": 0
+            "no-tabs": 0,
+            "quotes": 0,
+            "semi": 0
         },
         "overrides": [{
             "files": [

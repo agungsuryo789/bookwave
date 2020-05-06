@@ -4,13 +4,15 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-// route level Lazy Load
-const About = () =>
-    import ('../views/About.vue')
+// Lazy load route level
 const Home = () =>
     import ('../views/Home.vue')
+const About = () =>
+    import ('../views/About.vue')
 const Login = () =>
     import ('../views/Login.vue')
+const Dashboard = () =>
+    import ('../views/DashboardComponent.vue')
 
 const routes = [{
         path: '/',
@@ -26,6 +28,11 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: Login
+    },
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: Dashboard
     }
 ]
 
