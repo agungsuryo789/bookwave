@@ -81,7 +81,7 @@
             </v-chip-group>
           </v-col>
         </v-row>
-        <v-row class="my-9 justify-center align-center" no-gutters>
+        <v-row class="my-9 justify-start align-center" no-gutters>
           <template v-for="n in 6">
             <v-col
               :key="n"
@@ -101,7 +101,7 @@
               class="my-5"
               style="max-width:300px;"
             >
-              <BookCardComponent />
+              <BookCard />
             </v-col>
           </template>
         </v-row>
@@ -125,13 +125,13 @@
 <script>
 /* eslint-disable */
 import NavbarSection from "@/components/NavbarSection.vue";
-import BookCardComponent from "@/components/BookCardComponent.vue";
+import BookCard from "@/components/BookCard.vue";
 import FooterSection from "@/components/FooterSection.vue";
 export default {
   name: "Home",
   components: {
     NavbarSection,
-    BookCardComponent,
+    BookCard,
     FooterSection
   },
   data: () => ({

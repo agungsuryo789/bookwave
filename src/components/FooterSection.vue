@@ -1,7 +1,7 @@
 <template>
   <div class="footer-body">
     <v-card class="mt-12" height="250">
-      <div class="d-flex flex-row justify-center align-center footer-links">
+      <div class="d-flex flex-lg-row flex-md-column justify-center align-center footer-links">
         <div>
           <img
             alt="AHA Footer Library"
@@ -121,25 +121,20 @@ export default {
       margin: 0 30px;
     }
   }
-
   .table-footer-links {
     margin: 5px 0;
     width: 100%;
-
     td,
     th {
       padding: 2px 15px;
     }
-
     a {
       text-decoration: none;
       color: black;
     }
   }
-
   .footer-list-sitelink {
     list-style: none;
-
     li {
       display: inline;
       padding: 4px 6px;

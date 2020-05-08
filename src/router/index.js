@@ -11,8 +11,10 @@ const About = () =>
     import ('../views/About.vue')
 const Login = () =>
     import ('../views/Login.vue')
-const Dashboard = () =>
-    import ('../views/DashboardComponent.vue')
+const LandingUser = () =>
+    import ('../views/LandingUser.vue')
+const BookPage = () =>
+    import ('../components/UserBookSection.vue')
 
 const routes = [{
         path: '/',
@@ -30,9 +32,14 @@ const routes = [{
         component: Login
     },
     {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: Dashboard
+        path: '/home',
+        name: 'LandingUser',
+        component: LandingUser
+    },
+    {
+        path: '/home/book-page',
+        name: 'BookPage',
+        component: BookPage
     }
 ]
 

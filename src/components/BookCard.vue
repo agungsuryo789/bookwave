@@ -5,10 +5,10 @@
         class="book-card-img mx-auto"
         width="120"
         height="120"
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        src="https://www.tibs.org.tw/images/default.jpg"
       ></v-img>
       <v-btn class="book-bookmark-button" icon>
-        <v-icon>mdi-bookmark</v-icon>
+        <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </div>
     <a href="#" class="book-card-title" v-ripple>
@@ -24,18 +24,18 @@
 <script>
 /* eslint-disable */
 export default {
-  name: "BookCardComponent"
+  name: "BookCard"
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .book-card {
   .book-card-color {
     height: 180px;
     position: relative;
     border-radius: 8px;
     background-color: #e76464;
-    box-shadow: 4px 4px rgb(199, 199, 199);
+    box-shadow: 2px 4px 4px 2px rgb(160, 83, 83);
     .book-bookmark-button {
       position: absolute;
       bottom: 5px;
