@@ -24,11 +24,11 @@
     </header>
     <section>
       <v-container>
-        <a
-          href="#"
+        <router-link
+          to="/home/book-page"
           class="font-weight-black book-section-title"
           @click="bookSectionAction"
-        >Trending Books</a>
+        >Trending Books</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
         <v-row class="my-9 justify-start align-center" no-gutters>
           <template v-for="n in 4">
@@ -58,7 +58,11 @@
             </v-col>
           </template>
         </v-row>
-        <a href class="font-weight-black book-section-title" @click="bookSectionAction">AHA Episodes</a>
+        <router-link
+          to="/home/book-page"
+          class="font-weight-black book-section-title"
+          @click="bookSectionAction"
+        >AHA Episodes</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
         <v-row class="my-9 justify-start align-center" no-gutters>
           <template v-for="n in 5">
@@ -66,7 +70,7 @@
               :key="n"
               v-if="loadSkeleton"
               lg="3"
-              md="12"
+              md="6"
               sm="12"
               xs="12"
               class="my-3 mx-1 justify-start"
@@ -76,14 +80,18 @@
                 <v-skeleton-loader class="mx-auto" max-width="40" type="avatar"></v-skeleton-loader>
               </div>
             </v-col>
-            <v-col :key="n" v-if="!loadSkeleton" lg="3" md="12" sm="12" xs="12" class="my-3 mx-1">
+            <v-col :key="n" v-if="!loadSkeleton" lg="3" md="6" sm="12" xs="12" class="my-3 mx-1">
               <a href="#" style="text-decoration:none;">
                 <EpisodeCard />
               </a>
             </v-col>
           </template>
         </v-row>
-        <a href class="font-weight-black book-section-title" @click="bookSectionAction">Newest Books</a>
+        <router-link
+          to="/home/book-page"
+          class="font-weight-black book-section-title"
+          @click="bookSectionAction"
+        >Newest Books</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
         <v-row class="my-9 justify-start align-center" no-gutters>
           <template v-for="n in 4">
@@ -133,7 +141,7 @@ export default {
     underlineValue: 15
   }),
   methods: {
-    bookSectionAction (event) {
+    bookSectionAction(event) {
       this.underlineValue = 100;
     }
   }

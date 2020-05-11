@@ -11,14 +11,16 @@
             color="#D65F5F"
             v-on:scroll="updateScroll"
           >
-            <v-img
-              alt="Vuetify Logo"
-              class="shrink ml-5 mr-2"
-              contain
-              src="../assets/image/aha-white-icon.svg"
-              transition="scale-transition"
-              width="100"
-            />
+            <router-link to="/">
+              <v-img
+                alt="Vuetify Logo"
+                class="shrink ml-5 mr-2"
+                contain
+                src="../assets/image/aha-white-icon.svg"
+                transition="scale-transition"
+                width="100"
+              />
+            </router-link>
             <v-spacer></v-spacer>
             <v-btn
               class="button-subscribe"
@@ -27,7 +29,7 @@
               elevation="2"
               depressed
             >Start Trial</v-btn>
-			<v-btn
+            <v-btn
               color="transparent"
               depressed
               style="text-transform:none;font-size:18px;font-weight:600;"
@@ -43,18 +45,22 @@
             color="#D65F5F"
             v-on:scroll="updateScroll"
           >
-            <v-img
-              alt="Vuetify Logo"
-              class="shrink ml-5 mr-2"
-              contain
-              src="../assets/image/aha-white-icon.svg"
-              transition="scale-transition"
-              width="100"
-            />
+            <router-link to="/home">
+              <v-img
+                alt="Vuetify Logo"
+                class="shrink ml-5 mr-2"
+                contain
+                src="../assets/image/aha-white-icon.svg"
+                transition="scale-transition"
+                width="100"
+              />
+            </router-link>
             <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>mdi-magnify</v-icon>
-            </v-btn>
+            <router-link to="/books/search">
+              <v-btn icon>
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </router-link>
             <v-btn
               color="transparent"
               depressed
@@ -71,6 +77,11 @@
               depressed
               style="text-transform:none;font-size:18px;font-weight:600;"
             >Promo</v-btn>
+            <v-btn
+              color="transparent"
+              depressed
+              style="text-transform:none;font-size:18px;font-weight:600;"
+            >Laporan</v-btn>
             <v-spacer></v-spacer>
             <v-btn
               class="button-subscribe mx-5"
@@ -101,7 +112,7 @@
 export default {
   name: "NavbarSection",
   data: () => ({
-    userState: false,
+    userState: true,
     scrollPosition: null
   }),
   created() {

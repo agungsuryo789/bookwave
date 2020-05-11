@@ -15,6 +15,8 @@ const LandingUser = () =>
     import ('../views/LandingUser.vue')
 const BookPage = () =>
     import ('../components/UserBookSection.vue')
+const BookSearch = () =>
+    import ('../views/BookSearch.vue')
 
 const routes = [{
         path: '/',
@@ -40,6 +42,11 @@ const routes = [{
         path: '/home/book-page',
         name: 'BookPage',
         component: BookPage
+    },
+    {
+        path: '/books/search',
+        name: 'BookSearch',
+        component: BookSearch
     }
 ]
 

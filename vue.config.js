@@ -1,7 +1,8 @@
 module.exports = {
   pwa: {
     name: 'AHA',
-    themeColor: '#BA4D4F'
+    themeColor: '#BA4D4F',
+    workboxPluginMode: 'InjectManifest'
   },
   transpileDependencies: [
     'vuetify'

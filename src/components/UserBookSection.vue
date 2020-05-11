@@ -2,7 +2,7 @@
   <div>
     <NavbarSection />
     <v-container class="mt-12">
-      <a href="#" class="font-weight-black book-section-title" @click="bookSectionAction">AHA Episodes</a>
+      <h2 class="font-weight-black book-section-title">Trending Book</h2>
       <v-progress-linear v-model="underlineValue"></v-progress-linear>
       <v-row>
         <template v-for="n in 16">
@@ -35,11 +35,7 @@ export default {
     loadSkeleton: false,
     underlineValue: 15
   }),
-  methods: {
-    bookSectionAction (event) {
-      this.underlineValue = 100;
-    }
-  }
+  methods: {}
 };
 </script>
 

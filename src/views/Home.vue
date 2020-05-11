@@ -81,7 +81,7 @@
             </v-chip-group>
           </v-col>
         </v-row>
-        <v-row class="my-9 justify-start align-center" no-gutters>
+        <v-row class="my-9 justify-center align-center" no-gutters>
           <template v-for="n in 6">
             <v-col
               :key="n"
@@ -98,7 +98,7 @@
               v-if="!loadSkeleton"
               lg="4"
               md="12"
-              class="my-5"
+              class="my-5 mx-1"
               style="max-width:300px;"
             >
               <BookCard />
