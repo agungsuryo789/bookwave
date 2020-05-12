@@ -10,9 +10,9 @@ const Home = () =>
 const About = () =>
     import ('../views/About.vue')
 const Login = () =>
-	import ('../views/Login.vue')
+	import ('../views/auth/Login.vue')
 const Register = () =>
-    import ('../views/Register.vue')
+    import ('../views/auth/Register.vue')
 const LandingUser = () =>
     import ('../views/LandingUser.vue')
 const BookPage = () =>
