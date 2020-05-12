@@ -1,5 +1,5 @@
 <template>
-  <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
+  <v-card class="book-card mx-auto" max-width="260" max-height="300" flat>
     <div class="book-card-color py-7">
       <v-img
         class="book-card-img mx-auto"

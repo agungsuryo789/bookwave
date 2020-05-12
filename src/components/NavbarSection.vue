@@ -72,16 +72,13 @@
               depressed
               style="text-transform:none;font-size:18px;font-weight:600;"
             >Library</v-btn>
-            <v-btn
-              color="transparent"
-              depressed
-              style="text-transform:none;font-size:18px;font-weight:600;"
-            >Promo</v-btn>
-            <v-btn
-              color="transparent"
-              depressed
-              style="text-transform:none;font-size:18px;font-weight:600;"
-            >Laporan</v-btn>
+            <router-link to="/promo">
+              <v-btn
+                color="transparent"
+                depressed
+                style="text-transform:none;font-size:18px;font-weight:600;"
+              >Promo</v-btn>
+            </router-link>
             <v-spacer></v-spacer>
             <v-btn
               class="button-subscribe mx-5"
