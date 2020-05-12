@@ -1,5 +1,5 @@
 <template>
-<div class="Login">
+<div class="Register">
     <v-app>
         <NavbarSection />
         <v-container fluid>
@@ -7,27 +7,27 @@
                 <v-col cols="12" class="mt-12">
 					<v-row justify="center" class="mt-12">
                         <v-col cols="6" md="4" align="center">
-							<h2 class="font-weight-black"> MASUK AKUN </h2>
+							<h2 class="font-weight-black"> DAFTAR AKUN </h2>
                         </v-col>
                     </v-row>
                     <v-row justify="center" class="mt-10">
                         <v-col cols="6" md="4" align="center">
-							<v-btn block="true">Sign in with Email</v-btn>
+							<v-btn block="true">Sign up with Email</v-btn>
                         </v-col>
                     </v-row>
 					<v-row justify="center">
                         <v-col cols="6" md="4" align="center">
-							<v-btn block="true">Sign in with Google</v-btn>
+							<v-btn block="true">Sign up with Google</v-btn>
                         </v-col>
                     </v-row>
 					<v-row justify="center">
                         <v-col cols="6" md="4" align="center">
-							<v-btn block="true">Sign in with Facebook</v-btn>
+							<v-btn block="true">Sign up with Facebook</v-btn>
                         </v-col>
                     </v-row>
 					<v-row justify="center">
                         <v-col cols="6" md="4" align="center">
-							<v-btn block="true">Sign in with Apple</v-btn>
+							<v-btn block="true">Sign up with Apple</v-btn>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -41,7 +41,7 @@
 import NavbarSection from '@/components/NavbarSection.vue'
 /* eslint-disable */
 export default {
-    name: 'Login',
+    name: 'Register',
     components: {
         NavbarSection
     }

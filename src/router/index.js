@@ -10,7 +10,9 @@ const Home = () =>
 const About = () =>
     import ('../views/About.vue')
 const Login = () =>
-    import ('../views/Login.vue')
+	import ('../views/Login.vue')
+const Register = () =>
+    import ('../views/Register.vue')
 const LandingUser = () =>
     import ('../views/LandingUser.vue')
 const BookPage = () =>
@@ -32,6 +34,11 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: Login
+	},
+	{
+        path: '/register',
+        name: 'Register',
+        component: Register
     },
     {
         path: '/home',
