@@ -22,6 +22,9 @@
         </v-row>
       </v-container>
     </header>
+	<section>
+		<router-view></router-view>
+	</section>
     <section>
       <v-container>
         <router-link

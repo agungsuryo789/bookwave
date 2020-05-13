@@ -1,5 +1,5 @@
 <template>
-  <div class="Promo-Page">
+  <div class="promo-page">
     <NavbarSection />
     <header>
       <v-container>

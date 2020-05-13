@@ -14,15 +14,19 @@ const Login = () =>
 const Register = () =>
     import ('../views/auth/Register.vue')
 const LandingUser = () =>
-    import ('../views/LandingUser.vue')
+    import ('../views/user/LandingUser.vue')
 const BookPage = () =>
     import ('../components/UserBookSection.vue')
 const BookSearch = () =>
     import ('../views/BookSearch.vue')
 const PromoPage = () =>
     import ('../views/PromoPage.vue')
+const SubcriptionPage = () =>
+    import ('../views/SubcriptionPage.vue')
 
-const routes = [{
+const routes = [
+    //MAIN LAYOUT ROUTE
+    {
         path: '/',
         name: 'Home',
         component: Home
@@ -43,6 +47,17 @@ const routes = [{
         component: Register
     },
     {
+        path: '/promo',
+        name: 'PromoPage',
+        component: PromoPage
+    },
+    {
+        path: '/plans',
+        name: 'SubcriptionPage',
+        component: SubcriptionPage
+    },
+    //USER LAYOUT ROUTE
+    {
         path: '/home',
         name: 'LandingUser',
         component: LandingUser
@@ -53,14 +68,9 @@ const routes = [{
         component: BookPage
     },
     {
-        path: '/books/search',
+        path: '/home/search',
         name: 'BookSearch',
         component: BookSearch
-    },
-    {
-        path: '/promo',
-        name: 'PromoPage',
-        component: PromoPage
     }
 ]
 

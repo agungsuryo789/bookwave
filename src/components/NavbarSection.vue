@@ -56,7 +56,7 @@
               />
             </router-link>
             <v-spacer></v-spacer>
-            <router-link to="/books/search">
+            <router-link to="/home/search" tag="icon">
               <v-btn icon>
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>
@@ -72,7 +72,7 @@
               depressed
               style="text-transform:none;font-size:18px;font-weight:600;"
             >Library</v-btn>
-            <router-link to="/promo">
+            <router-link to="/promo" tag="button">
               <v-btn
                 color="transparent"
                 depressed
@@ -80,13 +80,9 @@
               >Promo</v-btn>
             </router-link>
             <v-spacer></v-spacer>
-            <v-btn
-              class="button-subscribe mx-5"
-              rounded
-              depressed
-              color="#39DF8C"
-              elevation="2"
-            >Upgrade Premium</v-btn>
+            <v-btn class="button-subscribe mx-5" rounded depressed color="#39DF8C" elevation="2">
+              <router-link to="/plans" tag="icon">Upgrade Premium</router-link>
+            </v-btn>
             <v-menu left bottom>
               <template v-slot:activator="{ on }">
                 <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
