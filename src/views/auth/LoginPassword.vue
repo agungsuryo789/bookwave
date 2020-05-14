@@ -17,7 +17,7 @@
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="3" md="1" align="center">
-							<v-btn :elevation="8" color="red darken-1" block="true" x-large="true" class="white--text">Masuk</v-btn>
+							<v-btn :elevation="8" color="red darken-1" block x-large class="white--text">Masuk</v-btn>
 						</v-col>
 					</v-row>
 				</v-col>
