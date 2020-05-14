@@ -136,7 +136,7 @@ export default {
   },
   data: () => ({
     chipKategori: [1],
-    loadSkeleton: false
+    loadSkeleton: true
   })
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="episode-card mx-auto" max-width="350" max-height="250px" color="#ffc400" v-ripple>
+  <v-card class="episode-card mx-auto" max-width="350" max-height="250px" color="#ffc400" ripple>
     <div class="d-flex flex-row justify-space-between align-center">
       <div class="mx-3">
         <p>Baru</p>

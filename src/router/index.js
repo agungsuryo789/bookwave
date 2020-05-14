@@ -10,6 +10,7 @@ const Home = () =>
 const About = () =>
     import ('../views/About.vue')
 const Login = () =>
+<<<<<<< HEAD
 	import ('../views/auth/Login.vue')
 const LoginOptions = () =>
 	import ('../components/auth/LoginOptions.vue')
@@ -17,16 +18,27 @@ const LoginEmail = () =>
 	import ('../components/auth/LoginEmail.vue')
 const PasswordEmail = () =>
 	import ('../components/auth/PasswordEmail.vue')
+=======
+    import ('../views/auth/Login.vue')
+>>>>>>> 2f80849e967457ad2e5357a8c0c4c31f45f90eda
 const Register = () =>
     import ('../views/auth/Register.vue')
 const LandingUser = () =>
-    import ('../views/LandingUser.vue')
+    import ('../views/user/LandingUser.vue')
 const BookPage = () =>
-    import ('../components/UserBookSection.vue')
-const BookSearch = () =>
-    import ('../views/BookSearch.vue')
+    import ('../components/user/UserBookSection.vue')
+const SearchPage = () =>
+    import ('../views/SearchPage.vue')
+const PromoPage = () =>
+    import ('../views/PromoPage.vue')
+const MembershipPage = () =>
+    import ('../views/MembershipPage.vue')
+const CategoryPage = () =>
+    import ('../views/CategoryPage.vue')
 
-const routes = [{
+const routes = [
+    //MAIN LAYOUT ROUTE
+    {
         path: '/',
         name: 'Home',
         component: Home
@@ -39,6 +51,7 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
+<<<<<<< HEAD
 		component: Login,
 		children: [
 			{
@@ -59,10 +72,26 @@ const routes = [{
 		]
 	},
 	{
+=======
+        component: Login
+    },
+    {
+>>>>>>> 2f80849e967457ad2e5357a8c0c4c31f45f90eda
         path: '/register',
         name: 'Register',
         component: Register
     },
+    {
+        path: '/promo',
+        name: 'PromoPage',
+        component: PromoPage
+    },
+    {
+        path: '/categories/:categoryID',
+        name: 'CategoryPage',
+        component: CategoryPage
+    },
+    //USER LAYOUT ROUTE
     {
         path: '/home',
         name: 'LandingUser',
@@ -74,9 +103,14 @@ const routes = [{
         component: BookPage
     },
     {
-        path: '/books/search',
-        name: 'BookSearch',
-        component: BookSearch
+        path: '/home/search',
+        name: 'SearchPage',
+        component: SearchPage
+    },
+    {
+        path: '/plans',
+        name: 'MembershipPage',
+        component: MembershipPage
     }
 ]
 
