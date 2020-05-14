@@ -12,7 +12,7 @@
                     </v-row>
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block><v-icon dark left>mdi-email-outline</v-icon> Sign up with Email</v-btn>
+							<v-btn href="/register/email" :elevation="8" block><v-icon dark left>mdi-email-outline</v-icon> Sign up with Email</v-btn>
 						</v-col>
 					</v-row>
 					<v-row justify="center">

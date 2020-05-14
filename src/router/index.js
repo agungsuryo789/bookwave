@@ -16,7 +16,11 @@ const LoginEmail = () =>
 const LoginPassword = () =>
 	import ('../views/auth/LoginPassword.vue')
 const Register = () =>
-    import ('../views/auth/Register.vue')
+	import ('../views/auth/Register.vue')
+const RegisterEmail = () =>
+	import ('../views/auth/RegisterEmail.vue')
+const RegisterPassword = () =>
+	import ('../views/auth/RegisterPassword.vue')
 const LandingUser = () =>
     import ('../views/user/LandingUser.vue')
 const BookPage = () =>
@@ -61,7 +65,17 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register
-    },
+	},
+	{
+		path: '/register/email',
+		name:'RegisterEmail',
+		component: RegisterEmail
+	},
+	{
+		path: '/register/pwd',
+		name:'RegisterPassword',
+		component: RegisterPassword
+	},
     {
         path: '/promo',
         name: 'PromoPage',
