@@ -11,6 +11,12 @@ const About = () =>
     import ('../views/About.vue')
 const Login = () =>
 	import ('../views/auth/Login.vue')
+const LoginOptions = () =>
+	import ('../components/auth/LoginOptions.vue')
+const LoginEmail = () =>
+	import ('../components/auth/LoginEmail.vue')
+const PasswordEmail = () =>
+	import ('../components/auth/PasswordEmail.vue')
 const Register = () =>
     import ('../views/auth/Register.vue')
 const LandingUser = () =>
@@ -33,7 +39,24 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
-        component: Login
+		component: Login,
+		children: [
+			{
+				path: '/login/',
+				name: "LoginOptions",
+				component: LoginOptions				
+			},
+			{
+				path: '/login/email',
+				name: "LoginEmail",
+				component: LoginEmail				
+			},
+			{
+				path: '/login/password',
+				name: "PasswordEmail",
+				component: PasswordEmail				
+			}
+		]
 	},
 	{
         path: '/register',

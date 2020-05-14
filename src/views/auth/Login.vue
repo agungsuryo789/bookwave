@@ -11,8 +11,14 @@
                         </v-col>
                     </v-row>
                 </v-col>
-				<LoginOptions />
+				<router-view></router-view>
             </v-row>
+			<v-spacer></v-spacer>
+			<v-row justify="center">
+				<v-col cols="6" md="4" align="center" class="mt-12">
+					<router-link to="/register">Lupa Kata Sandi</router-link>
+				</v-col>
+			</v-row>
         </v-container>
     </v-app>
 </div>
@@ -20,13 +26,13 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
-import LoginOptions from '@/components/auth/LoginOptions.vue'
+// import LoginOptions from '@/components/auth/LoginOptions.vue'
 /* eslint-disable */
 export default {
     name: 'Login',
     components: {
-		NavbarSection,
-		LoginOptions
+		NavbarSection
+		// LoginOptions
     }
 }
 </script>
