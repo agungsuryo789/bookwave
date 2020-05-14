@@ -12,8 +12,6 @@ const About = () =>
 const Login = () =>
 <<<<<<< HEAD
 	import ('../views/auth/Login.vue')
-const LoginOptions = () =>
-	import ('../components/auth/LoginOptions.vue')
 const LoginEmail = () =>
 	import ('../components/auth/LoginEmail.vue')
 const PasswordEmail = () =>
