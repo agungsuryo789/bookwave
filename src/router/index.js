@@ -10,15 +10,11 @@ const Home = () =>
 const About = () =>
     import ('../views/About.vue')
 const Login = () =>
-<<<<<<< HEAD
 	import ('../views/auth/Login.vue')
 const LoginEmail = () =>
-	import ('../components/auth/LoginEmail.vue')
-const PasswordEmail = () =>
-	import ('../components/auth/PasswordEmail.vue')
-=======
-    import ('../views/auth/Login.vue')
->>>>>>> 2f80849e967457ad2e5357a8c0c4c31f45f90eda
+	import ('../views/auth/LoginEmail.vue')
+const LoginPassword = () =>
+	import ('../views/auth/LoginPassword.vue')
 const Register = () =>
     import ('../views/auth/Register.vue')
 const LandingUser = () =>
@@ -49,32 +45,19 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-<<<<<<< HEAD
-		component: Login,
-		children: [
-			{
-				path: '/login/',
-				name: "LoginOptions",
-				component: LoginOptions				
-			},
-			{
-				path: '/login/email',
-				name: "LoginEmail",
-				component: LoginEmail				
-			},
-			{
-				path: '/login/password',
-				name: "PasswordEmail",
-				component: PasswordEmail				
-			}
-		]
+		component: Login
 	},
 	{
-=======
-        component: Login
-    },
-    {
->>>>>>> 2f80849e967457ad2e5357a8c0c4c31f45f90eda
+		path: '/login/email',
+		name:'LoginEmail',
+		component: LoginEmail
+	},
+	{
+		path: '/login/pwd',
+		name:'LoginPassword',
+		component: LoginPassword
+	},
+	{
         path: '/register',
         name: 'Register',
         component: Register
