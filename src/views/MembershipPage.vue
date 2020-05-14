@@ -14,10 +14,17 @@
         <h2>UPGRADE KE AHA PREMIUM</h2>
       </div>
       <v-row>
-        <v-col>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure distinctio accusantium ut dolor, eveniet voluptatibus ad repellendus nulla quod aspernatur doloremque quibusdam amet dolorum laborum dolorem, vel natus facere suscipit?</v-col>
-        <v-col>
+        <v-col lg="4" md="6" sm="12" xs="12">
+          <ul>
+            <li>Simpan lebih dari 256 buku bermanfaat</li>
+            <li>Baca pada semua perangkat</li>
+            <li>Putar bacaan buku tanpa halangan</li>
+            <li>Tandai dan simpan kalimat penting</li>
+          </ul>
+        </v-col>
+        <v-col lg="4" md="6" sm="12" xs="12">
           <v-card height="180px">
-            <div class="d-flex flex-row justify-space-between">
+            <div class="d-flex flex-row justify-space-between pt-2">
               <div
                 class="subcription-page--price-badge justify-center align-center"
                 style="background-color:#B2FF59;height:35px;padding:3px;color:white;"
@@ -30,24 +37,23 @@
                 style="color:white;font-weight:bold;"
               >Coba 7 hari gratis</v-btn>
             </div>
-            <v-card-title>Tahunan</v-card-title>
-            <v-card-text>
+            <v-card-title class="m-0 p-0">Tahunan</v-card-title>
+            <v-card-text class="m-0 p-0">
               <h2>Rp 116.583/Bulan</h2>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
             </v-card-text>
-            <v-card-subtitle>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</v-card-subtitle>
           </v-card>
         </v-col>
-        <v-col>
+        <v-col lg="4" md="6" sm="12" xs="12">
           <v-card height="180px">
-            <div class="d-flex flex-row justify-space-between">
+            <div class="d-flex flex-row justify-space-between pt-2">
               <div class="subcription-page--price-badge"></div>
               <v-btn outlined color="#D32F2F" elevation="2" style="font-weight:bold;">Langganan</v-btn>
             </div>
-            <v-card-title>Bulanan</v-card-title>
-            <v-card-text>
+            <v-card-title class="m-0 p-0">Bulanan</v-card-title>
+            <v-card-text class="m-0 p-0">
               <h2>Rp 116.583/Bulan</h2>
             </v-card-text>
-            <v-card-subtitle></v-card-subtitle>
           </v-card>
         </v-col>
       </v-row>
@@ -60,7 +66,7 @@
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
 export default {
-  name: "SubcriptionPage",
+  name: "MembershipPage",
   components: {
     NavbarSection,
     FooterSection

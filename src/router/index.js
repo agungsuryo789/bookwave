@@ -16,13 +16,15 @@ const Register = () =>
 const LandingUser = () =>
     import ('../views/user/LandingUser.vue')
 const BookPage = () =>
-    import ('../components/UserBookSection.vue')
-const BookSearch = () =>
-    import ('../views/BookSearch.vue')
+    import ('../components/user/UserBookSection.vue')
+const SearchPage = () =>
+    import ('../views/SearchPage.vue')
 const PromoPage = () =>
     import ('../views/PromoPage.vue')
-const SubcriptionPage = () =>
-    import ('../views/SubcriptionPage.vue')
+const MembershipPage = () =>
+    import ('../views/MembershipPage.vue')
+const CategoryPage = () =>
+    import ('../views/CategoryPage.vue')
 
 const routes = [
     //MAIN LAYOUT ROUTE
@@ -52,9 +54,9 @@ const routes = [
         component: PromoPage
     },
     {
-        path: '/plans',
-        name: 'SubcriptionPage',
-        component: SubcriptionPage
+        path: '/categories/:categoryID',
+        name: 'CategoryPage',
+        component: CategoryPage
     },
     //USER LAYOUT ROUTE
     {
@@ -69,8 +71,13 @@ const routes = [
     },
     {
         path: '/home/search',
-        name: 'BookSearch',
-        component: BookSearch
+        name: 'SearchPage',
+        component: SearchPage
+    },
+    {
+        path: '/plans',
+        name: 'MembershipPage',
+        component: MembershipPage
     }
 ]
 
