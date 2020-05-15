@@ -11,13 +11,23 @@
                         </v-col>
                     </v-row>
                 </v-col>
-				<v-col class="mt-8" cols="12">
+				<v-col v-show="isShow" class="mt-8" cols="12">
 					<v-row justify="center">
 						<EmailInput />
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="3" md="1" align="center">
-							<v-btn href="/login/pwd" :elevation="8" color="red darken-1" block x-large class="white--text">Lanjut</v-btn>
+							<v-btn :elevation="8" color="red darken-1" block x-large class="white--text" v-on:click="isShow = !isShow">Lanjut</v-btn>
+						</v-col>
+					</v-row>
+				</v-col>
+				<v-col v-show="!isShow" class="mt-8" cols="12">
+					<v-row justify="center">
+						<PasswordInput />
+					</v-row>
+					<v-row justify="center">
+						<v-col cols="3" md="1" align="center">
+							<v-btn :elevation="8" color="red darken-1" block x-large class="white--text">Masuk</v-btn>
 						</v-col>
 					</v-row>
 				</v-col>
@@ -36,13 +46,20 @@
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
 import EmailInput from '@/components/auth/EmailInput.vue'
+import PasswordInput from '@/components/auth/PasswordInput.vue'
 
 /* eslint-disable */
 export default {
     name: 'LoginEmail',
     components: {
 		NavbarSection,
-		EmailInput
+		EmailInput,
+		PasswordInput
+    },
+	data(){
+		return {
+			isShow : true,
+		}
     }
 }
 </script>

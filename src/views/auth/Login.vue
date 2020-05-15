@@ -7,7 +7,7 @@
                 <v-col cols="12" class="mt-12">
 					<v-row justify="center" class="mt-12">
                         <v-col cols="6" md="4" align="center">
-							<h2 class="font-weight-black"> MASUK AKUN </h2>
+							<h2 class="font-weight-black"> MASUK AKUN</h2>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -19,7 +19,8 @@
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
-							<v-btn :params="params" :onSuccess="onSuccess" :onFailure="onFailure" :elevation="8" block><v-icon dark left>mdi-google</v-icon>Sign in with Google</v-btn>
+							<!-- <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess"></GoogleLogin> -->
+							<v-btn :elevation="8" block><v-icon dark left>mdi-google</v-icon>Sign in with Google</v-btn>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
@@ -46,16 +47,14 @@
 </template>
 
 <script>
-import NavbarSection from '@/components/NavbarSection.vue'
+import NavbarSection from '@/components/NavbarSection.vue';
 import GoogleLogin from 'vue-google-login';
-// import LoginOptions from '@/components/auth/LoginOptions.vue'
 /* eslint-disable */
 export default {
     name: 'Login',
     components: {
 		NavbarSection,
 		GoogleLogin
-		// LoginOptions
 	},
 	data() {
 		return {
@@ -65,7 +64,7 @@ export default {
 			},
 			// only needed if you want to render the button with the google ui
 			renderParams: {
-				width: 250,
+				width: 480,
 				height: 50,
 				longtitle: true
 			}
@@ -74,10 +73,10 @@ export default {
 	methods: {
         onSuccess(googleUser) {
             console.log(googleUser);
- 
+
             // This only gets the user information: id, name, imageUrl and email
             console.log(googleUser.getBasicProfile());
         }
-    }
+	}
 }
 </script>

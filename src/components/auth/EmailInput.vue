@@ -8,15 +8,26 @@
 <script>
 /* eslint-disable */
 export default {
-  name: "EmailInput",
-   data: () => ({
+	name: "EmailInput",
+	data: () => ({
       email: '',
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
       lazy: false,
-    }),
+	}),
+	data: function ()
+	{
+		return{
+			att:[
+				{
+					judul: "MASUK AKUN",
+					button: "Lanjutkan"
+				}
+			]
+		}
+	}
 };
 </script>
 
