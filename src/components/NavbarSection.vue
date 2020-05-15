@@ -147,9 +147,9 @@ export default {
       this.scrollPosition = window.scrollY;
       const navbarElement = document.querySelector(".app-bar");
       if (window.scrollY || window.pageYOffset > 500) {
-        navbarElement.style.backgroundColor = "white";
-      } else if (window.scrollY < 100) {
         navbarElement.style.backgroundColor = "#D65F5F";
+      } else if (window.scrollY < 100) {
+        navbarElement.style.backgroundColor = "white";
       }
     }
   }
@@ -160,9 +160,9 @@ export default {
 @import "@/assets/css/global_variables.scss";
 
 .navbar {
-  background-color: #d65f5f;
+  background-color: white;
   .navbarChangeColor {
-    background-color: #d65f5f;
+    background-color: #D65F5F;
   }
   .app-bar {
     color: white;

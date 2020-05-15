@@ -22,7 +22,7 @@
       <v-container class="mt-10">
         <h2 class="mx-10">Promo 50%</h2>
         <v-row class="justify-center align-center">
-          <template v-for="n in 6">
+          <template v-for="n in booksToShow">
             <v-col
               :key="n"
               v-if="loadSkeleton"
@@ -57,6 +57,7 @@
               color="#39DF8C"
               elevation="2"
               depressed
+              @click="booksToShow += 3"
             >Lihat lebih banyak</v-btn>
           </v-col>
         </v-row>
@@ -79,7 +80,8 @@ export default {
     BookCard
   },
   data: () => ({
-    loadSkeleton: false
+    loadSkeleton: false,
+    booksToShow: 6
   })
 };
 </script>

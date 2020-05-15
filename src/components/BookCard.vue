@@ -11,13 +11,13 @@
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </div>
-    <a href="#" class="book-card-title" v-ripple>
+    <router-link to="/books/sebuah-buku" class="book-card-title">
       <v-card-title class="text-right">Judul Buku Lorem Ipsum</v-card-title>
       <v-card-subtitle class="text--primary text-right">
         Listen to your favorite artists and albums whenever and wherever,
         online and offline.
       </v-card-subtitle>
-    </a>
+    </router-link>
   </v-card>
 </template>
 
