@@ -76,7 +76,7 @@ const routes = [
     {
         path: '/home',
         name: 'LandingUser',
-        component: LandingUser
+		component: LandingUser
     },
     {
         path: '/home/book-page',
@@ -100,5 +100,4 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
-
 export default router

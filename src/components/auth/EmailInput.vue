@@ -1,7 +1,7 @@
 <template>
 	<v-col cols="6" md="4" align="center">
 		<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email</p>
-		<v-text-field class="centered-input" :rules="emailRules" solo background-color="grey lighten-2"></v-text-field>
+		<v-text-field v-model="email" class="centered-input" :rules="emailRules" solo background-color="grey lighten-2"></v-text-field>
 	</v-col>
 </template>
 
@@ -16,18 +16,7 @@ export default {
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
       lazy: false,
-	}),
-	data: function ()
-	{
-		return{
-			att:[
-				{
-					judul: "MASUK AKUN",
-					button: "Lanjutkan"
-				}
-			]
-		}
-	}
+	})
 };
 </script>
 

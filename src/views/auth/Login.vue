@@ -14,7 +14,9 @@
 				<v-col class="mt-8" cols="12">
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
-							<v-btn href="/login/email" :elevation="8" block><v-icon dark left>mdi-email-outline</v-icon>Sign in with Email</v-btn>
+							<router-link to="/login/email" tag="button" :elevation="8" style="width:100%;">
+								<v-btn><v-icon dark left>mdi-email-outline</v-icon>Sign in with Email</v-btn>
+							</router-link>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
