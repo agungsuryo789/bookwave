@@ -1,5 +1,5 @@
 <template>
-	<div class="container mt-10">
+	<v-container class="mt-10">
 		<v-row>
 			<v-col md="6">
 				<h1> {{ title }} </h1>
@@ -13,7 +13,7 @@
 			</v-col>
 		</v-row>
 		<hr class="mt-5">
-	</div>
+	</v-container>
 </template>
 
 <script>

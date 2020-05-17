@@ -5,32 +5,43 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // Lazy load route level
+// Main layout
 const Home = () =>
     import ('../views/Home.vue')
 const About = () =>
     import ('../views/About.vue')
+    // Auth layout
 const Login = () =>
-	import ('../views/auth/Login.vue')
+    import ('../views/auth/Login.vue')
 const LoginEmail = () =>
-	import ('../views/auth/LoginEmail.vue')
+    import ('../views/auth/LoginEmail.vue')
 const Register = () =>
-	import ('../views/auth/Register.vue')
+    import ('../views/auth/Register.vue')
 const RegisterEmail = () =>
-	import ('../views/auth/RegisterEmail.vue')
+    import ('../views/auth/RegisterEmail.vue')
 const LandingUser = () =>
     import ('../views/user/LandingUser.vue')
-const BookPage = () =>
+    // Page Layout
+const UserBookSection = () =>
     import ('../components/user/UserBookSection.vue')
 const SearchPage = () =>
-    import ('../views/SearchPage.vue')
+    import ('../views/page/SearchPage.vue')
 const PromoPage = () =>
-    import ('../views/PromoPage.vue')
+    import ('../views/page/PromoPage.vue')
 const MembershipPage = () =>
-    import ('../views/MembershipPage.vue')
+    import ('../views/page/MembershipPage.vue')
 const CategoryPage = () =>
-	import ('../views/CategoryPage.vue')
+	import ('../views/page/CategoryPage.vue')
 const DisclaimerPage = () =>
-    import ('../views/pages/DisclaimerPage.vue')
+	import ('../views/pages/DisclaimerPage.vue')
+const SitemapPage = () =>
+	import ('../views/pages/SitemapPage.vue')
+const AppPrivacy = () =>
+	import ('../views/pages/AppPrivacy.vue')
+const UsersPrivacy = () =>
+	import ('../views/pages/UsersPrivacy.vue')
+const TermsCondition = () =>
+    import ('../views/pages/TermsCondition.vue')
 
 const routes = [
     //MAIN LAYOUT ROUTE
@@ -47,23 +58,23 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-		component: Login
-	},
-	{
-		path: '/login/email',
-		name:'LoginEmail',
-		component: LoginEmail
-	},
-	{
+        component: Login
+    },
+    {
+        path: '/login/email',
+        name: 'LoginEmail',
+        component: LoginEmail
+    },
+    {
         path: '/register',
         name: 'Register',
         component: Register
-	},
-	{
-		path: '/register/email',
-		name:'RegisterEmail',
-		component: RegisterEmail
-	},
+    },
+    {
+        path: '/register/email',
+        name: 'RegisterEmail',
+        component: RegisterEmail
+    },
     {
         path: '/promo',
         name: 'PromoPage',
@@ -85,9 +96,9 @@ const routes = [
         component: SitemapPage
 	},
 	{
-        path: '/userprivacy',
-        name: 'UserPrivacy',
-        component: UserPrivacy
+        path: '/usersprivacy',
+        name: 'UsersPrivacy',
+        component: UsersPrivacy
 	},
 	{
         path: '/terms',
@@ -106,9 +117,9 @@ const routes = [
 		component: LandingUser
     },
     {
-        path: '/home/book-page',
-        name: 'BookPage',
-        component: BookPage
+        path: '/home/:sectionName',
+        name: 'UserBookSection',
+        component: UserBookSection
     },
     {
         path: '/home/search',

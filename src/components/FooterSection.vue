@@ -74,19 +74,19 @@
           <ul class="footer-list-sitelink mt-2">
             <li>AHA 2020 |</li>
             <li>
-              <a href>Sitemap</a> |
+              <router-link to="/sitemap">Sitemap</router-link> |
             </li>
             <li>
-              <a href>Disclaimer</a> |
+               <router-link to="/disclaimer">Disclaimer</router-link> |
             </li>
             <li>
-              <a href>User Privacy</a> |
+               <router-link to="/usersprivacy">User Privacy</router-link> |
             </li>
             <li>
-              <a href>Terms</a> |
+               <router-link to="/terms">Terms</router-link> |
             </li>
             <li>
-              <a href>Applicant Privacy</a>
+               <router-link to="/privacy">Applicant Privacy</router-link>
             </li>
           </ul>
           <v-spacer></v-spacer>
