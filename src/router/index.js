@@ -28,7 +28,9 @@ const PromoPage = () =>
 const MembershipPage = () =>
     import ('../views/MembershipPage.vue')
 const CategoryPage = () =>
-    import ('../views/CategoryPage.vue')
+	import ('../views/CategoryPage.vue')
+const DisclaimerPage = () =>
+    import ('../views/pages/DisclaimerPage.vue')
 
 const routes = [
     //MAIN LAYOUT ROUTE
@@ -71,7 +73,32 @@ const routes = [
         path: '/categories/:categoryID',
         name: 'CategoryPage',
         component: CategoryPage
-    },
+	},
+	{
+        path: '/disclaimer',
+        name: 'DisclaimerPage',
+        component: DisclaimerPage
+	},
+	{
+        path: '/sitemap',
+        name: 'SitemapPage',
+        component: SitemapPage
+	},
+	{
+        path: '/userprivacy',
+        name: 'UserPrivacy',
+        component: UserPrivacy
+	},
+	{
+        path: '/terms',
+        name: 'TermsCondition',
+        component: TermsCondition
+	},
+	{
+        path: '/privacy',
+        name: 'AppPrivacy',
+        component: AppPrivacy
+	},
     //USER LAYOUT ROUTE
     {
         path: '/home',
