@@ -1,15 +1,96 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import VuexPersist from 'vuex-persistedstate';
 
-Vue.use(Vuex)
+Vue.use(Vuex, axios);
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+// AXIOS CONFIG
+export const axs = axios.create({
+    baseURL: "http://anditopi.com"
+});
+axs.interceptors.request.use(
+    (config) => {
+        const key = window.sessionStorage.getItem("x-api-key")
+        const token = window.sessionStorage.getItem("x-token")
+        if (key || token) {
+            config.headers["x-api-key"] = key
+            config.headers["x-token"] = token
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+)
+axs.interceptors.response.use(
+    (config) => {
+        const key = window.sessionStorage.getItem("x-api-key")
+        const token = window.sessionStorage.getItem("x-token")
+        if (key || token) {
+            config.headers["x-api-key"] = key
+            config.headers["x-token"] = token
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+)
+const vuexSession = new VuexPersist({
+    reducer: state => ({
+        daftarKategori: state.daftarKategori,
+        bookListTrending: state.bookListTrending,
+        bookListNew: state.bookListNew,
+        episodeListNew: state.episodeListNew
+    })
 })
+export default new Vuex.Store({
+    plugins: [vuexSession],
+    state: {
+        daftarKategori: [],
+        bookListTrending: [],
+        bookListNew: [],
+        episodeListNew: []
+    },
+    mutations: {
+        getKategori_mutation: (state, response) => {
+            state.daftarKategori = response
+        },
+        getListBookTrending_mutation: (state, response) => {
+            state.bookListTrending = response
+        },
+        getListBookNew_mutation: (state, response) => {
+            state.bookListNew = response
+        },
+        getListEpisodeNew_mutation: (state, response) => {
+            state.episodeListNew = response
+        }
+    },
+    actions: {
+        getKategori: ({ commit }) => {
+            axs.get('/ahaapi/beranda_buku_noauth')
+                .then(response => {
+                    commit('getKategori_mutation', response.data.daftar_kategori);
+                })
+        },
+        getListBookTrending: ({ commit }) => {
+            axs.get('/ahaapi/beranda_buku_noauth')
+                .then(response => {
+                    commit('getListBookTrending_mutation', response.data.buku_trending);
+                })
+        },
+        getListBookNew: ({ commit }) => {
+            axs.get('/ahaapi/beranda_buku_noauth')
+                .then(response => {
+                    commit('getListBookNew_mutation', response.data.buku_terbaru);
+                })
+        },
+        getListEpisodeNew: ({ commit }) => {
+            axs.get('/ahaapi/beranda_buku')
+                .then(response => {
+                    commit('getListEpisodeNew_mutation', response.data.audio_new);
+                })
+        }
+    }
+});

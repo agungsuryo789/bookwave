@@ -132,7 +132,6 @@ export default {
   },
   data: () => ({
     userState: true,
-    scrollPosition: null,
     showCategory: false,
     showSearchBar: false
   }),
@@ -144,11 +143,10 @@ export default {
   },
   methods: {
     updateScroll(event) {
-      this.scrollPosition = window.scrollY;
       const navbarElement = document.querySelector(".app-bar");
       if (window.scrollY || window.pageYOffset > 500) {
         navbarElement.style.backgroundColor = "#D65F5F";
-      } else if (window.scrollY < 100) {
+      } else if (window.scrollY < 100 || window.scrollY == 0) {
         navbarElement.style.backgroundColor = "white";
       }
     }
@@ -162,7 +160,7 @@ export default {
 .navbar {
   background-color: white;
   .navbarChangeColor {
-    background-color: #D65F5F;
+    background-color: white;
   }
   .app-bar {
     color: white;

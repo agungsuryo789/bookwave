@@ -1,6 +1,6 @@
 <template>
   <v-card class="book-card mx-auto" max-width="260" max-height="300" flat>
-    <div class="book-card-color py-7">
+    <div class="book-card-color py-7" :style="cssVars">
       <v-img
         class="book-card-img mx-auto"
         width="120"
@@ -12,11 +12,8 @@
       </v-btn>
     </div>
     <router-link to="/books/sebuah-buku" class="book-card-title">
-      <v-card-title class="text-right">Judul Buku Lorem Ipsum</v-card-title>
-      <v-card-subtitle class="text--primary text-right">
-        Listen to your favorite artists and albums whenever and wherever,
-        online and offline.
-      </v-card-subtitle>
+      <v-card-title class="text-right">{{ title }}</v-card-title>
+      <v-card-subtitle class="text--primary text-right">{{ deskripsi }}</v-card-subtitle>
     </router-link>
   </v-card>
 </template>
@@ -24,7 +21,16 @@
 <script>
 /* eslint-disable */
 export default {
-  name: "BookCard"
+  name: "BookCard",
+  props: ["title", "deskripsi", "warna_kategori"],
+  computed: {
+    cssVars() {
+      return {
+        /* variables you want to pass to css */
+        "--color": this.warna_kategori
+      }
+    }
+  }
 };
 </script>
 
@@ -34,7 +40,7 @@ export default {
     height: 180px;
     position: relative;
     border-radius: 8px;
-    background-color: #e76464;
+	background-color: var(--color);
     box-shadow: 2px 4px 4px 2px rgb(160, 83, 83);
     .book-bookmark-button {
       position: absolute;

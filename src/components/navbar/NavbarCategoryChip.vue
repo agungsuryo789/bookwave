@@ -1,14 +1,33 @@
 <template>
   <v-card class="py-2 px-4">
-    <router-link :to="{ name: 'CategoryPage', params: {categoryID: 4}}">
-      <v-btn v-for="n in 12" :key="n" class="my-2 mx-3 btn-category" depressed>Kategory {{ n }}</v-btn>
-    </router-link>
+    <v-btn
+      v-for="n in daftarKategori"
+      :key="n.id_daftar_kategori"
+      @click="gotoKategori(n.nama_kategori)"
+      class="my-2 mx-3 btn-category"
+      depressed
+    >{{ n.nama_kategori }}</v-btn>
   </v-card>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "NavbarCategoryChip"
+  name: "NavbarCategoryChip",
+  computed: mapState({
+    daftarKategori: state => state.daftarKategori
+  }),
+  methods: {
+    gotoKategori(categoryID) {
+      this.$router.push({
+        name: "CategoryPage",
+        params: { categoryID: categoryID }
+      });
+    }
+  },
+  mounted() {
+    this.$store.dispatch("getKategori");
+  }
 };
 </script>
 
