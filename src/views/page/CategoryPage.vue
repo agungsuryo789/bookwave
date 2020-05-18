@@ -4,7 +4,7 @@
     <v-container fluid class="px-0 py-0 mx-0 my-0">
       <v-row>
         <v-col class="category-page-title">
-          <h1>Category {{$route.params.categoryID}}</h1>
+          <h1>{{$route.params.categoryID}}</h1>
         </v-col>
       </v-row>
       <v-row>

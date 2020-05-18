@@ -22,6 +22,8 @@ const RegisterEmail = () =>
 const LandingUser = () =>
     import ('../views/user/LandingUser.vue')
     // Page Layout
+const BookPage = () =>
+    import ('../views/page/BookPage.vue')
 const UserBookSection = () =>
     import ('../components/user/UserBookSection.vue')
 const SearchPage = () =>
@@ -31,15 +33,15 @@ const PromoPage = () =>
 const MembershipPage = () =>
     import ('../views/page/MembershipPage.vue')
 const CategoryPage = () =>
-	import ('../views/page/CategoryPage.vue')
+    import ('../views/page/CategoryPage.vue')
 const DisclaimerPage = () =>
-	import ('../views/pages/DisclaimerPage.vue')
+    import ('../views/pages/DisclaimerPage.vue')
 const SitemapPage = () =>
-	import ('../views/pages/SitemapPage.vue')
+    import ('../views/pages/SitemapPage.vue')
 const AppPrivacy = () =>
-	import ('../views/pages/AppPrivacy.vue')
+    import ('../views/pages/AppPrivacy.vue')
 const UsersPrivacy = () =>
-	import ('../views/pages/UsersPrivacy.vue')
+    import ('../views/pages/UsersPrivacy.vue')
 const TermsCondition = () =>
     import ('../views/pages/TermsCondition.vue')
 
@@ -84,37 +86,42 @@ const routes = [
         path: '/categories/:categoryID',
         name: 'CategoryPage',
         component: CategoryPage
-	},
-	{
+    },
+    {
+        path: '/books/:bookName',
+        name: 'BookPage',
+        component: BookPage
+    },
+    {
         path: '/disclaimer',
         name: 'DisclaimerPage',
         component: DisclaimerPage
-	},
-	{
+    },
+    {
         path: '/sitemap',
         name: 'SitemapPage',
         component: SitemapPage
-	},
-	{
+    },
+    {
         path: '/usersprivacy',
         name: 'UsersPrivacy',
         component: UsersPrivacy
-	},
-	{
+    },
+    {
         path: '/terms',
         name: 'TermsCondition',
         component: TermsCondition
-	},
-	{
+    },
+    {
         path: '/privacy',
         name: 'AppPrivacy',
         component: AppPrivacy
-	},
+    },
     //USER LAYOUT ROUTE
     {
         path: '/home',
         name: 'LandingUser',
-		component: LandingUser
+        component: LandingUser
     },
     {
         path: '/home/:sectionName',

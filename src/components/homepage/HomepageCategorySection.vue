@@ -15,11 +15,12 @@
     <v-row class="justify-center align-center my-10">
       <v-col class="col-kategori-chip">
         <v-chip-group v-model="chipKategori" column>
-          <v-chip filter outlined>Semua</v-chip>
-          <v-chip filter outlined>Agama</v-chip>
-          <v-chip filter outlined>Politik</v-chip>
-          <v-chip filter outlined>Budaya</v-chip>
-          <v-chip filter outlined>Kesehatan</v-chip>
+          <v-chip
+            v-for="n in daftarKategori"
+            :key="n.id_daftar_kategori"
+            filter
+            outlined
+          >{{ n.nama_kategori }}</v-chip>
         </v-chip-group>
       </v-col>
     </v-row>
@@ -53,7 +54,14 @@
     </v-row>
     <v-row>
       <v-col class="text-center d-flex flex-column justify-center align-center">
-        <v-btn class="btnLihat" rounded color="#39DF8C" elevation="2" depressed @click="booksToShow += 3">Lihat lebih banyak</v-btn>
+        <v-btn
+          class="btnLihat"
+          rounded
+          color="#39DF8C"
+          elevation="2"
+          depressed
+          @click="booksToShow += 3"
+        >Lihat lebih banyak</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -61,15 +69,25 @@
 
 <script>
 import BookCard from "@/components/BookCard.vue";
+import { mapState } from "vuex";
+
 export default {
   name: "HomepageCategorySection",
   components: {
     BookCard
   },
   data: () => ({
+    chipKategori: [1],
     loadSkeleton: false,
     booksToShow: 3
-  })
+  }),
+  computed: mapState({
+    daftarKategori: state => state.daftarKategori
+  }),
+  methods: {},
+  mounted() {
+    this.$store.dispatch("getKategori");
+  }
 };
 </script>
 
