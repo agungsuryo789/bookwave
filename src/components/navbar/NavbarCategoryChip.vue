@@ -3,7 +3,7 @@
     <v-btn
       v-for="n in daftarKategori"
       :key="n.id_daftar_kategori"
-      @click="gotoKategori(n.nama_kategori)"
+      @click="gotoKategori(n.id_daftar_kategori)"
       class="my-2 mx-3 btn-category"
       depressed
     >{{ n.nama_kategori }}</v-btn>
@@ -18,10 +18,10 @@ export default {
     daftarKategori: state => state.daftarKategori
   }),
   methods: {
-    gotoKategori(categoryID) {
+    gotoKategori(idKategori) {
       this.$router.push({
         name: "CategoryPage",
-        params: { categoryID: categoryID }
+		params: { idKategori: idKategori }
       });
     }
   },

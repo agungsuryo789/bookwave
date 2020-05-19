@@ -4,7 +4,7 @@
     <v-container fluid class="px-0 py-0 mx-0 my-0">
       <v-row>
         <v-col class="category-page-title">
-          <h1>{{$route.params.categoryID}}</h1>
+			<h1>{{namaKategori.data[0].nama_kategori}}</h1>
         </v-col>
       </v-row>
       <v-row>
@@ -47,6 +47,7 @@ import NavbarSection from "@/components/NavbarSection.vue";
 import BookCard from "@/components/BookCard.vue";
 import BookCardSmall from "@/components/BookCardSmall.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "CategoryPage",
@@ -56,10 +57,19 @@ export default {
     NavbarSection,
     FooterSection
   },
-  data: () => ({
-    loadSkeleton: false,
-    booksToShow: 12
-  })
+  data: function() {
+    return {
+      loadSkeleton: false,
+      booksToShow: 12,
+      namaKategori: this.$store.state.bookListByKategori
+    };
+  },
+  computed: mapState({
+    bookListByKategori: state => state.bookListByKategori
+  }),
+  mounted() {
+	this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
+  }
 };
 </script>
 

@@ -42,7 +42,8 @@ const vuexSession = new VuexPersist({
         daftarKategori: state.daftarKategori,
         bookListTrending: state.bookListTrending,
         bookListNew: state.bookListNew,
-        episodeListNew: state.episodeListNew
+        episodeListNew: state.episodeListNew,
+        bookListByKategori: state.bookListByKategori
     })
 })
 export default new Vuex.Store({
@@ -51,7 +52,8 @@ export default new Vuex.Store({
         daftarKategori: [],
         bookListTrending: [],
         bookListNew: [],
-        episodeListNew: []
+        episodeListNew: [],
+        bookListByKategori: {}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -65,6 +67,9 @@ export default new Vuex.Store({
         },
         getListEpisodeNew_mutation: (state, response) => {
             state.episodeListNew = response
+        },
+        getBookByKategori_mutation: (state, response) => {
+            state.bookListByKategori = response
         }
     },
     actions: {
@@ -90,6 +95,16 @@ export default new Vuex.Store({
             axs.get('/ahaapi/beranda_buku')
                 .then(response => {
                     commit('getListEpisodeNew_mutation', response.data.audio_new);
+                })
+        },
+        getBookByKategori: ({ commit }, categoryID) => {
+            axs.get('/ahaapi/buku_by_kategori?id_kategori=' + categoryID)
+                .then(response => {
+                    if (response.status === 1) {
+                        commit('getBookByKategori_mutation', response.data);
+                    } else if (response.data.status === 0) {
+                        console.log(response.data.message)
+                    }
                 })
         }
     }

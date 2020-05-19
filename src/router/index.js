@@ -83,7 +83,7 @@ const routes = [
         component: PromoPage
     },
     {
-        path: '/categories/:categoryID',
+        path: '/categories/:idKategori',
         name: 'CategoryPage',
         component: CategoryPage
     },
