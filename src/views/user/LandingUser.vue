@@ -53,9 +53,11 @@
           <BookCard
             v-for="n in bukuTrending.slice(0, 4)"
             :key="n.id_buku"
+            :idBuku="n.id_buku"
             :title="n.judul"
             :deskripsi="n.deskripsi"
-            :warna_kategori="n.warna_kategori"
+            :warna_kategori="n.border_buku"
+            :kategori_buku="n.nama_kategori"
           />
         </div>
         <router-link
@@ -91,9 +93,11 @@
           <BookCard
             v-for="n in bukuNew.slice(0, 4)"
             :key="n.id_buku"
+            :idBuku="n.id_buku"
             :title="n.judul"
             :deskripsi="n.deskripsi"
-            :warna_kategori="n.warna_kategori"
+            :warna_kategori="n.border_buku"
+            :kategori_buku="n.nama_kategori"
           />
         </div>
       </v-container>

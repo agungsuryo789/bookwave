@@ -88,9 +88,10 @@ const routes = [
         component: CategoryPage
     },
     {
-        path: '/books/:bookName',
+        path: '/books/:bookParam',
         name: 'BookPage',
-        component: BookPage
+        component: BookPage,
+        props: true
     },
     {
         path: '/disclaimer',

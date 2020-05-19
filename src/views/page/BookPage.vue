@@ -1,7 +1,7 @@
 <template>
   <div class="book-page">
     <NavbarSection />
-    <v-container class="py-0 my-0">
+    <v-container class="py-0 my-0" v-for="book in bookDetail.data" :key="book.id_buku">
       <v-row>
         <v-col lg="6" md="6" sm="12" cols="12">
           <v-card class="book-card" max-width="200" max-height="300">
@@ -19,13 +19,23 @@
           </v-card>
         </v-col>
         <v-col class="px-0 py-0 mx-0 my-0" lg="6" md="6" sm="12" cols="12">
-          <h2>Judul Buku Lorem Ipsum</h2>
-          <p>Sinopnis Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas esse blanditiis enim voluptate dolor nostrum. Sint, nostrum rem! Aliquam unde adipisci aut quo laborum maiores quas ipsum sint inventore eius.</p>
-          <small>Jhoe Sipenulis</small>
-          <div class="d-flex flex-row justify-space-between">
-            <v-btn rounded>Upgrade now to read.</v-btn>
+          <h2 class="my-3">{{ book.judul }}</h2>
+          <p class="my-3 font-weight-bold">{{ book.sub_judul }}</p>
+          <p style="font-size:15px;font-weight:600;color:gray;">{{ book.penulis }}</p>
+          <div class="d-flex flex-row justify-space-between my-10">
+            <template v-if="isPremium">
+				<div class="d-flex flex-row justify-space-between my-1">
+					<v-btn class="mx-4">Mulai Baca</v-btn>
+					<v-btn class="mx-4">Putar Audio</v-btn>
+				</div>
+			</template>
+            <template v-if="!isPremium">
+				<div class="d-flex flex-row justify-space-between">
+					<v-btn rounded>Upgrade now to read.</v-btn>
+				</div>
+			</template>
             <ul>
-              <li>15-menit membaca</li>
+              <li>{{ book.durasi }} membaca</li>
               <li>Audio Available</li>
             </ul>
           </div>
@@ -33,7 +43,11 @@
       </v-row>
       <v-row>
         <v-col>
-          <BookpageTabs />
+          <BookpageTabs
+            :sinopsis="book.deskripsi"
+            :tujuan="book.tujuan"
+            :author="book.tentang_penulis"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -45,12 +59,27 @@
 import BookpageTabs from "@/components/bookpage/BookpageTabs.vue";
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import { mapState } from "vuex";
+
 export default {
   name: "BookPage",
+  props: ["bookID"],
   components: {
     NavbarSection,
     BookpageTabs,
     FooterSection
+  },
+  data() {
+    return {
+      bookId: this.$store.state.bookId,
+      isPremium: true
+    };
+  },
+  computed: mapState({
+    bookDetail: state => state.bookDetail
+  }),
+  mounted() {
+    this.$store.dispatch("getBookDetailByID", this.bookId);
   }
 };
 </script>

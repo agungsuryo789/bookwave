@@ -4,27 +4,34 @@
     <v-container fluid class="px-0 py-0 mx-0 my-0">
       <v-row>
         <v-col class="category-page-title">
-			<h1>{{namaKategori.data[0].nama_kategori}}</h1>
+          <h1>{{ bookListByKategori.nama_kategori }}</h1>
         </v-col>
       </v-row>
-      <v-row>
-        <template v-for="n in 4">
-          <v-col :key="n" v-if="loadSkeleton" lg="3" md="6" sm="12" xs="12">
-            <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
-          </v-col>
-          <v-col :key="n" v-if="!loadSkeleton" lg="3" md="6" sm="12" xs="12">
-            <BookCard />
-          </v-col>
-        </template>
-      </v-row>
-      <v-row>
-        <template v-for="n in booksToShow">
-          <v-col :key="n" v-if="loadSkeleton" lg="4" md="6" class="my-5"></v-col>
-          <v-col :key="n" v-if="!loadSkeleton" lg="4" md="6" sm="6" xs="12" class="my-5">
-            <BookCardSmall />
-          </v-col>
-        </template>
-      </v-row>
+      <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
+        <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
+      </div>
+      <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
+        <BookCard
+          v-for="n in bookListByKategori.buku_populer.slice(0, 4)"
+          :key="n.id_buku"
+          :idBuku="n.id_buku"
+          :title="n.judul"
+          :deskripsi="n.deskripsi"
+          :warna_kategori="n.border_buku"
+          :kategori_buku="n.nama_kategori"
+        />
+      </div>
+      <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
+        <BookCardSmall
+          v-for="n in bookListByKategori.buku_terbaru.slice(0, booksToShow)"
+          :key="n.id_buku"
+          :idBuku="n.id_buku"
+          :title="n.judul"
+          :deskripsi="n.deskripsi"
+          :warna_kategori="n.border_buku"
+          :kategori_buku="n.nama_kategori"
+        />
+      </div>
       <v-row>
         <v-col class="text-center d-flex flex-column justify-center align-center">
           <v-btn
@@ -57,18 +64,18 @@ export default {
     NavbarSection,
     FooterSection
   },
-  data: function() {
+  data() {
     return {
       loadSkeleton: false,
-      booksToShow: 12,
-      namaKategori: this.$store.state.bookListByKategori
+      booksToShow: 9,
+      kategoriId: this.$store.state.kategoriId
     };
   },
   computed: mapState({
     bookListByKategori: state => state.bookListByKategori
   }),
   mounted() {
-	this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
+    this.$store.dispatch("getBookByKategori", this.kategoriId);
   }
 };
 </script>
