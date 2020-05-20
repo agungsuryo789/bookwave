@@ -13,9 +13,10 @@ export const axs = axios.create({
 });
 axs.interceptors.request.use(
     (config) => {
-        const key = window.sessionStorage.getItem("x-api-key")
-        const token = window.sessionStorage.getItem("x-token")
-        if (key || token) {
+        const key = 'C94D74AC6115211E9531D5082CA97F2C'
+        const token = window.localStorage.getItem("x-token")
+        config.headers["x-api-key"] = key
+        if (token) {
             config.headers["x-api-key"] = key
             config.headers["x-token"] = token
         }
@@ -27,9 +28,10 @@ axs.interceptors.request.use(
 )
 axs.interceptors.response.use(
     (config) => {
-        const key = window.localStorage.getItem("x-api-key")
+        const key = 'C94D74AC6115211E9531D5082CA97F2C'
         const token = window.localStorage.getItem("x-token")
-        if (key || token) {
+        config.headers["x-api-key"] = key
+        if (token) {
             config.headers["x-api-key"] = key
             config.headers["x-token"] = token
         }
