@@ -17,12 +17,12 @@
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block><v-icon dark left>mdi-google</v-icon>Sign up with Google</v-btn>
+							<v-btn :elevation="8" block @click="login"><v-icon dark left>mdi-google</v-icon>Sign up with Google</v-btn>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block><v-icon dark left>mdi-facebook</v-icon>Sign up with Facebook</v-btn>
+							<v-btn :elevation="8" block @click="loginfb"><v-icon dark left>mdi-facebook</v-icon>Sign up with Facebook</v-btn>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
@@ -45,11 +45,50 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
+import Firebase from '@/firebase.js'
 /* eslint-disable */
 export default {
     name: 'Register',
     components: {
-		NavbarSection
-    }
+		NavbarSection,
+	},
+	mounted: function() {
+		Firebase.auth.onAuthStateChanged( user => {
+        if (user) {
+          this.user.loggedIn = true;
+          this.user.data = user;
+        }
+        else {
+          this.user.loggedIn = false;
+          this.user.data = {};
+        }
+      })
+    },
+	user: {
+		loggedIn: false,
+		data: {}
+	},
+	computed: {
+        authenticated(){
+          return this.user.loggedIn
+        },
+        firstName(){
+          if (this.user.data.displayName) {
+            return this.user.data.displayName.split(' ')[0]
+          }
+          return null
+        }
+    },
+	methods: {
+      login() {
+        Firebase.login();
+	  },
+	  loginfb() {
+		  Firebase.loginfb();
+	  },
+      logout() {
+        Firebase.logout()
+      }
+    },
 }
 </script>

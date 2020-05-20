@@ -51,6 +51,7 @@ const vuexSession = new VuexPersist({
         bookDetail: state.bookDetail
     })
 })
+
 export default new Vuex.Store({
     plugins: [vuexSession],
     state: {
@@ -131,6 +132,7 @@ export default new Vuex.Store({
 				.then(response => {
 					const token = response.data.token
 					const email = response.data.email
+					axios.defaults.headers.common['Authorization'] = token;
 					commit('authSuccess_mutation', token, email)
 				})
 		}
