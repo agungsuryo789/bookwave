@@ -3,7 +3,7 @@
     <v-app>
         <NavbarSection />
         <v-container fluid>
-            <v-row>
+            <v-row class="submit-form">
                 <v-col cols="12" class="mt-12">
 					<v-row justify="center" class="mt-12">
                         <v-col cols="6" md="4" align="center">
@@ -13,7 +13,10 @@
                 </v-col>
 				<v-col v-show="isShow" class="mt-8" cols="12">
 					<v-row justify="center">
-						<EmailInput />
+						<v-col cols="6" md="4" align="center">
+							<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email</p>
+							<v-text-field v-model="email" class="centered-input" :rules="emailRules" solo background-color="grey lighten-2"></v-text-field>
+						</v-col>
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="3" md="1" align="center">
@@ -23,11 +26,14 @@
 				</v-col>
 				<v-col v-show="!isShow" class="mt-8" cols="12">
 					<v-row justify="center">
-						<PasswordInput />
+						<v-col cols="6" md="4" align="center">
+							<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-lock-outline</v-icon>Kata Sandi</p>
+							<v-text-field class="centered-input" v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"  :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="show1 = !show1" solo background-color="grey lighten-2"></v-text-field>
+						</v-col>
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="3" md="1" align="center">
-							<v-btn :elevation="8" color="red darken-1" block x-large class="white--text">Daftar</v-btn>
+							<v-btn :elevation="8" color="red darken-1" block x-large class="white--text" @click="submit">Daftar</v-btn>
 						</v-col>
 					</v-row>
 				</v-col>
@@ -45,21 +51,41 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
-import EmailInput from '@/components/auth/EmailInput.vue'
-import PasswordInput from '@/components/auth/PasswordInput.vue'
 
 /* eslint-disable */
 export default {
     name: 'RegisterEmail',
     components: {
-		NavbarSection,
-		EmailInput,
-		PasswordInput
+		NavbarSection
 	},
 	data(){
 		return {
-			isShow : true,
+			isShow: true,
+			email: '',
+			password: '',
+			emailRules: [
+				v => !!v || 'E-mail is required',
+				v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+			],
+			lazy: false,
+			show1: false,
+        	rules: {
+				required: value => !!value || 'Required.',
+				emailMatch: () => ('The email and password you entered don\'t match'),
+			}
 		}
+	},
+	methods: {
+      submit () {
+          var data = {
+              email: this.email,
+			  password: this.password,
+			  type: 1
+			}
+			console.log(data)
+
+			this.$store.dispatch('userRegister', data)
+      }
     }
 }
 </script>

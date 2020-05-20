@@ -16,7 +16,7 @@ axs.interceptors.request.use(
         if (key || token) {
             config.headers["x-api-key"] = key
             config.headers["x-token"] = token
-        }
+		}
         return config;
     },
     (error) => {
@@ -42,7 +42,7 @@ const vuexSession = new VuexPersist({
         daftarKategori: state.daftarKategori,
         bookListTrending: state.bookListTrending,
         bookListNew: state.bookListNew,
-        episodeListNew: state.episodeListNew
+		episodeListNew: state.episodeListNew
     })
 })
 export default new Vuex.Store({
@@ -51,7 +51,8 @@ export default new Vuex.Store({
         daftarKategori: [],
         bookListTrending: [],
         bookListNew: [],
-        episodeListNew: []
+		episodeListNew: [],
+		user: []
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -65,7 +66,15 @@ export default new Vuex.Store({
         },
         getListEpisodeNew_mutation: (state, response) => {
             state.episodeListNew = response
-        }
+		},
+		user_mutation: (state, response) => {
+			state.user = response
+		},
+		authSuccess_mutation(state, token, email) {
+			state.status = 'success'
+			state.token = token
+			state.email = email
+		}
     },
     actions: {
         getKategori: ({ commit }) => {
@@ -91,6 +100,26 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('getListEpisodeNew_mutation', response.data.audio_new);
                 })
-        }
-    }
+		},
+		userLogin: ({ commit }, user) => {
+			axs.post('ahaapi/login_member', user)
+				.then(response => {
+					const token = response.data.token
+					const email = response.data.email
+					commit('authSuccess_mutation', token, email)
+				})
+		},
+		userRegister: ({ commit }, user) => {
+			axs.post('ahaapi/register_member', user)
+				.then(response => {
+					const token = response.data.token
+					const email = response.data.email
+					commit('authSuccess_mutation', token, email)
+				})
+		}
+	},
+	getters: {
+		isLoggedIn: state => !!state.token,
+		authStatus: state => state.status
+	}
 });

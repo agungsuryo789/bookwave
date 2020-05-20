@@ -7,7 +7,6 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
-import GoogleLogin from "vue-google-login";
 
 Vue.config.productionTip = false;
 
@@ -15,6 +14,5 @@ new Vue({
     router,
     store,
     vuetify,
-    GoogleLogin,
     render: h => h(App)
 }).$mount("#app");
