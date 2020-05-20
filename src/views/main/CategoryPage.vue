@@ -3,7 +3,7 @@
     <NavbarSection />
     <v-container fluid class="px-0 py-0 mx-0 my-0">
       <v-row>
-        <v-col class="category-page-title">
+        <v-col class="category-page-title" :style="{'background-color': warnaKategori}">
           <h1>{{ bookListByKategori.nama_kategori }}</h1>
         </v-col>
       </v-row>
@@ -67,15 +67,15 @@ export default {
   data() {
     return {
       loadSkeleton: false,
-      booksToShow: 9,
-      kategoriId: this.$store.state.kategoriId
+      booksToShow: 9
     };
   },
   computed: mapState({
-    bookListByKategori: state => state.bookListByKategori
+    bookListByKategori: state => state.bookListByKategori,
+    warnaKategori: state => state.bookListByKategori.warna_kategori
   }),
-  mounted() {
-    this.$store.dispatch("getBookByKategori", this.kategoriId);
+  created() {
+    this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
   }
 };
 </script>
@@ -85,7 +85,6 @@ export default {
   .category-page-title {
     height: 150px;
     padding: 4px 14px;
-    background-color: #8edf00;
     color: white;
     text-transform: uppercase;
     h1 {

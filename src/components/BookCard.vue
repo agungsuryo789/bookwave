@@ -25,17 +25,16 @@ export default {
   props: ["idBuku", "title", "deskripsi", "warna_kategori", "kategori_buku"],
   methods: {
     gotoBook() {
-      this.$store.state.bookId = this.$props.idBuku;
       this.$router.push({
         name: "BookPage",
-        params: { bookParam: this.$props.title.toLowerCase() }
+        params: { bookId: this.$props.idBuku, bookName: this.$props.title.toLowerCase() }
       });
     }
   },
   computed: {
     cssVars() {
       return {
-        "--color": this.warna_kategori
+        "--color": this.$props.warna_kategori
       };
     }
   }

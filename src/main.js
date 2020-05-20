@@ -10,6 +10,7 @@ import "@mdi/font/css/materialdesignicons.css";
 import GoogleLogin from "vue-google-login";
 
 Vue.config.productionTip = false;
+Vue.config.performance = false;
 
 new Vue({
     router,

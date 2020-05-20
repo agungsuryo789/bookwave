@@ -1,15 +1,18 @@
 <template>
   <div class="book-page">
     <NavbarSection />
-    <v-container class="py-0 my-0" v-for="book in bookDetail.data" :key="book.id_buku">
-      <v-row>
+    <v-container
+      class="py-0 justify-center align-center"
+      v-for="book in bookDetail.data"
+      :key="book.id_buku"
+    >
+      <v-row style="max-width:850px;margin:0 auto;">
         <v-col lg="6" md="6" sm="12" cols="12">
-          <v-card class="book-card" max-width="200" max-height="300">
-            <div class="book-card-color py-7">
+          <v-card max-width="250">
+            <div class="py-7">
               <v-img
                 class="book-card-img mx-auto"
-                width="120"
-                height="120"
+                width="150"
                 src="https://www.tibs.org.tw/images/default.jpg"
               ></v-img>
               <v-btn class="book-bookmark-button" icon>
@@ -19,29 +22,38 @@
           </v-card>
         </v-col>
         <v-col class="px-0 py-0 mx-0 my-0" lg="6" md="6" sm="12" cols="12">
-          <h2 class="my-3">{{ book.judul }}</h2>
+          <h1 class="my-3">{{ book.judul }}</h1>
           <p class="my-3 font-weight-bold">{{ book.sub_judul }}</p>
           <p style="font-size:15px;font-weight:600;color:gray;">{{ book.penulis }}</p>
-          <div class="d-flex flex-row justify-space-between my-10">
+          <div class="d-flex flex-column flex-lg-row justify-space-between my-10">
             <template v-if="isPremium">
-				<div class="d-flex flex-row justify-space-between my-1">
-					<v-btn class="mx-4">Mulai Baca</v-btn>
-					<v-btn class="mx-4">Putar Audio</v-btn>
-				</div>
-			</template>
+              <div class="d-flex flex-row justify-space-between">
+                <v-btn
+                  :to="{ name: 'BookChapter', params: {bookId: book.id_buku, bookName: book.judul.toLowerCase()}}"
+                  depressed
+                  style="font-size:12px;"
+                >Mulai Baca</v-btn>
+                <v-btn
+                  :to="{ name: 'BookChapter', params: {bookId: book.id_buku, bookName: book.judul.toLowerCase()}}"
+                  class="mx-2"
+                  depressed
+                  style="font-size:12px;"
+                >Putar Audio</v-btn>
+              </div>
+            </template>
             <template v-if="!isPremium">
-				<div class="d-flex flex-row justify-space-between">
-					<v-btn rounded>Upgrade now to read.</v-btn>
-				</div>
-			</template>
-            <ul>
+              <div class="d-flex flex-row justify-space-between">
+                <v-btn rounded>Upgrade now to read.</v-btn>
+              </div>
+            </template>
+            <ul style="font-size:12px;">
               <li>{{ book.durasi }} membaca</li>
               <li>Audio Available</li>
             </ul>
           </div>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row style="max-width:850px;margin:0 auto;">
         <v-col>
           <BookpageTabs
             :sinopsis="book.deskripsi"
@@ -71,18 +83,28 @@ export default {
   },
   data() {
     return {
-      bookId: this.$store.state.bookId,
       isPremium: true
     };
+  },
+  methods: {
+    gotoChapter() {
+      this.$router.push({
+        name: "BookChapter",
+        params: {
+          bookId: this.$props.idBuku,
+          bookName: this.$props.title.toLowerCase()
+        }
+      });
+    }
   },
   computed: mapState({
     bookDetail: state => state.bookDetail
   }),
   mounted() {
-    this.$store.dispatch("getBookDetailByID", this.bookId);
+    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
   }
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>
