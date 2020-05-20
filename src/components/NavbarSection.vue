@@ -1,10 +1,10 @@
 <template>
   <div class="navbar-section">
-    <nav class="navbar" v-on:scroll="updateScroll">
+    <nav class="navbar">
       <v-container>
         <v-row>
           <v-col v-if="userState == false">
-            <v-app-bar flat fixed class="app-bar" id="appBar" color="#D65F5F">
+            <v-app-bar fixed elevate-on-scroll class="app-bar" id="appBar" color="#D84B5B">
               <router-link to="/">
                 <v-img
                   alt="Vuetify Logo"
@@ -31,7 +31,7 @@
             </v-app-bar>
           </v-col>
           <v-col v-if="userState == true">
-            <v-app-bar flat fixed class="app-bar" id="appBar" color="#D65F5F">
+            <v-app-bar fixed elevate-on-scroll class="app-bar" id="appBar" color="white">
               <template v-if="!showSearchBar">
                 <router-link to="/home">
                   <v-img
@@ -135,22 +135,6 @@ export default {
     showCategory: false,
     showSearchBar: false
   }),
-  created() {
-    window.addEventListener("scroll", this.updateScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.updateScroll);
-  },
-  methods: {
-    updateScroll(event) {
-      const navbarElement = document.querySelector(".app-bar");
-      if (window.scrollY || window.pageYOffset > 500) {
-        navbarElement.style.backgroundColor = "#D65F5F";
-      } else if (window.scrollY < 100 || window.scrollY == 0) {
-        navbarElement.style.backgroundColor = "white";
-      }
-    }
-  }
 };
 </script>
 

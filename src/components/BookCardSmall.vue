@@ -12,12 +12,12 @@
         </div>
         <div class>
           <router-link to="/books/sebuah-buku" class="book-card-link">
-            <h2>Judul Buku</h2>
-            <small>Nama Penulis</small>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, dolor neque? Tempora, neque beatae provident ipsam facilis quaerat blanditiis consectetur saepe eligendi! Tempora dignissimos harum cupiditate, illo inventore repellat odio.</p>
+            <h2>{{title}}</h2>
+            <small>{{penulis}}</small>
+            <p>{{deskripsi}}</p>
           </router-link>
           <div class="d-flex flex-row justify-space-between mt-1">
-            <v-btn class="book-card-category" outlined color="indigo">Category</v-btn>
+            <v-btn class="book-card-category" outlined color="indigo">{{kategori_buku}}</v-btn>
             <v-btn class="book-bookmark-button" icon>
               <v-icon>mdi-bookmark-outline</v-icon>
             </v-btn>
@@ -30,7 +30,8 @@
 
 <script>
 export default {
-  name: "BookCardSmall"
+  name: "BookCardSmall",
+  props: ["title", "deskripsi", "penulis", "warna_kategori", "kategori_buku"]
 };
 </script>
 

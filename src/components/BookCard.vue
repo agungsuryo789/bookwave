@@ -11,10 +11,10 @@
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </div>
-    <router-link to="/books/sebuah-buku" class="book-card-title">
+    <a @click="gotoBook"  class="book-card-title">
       <v-card-title class="text-right">{{ title }}</v-card-title>
       <v-card-subtitle class="text--primary text-right">{{ deskripsi }}</v-card-subtitle>
-    </router-link>
+    </a>
   </v-card>
 </template>
 
@@ -22,13 +22,21 @@
 /* eslint-disable */
 export default {
   name: "BookCard",
-  props: ["title", "deskripsi", "warna_kategori"],
+  props: ["idBuku", "title", "deskripsi", "warna_kategori", "kategori_buku"],
+  methods: {
+    gotoBook() {
+      this.$store.state.bookId = this.$props.idBuku;
+      this.$router.push({
+        name: "BookPage",
+        params: { bookParam: this.$props.title.toLowerCase() }
+      });
+    }
+  },
   computed: {
     cssVars() {
       return {
-        /* variables you want to pass to css */
         "--color": this.warna_kategori
-      }
+      };
     }
   }
 };
@@ -40,7 +48,7 @@ export default {
     height: 180px;
     position: relative;
     border-radius: 8px;
-	background-color: var(--color);
+    background-color: var(--color);
     box-shadow: 2px 4px 4px 2px rgb(160, 83, 83);
     .book-bookmark-button {
       position: absolute;

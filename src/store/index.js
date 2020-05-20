@@ -5,6 +5,8 @@ import VuexPersist from 'vuex-persistedstate';
 
 Vue.use(Vuex, axios);
 
+// const apiCookie = ("; " + document.cookie).split("; x-api-key=").pop().split(";").shift();
+
 // AXIOS CONFIG
 export const axs = axios.create({
     baseURL: "http://anditopi.com"
@@ -25,8 +27,8 @@ axs.interceptors.request.use(
 )
 axs.interceptors.response.use(
     (config) => {
-        const key = window.sessionStorage.getItem("x-api-key")
-        const token = window.sessionStorage.getItem("x-token")
+        const key = window.localStorage.getItem("x-api-key")
+        const token = window.localStorage.getItem("x-token")
         if (key || token) {
             config.headers["x-api-key"] = key
             config.headers["x-token"] = token
@@ -42,7 +44,11 @@ const vuexSession = new VuexPersist({
         daftarKategori: state.daftarKategori,
         bookListTrending: state.bookListTrending,
         bookListNew: state.bookListNew,
-		episodeListNew: state.episodeListNew
+        episodeListNew: state.episodeListNew,
+        bookListByKategori: state.bookListByKategori,
+        kategoriId: state.kategoriId,
+        bookId: state.bookId,
+        bookDetail: state.bookDetail
     })
 })
 export default new Vuex.Store({
@@ -51,8 +57,13 @@ export default new Vuex.Store({
         daftarKategori: [],
         bookListTrending: [],
         bookListNew: [],
-		episodeListNew: [],
-		user: []
+		user: [],
+        episodeListNew: [],
+        detailKategori: {},
+        bookListByKategori: [],
+        bookId: '',
+        kategoriId: '',
+        bookDetail: {}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -74,7 +85,13 @@ export default new Vuex.Store({
 			state.status = 'success'
 			state.token = token
 			state.email = email
-		}
+        },
+        getBookByKategori_mutation: (state, response) => {
+            state.bookListByKategori = response
+        },
+        getBookDetailByID_mutation: (state, response) => {
+            state.bookDetail = response
+        }
     },
     actions: {
         getKategori: ({ commit }) => {
@@ -121,5 +138,19 @@ export default new Vuex.Store({
 	getters: {
 		isLoggedIn: state => !!state.token,
 		authStatus: state => state.status
-	}
-});
+
+        },
+        getBookByKategori: ({ commit }, categoryID) => {
+            axs.get('/ahaapi/buku_by_kategori?id_kategori=' + categoryID)
+                .then(response => {
+                    commit('getBookByKategori_mutation', response.data);
+                })
+        },
+        getBookDetailByID: ({ commit }, bookId) => {
+            axs.get('/ahaapi/buku?id_buku=' + bookId)
+                .then(response => {
+                    commit('getBookDetailByID_mutation', response.data);
+                })
+        }
+    }
+);
