@@ -98,9 +98,9 @@ export default {
     }
   },
   computed: mapState({
-    bookDetail: state => state.bookDetail
+	bookDetail: state => state.bookDetail
   }),
-  mounted() {
+  created() {
     this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
   }
 };
