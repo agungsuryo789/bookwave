@@ -19,7 +19,11 @@ const AppPrivacy = () =>
 const UsersPrivacy = () =>
     import ('../views/pages/UsersPrivacy.vue')
 const TermsCondition = () =>
-    import ('../views/pages/TermsCondition.vue')
+	import ('../views/pages/TermsCondition.vue')
+const Faq = () =>
+	import ('../views/pages/Faq.vue')
+const Contact = () =>
+	import ('../views/pages/ContactUs.vue')
 
 // Auth Component
 const Login = () =>
@@ -109,7 +113,17 @@ const routes = [
         path: '/privacy',
         name: 'AppPrivacy',
         component: AppPrivacy
-    },
+	},
+	{
+        path: '/faq',
+        name: 'Faq',
+        component: Faq
+	},
+	{
+        path: '/contact',
+        name: 'Contact',
+        component: Contact
+	},
     // User Layout (Auth)
     // Landing Layout
     {
