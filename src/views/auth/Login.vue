@@ -80,7 +80,7 @@ export default {
         },
         firstName(){
           if (this.user.data.displayName) {
-            return this.user.data.displayName.split(' ')[0]
+            return this.user.data.displayName
           }
           return null
         }
@@ -90,7 +90,7 @@ export default {
         Firebase.login();
 	  },
 	  loginfb() {
-		  Firebase.loginfb();
+		Firebase.loginfb();
 	  },
       logout() {
         Firebase.logout()

@@ -79,11 +79,12 @@ export default {
       submit () {
           var data = {
               email: this.email,
-			  password: this.password
+			  password: this.password,
+			  type: 1
 			}
-			console.log(data)
 
 			this.$store.dispatch('userLogin', data)
+			.then(() => this.$router.push('/home'))
       }
     }
 }

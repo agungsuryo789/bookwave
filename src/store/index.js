@@ -59,8 +59,10 @@ export default new Vuex.Store({
     state: {
         daftarKategori: [],
         bookListTrending: [],
-        bookListNew: [],
-		user: [],
+		bookListNew: [],
+		status: '',
+		token: '',
+		email: {},
         episodeListNew: [],
         detailKategori: {},
         bookListByKategori: [],
@@ -84,11 +86,16 @@ export default new Vuex.Store({
 		user_mutation: (state, response) => {
 			state.user = response
 		},
-		authSuccess_mutation(state, token, email) {
+		authSuccess_mutation(state, token) {
 			state.status = 'success'
 			state.token = token
-			state.email = email
-        },
+		},
+		authError_mutation(state) {
+			state.status = 'error'
+		},
+		authDown_mutation(state) {
+			state.status = ''
+		},
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response
         },
@@ -125,24 +132,28 @@ export default new Vuex.Store({
 			axs.post('ahaapi/login_member', user)
 				.then(response => {
 					const token = response.data.token
-					const email = response.data.email
-					commit('authSuccess_mutation', token, email)
+					localStorage.setItem('token', token)
+					commit('authSuccess_mutation', token)
 				})
 		},
 		userRegister: ({ commit }, user) => {
 			axs.post('ahaapi/register_member', user)
 				.then(response => {
 					const token = response.data.token
-					const email = response.data.email
-					axios.defaults.headers.common['Authorization'] = token;
-					commit('authSuccess_mutation', token, email)
+					commit('authSuccess_mutation', token)
 				})
+		},
+		userLogout: ({ commit }, user) => {
+			return new Promise((resolve, reject) => {
+				commit('authDown_mutation')
+				localStorage.removeItem('token')
+				resolve()
+			})
 		}
 	},
 	getters: {
 		isLoggedIn: state => !!state.token,
 		authStatus: state => state.status
-
         },
         getBookByKategori: ({ commit }, categoryID) => {
             axs.get('/ahaapi/buku_by_kategori?id_kategori=' + categoryID)
