@@ -5,35 +5,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // Lazy load route level
-// Main layout
+// No-Auth Component
 const Home = () =>
     import ('../views/Home.vue')
 const About = () =>
     import ('../views/About.vue')
-    // Auth layout
-const Login = () =>
-    import ('../views/auth/Login.vue')
-const LoginEmail = () =>
-    import ('../views/auth/LoginEmail.vue')
-const Register = () =>
-    import ('../views/auth/Register.vue')
-const RegisterEmail = () =>
-    import ('../views/auth/RegisterEmail.vue')
-const LandingUser = () =>
-    import ('../views/user/LandingUser.vue')
-    // Page Layout
-const BookPage = () =>
-    import ('../views/page/BookPage.vue')
-const UserBookSection = () =>
-    import ('../components/user/UserBookSection.vue')
-const SearchPage = () =>
-    import ('../views/page/SearchPage.vue')
-const PromoPage = () =>
-    import ('../views/page/PromoPage.vue')
-const MembershipPage = () =>
-    import ('../views/page/MembershipPage.vue')
-const CategoryPage = () =>
-    import ('../views/page/CategoryPage.vue')
 const DisclaimerPage = () =>
     import ('../views/pages/DisclaimerPage.vue')
 const SitemapPage = () =>
@@ -45,8 +21,40 @@ const UsersPrivacy = () =>
 const TermsCondition = () =>
     import ('../views/pages/TermsCondition.vue')
 
+// Auth Component
+const Login = () =>
+    import ('../views/auth/Login.vue')
+const LoginEmail = () =>
+    import ('../views/auth/LoginEmail.vue')
+const Register = () =>
+    import ('../views/auth/Register.vue')
+const RegisterEmail = () =>
+    import ('../views/auth/RegisterEmail.vue')
+
+// User Component
+const LandingUser = () =>
+    import ('../views/user/LandingUser.vue')
+
+// Main feature Component
+const BookPage = () =>
+    import ('../views/main/BookPage.vue')
+const UserBookSection = () =>
+    import ('../components/user/UserBookSection.vue')
+const SearchPage = () =>
+    import ('../views/main/SearchPage.vue')
+const CategoryPage = () =>
+    import ('../views/main/CategoryPage.vue')
+const BookChapter = () =>
+    import ('../views/main/BookChapter.vue')
+
+// Pricing Component
+const PromoPage = () =>
+    import ('../views/page/PromoPage.vue')
+const MembershipPage = () =>
+    import ('../views/page/MembershipPage.vue')
+
 const routes = [
-    //MAIN LAYOUT ROUTE
+    //Main Layout (No Auth)
     {
         path: '/',
         name: 'Home',
@@ -78,22 +86,6 @@ const routes = [
         component: RegisterEmail
     },
     {
-        path: '/promo',
-        name: 'PromoPage',
-        component: PromoPage
-    },
-    {
-        path: '/categories/:idKategori',
-        name: 'CategoryPage',
-        component: CategoryPage
-    },
-    {
-        path: '/books/:bookParam',
-        name: 'BookPage',
-        component: BookPage,
-        props: true
-    },
-    {
         path: '/disclaimer',
         name: 'DisclaimerPage',
         component: DisclaimerPage
@@ -118,7 +110,8 @@ const routes = [
         name: 'AppPrivacy',
         component: AppPrivacy
     },
-    //USER LAYOUT ROUTE
+    // User Layout (Auth)
+    // Landing Layout
     {
         path: '/home',
         name: 'LandingUser',
@@ -133,6 +126,28 @@ const routes = [
         path: '/home/search',
         name: 'SearchPage',
         component: SearchPage
+    },
+    // Main Feature Layout
+    {
+        path: '/categories/:idKategori',
+        name: 'CategoryPage',
+        component: CategoryPage
+    },
+    {
+        path: '/books/:bookId/:bookName',
+        name: 'BookPage',
+        component: BookPage,
+    },
+    {
+        path: '/books/:bookId/:bookName/read',
+        name: 'BookChapter',
+        component: BookChapter,
+    },
+    // Promo etc Layout
+    {
+        path: '/promo',
+        name: 'PromoPage',
+        component: PromoPage
     },
     {
         path: '/plans',
