@@ -22,8 +22,10 @@ export default {
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider)
       .then(function(result) {
-        console.log(result);
-      })
+		const token = result.credential.accessToken
+		console.log(result)
+		localStorage.setItem('x-token', token)
+	  })
       .catch(function(error) {
         const errorCode = error.code;
         const errorMessage = error.message;

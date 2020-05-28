@@ -61,7 +61,7 @@ export default new Vuex.Store({
         bookListTrending: [],
 		bookListNew: [],
 		status: '',
-		token: window.localStorage.getItem('x-token') || '',
+		token: localStorage.getItem('x-token') || '',
 		email: {},
         episodeListNew: [],
         detailKategori: {},
@@ -140,6 +140,7 @@ export default new Vuex.Store({
 			axs.post('ahaapi/register_member', user)
 				.then(response => {
 					const token = response.data.token
+					localStorage.setItem('x-token', token)
 					commit('authSuccess_mutation', token)
 				})
 		},

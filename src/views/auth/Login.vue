@@ -58,36 +58,10 @@ export default {
     components: {
 		NavbarSection,
 	},
-	mounted: function() {
-		Firebase.auth.onAuthStateChanged( user => {
-        if (user) {
-          this.user.loggedIn = true;
-          this.user.data = user;
-        }
-        else {
-          this.user.loggedIn = false;
-          this.user.data = {};
-        }
-      })
-    },
-	user: {
-		loggedIn: false,
-		data: {}
-	},
-	computed: {
-        authenticated(){
-          return this.user.loggedIn
-        },
-        firstName(){
-          if (this.user.data.displayName) {
-            return this.user.data.displayName
-          }
-          return null
-        }
-    },
 	methods: {
       login() {
-        Firebase.login();
+		Firebase.login()
+		.then(() => this.$router.push('/home'))
 	  },
 	  loginfb() {
 		Firebase.loginfb();
