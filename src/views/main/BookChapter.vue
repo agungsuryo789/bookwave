@@ -264,8 +264,8 @@ export default {
 	  tooltipSpan.style.display = "flex";
 	  tooltipSpan.style.position = "fixed";
 	  tooltipSpan.style.overflow = "hidden";
-      tooltipSpan.style.top = y - 50 + "px";
-      tooltipSpan.style.left = x + "px";
+      tooltipSpan.style.top = y - 70 + "px";
+      tooltipSpan.style.left = x - 120 + "px";
     };
   }
 };

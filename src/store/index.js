@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import router from "../router";
 import VuexPersist from 'vuex-persistedstate';
 
 Vue.use(Vuex, axios);
@@ -19,7 +20,7 @@ axs.interceptors.request.use(
         if (token) {
             config.headers["x-api-key"] = key
             config.headers["x-token"] = token
-		}
+        }
         return config;
     },
     (error) => {
@@ -59,10 +60,10 @@ export default new Vuex.Store({
     state: {
         daftarKategori: [],
         bookListTrending: [],
-		bookListNew: [],
-		status: '',
-		token: window.localStorage.getItem('x-token') || '',
-		email: {},
+        bookListNew: [],
+        status: '',
+        token: window.localStorage.getItem('x-token') || '',
+        email: {},
         episodeListNew: [],
         detailKategori: {},
         bookListByKategori: [],
@@ -82,20 +83,25 @@ export default new Vuex.Store({
         },
         getListEpisodeNew_mutation: (state, response) => {
             state.episodeListNew = response
-		},
-		user_mutation: (state, response) => {
-			state.user = response
-		},
-		authSuccess_mutation(state, token) {
-			state.status = 'success'
-			state.token = token
-		},
-		authError_mutation(state) {
-			state.status = 'error'
-		},
-		authDown_mutation(state) {
-			state.status = ''
-		},
+        },
+        user_mutation: (state, response) => {
+            state.user = response
+        },
+        authSuccess_mutation: (state, token) => {
+            state.status = 'success'
+            state.token = token
+            router.push('/home')
+        },
+        authError_mutation: (state) => {
+            state.status = 'error'
+        },
+        authDown_mutation: (state) => {
+            state.status = ''
+            state.token = ''
+            Object.assign(state)
+            router.push('/')
+            location.reload()
+        },
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response
         },
@@ -127,33 +133,6 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('getListEpisodeNew_mutation', response.data.audio_new);
                 })
-		},
-		userLogin: ({ commit }, user) => {
-			axs.post('ahaapi/login_member', user)
-				.then(response => {
-					const token = response.data.token
-					localStorage.setItem('x-token', token)
-					commit('authSuccess_mutation', token)
-				})
-		},
-		userRegister: ({ commit }, user) => {
-			axs.post('ahaapi/register_member', user)
-				.then(response => {
-					const token = response.data.token
-					commit('authSuccess_mutation', token)
-				})
-		},
-		userLogout: ({ commit }, user) => {
-			return new Promise((resolve, reject) => {
-				commit('authDown_mutation')
-				localStorage.removeItem('x-token')
-				resolve()
-			})
-		}
-	},
-	getters: {
-		isLoggedIn: state => !!state.token,
-		authStatus: state => state.status
         },
         getBookByKategori: ({ commit }, categoryID) => {
             axs.get('/ahaapi/buku_by_kategori?id_kategori=' + categoryID)
@@ -166,6 +145,32 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('getBookDetailByID_mutation', response.data);
                 })
+        },
+        userLogin: ({ commit }, user) => {
+            axs.post('ahaapi/login_member', user)
+                .then(response => {
+                    const token = response.data.token
+                    localStorage.setItem('x-token', token)
+                    commit('authSuccess_mutation', token)
+                })
+        },
+        userRegister: ({ commit }, user) => {
+            axs.post('ahaapi/register_member', user)
+                .then(response => {
+                    const token = response.data.token
+                    commit('authSuccess_mutation', token)
+                })
+        },
+        userLogout: ({ commit }, user) => {
+            return new Promise((resolve, reject) => {
+                commit('authDown_mutation')
+                localStorage.removeItem('x-token')
+                resolve()
+            })
         }
+    },
+    getters: {
+        isLoggedIn: state => !!state.token,
+        authStatus: state => state.status
     }
-);
+});
