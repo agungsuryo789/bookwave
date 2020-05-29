@@ -106,13 +106,27 @@
         </v-carousel>
         <v-row>
           <v-col style="position:relative;">
-            <p id="chapterText" :style="styleObject" @mouseup="tooltipShow = true">
-              {{ book.data_chapter[chapterArray].isi_chapter }}
+            <p id="chapterText" :style="styleObject" @mouseup="showHighlightTool">
               <span id="tooltip">
-                <v-btn>Warnai</v-btn>
-				<v-btn>Highlight</v-btn>
+                <v-btn class="button-tooltip py-2 px-2" depressed @click="setColor">
+                  <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
+                </v-btn>
               </span>
+              {{ book.data_chapter[chapterArray].isi_chapter }}
             </p>
+            <div v-if="chapterArray >= parseInt(book.data_chapter.length) - 1">
+              <v-card class="d-flex flex-row justify-space-between py-2 px-2">
+                <div>
+                  <v-btn tile text depressed>
+                    <v-icon>mdi-share-variant</v-icon>
+                  </v-btn>
+                  <v-btn tile text depressed>
+                    <v-icon>mdi-heart-outline</v-icon>
+                  </v-btn>
+                </div>
+                <v-btn class="btn-main">Selesai</v-btn>
+              </v-card>
+            </div>
             <div class="d-flex flex-row justify-space-between mt-12 mb-2">
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
@@ -122,13 +136,13 @@
                 rounded
                 style="position:absolute;bottom:0;left:0;margin:0 10px;"
               >
-                <v-icon>mdi-less-than</v-icon>
-                <v-icon>mdi-less-than</v-icon>
+                <v-icon x-small>mdi-less-than</v-icon>
+                <v-icon x-small>mdi-less-than</v-icon>
               </v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 depressed
-                style="position:absolute;bottom:0;left:45%;"
+                style="position:absolute;bottom:0;left:45%;font-weight:bold;"
               >{{ chapterArray + 1 }}</v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
@@ -138,8 +152,8 @@
                 rounded
                 style="position:absolute;bottom:0;right:0;margin:0 10px;"
               >
-                <v-icon>mdi-greater-than</v-icon>
-                <v-icon>mdi-greater-than</v-icon>
+                <v-icon x-small>mdi-greater-than</v-icon>
+                <v-icon x-small>mdi-greater-than</v-icon>
               </v-btn>
             </div>
           </v-col>
@@ -149,7 +163,7 @@
             <vuetify-audio
               :file="book.data_chapter[chapterArray].audio_chapter"
               :autoPlay="false"
-              color="success"
+              color="#FF8A80"
             ></vuetify-audio>
           </div>
         </div>
@@ -199,7 +213,6 @@ export default {
       min: 8,
       max: 72,
       slider: 24,
-      tooltipShow: false,
       bgWhite: true,
       bgGrey: false,
       bgBlack: false
@@ -208,6 +221,54 @@ export default {
   methods: {
     hasHistory() {
       return window.history?.length > 2;
+    },
+    getSelected() {
+      /* eslint-disable */
+      if (window.getSelection) {
+        return window.getSelection();
+      } else if (document.getSelection) {
+        return document.getSelection();
+      } else {
+        var selection = document.selection && document.selection.createRange();
+        if (selection.text) {
+          return selection.text;
+        }
+        return false;
+      }
+      return false;
+    },
+    showHighlightTool(e) {
+      let selection = this.getSelected();
+      let tooltipSpan = document.getElementById("tooltip");
+      let anchorSelection = selection.extentOffset - selection.anchorOffset;
+      if (selection && anchorSelection > 0) {
+        let x = e.clientX;
+        let y = e.clientY;
+        tooltipSpan.style.display = "flex";
+        tooltipSpan.style.position = "fixed";
+        tooltipSpan.style.overflow = "hidden";
+        tooltipSpan.style.top = y - 60 + "px";
+        tooltipSpan.style.left = x + -100 + "px";
+      } else {
+        tooltipSpan.display = "none";
+      }
+    },
+    highlightRange(range) {
+      let newNode = document.createElement("span");
+      newNode.setAttribute(
+        "style",
+        "background-color: yellow; display: inline;"
+      );
+      range.surroundContents(newNode);
+    },
+    setColor() {
+      let userSelection = this.getSelected();
+      let tooltipSpan = document.getElementById("tooltip");
+
+      for (let i = 0; i < userSelection.rangeCount; i++) {
+        this.highlightRange(userSelection.getRangeAt(i));
+      }
+      tooltipSpan.style.display = "none";
     }
   },
   computed: mapState({
@@ -222,51 +283,13 @@ export default {
     this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
   },
   mounted() {
-    function getSelected() {
-      /* eslint-disable */
-      if (window.getSelection) {
-        return window.getSelection();
-      } else if (document.getSelection) {
-        return document.getSelection();
-      } else {
-        var selection = document.selection && document.selection.createRange();
-        if (selection.text) {
-          return selection.text;
-        }
-        return false;
-      }
-      return false;
-    }
-    document
-      .getElementById("chapterText")
-      .addEventListener("mouseup", function() {
-        var selection = getSelected();
-        if (selection) {
-          //   alert(selection);
-        //   var span = document.createElement("span");
-        //   span.innerHTML = window.getSelection().toString();
-        //   span.style.width = "80px";
-        //   span.style.border = "1px solid black";
-        //   span.style.backgroundColor = "#555";
-        //   span.style.position = "absolute";
-        //   span.style.zIndex = 1;
-        //   span.style.bottom = "125%";
-        //   span.style.left = "50%";
-        //   span.style.color = "#fff";
-        //   document.getElementById("chapterText").appendChild(span);
-        }
-      });
-    var tooltipSpan = document.getElementById("tooltip");
-
-    window.onmouseup = function(e) {
-      var x = e.clientX;
-	  var y = e.clientY;
-	  tooltipSpan.style.display = "flex";
-	  tooltipSpan.style.position = "fixed";
-	  tooltipSpan.style.overflow = "hidden";
-      tooltipSpan.style.top = y - 70 + "px";
-      tooltipSpan.style.left = x - 120 + "px";
-    };
+    // let elementIgnoreOnClik = document.getElementById("tooltip");
+    // document.addEventListener("click", function(e) {
+    //   let isInsideElement = elementIgnoreOnClik.contains(e.target);
+    //   if (isInsideElement) {
+    //     elementIgnoreOnClik.style.display = "none";
+    //   }
+    // });
   }
 };
 </script>
@@ -276,10 +299,29 @@ export default {
 
 #chapterText #tooltip {
   display: none;
+  .button-tooltip {
+    font-size: 12px;
+    text-transform: none;
+    margin: 0 1px;
+    color: $mainColor;
+    background-color: rgb(243, 243, 243);
+    border-radius: 0;
+    border-top: 4px solid rgb(173, 173, 173);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
 }
-.showTooltip{
-	display: block;
-	position: fixed;
-	overflow: hidden;
+.showTooltip {
+  display: block;
+  position: fixed;
+  overflow: hidden;
+}
+.btn-main {
+  @include btn-chip-main();
+  text-transform: none;
+  border-color: $mainColor;
+  font-size: 14px;
+  font-weight: bold;
+  color: $mainColor;
 }
 </style>

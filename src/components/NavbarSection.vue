@@ -1,36 +1,9 @@
 <template>
   <div class="navbar-section">
-    <nav class="navbar">
+    <nav v-if="userState" class="navbar" style="background-color:white;">
       <v-container>
         <v-row>
-          <v-col v-if="userState == false">
-            <v-app-bar fixed elevate-on-scroll class="app-bar" id="appBar" color="#D84B5B">
-              <router-link to="/">
-                <v-img
-                  alt="Vuetify Logo"
-                  class="shrink ml-5 mr-2"
-                  contain
-                  src="../assets/image/aha-white-icon.svg"
-                  transition="scale-transition"
-                  width="100"
-                />
-              </router-link>
-              <v-spacer></v-spacer>
-              <v-btn
-                class="button-subscribe"
-                rounded
-                color="#39DF8C"
-                elevation="2"
-                depressed
-              >Start Trial</v-btn>
-              <v-btn
-                color="transparent"
-                depressed
-                style="text-transform:none;font-size:18px;font-weight:600;"
-              >Login</v-btn>
-            </v-app-bar>
-          </v-col>
-          <v-col v-if="userState == true">
+          <v-col>
             <v-app-bar fixed elevate-on-scroll class="app-bar" id="appBar" color="white">
               <template v-if="!showSearchBar">
                 <router-link to="/home">
@@ -119,22 +92,57 @@
         </v-row>
       </v-container>
     </nav>
+    <nav v-if="!userState" class="navbar" style="background-color:#D84B5B;">
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-app-bar fixed elevate-on-scroll class="app-bar" id="appBar" color="#D84B5B">
+              <router-link to="/">
+                <v-img
+                  alt="Vuetify Logo"
+                  class="shrink ml-5 mr-2"
+                  contain
+                  src="../assets/image/aha-white-icon.svg"
+                  transition="scale-transition"
+                  width="100"
+                />
+              </router-link>
+              <v-spacer></v-spacer>
+              <v-btn
+                class="button-subscribe"
+                rounded
+                color="#39DF8C"
+                elevation="2"
+                depressed
+              >Start Trial</v-btn>
+              <v-btn
+                color="transparent"
+                depressed
+                style="text-transform:none;font-size:18px;font-weight:600;"
+              >Login</v-btn>
+            </v-app-bar>
+          </v-col>
+        </v-row>
+      </v-container>
+    </nav>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
 import NavbarCategoryChip from "@/components/navbar/NavbarCategoryChip.vue";
 export default {
   name: "NavbarSection",
   components: {
     NavbarCategoryChip
   },
-  data: () => ({
-    userState: true,
-    showCategory: false,
-    showSearchBar: false
-  }),
+  data() {
+    return {
+      userState: this.$store.getters.isLoggedIn,
+      showCategory: false,
+      showSearchBar: false
+    };
+  },
+  mounted() {}
 };
 </script>
 
@@ -142,7 +150,6 @@ export default {
 @import "@/assets/css/global_variables.scss";
 
 .navbar {
-  background-color: white;
   .navbarChangeColor {
     background-color: white;
   }
@@ -160,7 +167,7 @@ export default {
   }
   .category-chip--navbar {
     position: fixed;
-	z-index: 999;
+    z-index: 999;
   }
 }
 .fade-enter-active,
