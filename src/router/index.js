@@ -19,11 +19,11 @@ const AppPrivacy = () =>
 const UsersPrivacy = () =>
     import ('../views/pages/UsersPrivacy.vue')
 const TermsCondition = () =>
-	import ('../views/pages/TermsCondition.vue')
+    import ('../views/pages/TermsCondition.vue')
 const Faq = () =>
-	import ('../views/pages/Faq.vue')
+    import ('../views/pages/Faq.vue')
 const Contact = () =>
-	import ('../views/pages/ContactUs.vue')
+    import ('../views/pages/ContactUs.vue')
 
 // Auth Component
 const Login = () =>
@@ -43,7 +43,7 @@ const LandingUser = () =>
 const BookPage = () =>
     import ('../views/main/BookPage.vue')
 const UserBookSection = () =>
-    import ('../components/user/UserBookSection.vue')
+    import ('../components/landing/UserBookSection.vue')
 const SearchPage = () =>
     import ('../views/main/SearchPage.vue')
 const CategoryPage = () =>
@@ -113,17 +113,17 @@ const routes = [
         path: '/privacy',
         name: 'AppPrivacy',
         component: AppPrivacy
-	},
-	{
+    },
+    {
         path: '/faq',
         name: 'Faq',
         component: Faq
-	},
-	{
+    },
+    {
         path: '/contact',
         name: 'Contact',
         component: Contact
-	},
+    },
     // User Layout (Auth)
     // Landing Layout
     {
@@ -153,7 +153,7 @@ const routes = [
         component: BookPage,
     },
     {
-        path: '/books/:bookId/:bookName/read',
+        path: '/read/:bookId/:chapterId',
         name: 'BookChapter',
         component: BookChapter,
     },

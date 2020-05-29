@@ -25,29 +25,12 @@
     <section>
       <v-container>
         <router-link
-          to="/home/book-page"
+          :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[0].url }}"
           class="font-weight-black book-section-title"
-          @click="bookSectionAction"
-        >Trending Books</router-link>
+        >{{ sectionLink[0].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <!-- <v-row class="my-9 justify-start align-center" no-gutters>
-          <template>
-            <v-col
-              :key="n.id_buku"
-              v-if="loadSkeleton"
-              lg="3"
-              md="6"
-              sm="12"
-              xs="12"
-              class="my-5"
-              style="max-width:300px;"
-            >
-              <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
-            </v-col>
-          </template>
-        </v-row>-->
         <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-          <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
+          <v-skeleton-loader v-for="n in 4" :key="n" class="mx-auto" width="250" type="card"></v-skeleton-loader>
         </div>
         <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
           <BookCard
@@ -55,21 +38,25 @@
             :key="n.id_buku"
             :idBuku="n.id_buku"
             :title="n.judul"
+            :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
             :warna_kategori="n.border_buku"
             :kategori_buku="n.nama_kategori"
           />
         </div>
         <router-link
-          to="/home/book-page"
+          :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[1].url }}"
           class="font-weight-black book-section-title"
-          @click="bookSectionAction"
-        >AHA Episodes</router-link>
+        >{{ sectionLink[1].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
         <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-          <div class="skeleton-episode-card d-flex flex-row justify-space-between">
-            <v-skeleton-loader class="mx-auto" max-width="100" type="card-heading"></v-skeleton-loader>
-            <v-skeleton-loader class="mx-auto" max-width="40" type="avatar"></v-skeleton-loader>
+          <div
+            v-for="n in 4"
+            :key="n"
+            class="skeleton-episode-card d-flex flex-row justify-center mx-3 my-2"
+          >
+            <v-skeleton-loader class="mx-auto" width="150" type="card-heading"></v-skeleton-loader>
+            <v-skeleton-loader class="mx-auto" width="50" type="avatar"></v-skeleton-loader>
           </div>
         </div>
         <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
@@ -81,13 +68,12 @@
           />
         </div>
         <router-link
-          to="/home/book-page"
+          :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[2].url }}"
           class="font-weight-black book-section-title"
-          @click="bookSectionAction"
-        >Newest Books</router-link>
+        >{{ sectionLink[2].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
         <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-          <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
+          <v-skeleton-loader v-for="n in 4" :key="n" class="mx-auto" width="250" type="card"></v-skeleton-loader>
         </div>
         <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
           <BookCard
@@ -95,6 +81,7 @@
             :key="n.id_buku"
             :idBuku="n.id_buku"
             :title="n.judul"
+            :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
             :warna_kategori="n.border_buku"
             :kategori_buku="n.nama_kategori"
@@ -122,8 +109,22 @@ export default {
     FooterSection
   },
   data: () => ({
-    loadSkeleton: false,
-    underlineValue: 15
+    loadSkeleton: true,
+    underlineValue: 15,
+    sectionLink: [
+      {
+        sectionName: "Buku Trending",
+        url: "buku-trending"
+      },
+      {
+        sectionName: "Aha Episodes",
+        url: "aha-episodes"
+      },
+      {
+        sectionName: "Buku Terbaru",
+        url: "buku-terbaru"
+      }
+    ]
   }),
   methods: {
     bookSectionAction(event) {
@@ -135,10 +136,11 @@ export default {
     bukuNew: state => state.bookListNew,
     episodeNew: state => state.episodeListNew
   }),
-  mounted() {
+  beforeMount() {
     this.$store.dispatch("getListBookTrending");
     this.$store.dispatch("getListBookNew");
-    this.$store.dispatch("getListEpisodeNew");
+	this.$store.dispatch("getListEpisodeNew");
+	this.loadSkeleton = false;
   }
 };
 </script>

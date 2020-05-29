@@ -1,12 +1,15 @@
 <template>
   <v-card class="py-2 px-4">
-    <v-btn
+    <v-chip
+      class="btn-chip-main mx-1 my-1"
       v-for="n in daftarKategori"
       :key="n.id_daftar_kategori"
       @click="gotoKategori(n.id_daftar_kategori)"
-      class="my-2 mx-3 btn-category"
-      depressed
-    >{{ n.nama_kategori }}</v-btn>
+      filter
+      outlined
+      link
+      :color="n.warna_kategori"
+    >{{ n.nama_kategori }}</v-chip>
   </v-card>
 </template>
 
@@ -32,8 +35,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.btn-category {
-  text-decoration: none;
-  font-size: 12px;
+@import "@/assets/css/global_variables.scss";
+.btn-chip-main {
+  @include btn-chip-main();
 }
 </style>

@@ -5,7 +5,7 @@
         class="book-card-img mx-auto"
         width="120"
         height="120"
-        src="https://www.tibs.org.tw/images/default.jpg"
+        :src="foto_sampul"
       ></v-img>
       <v-btn class="book-bookmark-button" icon>
         <v-icon>mdi-bookmark-outline</v-icon>
@@ -22,7 +22,7 @@
 /* eslint-disable */
 export default {
   name: "BookCard",
-  props: ["idBuku", "title", "deskripsi", "warna_kategori", "kategori_buku"],
+  props: ["idBuku", "title", "foto_sampul", "deskripsi", "warna_kategori", "kategori_buku"],
   methods: {
     gotoBook() {
       this.$router.push({
