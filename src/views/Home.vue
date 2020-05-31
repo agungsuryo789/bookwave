@@ -94,7 +94,7 @@ export default {
   .row-hero-1,
   .row-hero-2 {
     h1 {
-      color: #d65f5f;
+      color: $mainColor;
       font-weight: bold;
     }
   }

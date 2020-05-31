@@ -87,7 +87,7 @@
       </v-row>
     </v-container>
     <template v-if="!outlineMenu">
-      <v-container v-for="book in bookDetail.data" :key="book.id_buku">
+      <v-container v-for="chapter in chapterDetail.data" :key="chapter.id_chapter">
         <v-carousel height="150" hide-delimiters touchless :show-arrows="false">
           <v-carousel-item>
             <v-sheet
@@ -97,97 +97,84 @@
               style="color:black;"
             >
               <v-row class="fill-height" align="center" justify="center">
-                <div
-                  class="display-3 font-weight-bold px-5"
-                >{{ book.data_chapter[chapterArray].judul_chapter }}</div>
+                <div class="display-3 font-weight-bold px-5">{{ chapter.judul_chapter }}</div>
               </v-row>
             </v-sheet>
           </v-carousel-item>
         </v-carousel>
         <v-row>
           <v-col style="position:relative;">
-            <p id="chapterText" :style="styleObject" @mouseup="tooltipShow = true">
-              {{ book.data_chapter[chapterArray].isi_chapter }}
+            <p id="chapterText" :style="styleObject" @mouseup="showHighlightTool">
               <span id="tooltip">
-                <v-btn>Warnai</v-btn>
-				<v-btn>Highlight</v-btn>
+                <v-btn class="button-tooltip py-2 px-2" depressed @click="setColor">
+                  <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
+                </v-btn>
               </span>
+              {{ chapter.isi_chapter }}
             </p>
+            <div
+              v-if="parseInt(chapter.prev_chapter_id) > 0 && parseInt(chapter.next_chapter_id) <= 0 "
+            >
+              <ChapterpageBookmark :bookId="chapter.id_buku" :chapterId="chapter.id_chapter" />
+            </div>
             <div class="d-flex flex-row justify-space-between mt-12 mb-2">
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
-                v-if="chapterArray > 0"
-                @click="chapterArray -= 1"
+                v-if="parseInt(chapter.prev_chapter_id) > 0"
                 depressed
                 rounded
+                :loading="loading"
+                @click="loader = 'loading'"
+                :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.id_chapter - 1}}"
                 style="position:absolute;bottom:0;left:0;margin:0 10px;"
               >
-                <v-icon>mdi-less-than</v-icon>
-                <v-icon>mdi-less-than</v-icon>
+                <v-icon x-small>mdi-less-than</v-icon>
+                <v-icon x-small>mdi-less-than</v-icon>
               </v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 depressed
-                style="position:absolute;bottom:0;left:45%;"
-              >{{ chapterArray + 1 }}</v-btn>
+                style="position:absolute;bottom:0;left:45%;font-weight:bold;"
+              >{{ chapter.page_number }}</v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
-                v-if="chapterArray < parseInt(book.data_chapter.length) - 1"
-                @click="chapterArray += 1"
+                v-if="parseInt(chapter.next_chapter_id) > 0"
                 depressed
                 rounded
+                :loading="loading"
+                @click="loader = 'loading'"
+                :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.next_chapter_id}}"
                 style="position:absolute;bottom:0;right:0;margin:0 10px;"
               >
-                <v-icon>mdi-greater-than</v-icon>
-                <v-icon>mdi-greater-than</v-icon>
+                <v-icon x-small>mdi-greater-than</v-icon>
+                <v-icon x-small>mdi-greater-than</v-icon>
               </v-btn>
             </div>
           </v-col>
         </v-row>
-        <div class="mt-10" style="position:sticky;bottom:0;left:0;width:100%;">
+        <div class="audioplayer-section mt-10" style="position:sticky;bottom:0;left:0;width:100%;">
           <div class="d-flex flex-column">
-            <vuetify-audio
-              :file="book.data_chapter[chapterArray].audio_chapter"
-              :autoPlay="false"
-              color="success"
-            ></vuetify-audio>
+            <vuetify-audio :file="chapter.audio_chapter" :autoPlay="false" color="#FF8A80"></vuetify-audio>
           </div>
         </div>
       </v-container>
     </template>
-    <template v-if="outlineMenu">
-      <v-container v-for="book in bookDetail.data" :key="book.id_buku">
-        <v-row>
-          <v-col>
-            <v-list>
-              <v-list-item-group>
-                <v-list-item
-                  v-for="(item, i) in book.data_chapter"
-                  :key="item.id_chapter"
-                  @click="chapterArray = i, outlineMenu = false"
-                >
-                  <div style="width:100%;">
-                    <v-divider></v-divider>
-                    {{ i + 1 }}. {{ item.judul_chapter }}
-                    <v-divider></v-divider>
-                  </div>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-col>
-        </v-row>
-      </v-container>
+    <template v-else>
+      <ChapterpageOutline />
     </template>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
 import { mapState } from "vuex";
+import ChapterpageOutline from "@/components/chapterpage/ChapterpageOutline.vue";
+import ChapterpageBookmark from "@/components/chapterpage/ChapterpageBookmark.vue";
 
 export default {
   name: "BookChapter",
   components: {
+	ChapterpageOutline,
+	ChapterpageBookmark,
     VuetifyAudio: () => import("vuetify-audio")
   },
   data() {
@@ -196,77 +183,100 @@ export default {
       showTools: false,
       showMenuTop: false,
       outlineMenu: false,
+      loader: null,
+      loading: false,
       min: 8,
       max: 72,
       slider: 24,
-      tooltipShow: false,
       bgWhite: true,
       bgGrey: false,
-      bgBlack: false
+      bgBlack: false,
+      dispatchPayload: {
+        bookId: this.$route.params.bookId,
+        chapterId: this.$route.params.chapterId
+      }
     };
   },
-  methods: {
-    hasHistory() {
-      return window.history?.length > 2;
-    }
-  },
   computed: mapState({
-    bookDetail: state => state.bookDetail,
+    chapterDetail: state => state.chapterDetail,
     styleObject() {
       return {
         fontSize: this.slider + "px"
       };
     }
   }),
-  created() {
-    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
-  },
-  mounted() {
-    function getSelected() {
-      /* eslint-disable */
+  methods: {
+    hasHistory() {
+      return window.history?.length > 2;
+    },
+    getSelected() {
       if (window.getSelection) {
         return window.getSelection();
       } else if (document.getSelection) {
         return document.getSelection();
       } else {
-        var selection = document.selection && document.selection.createRange();
+        const selection =
+          document.selection && document.selection.createRange();
         if (selection.text) {
           return selection.text;
         }
         return false;
       }
-      return false;
+    },
+    showHighlightTool(e) {
+      const selection = this.getSelected();
+      const anchorSelection = selection.extentOffset - selection.anchorOffset;
+      const tooltipSpan = document.getElementById("tooltip");
+      if (selection && anchorSelection > 0) {
+        const x = e.clientX;
+        const y = e.clientY;
+        tooltipSpan.style.display = "flex";
+        tooltipSpan.style.position = "fixed";
+        tooltipSpan.style.overflow = "hidden";
+        tooltipSpan.style.top = y - 60 + "px";
+        tooltipSpan.style.left = x + -100 + "px";
+      } else {
+        tooltipSpan.display = "none";
+      }
+    },
+    highlightRange(range) {
+      const newNode = document.createElement("span");
+      newNode.setAttribute(
+        "style",
+        "background-color: yellow; display: inline;"
+      );
+      range.surroundContents(newNode);
+    },
+    setColor() {
+      const userSelection = this.getSelected();
+      //   for (let i = 0; i < userSelection.rangeCount; i++) {
+      //     this.highlightRange(userSelection.getRangeAt(i));
+      //   }
+      //   let tooltipSpan = document.getElementById("tooltip");
+      //   tooltipSpan.style.display = "none";
+      const selectionText = userSelection.toString();
+      const span = document.createElement("span");
+      const range = userSelection.getRangeAt(0);
+      const tooltipSpan = document.getElementById("tooltip");
+      span.setAttribute("style", "background-color: yellow; display: inline;");
+      span.textContent = selectionText;
+      range.deleteContents();
+      range.insertNode(span);
+      tooltipSpan.style.display = "none";
     }
-    document
-      .getElementById("chapterText")
-      .addEventListener("mouseup", function() {
-        var selection = getSelected();
-        if (selection) {
-          //   alert(selection);
-        //   var span = document.createElement("span");
-        //   span.innerHTML = window.getSelection().toString();
-        //   span.style.width = "80px";
-        //   span.style.border = "1px solid black";
-        //   span.style.backgroundColor = "#555";
-        //   span.style.position = "absolute";
-        //   span.style.zIndex = 1;
-        //   span.style.bottom = "125%";
-        //   span.style.left = "50%";
-        //   span.style.color = "#fff";
-        //   document.getElementById("chapterText").appendChild(span);
-        }
-      });
-    var tooltipSpan = document.getElementById("tooltip");
+  },
+  created() {
+    this.$store.dispatch("getBookChapter", this.dispatchPayload);
+  },
+  watch: {
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
 
-    window.onmouseup = function(e) {
-      var x = e.clientX;
-	  var y = e.clientY;
-	  tooltipSpan.style.display = "flex";
-	  tooltipSpan.style.position = "fixed";
-	  tooltipSpan.style.overflow = "hidden";
-      tooltipSpan.style.top = y - 70 + "px";
-      tooltipSpan.style.left = x - 120 + "px";
-    };
+      setTimeout(() => (this[l] = false), 3000);
+
+      this.loader = null;
+    }
   }
 };
 </script>
@@ -276,10 +286,21 @@ export default {
 
 #chapterText #tooltip {
   display: none;
+  .button-tooltip {
+    font-size: 12px;
+    text-transform: none;
+    margin: 0 1px;
+    color: $mainColor;
+    background-color: rgb(243, 243, 243);
+    border-radius: 0;
+    border-top: 4px solid rgb(173, 173, 173);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
 }
-.showTooltip{
-	display: block;
-	position: fixed;
-	overflow: hidden;
+.showTooltip {
+  display: block;
+  position: fixed;
+  overflow: hidden;
 }
 </style>

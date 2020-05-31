@@ -6,6 +6,14 @@
     background-color: #39DF8C;
 }
 
+@mixin btn-chip-main {
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid rgb(165, 165, 165);
+    border-bottom: 4px solid rgb(165, 165, 165);
+}
+
+$mainColor: #E76464;
 .bgWhite {
     background-color: white !important;
     color: black !important;

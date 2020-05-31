@@ -10,7 +10,8 @@ Vue.use(Vuex, axios);
 
 // AXIOS CONFIG
 export const axs = axios.create({
-    baseURL: "http://anditopi.com"
+    baseURL: "http://103.56.148.102",
+    timeout: 30000
 });
 axs.interceptors.request.use(
     (config) => {
@@ -43,6 +44,7 @@ axs.interceptors.response.use(
     }
 )
 const vuexSession = new VuexPersist({
+    key: 'aADWNMK325asdd2345',
     reducer: state => ({
         daftarKategori: state.daftarKategori,
         bookListTrending: state.bookListTrending,
@@ -51,7 +53,9 @@ const vuexSession = new VuexPersist({
         bookListByKategori: state.bookListByKategori,
         kategoriId: state.kategoriId,
         bookId: state.bookId,
-        bookDetail: state.bookDetail
+        bookDetail: state.bookDetail,
+        chapterDetail: state.chapterDetail,
+        bookList: state.bookList
     })
 })
 
@@ -59,6 +63,7 @@ export default new Vuex.Store({
     plugins: [vuexSession],
     state: {
         daftarKategori: [],
+        bookList: [],
         bookListTrending: [],
         bookListNew: [],
         status: '',
@@ -69,11 +74,20 @@ export default new Vuex.Store({
         bookListByKategori: [],
         bookId: '',
         kategoriId: '',
-        bookDetail: {}
+        bookDetail: {},
+        chapterDetail: {},
+        bookStatus: {},
+        bookFavorit: {}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
             state.daftarKategori = response
+        },
+        getBookTrending_mutation: (state, response) => {
+            state.bookList = response
+        },
+        getBookNew_mutation: (state, response) => {
+            state.bookList = response
         },
         getListBookTrending_mutation: (state, response) => {
             state.bookListTrending = response
@@ -107,6 +121,19 @@ export default new Vuex.Store({
         },
         getBookDetailByID_mutation: (state, response) => {
             state.bookDetail = response
+        },
+        getBookChapter_mutation: (state, response) => {
+            state.chapterDetail = response
+        },
+        setBookDone_mutation: (state, response) => {
+            state.bookStatus = response
+            alert("Selamat!! kamu sudah selesai membaca buku ini ^_^")
+            router.push('/home')
+        },
+        setBookFavorit_mutation: (state, response) => {
+            state.bookFavorit = response
+            alert("Berhasil menambahkan buku favorit")
+            router.push('/home')
         }
     },
     actions: {
@@ -115,11 +142,17 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('getKategori_mutation', response.data.daftar_kategori);
                 })
+                .catch(err => {
+                    alert(err.message);
+                })
         },
         getListBookTrending: ({ commit }) => {
             axs.get('/ahaapi/beranda_buku_noauth')
                 .then(response => {
                     commit('getListBookTrending_mutation', response.data.buku_trending);
+                })
+                .catch(err => {
+                    alert(err.message);
                 })
         },
         getListBookNew: ({ commit }) => {
@@ -127,11 +160,35 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('getListBookNew_mutation', response.data.buku_terbaru);
                 })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        getBookTrending: ({ commit }) => {
+            axs.get('/ahaapi/buku_trending')
+                .then(response => {
+                    commit('getBookTrending_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        getBookNew: ({ commit }) => {
+            axs.get('/ahaapi/buku_terbaru')
+                .then(response => {
+                    commit('getBookNew_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
         },
         getListEpisodeNew: ({ commit }) => {
             axs.get('/ahaapi/beranda_buku')
                 .then(response => {
                     commit('getListEpisodeNew_mutation', response.data.audio_new);
+                })
+                .catch(err => {
+                    alert(err.message);
                 })
         },
         getBookByKategori: ({ commit }, categoryID) => {
@@ -139,11 +196,44 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('getBookByKategori_mutation', response.data);
                 })
+                .catch(err => {
+                    alert(err.message);
+                })
         },
         getBookDetailByID: ({ commit }, bookId) => {
             axs.get('/ahaapi/buku?id_buku=' + bookId)
                 .then(response => {
                     commit('getBookDetailByID_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        getBookChapter: ({ commit }, dispatchPayload) => {
+            axs.get('/ahaapi/chapter?id_buku=' + dispatchPayload.bookId + '&id_chapter=' + dispatchPayload.chapterId)
+                .then(response => {
+                    commit('getBookChapter_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        setBookDone: ({ commit }, payload) => {
+            axs.post('/ahaapi/selesai_baca', payload)
+                .then(response => {
+                    commit('setBookDone_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        setBookFavorit: ({ commit }, payload) => {
+            axs.post('/ahaapi/tambah_favorite', 1)
+                .then(response => {
+                    commit('setBookFavorit_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
                 })
         },
         userLogin: ({ commit }, user) => {
@@ -153,12 +243,18 @@ export default new Vuex.Store({
                     localStorage.setItem('x-token', token)
                     commit('authSuccess_mutation', token)
                 })
+                .catch(err => {
+                    alert(err.message);
+                })
         },
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
                     commit('authSuccess_mutation', token)
+                })
+                .catch(err => {
+                    alert(err.message);
                 })
         },
         userLogout: ({ commit }, user) => {

@@ -14,43 +14,33 @@
     </v-row>
     <v-row class="justify-center align-center my-10">
       <v-col class="col-kategori-chip">
-        <v-chip-group v-model="chipKategori" column>
+        <v-card class="py-2 px-2" flat hover outlined>
           <v-chip
+            class="btn-chip-main mx-1 my-1"
             v-for="n in daftarKategori"
             :key="n.id_daftar_kategori"
+            @click="gotoKategori(n.id_daftar_kategori)"
             filter
             outlined
+            link
+            :color="n.warna_kategori"
           >{{ n.nama_kategori }}</v-chip>
-        </v-chip-group>
+        </v-card>
       </v-col>
     </v-row>
     <v-row class="my-9 justify-center align-center" no-gutters>
-      <template v-for="n in booksToShow">
-        <v-col
-          :key="n"
-          v-if="loadSkeleton"
-          lg="4"
-          md="12"
-          sm="12"
-          cols="12"
-          class="my-5"
-          style="max-width:300px;"
-        >
-          <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
-        </v-col>
-        <v-col
-          :key="n"
-          v-if="!loadSkeleton"
-          lg="4"
-          md="12"
-          sm="12"
-          cols="12"
-          class="my-5 mx-1"
-          style="max-width:300px;"
-        >
-          <BookCard />
-        </v-col>
-      </template>
+      <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
+        <BookCard
+          v-for="n in bookListTrending.slice(0, booksToShow)"
+          :key="n.id_buku"
+          :idBuku="n.id_buku"
+          :title="n.judul"
+          :foto_sampul="n.foto_sampul"
+          :deskripsi="n.deskripsi"
+          :warna_kategori="n.border_buku"
+          :kategori_buku="n.nama_kategori"
+        />
+      </div>
     </v-row>
     <v-row>
       <v-col class="text-center d-flex flex-column justify-center align-center">
@@ -60,8 +50,18 @@
           color="#39DF8C"
           elevation="2"
           depressed
+          v-if="booksToShow < parseInt(bookListTrending.length)"
           @click="booksToShow += 3"
         >Lihat lebih banyak</v-btn>
+        <v-btn
+          class="btnLihat"
+          rounded
+          color="#39DF8C"
+          elevation="2"
+          depressed
+          v-else
+          @click="booksToShow -= 3"
+        >Lihat lebih sedikit</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -77,16 +77,24 @@ export default {
     BookCard
   },
   data: () => ({
-    chipKategori: [1],
     loadSkeleton: false,
     booksToShow: 3
   }),
   computed: mapState({
-    daftarKategori: state => state.daftarKategori
+    daftarKategori: state => state.daftarKategori,
+    bookListTrending: state => state.bookListTrending
   }),
-  methods: {},
-  mounted() {
+  methods: {
+    gotoKategori(idKategori) {
+      this.$router.push({
+        name: "CategoryPage",
+        params: { idKategori: idKategori }
+      });
+    }
+  },
+  created() {
     this.$store.dispatch("getKategori");
+    this.$store.dispatch("getListBookTrending");
   }
 };
 </script>
@@ -109,5 +117,8 @@ export default {
 .btnLihat {
   @include btn-main-green();
   width: 20%;
+}
+.btn-chip-main {
+  @include btn-chip-main();
 }
 </style>

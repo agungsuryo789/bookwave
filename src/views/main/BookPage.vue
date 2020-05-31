@@ -13,7 +13,7 @@
               <v-img
                 class="book-card-img mx-auto"
                 width="150"
-                src="https://www.tibs.org.tw/images/default.jpg"
+                :src="book.foto_sampul"
               ></v-img>
               <v-btn class="book-bookmark-button" icon>
                 <v-icon>mdi-bookmark-outline</v-icon>
@@ -29,16 +29,11 @@
             <template v-if="isPremium">
               <div class="d-flex flex-row justify-space-between">
                 <v-btn
-                  :to="{ name: 'BookChapter', params: {bookId: book.id_buku, bookName: book.judul.toLowerCase()}}"
+                  :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
                   depressed
+                  rounded
                   style="font-size:12px;"
-                >Mulai Baca</v-btn>
-                <v-btn
-                  :to="{ name: 'BookChapter', params: {bookId: book.id_buku, bookName: book.judul.toLowerCase()}}"
-                  class="mx-2"
-                  depressed
-                  style="font-size:12px;"
-                >Putar Audio</v-btn>
+                >Mulai Baca atau Dengarkan Audio</v-btn>
               </div>
             </template>
             <template v-if="!isPremium">
@@ -98,7 +93,7 @@ export default {
     }
   },
   computed: mapState({
-	bookDetail: state => state.bookDetail
+    bookDetail: state => state.bookDetail
   }),
   created() {
     this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
