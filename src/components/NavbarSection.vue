@@ -59,24 +59,8 @@
                   </v-list>
                 </v-menu>
               </template>
-              <template v-if="showSearchBar">
-                <router-link to="/home">
-                  <v-img
-                    alt="Vuetify Logo"
-                    class="shrink ml-5 mr-2"
-                    contain
-                    src="../assets/image/aha-white-icon.svg"
-                    transition="scale-transition"
-                    width="100"
-                  />
-                </router-link>
-                <v-btn icon>
-                  <v-icon>mdi-magnify</v-icon>
-                </v-btn>
-                <v-text-field class="mt-4 mx-2" label="Temukan yang anda cari disini"></v-text-field>
-                <v-btn icon @click="showSearchBar = !showSearchBar">
-                  <v-icon>mdi-close</v-icon>
-                </v-btn>
+              <template v-else>
+                <NavbarSearch :showState="showSearchBar" />
               </template>
             </v-app-bar>
           </v-col>
@@ -92,7 +76,7 @@
         </v-row>
       </v-container>
     </nav>
-    <nav v-if="!userState" class="navbar" style="background-color:#D84B5B;">
+    <nav v-else class="navbar" style="background-color:#D84B5B;">
       <v-container>
         <v-row>
           <v-col>
@@ -130,10 +114,12 @@
 
 <script>
 import NavbarCategoryChip from "@/components/navbar/NavbarCategoryChip.vue";
+import NavbarSearch from "@/components/navbar/NavbarSearch.vue";
 export default {
   name: "NavbarSection",
   components: {
-    NavbarCategoryChip
+    NavbarCategoryChip,
+    NavbarSearch
   },
   data() {
     return {

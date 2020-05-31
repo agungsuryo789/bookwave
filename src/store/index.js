@@ -77,7 +77,9 @@ export default new Vuex.Store({
         bookDetail: {},
         chapterDetail: {},
         bookStatus: {},
-        bookFavorit: {}
+        bookFavorit: {},
+        chapterHighlight: {},
+        subList: []
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -134,6 +136,12 @@ export default new Vuex.Store({
             state.bookFavorit = response
             alert("Berhasil menambahkan buku favorit")
             router.push('/home')
+        },
+        getSubsOption_mutation: (state, response) => {
+            state.subList = response
+        },
+        setChapterHighlight_mutation: (state, response) => {
+            state.chapterHighlight = response
         }
     },
     actions: {
@@ -191,6 +199,15 @@ export default new Vuex.Store({
                     alert(err.message);
                 })
         },
+        getSubsOption: ({ commit }) => {
+            axs.get('/ahaapi/list_subscription')
+                .then(response => {
+                    commit('getSubsOption_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
         getBookByKategori: ({ commit }, categoryID) => {
             axs.get('/ahaapi/buku_by_kategori?id_kategori=' + categoryID)
                 .then(response => {
@@ -228,9 +245,18 @@ export default new Vuex.Store({
                 })
         },
         setBookFavorit: ({ commit }, payload) => {
-            axs.post('/ahaapi/tambah_favorite', 1)
+            axs.post('/ahaapi/tambah_favorite', payload)
                 .then(response => {
                     commit('setBookFavorit_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        setChapterHighlight: ({ commit }, payload) => {
+            axs.post('/ahaapi/highlight_chapter', payload)
+                .then(response => {
+                    commit('setChapterHighlight_mutation', response.data);
                 })
                 .catch(err => {
                     alert(err.message);
