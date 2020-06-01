@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -55,7 +56,11 @@ const BookChapter = () =>
 const PromoPage = () =>
     import ('../views/page/PromoPage.vue')
 const MembershipPage = () =>
-    import ('../views/page/MembershipPage.vue')
+	import ('../views/page/MembershipPage.vue')
+
+// Library Component
+const LibraryPage = () =>
+	import ('../views/page/LibraryPage.vue')
 
 const routes = [
     //Main Layout (No Auth)
@@ -123,51 +128,77 @@ const routes = [
         path: '/contact',
         name: 'Contact',
         component: Contact
-    },
+	},
+
     // User Layout (Auth)
     // Landing Layout
     {
         path: '/home',
         name: 'LandingUser',
-        component: LandingUser
+		component: LandingUser,
+		meta: {
+			requiresAuth: true
+		}
     },
     {
         path: '/home/:sectionName',
         name: 'UserBookSection',
-        component: UserBookSection
+		component: UserBookSection,
+		meta: {
+			requiresAuth: true
+		}
     },
     {
         path: '/home/search',
         name: 'SearchPage',
-        component: SearchPage
+		component: SearchPage,
+		meta: {
+			requiresAuth: true
+		}
     },
     // Main Feature Layout
     {
         path: '/categories/:idKategori',
         name: 'CategoryPage',
-        component: CategoryPage
+		component: CategoryPage,
+		meta: {
+			requiresAuth: true
+		}
     },
     {
         path: '/books/:bookId/:bookName',
         name: 'BookPage',
-        component: BookPage,
+		component: BookPage,
+		meta: {
+			requiresAuth: true
+		}
     },
     {
         path: '/read/:bookId/:chapterId',
         name: 'BookChapter',
-        component: BookChapter,
+		component: BookChapter,
+		meta: {
+			requiresAuth: true
+		}
     },
     // Promo etc Layout
     {
         path: '/promo',
         name: 'PromoPage',
-        component: PromoPage
+		component: PromoPage,
     },
     {
         path: '/plans',
         name: 'MembershipPage',
         component: MembershipPage
-    }
+	},
+
+	// Library Layout
+	{
+		path: '/library',
+		name: 'LibraryPage',
+		component: LibraryPage
+	}
 ]
 
 const router = new VueRouter({
@@ -175,4 +206,16 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+router.beforeEach((to, from, next) => {
+	if(to.matched.some(record => record.meta.requiresAuth)) {
+		if (store.getters.isLoggedIn) {
+		next()
+		return
+		}
+		next('/login')
+	} else {
+		next()
+	}
+})
+
 export default router

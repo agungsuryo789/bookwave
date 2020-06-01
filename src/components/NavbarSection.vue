@@ -26,11 +26,13 @@
                   @click="showCategory = !showCategory"
                   style="text-transform:none;font-size:18px;font-weight:600;"
                 >Temukan</v-btn>
-                <v-btn
+                <router-link to="/library" tag="button">
+				<v-btn
                   color="transparent"
                   depressed
                   style="text-transform:none;font-size:18px;font-weight:600;"
                 >Library</v-btn>
+                </router-link>
                 <router-link to="/promo" tag="button">
                   <v-btn
                     color="transparent"
@@ -115,11 +117,13 @@
                 elevation="2"
                 depressed
               >Start Trial</v-btn>
+			<router-link to="login">
               <v-btn
                 color="transparent"
                 depressed
                 style="text-transform:none;font-size:18px;font-weight:600;"
               >Login</v-btn>
+			</router-link>
             </v-app-bar>
           </v-col>
         </v-row>

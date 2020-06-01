@@ -77,7 +77,8 @@ export default new Vuex.Store({
         bookDetail: {},
         chapterDetail: {},
         bookStatus: {},
-        bookFavorit: {}
+		bookFavorit: {},
+		koleksiBuku: {}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -134,7 +135,7 @@ export default new Vuex.Store({
             state.bookFavorit = response
             alert("Berhasil menambahkan buku favorit")
             router.push('/home')
-        }
+		}
     },
     actions: {
         getKategori: ({ commit }) => {
@@ -235,7 +236,8 @@ export default new Vuex.Store({
                 .catch(err => {
                     alert(err.message);
                 })
-        },
+		},
+		// auth action
         userLogin: ({ commit }, user) => {
             axs.post('ahaapi/login_member', user)
                 .then(response => {
@@ -263,7 +265,8 @@ export default new Vuex.Store({
                 localStorage.removeItem('x-token')
                 resolve()
             })
-        }
+		}
+		// end auth action
     },
     getters: {
         isLoggedIn: state => !!state.token,
