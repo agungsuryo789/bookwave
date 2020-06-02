@@ -93,6 +93,10 @@ export default new Vuex.Store({
         getKategori_mutation: (state, response) => {
             state.daftarKategori = response
         },
+        getSearch_mutation: (state, response) => {
+            state.searchResult = response
+            console.log(response)
+        },
         getBookTrending_mutation: (state, response) => {
             state.bookList = response
         },
@@ -162,6 +166,15 @@ export default new Vuex.Store({
 		}
     },
     actions: {
+        getSearch: ({ commit }, payload) => {
+            axs.post('/ahaapi/pencarian', payload)
+                .then(response => {
+                    commit('getSearch_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
         getKategori: ({ commit }) => {
             axs.get('/ahaapi/beranda_buku_noauth')
                 .then(response => {
@@ -339,13 +352,13 @@ export default new Vuex.Store({
                 })
         },
         userLogout: ({ commit }, user) => {
-            return new Promise((resolve, reject) => {
-                commit('authDown_mutation')
-                localStorage.removeItem('x-token')
-                resolve()
-            })
-		}
-		// end auth action
+                return new Promise((resolve, reject) => {
+                    commit('authDown_mutation')
+                    localStorage.removeItem('x-token')
+                    resolve()
+                })
+            }
+            // end auth action
     },
     getters: {
         isLoggedIn: state => !!state.token,

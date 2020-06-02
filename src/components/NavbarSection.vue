@@ -5,18 +5,18 @@
         <v-row>
           <v-col>
             <v-app-bar fixed elevate-on-scroll class="app-bar" id="appBar" color="white">
+              <router-link to="/home">
+                <v-img
+                  alt="Vuetify Logo"
+                  class="shrink ml-5 mr-2"
+                  contain
+                  src="@/assets/image/aha-red-icon.svg"
+                  transition="scale-transition"
+                  width="100"
+                />
+              </router-link>
+              <v-spacer></v-spacer>
               <template v-if="!showSearchBar">
-                <router-link to="/home">
-                  <v-img
-                    alt="Vuetify Logo"
-                    class="shrink ml-5 mr-2"
-                    contain
-                    src="../assets/image/aha-white-icon.svg"
-                    transition="scale-transition"
-                    width="100"
-                  />
-                </router-link>
-                <v-spacer></v-spacer>
                 <v-btn icon @click="showSearchBar = !showSearchBar">
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
@@ -27,11 +27,11 @@
                   style="text-transform:none;font-size:18px;font-weight:600;"
                 >Temukan</v-btn>
                 <router-link to="/library" tag="button">
-				<v-btn
-                  color="transparent"
-                  depressed
-                  style="text-transform:none;font-size:18px;font-weight:600;"
-                >Library</v-btn>
+                  <v-btn
+                    color="transparent"
+                    depressed
+                    style="text-transform:none;font-size:18px;font-weight:600;"
+                  >Library</v-btn>
                 </router-link>
                 <router-link to="/promo" tag="button">
                   <v-btn
@@ -62,7 +62,7 @@
                 </v-menu>
               </template>
               <template v-else>
-                <NavbarSearch :showState="showSearchBar" />
+                <NavbarSearch @clicked="onCloseSearchBar" />
               </template>
             </v-app-bar>
           </v-col>
@@ -88,7 +88,7 @@
                   alt="Vuetify Logo"
                   class="shrink ml-5 mr-2"
                   contain
-                  src="../assets/image/aha-white-icon.svg"
+                  src="@/assets/image/aha-red-icon.svg"
                   transition="scale-transition"
                   width="100"
                 />
@@ -101,13 +101,13 @@
                 elevation="2"
                 depressed
               >Start Trial</v-btn>
-			<router-link to="login">
-              <v-btn
-                color="transparent"
-                depressed
-                style="text-transform:none;font-size:18px;font-weight:600;"
-              >Login</v-btn>
-			</router-link>
+              <router-link to="login">
+                <v-btn
+                  color="transparent"
+                  depressed
+                  style="text-transform:none;font-size:18px;font-weight:600;"
+                >Login</v-btn>
+              </router-link>
             </v-app-bar>
           </v-col>
         </v-row>
@@ -132,11 +132,15 @@ export default {
       showSearchBar: false
     };
   },
-  mounted() {}
+  methods: {
+    onCloseSearchBar(e) {
+      this.showSearchBar = e;
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/css/global_variables.scss";
 
 .navbar {
