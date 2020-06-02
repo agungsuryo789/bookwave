@@ -55,7 +55,8 @@ const vuexSession = new VuexPersist({
         bookId: state.bookId,
         bookDetail: state.bookDetail,
         chapterDetail: state.chapterDetail,
-        bookList: state.bookList
+        bookList: state.bookList,
+        searchResult: state.searchResult
     })
 })
 
@@ -77,12 +78,18 @@ export default new Vuex.Store({
         bookDetail: {},
         chapterDetail: {},
         bookStatus: {},
-		bookFavorit: {},
-		koleksiBuku: {}
+        bookFavorit: {},
+        chapterHighlight: {},
+        subList: [],
+        searchResult: {}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
             state.daftarKategori = response
+        },
+        getSearch_mutation: (state, response) => {
+            state.searchResult = response
+            console.log(response)
         },
         getBookTrending_mutation: (state, response) => {
             state.bookList = response
@@ -135,9 +142,24 @@ export default new Vuex.Store({
             state.bookFavorit = response
             alert("Berhasil menambahkan buku favorit")
             router.push('/home')
-		}
+        },
+        getSubsOption_mutation: (state, response) => {
+            state.subList = response
+        },
+        setChapterHighlight_mutation: (state, response) => {
+            state.chapterHighlight = response
+        }
     },
     actions: {
+        getSearch: ({ commit }, payload) => {
+            axs.post('/ahaapi/pencarian', payload)
+                .then(response => {
+                    commit('getSearch_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
         getKategori: ({ commit }) => {
             axs.get('/ahaapi/beranda_buku_noauth')
                 .then(response => {
@@ -245,8 +267,17 @@ export default new Vuex.Store({
                 .catch(err => {
                     alert(err.message);
                 })
-		},
-		// auth action
+        },
+        setChapterHighlight: ({ commit }, payload) => {
+            axs.post('/ahaapi/highlight_chapter', payload)
+                .then(response => {
+                    commit('setChapterHighlight_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        // auth action
         userLogin: ({ commit }, user) => {
             axs.post('ahaapi/login_member', user)
                 .then(response => {
@@ -269,13 +300,13 @@ export default new Vuex.Store({
                 })
         },
         userLogout: ({ commit }, user) => {
-            return new Promise((resolve, reject) => {
-                commit('authDown_mutation')
-                localStorage.removeItem('x-token')
-                resolve()
-            })
-		}
-		// end auth action
+                return new Promise((resolve, reject) => {
+                    commit('authDown_mutation')
+                    localStorage.removeItem('x-token')
+                    resolve()
+                })
+            }
+            // end auth action
     },
     getters: {
         isLoggedIn: state => !!state.token,

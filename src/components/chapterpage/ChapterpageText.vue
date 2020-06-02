@@ -2,7 +2,7 @@
   <div>
     <p id="chapterText" :style="styleObject" @mouseup="showHighlightTool">
       <span id="tooltip">
-        <v-btn class="button-tooltip py-2 px-2" depressed @click="setColor">
+        <v-btn class="button-tooltip py-2 px-2" depressed @click="setHighlight">
           <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
         </v-btn>
       </span>
@@ -67,7 +67,7 @@ export default {
         tooltipSpan.display = "none";
       }
     },
-    setColor() {
+    setHighlight() {
       const userSelection = this.getSelected();
       const selectionText = userSelection.toString();
       const span = document.createElement("span");

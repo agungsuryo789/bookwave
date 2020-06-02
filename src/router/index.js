@@ -56,11 +56,11 @@ const BookChapter = () =>
 const PromoPage = () =>
     import ('../views/product/PromoPage.vue')
 const MembershipPage = () =>
-	import ('../views/product/MembershipPage.vue')
+    import ('../views/product/MembershipPage.vue')
 
 // Library Component
 const LibraryPage = () =>
-	import ('../views/product/LibraryPage.vue')
+    import ('../views/product/LibraryPage.vue')
 
 const routes = [
     //Main Layout (No Auth)
@@ -128,77 +128,77 @@ const routes = [
         path: '/contact',
         name: 'Contact',
         component: Contact
-	},
+    },
 
     // User Layout (Auth)
     // Landing Layout
     {
         path: '/home',
         name: 'LandingUser',
-		component: LandingUser,
-		meta: {
-			requiresAuth: true
-		}
+        component: LandingUser,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/home/:sectionName',
         name: 'UserBookSection',
-		component: UserBookSection,
-		meta: {
-			requiresAuth: true
-		}
+        component: UserBookSection,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/home/search',
         name: 'SearchPage',
-		component: SearchPage,
-		meta: {
-			requiresAuth: true
-		}
+        component: SearchPage,
+        meta: {
+            requiresAuth: true
+        }
     },
     // Main Feature Layout
     {
         path: '/categories/:idKategori',
         name: 'CategoryPage',
-		component: CategoryPage,
-		meta: {
-			requiresAuth: true
-		}
+        component: CategoryPage,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/books/:bookId/:bookName',
         name: 'BookPage',
-		component: BookPage,
-		meta: {
-			requiresAuth: true
-		}
+        component: BookPage,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/read/:bookId/:chapterId',
         name: 'BookChapter',
-		component: BookChapter,
-		meta: {
-			requiresAuth: true
-		}
+        component: BookChapter,
+        meta: {
+            requiresAuth: true
+        }
     },
     // Promo etc Layout
     {
         path: '/promo',
         name: 'PromoPage',
-		component: PromoPage,
+        component: PromoPage,
     },
     {
         path: '/plans',
         name: 'MembershipPage',
         component: MembershipPage
-	},
+    },
 
-	// Library Layout
-	{
-		path: '/library',
-		name: 'LibraryPage',
-		component: LibraryPage
-	}
+    // Library Layout
+    {
+        path: '/library',
+        name: 'LibraryPage',
+        component: LibraryPage
+    }
 ]
 
 const router = new VueRouter({
@@ -207,15 +207,15 @@ const router = new VueRouter({
     routes
 })
 router.beforeEach((to, from, next) => {
-	if(to.matched.some(record => record.meta.requiresAuth)) {
-		if (store.getters.isLoggedIn) {
-		next()
-		return
-		}
-		next('/login')
-	} else {
-		next()
-	}
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters.isLoggedIn) {
+            next()
+            return
+        }
+        next('/login')
+    } else {
+        next()
+    }
 })
 
 export default router
