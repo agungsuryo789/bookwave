@@ -24,7 +24,9 @@ const TermsCondition = () =>
 const Faq = () =>
     import ('../views/pages/Faq.vue')
 const Contact = () =>
-    import ('../views/pages/ContactUs.vue')
+	import ('../views/pages/ContactUs.vue')
+const PartnersPage = () =>
+    import ('../views/pages/PartnersPage.vue')
 
 // Auth Component
 const Login = () =>
@@ -60,7 +62,8 @@ const MembershipPage = () =>
 
 // Library Component
 const LibraryPage = () =>
-    import ('../views/product/LibraryPage.vue')
+	import ('../views/product/LibraryPage.vue')
+
 
 const routes = [
     //Main Layout (No Auth)
@@ -128,8 +131,12 @@ const routes = [
         path: '/contact',
         name: 'Contact',
         component: Contact
-    },
-
+	},
+	{
+        path: '/partnership',
+        name: 'PartnersPage',
+        component: PartnersPage
+	},
     // User Layout (Auth)
     // Landing Layout
     {
@@ -193,12 +200,15 @@ const routes = [
         component: MembershipPage
     },
 
-    // Library Layout
-    {
-        path: '/library',
-        name: 'LibraryPage',
-        component: LibraryPage
-    }
+	// Library Layout
+	{
+		path: '/library',
+		name: 'LibraryPage',
+		component: LibraryPage,
+		meta: {
+			requiresAuth: true
+		}
+	}
 ]
 
 const router = new VueRouter({

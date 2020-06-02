@@ -25,7 +25,7 @@
                 <a href>Pricing</a>
               </td>
               <td>
-                <a href>About</a>
+                 <router-link to="/about">About</router-link>
               </td>
             </tr>
             <tr>
@@ -47,7 +47,7 @@
                 <a href>Magazine</a>
               </td>
               <td>
-                <a href>Partners</a>
+                 <router-link to="/partnership">Partners</router-link>
               </td>
             </tr>
             <tr>

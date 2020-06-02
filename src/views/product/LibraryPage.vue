@@ -2,34 +2,38 @@
   <div class="library-page">
     <NavbarSection />
 		<v-container>
-			<v-tabs v-model="active" slider-color="#E76464" class="mt-12" grow>
-				<v-tab href="#tab-1">Buku</v-tab>
+			<v-tabs v-model="tab" slider-color="#E76464" class="mt-12" grow>
+				<v-tab>Buku</v-tab>
 				<v-tab>Episode</v-tab>
 				<v-spacer></v-spacer>
 				<v-tab><v-icon left>mdi-pencil</v-icon>Warnai</v-tab>
 				<v-tab><v-icon left>mdi-heart-outline</v-icon>Favorit</v-tab>
 				<v-tab><v-icon left>mdi-tag-outline</v-icon>Tag</v-tab>
-
-				<v-tab-item :value="'tab-1'">
-					<v-row>
-						<v-col cols="3" md="4">
-							<v-card flat>
-								<v-row>
-									<v-col cols="2" md="4">
-										<v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
-									</v-col>
-									<v-col cols="2" md="8">
-										<h3 class="font-weight-black"> Judul Buku</h3>
-										<span>Nama Penulis</span>
-										<p class="mt-3">Maecenas interdum lorem at massa aliquam, vel sollicitudin lacus fermentum.</p>
-										<v-row>
-										</v-row>
-									</v-col>
-								</v-row>
-							</v-card>
-						</v-col>
-					</v-row>
-				</v-tab-item>
+				<v-tabs-items v-model="tab">
+					<v-tab-item>
+						<BookList />
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<EpisodeList />
+						</v-row>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<ColouredList />
+						</v-row>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<FavoriteList />
+						</v-row>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<TagList />
+						</v-row>
+					</v-tab-item>
+				</v-tabs-items>
 			</v-tabs>
 		</v-container>
     <FooterSection />
@@ -39,13 +43,26 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import BookList from "@/components/library/BookList.vue";
+import EpisodeList from "@/components/library/EpisodeList.vue";
+import ColouredList from "@/components/library/ColouredList.vue";
+import FavoriteList from "@/components/library/FavoriteList.vue";
+import TagList from "@/components/library/TagList.vue";
 
 export default {
   name: "LibraryPage",
   components: {
     NavbarSection,
-	FooterSection
-  }
+	FooterSection,
+	BookList,
+	EpisodeList,
+	ColouredList,
+	FavoriteList,
+	TagList
+  },
+  data: () => ({
+	tab: null
+  })
 };
 </script>
 
