@@ -28,19 +28,32 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row class="my-9 justify-center align-center" no-gutters>
-      <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
+    <v-row v-if="loadSkeleton">
+      <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
+        <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
+      </v-col>
+    </v-row>
+    <v-row v-else style="margin:0 auto;">
+      <v-col
+        v-for="n in bookListTrending.slice(0, booksToShow)"
+        :key="n.id_buku"
+        lg="3"
+        md="12"
+        sm="12"
+        xs="12"
+        class="my-2"
+      >
         <BookCard
-          v-for="n in bookListTrending.slice(0, booksToShow)"
           :key="n.id_buku"
           :idBuku="n.id_buku"
           :title="n.judul"
           :foto_sampul="n.foto_sampul"
           :deskripsi="n.deskripsi"
-          :warna_kategori="n.border_buku"
+          :penulis="n.penulis"
+          :warna_kategori="n.warna_kategori"
           :kategori_buku="n.nama_kategori"
         />
-      </div>
+      </v-col>
     </v-row>
     <v-row>
       <v-col class="text-center d-flex flex-column justify-center align-center">

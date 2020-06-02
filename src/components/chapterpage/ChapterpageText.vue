@@ -12,9 +12,10 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "ChapterpageText",
-  props: ["fontSize", "chapterText"],
+  props: ["fontSize", "bookId", "chapterText"],
   data() {
     return {
       highlightPayload: {
@@ -23,16 +24,21 @@ export default {
         id_chapter: this.$route.params.chapterId,
         start_char: "",
         end_char: ""
+      },
+      dispatchPayload: {
+        bookId: this.$route.params.bookId,
+        chapterId: this.$route.params.chapterId
       }
     };
   },
-  computed: {
+  computed: mapState({
+    dataHighlight: state => state.chapterDetail,
     styleObject() {
       return {
         fontSize: this.$props.fontSize + "px"
       };
     }
-  },
+  }),
   methods: {
     getSelected() {
       // Get Mouse Selection Data
@@ -88,19 +94,37 @@ export default {
       tooltipSpan.style.display = "none";
     },
     createNode() {
-    //   const chapterText = document.getElementById("chapterText");
-    //   const range = chapterText.createRange();
-    //   const span = document.createElement("span");
-
-    //   span.setAttribute("style", "background-color: #F1E4E4; display: inline;");
-    //   span.textContent = selectionText;
-    //   range.deleteContents();
-    //   range.insertNode(span);
-
-    //   range.setStart(startNode, startOffset);
-    //   range.setEnd(endNode, endOffset);
-    //   return range;
+      //   const chapterText = document.getElementById("chapterText");
+      //   const range = chapterText.createRange();
+      //   const span = document.createElement("span");
+      //   span.setAttribute("style", "background-color: #F1E4E4; display: inline;");
+      //   span.textContent = selectionText;
+      //   range.deleteContents();
+      //   range.insertNode(span);
+      //   range.setStart(startNode, startOffset);
+      //   range.setEnd(endNode, endOffset);
+      //   return range;
+      const x = this.dataHighlight.data[0].data_highlight;
+      for (let i = 0; i < x.length; i++) {
+        if (x.length !== 0) {
+          const chapterText = document.getElementById("chapterText");
+          const range = chapterText.createRange();
+          const span = document.createElement("span");
+          span.setAttribute(
+            "style",
+            "background-color: #F1E4E4; display: inline;"
+          );
+          span.textContent = x[i].kalimat;
+          range.setStart(x[i].start_char, x[i].start_char);
+          range.setEnd(x[i].end_char, x[i].end_char);
+          return range;
+        }
+      }
     }
+  },
+  mounted() {
+    this.$store.dispatch("getBookChapter", this.dispatchPayload);
+    this.createNode();
   }
 };
 </script>

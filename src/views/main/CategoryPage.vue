@@ -16,8 +16,9 @@
           :key="n.id_buku"
           :idBuku="n.id_buku"
           :title="n.judul"
+          :foto_sampul="n.foto_sampul"
           :deskripsi="n.deskripsi"
-          :warna_kategori="n.border_buku"
+          :warna_kategori="n.warna_kategori"
           :kategori_buku="n.nama_kategori"
         />
       </div>
@@ -27,8 +28,9 @@
           :key="n.id_buku"
           :idBuku="n.id_buku"
           :title="n.judul"
+          :foto_sampul="n.foto_sampul"
           :deskripsi="n.deskripsi"
-          :warna_kategori="n.border_buku"
+          :warna_kategori="n.warna_kategori"
           :kategori_buku="n.nama_kategori"
         />
       </div>

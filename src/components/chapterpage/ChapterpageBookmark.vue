@@ -1,15 +1,23 @@
 <template>
-  <v-card class="d-flex flex-row justify-space-between py-2 px-2">
-    <div>
-      <v-btn tile text depressed>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
-      <v-btn tile text depressed @click="setBookFavorit">
-        <v-icon v-if="bookFavorit.data = {}">mdi-heart-outline</v-icon>
-        <v-icon v-else style="color:#E76464;">mdi-heart</v-icon>
-      </v-btn>
+  <v-card>
+    <div
+      v-for="n in bookDetail.data"
+      :key="n.id_buku"
+      class="d-flex flex-row justify-space-between py-2 px-2"
+    >
+      <div>
+        <v-btn tile text depressed>
+          <v-icon>mdi-share-variant</v-icon>
+        </v-btn>
+        <template></template>
+        <v-btn tile text depressed @click="setBookFavorit">
+          <v-icon v-if="n.is_favorite = true">mdi-heart</v-icon>
+          <v-icon v-if="n.is_favorite = false" style="color:#E76464;">mdi-heart-outline</v-icon>
+        </v-btn>
+      </div>
+      <v-btn v-if="n.is_collected = false" class="btn-main" @click="setBookDone">Selesai</v-btn>
+      <v-btn v-if="n.is_collected = true" class="btn-main" @click="setDeleteKoleksi">Hapus dari koleksi</v-btn>
     </div>
-    <v-btn class="btn-main" @click="setBookDone">Selesai</v-btn>
   </v-card>
 </template>
 
@@ -20,25 +28,32 @@ export default {
   props: ["bookId", "chapterId"],
   data() {
     return {
-      payload: {
-        bookId: this.$props.bookId,
-        chapterId: this.$props.chapterId
+      payloadDone: {
+        id_buku: this.$props.bookId,
+        id_chapter: this.$props.chapterId
+      },
+      payloadFav: {
+        id_buku: this.$props.bookId
       }
     };
   },
-  mounted() {
-	// this.$store.dispatch("setBookFavorit", this.$props.bookId);
+  created() {
+    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
   },
   methods: {
     setBookDone() {
-      this.$store.dispatch("setBookDone", this.payload);
+      this.$store.dispatch("setBookDone", this.payloadDone);
+    },
+    setDeleteKoleksi() {
+      this.$store.dispatch("setDeleteKoleksi", this.payloadFav);
     },
     setBookFavorit() {
-      this.$store.dispatch("setBookFavorit", this.$props.bookId);
+      this.$store.dispatch("setBookFavorit", this.payloadFav);
     }
   },
   computed: mapState({
-    bookFavorit: state => state.bookFavorit
+    bookFavorit: state => state.bookFavorit,
+    bookDetail: state => state.bookDetail
   })
 };
 </script>

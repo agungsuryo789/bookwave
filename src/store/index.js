@@ -14,46 +14,44 @@ export const axs = axios.create({
     timeout: 30000
 });
 axs.interceptors.request.use(
-    (config) => {
+    config => {
         const key = 'C94D74AC6115211E9531D5082CA97F2C'
         const token = window.localStorage.getItem("x-token")
         config.headers["x-api-key"] = key
         if (token) {
-            config.headers["x-api-key"] = key
             config.headers["x-token"] = token
         }
         return config;
     },
-    (error) => {
+    error => {
         return Promise.reject(error);
     }
 )
 axs.interceptors.response.use(
-    (config) => {
+    config => {
         const key = 'C94D74AC6115211E9531D5082CA97F2C'
         const token = window.localStorage.getItem("x-token")
         config.headers["x-api-key"] = key
         if (token) {
-            config.headers["x-api-key"] = key
             config.headers["x-token"] = token
         }
         return config;
     },
-    (error) => {
+    error => {
         return Promise.reject(error);
     }
 )
 const vuexSession = new VuexPersist({
-    key: 'aADWNMK325asdd2345',
+    key: 'a7ac33d1966354c33537e0584f42d58d',
     reducer: state => ({
         daftarKategori: state.daftarKategori,
         bookListTrending: state.bookListTrending,
         bookListNew: state.bookListNew,
         episodeListNew: state.episodeListNew,
         bookListByKategori: state.bookListByKategori,
+        bookDetail: state.bookDetail,
         kategoriId: state.kategoriId,
         bookId: state.bookId,
-        bookDetail: state.bookDetail,
         chapterDetail: state.chapterDetail,
         bookList: state.bookList,
         searchResult: state.searchResult
@@ -81,7 +79,7 @@ export default new Vuex.Store({
         bookFavorit: {},
         chapterHighlight: {},
         subList: [],
-        searchResult: {}
+        searchResult: []
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -89,7 +87,6 @@ export default new Vuex.Store({
         },
         getSearch_mutation: (state, response) => {
             state.searchResult = response
-            console.log(response)
         },
         getBookTrending_mutation: (state, response) => {
             state.bookList = response
@@ -136,12 +133,16 @@ export default new Vuex.Store({
         setBookDone_mutation: (state, response) => {
             state.bookStatus = response
             alert("Selamat!! kamu sudah selesai membaca buku ini ^_^")
-            router.push('/home')
+            router.push('/library')
+        },
+        setDeleteKoleksi_mutation: (state, response) => {
+            state.bookStatus = response
+            alert("Buku berhasil dihapus dari koleksi")
+            router.push('/library')
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
-            alert("Berhasil menambahkan buku favorit")
-            router.push('/home')
+            location.reload()
         },
         getSubsOption_mutation: (state, response) => {
             state.subList = response
@@ -154,7 +155,7 @@ export default new Vuex.Store({
         getSearch: ({ commit }, payload) => {
             axs.post('/ahaapi/pencarian', payload)
                 .then(response => {
-                    commit('getSearch_mutation', response.data);
+                    commit('getSearch_mutation', response.data.data_buku);
                 })
                 .catch(err => {
                     alert(err.message);
@@ -250,8 +251,8 @@ export default new Vuex.Store({
                     alert(err.message);
                 })
         },
-        setBookDone: ({ commit }, payload) => {
-            axs.post('/ahaapi/selesai_baca', payload)
+        setBookDone: ({ commit }, payloadDone) => {
+            axs.post('/ahaapi/selesai_baca', payloadDone)
                 .then(response => {
                     commit('setBookDone_mutation', response.data);
                 })
@@ -259,8 +260,17 @@ export default new Vuex.Store({
                     alert(err.message);
                 })
         },
-        setBookFavorit: ({ commit }, payload) => {
-            axs.post('/ahaapi/tambah_favorite', payload)
+        setDeleteKoleksi: ({ commit }, payloadFav) => {
+            axs.post('/ahaapi/hapus_koleksi_buku', payloadFav)
+                .then(response => {
+                    commit('setDeleteKoleksi_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
+        setBookFavorit: ({ commit }, payloadFav) => {
+            axs.post('/ahaapi/tambah_favorite', payloadFav)
                 .then(response => {
                     commit('setBookFavorit_mutation', response.data);
                 })
@@ -268,8 +278,8 @@ export default new Vuex.Store({
                     alert(err.message);
                 })
         },
-        setChapterHighlight: ({ commit }, payload) => {
-            axs.post('/ahaapi/highlight_chapter', payload)
+        setChapterHighlight: ({ commit }, highlightPayload) => {
+            axs.post('/ahaapi/highlight_chapter', highlightPayload)
                 .then(response => {
                     commit('setChapterHighlight_mutation', response.data);
                 })

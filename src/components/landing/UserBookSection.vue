@@ -16,7 +16,7 @@
             :title="n.judul"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
-            :warna_kategori="n.border_buku"
+            :warna_kategori="n.warna_kategori"
             :kategori_buku="n.nama_kategori"
           />
         </div>

@@ -3,8 +3,8 @@
     class="episode-card mx-auto"
     max-width="350"
     max-height="250px"
-    color="#ffc400"
     ripple
+	:style="cssVars"
   >
     <div class="d-flex flex-row justify-space-between align-center">
       <div class="mx-3">
@@ -12,7 +12,7 @@
         <p>{{ episodeTitle }}</p>
         <small>Tema Episode</small>
       </div>
-      <div class="mx-3 episode-card-img-color" :style="cssVars">
+      <div class="mx-3 episode-card-img-color">
         <div>
           <v-img
             class="book-card-img mx-auto"
@@ -43,11 +43,11 @@ export default {
 
 <style lang="scss">
 .episode-card {
+	background-color: red;
   .episode-card-img-color {
     border-radius: 8px;
     padding: 9px;
     background-color: var(--color);
-    box-shadow: 2px 4px 4px 2px #b68c04;
   }
 }
 </style>
