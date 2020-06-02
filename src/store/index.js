@@ -55,7 +55,12 @@ const vuexSession = new VuexPersist({
         bookId: state.bookId,
         bookDetail: state.bookDetail,
         chapterDetail: state.chapterDetail,
-        bookList: state.bookList
+		bookList: state.bookList,
+		koleksiBuku: state.koleksiBuku,
+		koleksiBukuFav: state.koleksiBukuFav,
+		koleksiBukuHighlight: state.koleksiBukuHighlight,
+		koleksiAudio: state.koleksiAudio,
+		koleksiTag: state.koleksiTag
     })
 })
 
@@ -78,7 +83,11 @@ export default new Vuex.Store({
         chapterDetail: {},
         bookStatus: {},
 		bookFavorit: {},
-		koleksiBuku: {}
+		koleksiBuku: {},
+		koleksiBukuFav: {},
+		koleksiBukuHighlight: {},
+		koleksiAudio: {},
+		koleksiTag: {}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -135,6 +144,21 @@ export default new Vuex.Store({
             state.bookFavorit = response
             alert("Berhasil menambahkan buku favorit")
             router.push('/home')
+		},
+		koleksiBuku_mutation: (state, response) => {
+			state.koleksiBuku = response
+		},
+		koleksiBukuFav_mutation: (state, response) => {
+			state.koleksiBukuFav = response
+		},
+		koleksiBukuHighlight_mutation: (state, response) => {
+			state.koleksiBukuHighlight = response
+		},
+		koleksiAudio_mutation: (state, response) => {
+			state.koleksiAudio = response
+		},
+		koleksiTag_mutation: (state, response) => {
+			state.koleksiTag = response
 		}
     },
     actions: {
@@ -195,7 +219,8 @@ export default new Vuex.Store({
         getSubsOption: ({ commit }) => {
             axs.get('/ahaapi/list_subscription')
                 .then(response => {
-                    commit('getSubsOption_mutation', response.data);
+					commit('getSubsOption_mutation', response.data);
+					console.log(response)
                 })
                 .catch(err => {
                     alert(err.message);
@@ -246,6 +271,51 @@ export default new Vuex.Store({
                     alert(err.message);
                 })
 		},
+		koleksiBuku: ({ commit }) => {
+            axs.get('/ahaapi/koleksi_buku_member')
+                .then(response => {
+                    commit('koleksiBuku_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+		},
+		koleksiBukuFav: ({ commit }) => {
+            axs.get('/ahaapi/koleksi_buku_favorit')
+                .then(response => {
+                    commit('koleksiBukuFav_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+		},
+		koleksiBukuHighlight: ({ commit }) => {
+            axs.get('/ahaapi/koleksi_buku_highlight')
+                .then(response => {
+                    commit('koleksiBukuHighlight_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+		},
+		koleksiAudio: ({ commit }) => {
+            axs.get('/ahaapi/koleksi_audio_member')
+                .then(response => {
+                    commit('koleksiAudio_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+		},
+		koleksiTag: ({ commit }) => {
+            axs.get('/ahaapi/list_tag')
+                .then(response => {
+                    commit('koleksiTag_mutation', response.data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+        },
 		// auth action
         userLogin: ({ commit }, user) => {
             axs.post('ahaapi/login_member', user)

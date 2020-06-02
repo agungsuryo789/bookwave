@@ -24,7 +24,9 @@ const TermsCondition = () =>
 const Faq = () =>
     import ('../views/pages/Faq.vue')
 const Contact = () =>
-    import ('../views/pages/ContactUs.vue')
+	import ('../views/pages/ContactUs.vue')
+const PartnersPage = () =>
+    import ('../views/pages/PartnersPage.vue')
 
 // Auth Component
 const Login = () =>
@@ -129,7 +131,11 @@ const routes = [
         name: 'Contact',
         component: Contact
 	},
-
+	{
+        path: '/partnership',
+        name: 'PartnersPage',
+        component: PartnersPage
+	},
     // User Layout (Auth)
     // Landing Layout
     {
@@ -197,7 +203,10 @@ const routes = [
 	{
 		path: '/library',
 		name: 'LibraryPage',
-		component: LibraryPage
+		component: LibraryPage,
+		meta: {
+			requiresAuth: true
+		}
 	}
 ]
 
