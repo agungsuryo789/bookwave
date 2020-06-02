@@ -54,13 +54,13 @@ const BookChapter = () =>
 
 // Pricing Component
 const PromoPage = () =>
-    import ('../views/page/PromoPage.vue')
+    import ('../views/product/PromoPage.vue')
 const MembershipPage = () =>
-	import ('../views/page/MembershipPage.vue')
+	import ('../views/product/MembershipPage.vue')
 
 // Library Component
 const LibraryPage = () =>
-	import ('../views/page/LibraryPage.vue')
+	import ('../views/product/LibraryPage.vue')
 
 const routes = [
     //Main Layout (No Auth)

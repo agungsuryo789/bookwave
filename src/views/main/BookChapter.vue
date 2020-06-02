@@ -104,14 +104,7 @@
         </v-carousel>
         <v-row>
           <v-col style="position:relative;">
-            <p id="chapterText" :style="styleObject" @mouseup="showHighlightTool">
-              <span id="tooltip">
-                <v-btn class="button-tooltip py-2 px-2" depressed @click="setColor">
-                  <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
-                </v-btn>
-              </span>
-              {{ chapter.isi_chapter }}
-            </p>
+            <ChapterpageText :fontSize="slider" :chapterText="chapter.isi_chapter" />
             <div
               v-if="parseInt(chapter.prev_chapter_id) > 0 && parseInt(chapter.next_chapter_id) <= 0 "
             >
@@ -169,17 +162,18 @@
 import { mapState } from "vuex";
 import ChapterpageOutline from "@/components/chapterpage/ChapterpageOutline.vue";
 import ChapterpageBookmark from "@/components/chapterpage/ChapterpageBookmark.vue";
+import ChapterpageText from "@/components/chapterpage/ChapterpageText.vue";
 
 export default {
   name: "BookChapter",
   components: {
-	ChapterpageOutline,
-	ChapterpageBookmark,
+    ChapterpageOutline,
+    ChapterpageBookmark,
+    ChapterpageText,
     VuetifyAudio: () => import("vuetify-audio")
   },
   data() {
     return {
-      chapterArray: 0,
       showTools: false,
       showMenuTop: false,
       outlineMenu: false,
@@ -198,83 +192,22 @@ export default {
     };
   },
   computed: mapState({
-    chapterDetail: state => state.chapterDetail,
-    styleObject() {
-      return {
-        fontSize: this.slider + "px"
-      };
-    }
+    chapterDetail: state => state.chapterDetail
   }),
   methods: {
     hasHistory() {
       return window.history?.length > 2;
-    },
-    getSelected() {
-      if (window.getSelection) {
-        return window.getSelection();
-      } else if (document.getSelection) {
-        return document.getSelection();
-      } else {
-        const selection =
-          document.selection && document.selection.createRange();
-        if (selection.text) {
-          return selection.text;
-        }
-        return false;
-      }
-    },
-    showHighlightTool(e) {
-      const selection = this.getSelected();
-      const anchorSelection = selection.extentOffset - selection.anchorOffset;
-      const tooltipSpan = document.getElementById("tooltip");
-      if (selection && anchorSelection > 0) {
-        const x = e.clientX;
-        const y = e.clientY;
-        tooltipSpan.style.display = "flex";
-        tooltipSpan.style.position = "fixed";
-        tooltipSpan.style.overflow = "hidden";
-        tooltipSpan.style.top = y - 60 + "px";
-        tooltipSpan.style.left = x + -100 + "px";
-      } else {
-        tooltipSpan.display = "none";
-      }
-    },
-    highlightRange(range) {
-      const newNode = document.createElement("span");
-      newNode.setAttribute(
-        "style",
-        "background-color: yellow; display: inline;"
-      );
-      range.surroundContents(newNode);
-    },
-    setColor() {
-      const userSelection = this.getSelected();
-      //   for (let i = 0; i < userSelection.rangeCount; i++) {
-      //     this.highlightRange(userSelection.getRangeAt(i));
-      //   }
-      //   let tooltipSpan = document.getElementById("tooltip");
-      //   tooltipSpan.style.display = "none";
-      const selectionText = userSelection.toString();
-      const span = document.createElement("span");
-      const range = userSelection.getRangeAt(0);
-      const tooltipSpan = document.getElementById("tooltip");
-      span.setAttribute("style", "background-color: yellow; display: inline;");
-      span.textContent = selectionText;
-      range.deleteContents();
-      range.insertNode(span);
-      tooltipSpan.style.display = "none";
     }
   },
   created() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
   },
+  mounted() {},
   watch: {
     loader() {
       const l = this.loader;
       this[l] = !this[l];
-
       setTimeout(() => (this[l] = false), 3000);
-
       this.loader = null;
     }
   }
@@ -283,24 +216,4 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/css/global_variables.scss";
-
-#chapterText #tooltip {
-  display: none;
-  .button-tooltip {
-    font-size: 12px;
-    text-transform: none;
-    margin: 0 1px;
-    color: $mainColor;
-    background-color: rgb(243, 243, 243);
-    border-radius: 0;
-    border-top: 4px solid rgb(173, 173, 173);
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-  }
-}
-.showTooltip {
-  display: block;
-  position: fixed;
-  overflow: hidden;
-}
 </style>
