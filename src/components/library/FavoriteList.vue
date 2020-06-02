@@ -29,6 +29,9 @@ export default {
   name: "FavoriteList",
   computed: mapState({
     koleksiBukuFav: state => state.koleksiBukuFav
-  })
+  }),
+  created() {
+	this.$store.dispatch("koleksiBukuFav");
+  }
 }
 </script>

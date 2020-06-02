@@ -2,39 +2,38 @@
   <div class="library-page">
     <NavbarSection />
 		<v-container>
-			<v-tabs v-model="active" slider-color="#E76464" class="mt-12" grow>
-				<v-tab href="#tab-1">Buku</v-tab>
-				<v-tab href="#tab-2">Episode</v-tab>
+			<v-tabs v-model="tab" slider-color="#E76464" class="mt-12" grow>
+				<v-tab>Buku</v-tab>
+				<v-tab>Episode</v-tab>
 				<v-spacer></v-spacer>
-				<v-tab href="#tab-3"><v-icon left>mdi-pencil</v-icon>Warnai</v-tab>
-				<v-tab href="#tab-4"><v-icon left>mdi-heart-outline</v-icon>Favorit</v-tab>
-				<v-tab href="#tab-5"><v-icon left>mdi-tag-outline</v-icon>Tag</v-tab>
-
-				<v-tab-item :value="'tab-1'">
-					<v-row>
+				<v-tab><v-icon left>mdi-pencil</v-icon>Warnai</v-tab>
+				<v-tab><v-icon left>mdi-heart-outline</v-icon>Favorit</v-tab>
+				<v-tab><v-icon left>mdi-tag-outline</v-icon>Tag</v-tab>
+				<v-tabs-items v-model="tab">
+					<v-tab-item>
 						<BookList />
-					</v-row>
-				</v-tab-item>
-				<v-tab-item :value="'tab-2'">
-					<v-row>
-						<EpisodeList />
-					</v-row>
-				</v-tab-item>
-				<v-tab-item :value="'tab-3'">
-					<v-row>
-						<ColouredList />
-					</v-row>
-				</v-tab-item>
-				<v-tab-item :value="'tab-4'">
-					<v-row>
-						<FavoriteList />
-					</v-row>
-				</v-tab-item>
-				<v-tab-item :value="'tab-5'">
-					<v-row>
-						<TagList />
-					</v-row>
-				</v-tab-item>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<EpisodeList />
+						</v-row>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<ColouredList />
+						</v-row>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<FavoriteList />
+						</v-row>
+					</v-tab-item>
+					<v-tab-item>
+						<v-row>
+							<TagList />
+						</v-row>
+					</v-tab-item>
+				</v-tabs-items>
 			</v-tabs>
 		</v-container>
     <FooterSection />
@@ -60,7 +59,10 @@ export default {
 	ColouredList,
 	FavoriteList,
 	TagList
-  }
+  },
+  data: () => ({
+	tab: null
+  })
 };
 </script>
 

@@ -16,6 +16,9 @@ export default {
   name: "ColouredList",
   computed: mapState({
     koleksiBukuHighlight: state => state.koleksiBukuHighlight
-  })
+  }),
+  created() {
+	this.$store.dispatch("koleksiBukuHighlight");
+  }
 }
 </script>

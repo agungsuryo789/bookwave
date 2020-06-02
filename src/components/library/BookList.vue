@@ -1,5 +1,5 @@
 <template>
-<div>
+<v-row>
 	<v-col cols="3" md="4"  v-for="n in koleksiBuku" :key="n.id_buku">
 		<v-card flat>
 			<v-row>
@@ -20,7 +20,7 @@
 			</v-row>
 		</v-card>
 	</v-col>
-</div>
+</v-row>
 </template>
 
 <script>
@@ -29,6 +29,9 @@ export default {
   name: "BookList",
   computed: mapState({
     koleksiBuku: state => state.koleksiBuku
-  })
+  }),
+  created() {
+	this.$store.dispatch("koleksiBuku");
+  }
 }
 </script>

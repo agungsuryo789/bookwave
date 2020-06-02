@@ -15,6 +15,9 @@ export default {
   name: "TagList",
   computed: mapState({
     koleksiTag: state => state.koleksiTag
-  })
+  }),
+  created() {
+	this.$store.dispatch("koleksiTag");
+  }
 }
 </script>

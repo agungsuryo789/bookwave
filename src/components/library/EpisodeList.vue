@@ -29,6 +29,9 @@ export default {
   name: "EpisodeList",
   computed: mapState({
     koleksiAudio: state => state.koleksiAudio
-  })
+  }),
+  created() {
+	this.$store.dispatch("koleksiAudio");
+  }
 }
 </script>

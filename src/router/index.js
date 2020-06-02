@@ -62,7 +62,8 @@ const MembershipPage = () =>
 
 // Library Component
 const LibraryPage = () =>
-    import ('../views/product/LibraryPage.vue')
+	import ('../views/product/LibraryPage.vue')
+
 
 const routes = [
     //Main Layout (No Auth)

@@ -287,7 +287,7 @@ export default new Vuex.Store({
 		koleksiBuku: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_member')
                 .then(response => {
-                    commit('koleksiBuku_mutation', response.data);
+                    commit('koleksiBuku_mutation', response.data.data);
                 })
                 .catch(err => {
                     alert(err.message);
@@ -296,7 +296,7 @@ export default new Vuex.Store({
 		koleksiBukuFav: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_favorit')
                 .then(response => {
-                    commit('koleksiBukuFav_mutation', response.data);
+                    commit('koleksiBukuFav_mutation', response.data.data);
                 })
                 .catch(err => {
                     alert(err.message);
@@ -305,7 +305,7 @@ export default new Vuex.Store({
 		koleksiBukuHighlight: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_highlight')
                 .then(response => {
-                    commit('koleksiBukuHighlight_mutation', response.data);
+                    commit('koleksiBukuHighlight_mutation', response.data.data);
                 })
                 .catch(err => {
                     alert(err.message);
@@ -314,16 +314,16 @@ export default new Vuex.Store({
 		koleksiAudio: ({ commit }) => {
             axs.get('/ahaapi/koleksi_audio_member')
                 .then(response => {
-                    commit('koleksiAudio_mutation', response.data);
+                    commit('koleksiAudio_mutation', response.data.data);
                 })
                 .catch(err => {
                     alert(err.message);
                 })
 		},
 		koleksiTag: ({ commit }) => {
-            axs.get('/ahaapi/list_tag')
+            axs.get('/ahaapi/tag_buku')
                 .then(response => {
-                    commit('koleksiTag_mutation', response.data);
+                    commit('koleksiTag_mutation', response.data.data);
                 })
                 .catch(err => {
                     alert(err.message);
