@@ -19,7 +19,7 @@
     <div v-if="isResult" class="search-result">
       <v-list>
         <v-list-item-group>
-          <v-list-item v-for="item in searchResult" :key="item.id_buku" @click="gotoBook(item.id_buku, item.judul)">
+          <v-list-item v-for="item in searchResult.data_buku" :key="item.id_buku" @click="gotoBook(item.id_buku, item.judul)">
             <div style="width:100%;">
               {{ item.judul }}
               <v-divider></v-divider>
@@ -52,7 +52,7 @@ export default {
     },
     goSearch() {
       if (this.payload.pencarian !== "") {
-        this.$router.push({ name: "SearchPage", query: { s: this.payload.pencarian } });
+        this.$router.push({ name: "SearchPage", params: { searchParams: this.payload.pencarian } });
       } else {
         this.isResult = false;
         return false;
@@ -60,7 +60,7 @@ export default {
     },
     liveSearch() {
       if (this.payload.pencarian !== "") {
-        this.$store.dispatch("getSearch", this.payload);
+        this.$store.dispatch("getSearchByDefault", this.payload);
         this.isResult = true;
       } else {
         this.payload.pencarian = "";

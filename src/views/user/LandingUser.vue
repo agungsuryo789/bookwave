@@ -63,8 +63,7 @@
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
         <v-row v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
-            <v-skeleton-loader class="mx-auto" width="150" type="card-heading"></v-skeleton-loader>
-            <v-skeleton-loader class="mx-auto" width="50" type="avatar"></v-skeleton-loader>
+            <v-skeleton-loader class="mx-auto" width="350" type="list-item-avatar-three-line" tile></v-skeleton-loader>
           </v-col>
         </v-row>
         <v-row v-else>
@@ -77,7 +76,13 @@
             xs="12"
             class="my-2"
           >
-            <EpisodeCard :episodeTitle="n.judul_chapter" :warna_episode="n.warna_kategori" />
+            <EpisodeCard
+              :idBuku="n.id_buku"
+              :idChapter="n.id_chapter"
+              :episodeTitle="n.judul_chapter"
+              :foto_sampul="n.foto_sampul"
+              :warna_episode="n.warna_kategori"
+            />
           </v-col>
         </v-row>
         <router-link

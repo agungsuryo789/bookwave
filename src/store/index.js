@@ -6,8 +6,6 @@ import VuexPersist from 'vuex-persistedstate';
 
 Vue.use(Vuex, axios);
 
-// const apiCookie = ("; " + document.cookie).split("; x-api-key=").pop().split(";").shift();
-
 // AXIOS CONFIG
 export const axs = axios.create({
     baseURL: "http://103.56.148.102",
@@ -41,6 +39,8 @@ axs.interceptors.response.use(
         return Promise.reject(error);
     }
 )
+
+// Vuex Persistedstated for caching data
 const vuexSession = new VuexPersist({
     key: 'a7ac33d1966354c33537e0584f42d58d',
     reducer: state => ({
@@ -50,8 +50,6 @@ const vuexSession = new VuexPersist({
         episodeListNew: state.episodeListNew,
         bookListByKategori: state.bookListByKategori,
         bookDetail: state.bookDetail,
-        kategoriId: state.kategoriId,
-        bookId: state.bookId,
         chapterDetail: state.chapterDetail,
         bookList: state.bookList,
         koleksiBuku: state.koleksiBuku,
@@ -65,6 +63,7 @@ const vuexSession = new VuexPersist({
 export default new Vuex.Store({
     plugins: [vuexSession],
     state: {
+        loaderStatus: false,
         daftarKategori: [],
         bookList: [],
         bookListTrending: [],
@@ -83,7 +82,10 @@ export default new Vuex.Store({
         bookFavorit: {},
         chapterHighlight: {},
         subList: [],
-        searchResult: [],
+        searchResult: {},
+        searchResultByBook: {},
+        searchResultByPenulis: {},
+        searchResultByKategori: {},
         koleksiBuku: {},
         koleksiBukuFav: {},
         koleksiBukuHighlight: {},
@@ -94,8 +96,21 @@ export default new Vuex.Store({
         getKategori_mutation: (state, response) => {
             state.daftarKategori = response
         },
-        getSearch_mutation: (state, response) => {
+        getSearchByDefault_mutation(state, response) {
             state.searchResult = response
+            state.loaderStatus = true
+        },
+        getSearchByBook_mutation(state, response) {
+            state.searchResultByBook = response
+            state.loaderStatus = true
+        },
+        getSearchByPenulis_mutation(state, response) {
+            state.searchResultByPenulis = response
+            state.loaderStatus = true
+        },
+        getSearchByKategori_mutation(state, response) {
+            state.searchResultByKategori = response
+            state.loaderStatus = true
         },
         getBookTrending_mutation: (state, response) => {
             state.bookList = response
@@ -176,13 +191,40 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        getSearch: ({ commit }, payload) => {
+        getSearchByDefault: ({ commit }, payload) => {
             axs.post('/ahaapi/pencarian', payload)
                 .then(response => {
-                    commit('getSearch_mutation', response.data.data_buku);
+                    commit('getSearchByDefault_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
+                })
+        },
+        getSearchByBook: ({ commit }, payload) => {
+            axs.post('/ahaapi/pencarian', payload)
+                .then(response => {
+                    commit('getSearchByBook_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getSearchByPenulis: ({ commit }, payload) => {
+            axs.post('/ahaapi/pencarian', payload)
+                .then(response => {
+                    commit('getSearchByPenulis_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getSearchByKategori: ({ commit }, payload) => {
+            axs.post('/ahaapi/pencarian', payload)
+                .then(response => {
+                    commit('getSearchByKategori_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
                 })
         },
         getKategori: ({ commit }) => {
@@ -191,7 +233,7 @@ export default new Vuex.Store({
                     commit('getKategori_mutation', response.data.daftar_kategori);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getListBookTrending: ({ commit }) => {
@@ -200,7 +242,7 @@ export default new Vuex.Store({
                     commit('getListBookTrending_mutation', response.data.buku_trending);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getListBookNew: ({ commit }) => {
@@ -209,7 +251,7 @@ export default new Vuex.Store({
                     commit('getListBookNew_mutation', response.data.buku_terbaru);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getBookTrending: ({ commit }) => {
@@ -218,7 +260,7 @@ export default new Vuex.Store({
                     commit('getBookTrending_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getBookNew: ({ commit }) => {
@@ -227,7 +269,7 @@ export default new Vuex.Store({
                     commit('getBookNew_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getListEpisodeNew: ({ commit }) => {
@@ -236,7 +278,7 @@ export default new Vuex.Store({
                     commit('getListEpisodeNew_mutation', response.data.audio_new);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getSubsOption: ({ commit }) => {
@@ -246,7 +288,7 @@ export default new Vuex.Store({
                     console.log(response)
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getBookByKategori: ({ commit }, categoryID) => {
@@ -255,7 +297,7 @@ export default new Vuex.Store({
                     commit('getBookByKategori_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getBookDetailByID: ({ commit }, bookId) => {
@@ -264,7 +306,7 @@ export default new Vuex.Store({
                     commit('getBookDetailByID_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         getBookChapter: ({ commit }, dispatchPayload) => {
@@ -273,7 +315,7 @@ export default new Vuex.Store({
                     commit('getBookChapter_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         setBookDone: ({ commit }, payloadDone) => {
@@ -282,7 +324,7 @@ export default new Vuex.Store({
                     commit('setBookDone_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         setDeleteKoleksi: ({ commit }, payloadFav) => {
@@ -291,7 +333,7 @@ export default new Vuex.Store({
                     commit('setDeleteKoleksi_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         setBookFavorit: ({ commit }, payloadFav) => {
@@ -300,7 +342,7 @@ export default new Vuex.Store({
                     commit('setBookFavorit_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         setChapterHighlight: ({ commit }, highlightPayload) => {
@@ -309,7 +351,7 @@ export default new Vuex.Store({
                     commit('setChapterHighlight_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         koleksiBuku: ({ commit }) => {
@@ -318,7 +360,7 @@ export default new Vuex.Store({
                     commit('koleksiBuku_mutation', response.data.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         koleksiBukuFav: ({ commit }) => {
@@ -327,7 +369,7 @@ export default new Vuex.Store({
                     commit('koleksiBukuFav_mutation', response.data.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         koleksiBukuHighlight: ({ commit }) => {
@@ -336,7 +378,7 @@ export default new Vuex.Store({
                     commit('koleksiBukuHighlight_mutation', response.data.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         koleksiAudio: ({ commit }) => {
@@ -345,7 +387,7 @@ export default new Vuex.Store({
                     commit('koleksiAudio_mutation', response.data.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         koleksiTag: ({ commit }) => {
@@ -354,7 +396,7 @@ export default new Vuex.Store({
                     commit('koleksiTag_mutation', response.data.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         // auth action
@@ -366,7 +408,7 @@ export default new Vuex.Store({
                     commit('authSuccess_mutation', token)
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         userRegister: ({ commit }, user) => {
@@ -376,7 +418,7 @@ export default new Vuex.Store({
                     commit('authSuccess_mutation', token)
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         userLogout: ({ commit }, user) => {
