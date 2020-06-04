@@ -4,24 +4,33 @@
     <v-container class="mt-12">
       <h2 class="font-weight-black book-section-title">{{this.$route.params.sectionName}}</h2>
       <v-progress-linear v-model="underlineValue"></v-progress-linear>
-      <v-row>
-        <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="loadSkeleton">
-          <v-skeleton-loader v-for="n in 12" :key="n" type="card" width="250"></v-skeleton-loader>
-        </div>
-        <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
+      <v-row v-if="loadSkeleton">
+        <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
+          <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
+        </v-col>
+      </v-row>
+      <v-row v-else>
+        <v-col
+          v-for="n in bookList.data.slice(0, booksToShow)"
+          :key="n.id_buku"
+          lg="3"
+          md="12"
+          sm="12"
+          xs="12"
+          class="my-2"
+        >
           <BookCard
-            v-for="n in bookList.data.slice(0, booksToShow)"
             :key="n.id_buku"
             :idBuku="n.id_buku"
             :title="n.judul"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
-            :warna_kategori="n.warna_kategori"
+            :warna_kategori="n.border_buku"
             :kategori_buku="n.nama_kategori"
           />
-        </div>
+        </v-col>
       </v-row>
-      <v-row>
+      <v-row v-if="booksToShow < bookList.data.length">
         <v-col class="text-center d-flex flex-column justify-center align-center">
           <v-btn
             class="btnLihat"
@@ -67,6 +76,17 @@ export default {
       } else if (match3) {
         return this.$store.dispatch("getBookNew");
       }
+    },
+    callFunction: function() {
+      var load = this.$store.state.loaderStatus;
+      var v = this;
+      setTimeout(function() {
+        if (load) {
+          v.loadSkeleton = false;
+        } else {
+          v.loadSkeleton = true;
+        }
+      }, 800);
     }
   },
   computed: mapState({
@@ -76,7 +96,7 @@ export default {
     this.matchUrl();
   },
   mounted() {
-    this.loadSkeleton = false;
+    this.callFunction();
   }
 };
 </script>

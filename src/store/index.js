@@ -95,6 +95,7 @@ export default new Vuex.Store({
     mutations: {
         getKategori_mutation: (state, response) => {
             state.daftarKategori = response
+            state.loaderStatus = true
         },
         getSearchByDefault_mutation(state, response) {
             state.searchResult = response
@@ -114,18 +115,23 @@ export default new Vuex.Store({
         },
         getBookTrending_mutation: (state, response) => {
             state.bookList = response
+            state.loaderStatus = true
         },
         getBookNew_mutation: (state, response) => {
             state.bookList = response
+            state.loaderStatus = true
         },
         getListBookTrending_mutation: (state, response) => {
             state.bookListTrending = response
+            state.loaderStatus = true
         },
         getListBookNew_mutation: (state, response) => {
             state.bookListNew = response
+            state.loaderStatus = true
         },
         getListEpisodeNew_mutation: (state, response) => {
             state.episodeListNew = response
+            state.loaderStatus = true
         },
         user_mutation: (state, response) => {
             state.user = response
@@ -147,47 +153,67 @@ export default new Vuex.Store({
         },
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response
+            state.loaderStatus = true
         },
         getBookDetailByID_mutation: (state, response) => {
             state.bookDetail = response
+            state.loaderStatus = true
         },
         getBookChapter_mutation: (state, response) => {
             state.chapterDetail = response
+            state.loaderStatus = true
         },
         setBookDone_mutation: (state, response) => {
             state.bookStatus = response
+            state.loaderStatus = true
             alert("Selamat!! kamu sudah selesai membaca buku ini ^_^")
             router.push('/library')
         },
         setDeleteKoleksi_mutation: (state, response) => {
             state.bookStatus = response
+            state.loaderStatus = true
             alert("Buku berhasil dihapus dari koleksi")
             router.push('/library')
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
+            state.loaderStatus = true
             location.reload()
         },
         getSubsOption_mutation: (state, response) => {
             state.subList = response
+            state.loaderStatus = true
         },
         setChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
+            state.loaderStatus = true
+            location.reload()
+        },
+        setDelChapterHighlight_mutation: (state, response) => {
+            state.chapterHighlight = response
+            state.loaderStatus = true
+            alert("Berhasil hapus highligth text")
+            location.reload()
         },
         koleksiBuku_mutation: (state, response) => {
             state.koleksiBuku = response
+            state.loaderStatus = true
         },
         koleksiBukuFav_mutation: (state, response) => {
             state.koleksiBukuFav = response
+            state.loaderStatus = true
         },
         koleksiBukuHighlight_mutation: (state, response) => {
             state.koleksiBukuHighlight = response
+            state.loaderStatus = true
         },
         koleksiAudio_mutation: (state, response) => {
             state.koleksiAudio = response
+            state.loaderStatus = true
         },
         koleksiTag_mutation: (state, response) => {
             state.koleksiTag = response
+            state.loaderStatus = true
         }
     },
     actions: {
@@ -349,6 +375,15 @@ export default new Vuex.Store({
             axs.post('/ahaapi/highlight_chapter', highlightPayload)
                 .then(response => {
                     commit('setChapterHighlight_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        setDelChapterHighlight: ({ commit }, delHighlightPayload) => {
+            axs.post('/ahaapi/hapus_highlight', delHighlightPayload)
+                .then(response => {
+                    commit('setDelChapterHighlight_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
