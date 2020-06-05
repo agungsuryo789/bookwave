@@ -33,7 +33,7 @@
         <v-row class="row-hero-2">
           <v-col class="hero-2 text-center d-flex flex-column justify-center align-center">
             <p>Temukan Jutaan Buku Lainnya hanya di AHA</p>
-            <v-btn rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
+            <v-btn :to="{name: 'Register'}" rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
           </v-col>
         </v-row>
       </v-container>

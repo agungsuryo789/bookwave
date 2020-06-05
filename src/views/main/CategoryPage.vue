@@ -7,34 +7,61 @@
           <h1>{{ bookListByKategori.nama_kategori }}</h1>
         </v-col>
       </v-row>
-      <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-        <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
-      </div>
-      <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
-        <BookCard
+      <v-row v-if="loadSkeleton">
+        <v-col v-for="n in 4" :key="n" lg="3" md="12" sm="12" xs="12" class="my-2">
+          <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
+        </v-col>
+      </v-row>
+      <v-row v-else>
+        <v-col
           v-for="n in bookListByKategori.buku_populer.slice(0, 4)"
           :key="n.id_buku"
-          :idBuku="n.id_buku"
-          :title="n.judul"
-          :foto_sampul="n.foto_sampul"
-          :deskripsi="n.deskripsi"
-          :warna_kategori="n.warna_kategori"
-          :kategori_buku="n.nama_kategori"
-        />
-      </div>
-      <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
-        <BookCardSmall
+          lg="3"
+          md="6"
+          sm="6"
+          xs="12"
+          class="my-2"
+        >
+          <BookCard
+            :key="n.id_buku"
+            :idBuku="n.id_buku"
+            :title="n.judul"
+            :foto_sampul="n.foto_sampul"
+            :deskripsi="n.deskripsi"
+            :penulis="n.penulis"
+            :warna_kategori="n.border_buku"
+            :kategori_buku="n.nama_kategori"
+          />
+        </v-col>
+      </v-row>
+      <v-row v-if="loadSkeleton">
+        <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
+          <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
+        </v-col>
+      </v-row>
+      <v-row class="px-3" v-else>
+        <v-col
           v-for="n in bookListByKategori.buku_terbaru.slice(0, booksToShow)"
           :key="n.id_buku"
-          :idBuku="n.id_buku"
-          :title="n.judul"
-          :foto_sampul="n.foto_sampul"
-          :deskripsi="n.deskripsi"
-          :warna_kategori="n.warna_kategori"
-          :kategori_buku="n.nama_kategori"
-        />
-      </div>
-      <v-row>
+          lg="4"
+          md="6"
+          sm="6"
+          xs="12"
+          class="my-2"
+        >
+          <BookCardSmall
+            :key="n.id_buku"
+            :idBuku="n.id_buku"
+            :title="n.judul"
+            :foto_sampul="n.foto_sampul"
+            :deskripsi="n.deskripsi"
+            :penulis="n.penulis"
+            :warna_kategori="n.border_buku"
+            :kategori_buku="n.nama_kategori"
+          />
+        </v-col>
+      </v-row>
+      <v-row v-if="bookListByKategori.buku_terbaru.length > booksToShow">
         <v-col class="text-center d-flex flex-column justify-center align-center">
           <v-btn
             class="btnLihat"
