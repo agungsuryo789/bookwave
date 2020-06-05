@@ -25,7 +25,7 @@
     <section>
       <v-container>
         <router-link
-          :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[0].url }}"
+          :to="{ name: 'LandingBookSection', params: { sectionName: sectionLink[0].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[0].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
@@ -57,7 +57,7 @@
           </v-col>
         </v-row>
         <router-link
-          :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[1].url }}"
+          :to="{ name: 'LandingBookSection', params: { sectionName: sectionLink[1].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[1].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
@@ -86,7 +86,7 @@
           </v-col>
         </v-row>
         <router-link
-          :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[2].url }}"
+          :to="{ name: 'LandingBookSection', params: { sectionName: sectionLink[2].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[2].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>

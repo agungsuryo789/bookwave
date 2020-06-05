@@ -9,15 +9,9 @@
       <v-row style="max-width:850px;margin:0 auto;">
         <v-col lg="6" md="6" sm="12" cols="12">
           <v-card max-width="250">
-            <div class="py-7">
-              <v-img
-                class="book-card-img mx-auto"
-                width="150"
-                :src="book.foto_sampul"
-              ></v-img>
-              <v-btn class="book-bookmark-button" icon>
-                <v-icon>mdi-bookmark-outline</v-icon>
-              </v-btn>
+            <div class="d-flex flex-column justify-end py-7">
+              <v-img class="book-card-img mx-auto" width="150" :src="book.foto_sampul"></v-img>
+              <ButtonBookmark :idBuku="book.id_buku"/>
             </div>
           </v-card>
         </v-col>
@@ -65,6 +59,7 @@
 <script>
 import BookpageTabs from "@/components/bookpage/BookpageTabs.vue";
 import NavbarSection from "@/components/NavbarSection.vue";
+import ButtonBookmark from "@/components/ButtonBookmark.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
@@ -73,7 +68,8 @@ export default {
   props: ["bookID"],
   components: {
     NavbarSection,
-    BookpageTabs,
+	BookpageTabs,
+	ButtonBookmark,
     FooterSection
   },
   data() {

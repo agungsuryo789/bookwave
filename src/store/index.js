@@ -80,6 +80,7 @@ export default new Vuex.Store({
         chapterDetail: {},
         bookStatus: {},
         bookFavorit: {},
+        bookBookmarked: {},
         chapterHighlight: {},
         subList: [],
         searchResult: {},
@@ -177,6 +178,11 @@ export default new Vuex.Store({
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
+            state.loaderStatus = true
+            location.reload()
+        },
+        setBookmark_mutation: (state, response) => {
+            state.bookBookmarked = response
             state.loaderStatus = true
             location.reload()
         },
@@ -353,6 +359,15 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        setBookmark: ({ commit }, payloadBookmark) => {
+            axs.post('/ahaapi/simpan_buku', payloadBookmark)
+                .then(response => {
+                    commit('setBookmark_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         setDeleteKoleksi: ({ commit }, payloadFav) => {
             axs.post('/ahaapi/hapus_koleksi_buku', payloadFav)
                 .then(response => {
@@ -436,7 +451,7 @@ export default new Vuex.Store({
         },
         // auth action
         userLogin: ({ commit }, user) => {
-			console.log(user)
+            console.log(user)
             axs.post('ahaapi/login_member', user)
                 .then(response => {
                     const token = response.data.token
@@ -448,8 +463,8 @@ export default new Vuex.Store({
                 })
         },
         userRegister: ({ commit }, user) => {
-			console.log(user)
-             axs.post('ahaapi/register_member', user)
+            console.log(user)
+            axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
                     commit('authSuccess_mutation', token)

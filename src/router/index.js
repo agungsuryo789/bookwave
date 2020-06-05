@@ -45,8 +45,8 @@ const LandingUser = () =>
 // Main feature Component
 const BookPage = () =>
     import ('../views/main/BookPage.vue')
-const UserBookSection = () =>
-    import ('../components/landing/UserBookSection.vue')
+const LandingBookSection = () =>
+    import ('../components/landing/LandingBookSection.vue')
 const SearchPage = () =>
     import ('../views/main/SearchPage.vue')
 const CategoryPage = () =>
@@ -149,8 +149,8 @@ const routes = [
     },
     {
         path: '/home/:sectionName',
-        name: 'UserBookSection',
-        component: UserBookSection,
+        name: 'LandingBookSection',
+        component: LandingBookSection,
         meta: {
             requiresAuth: true
         }

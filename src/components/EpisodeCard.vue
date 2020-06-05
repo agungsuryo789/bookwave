@@ -1,26 +1,26 @@
 <template>
-  <div class="div--episode-card" :style="cssVars">
-    <v-card
-      class="episode-card mx-auto"
-      max-width="350"
-      max-height="250px"
-      ripple
-      :to="{ name: 'BookChapter', params: {bookId: idBuku, chapterId: idChapter}}"
-    >
-      <div class="d-flex flex-row justify-space-between align-center">
-        <div class="mx-3">
-          <p>Baru</p>
-          <p>{{ episodeTitle }}</p>
-          <small>Tema Episode</small>
-        </div>
-        <div class="mx-3 episode-card-img-color">
-          <div>
-            <v-img class="book-card-img mx-auto" width="40" height="40" :src="foto_sampul"></v-img>
-          </div>
+  <v-card
+    class="episode-card mx-auto"
+    max-width="350"
+    max-height="250px"
+    flat
+    ripple
+    :style="cssVars"
+    :to="{ name: 'BookChapter', params: {bookId: idBuku, chapterId: idChapter}}"
+  >
+    <div class="d-flex flex-row justify-space-between align-center div--episode-card">
+      <div class="mx-3">
+        <p>Baru</p>
+        <p>{{ episodeTitle }}</p>
+        <small>Tema Episode</small>
+      </div>
+      <div class="mx-3 episode-card-img-color">
+        <div>
+          <v-img class="book-card-img mx-auto" width="40" height="40" :src="foto_sampul"></v-img>
         </div>
       </div>
-    </v-card>
-  </div>
+    </div>
+  </v-card>
 </template>
 
 <script>

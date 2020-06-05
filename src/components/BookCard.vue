@@ -2,9 +2,7 @@
   <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
       <v-img class="book-card-img mx-auto" width="120" height="120" :src="foto_sampul"></v-img>
-      <v-btn class="book-bookmark-button" icon>
-        <v-icon>mdi-bookmark-outline</v-icon>
-      </v-btn>
+      <ButtonBookmark :idBuku="idBuku" />
     </div>
     <a @click="gotoBook" class="book-card-title">
       <v-card-title class="text-right">{{ title }}</v-card-title>
@@ -17,17 +15,21 @@
 
 <script>
 /* eslint-disable */
+import ButtonBookmark from "@/components/ButtonBookmark.vue";
 export default {
   name: "BookCard",
   props: [
     "idBuku",
     "title",
     "foto_sampul",
-	"deskripsi",
-	"penulis",
+    "deskripsi",
+    "penulis",
     "warna_kategori",
     "kategori_buku"
   ],
+  components: {
+    ButtonBookmark
+  },
   methods: {
     gotoBook() {
       this.$router.push({

@@ -12,11 +12,9 @@
             <p>{{deskripsi}}</p>
           </a>
           <div class="d-flex flex-row justify-space-between mt-1">
-            <v-btn class="book-card-category" outlined :style="cssVars">{{kategori_buku}}</v-btn>
-            <div>
-              <v-btn class="book-bookmark-button" icon>
-                <v-icon>mdi-bookmark-outline</v-icon>
-              </v-btn>
+            <v-btn disabled class="book-card-category" outlined :style="cssVars">{{kategori_buku}}</v-btn>
+            <div class="d-flex flex-row justify-space-between">
+              <ButtonBookmark class="book-bookmark-button" :idBuku="idBuku" />
               <v-btn icon>
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
@@ -29,6 +27,7 @@
 </template>
 
 <script>
+import ButtonBookmark from "@/components/ButtonBookmark.vue";
 export default {
   name: "BookCardSmall",
   props: [
@@ -40,6 +39,9 @@ export default {
     "warna_kategori",
     "kategori_buku"
   ],
+  components: {
+    ButtonBookmark
+  },
   methods: {
     gotoBook() {
       this.$router.push({
@@ -80,9 +82,10 @@ export default {
   }
   .book-card-category {
     font-size: 8px;
+	color: black !important;
     height: 25px;
     margin: 6px 0;
-	border: 2px solid var(--color);
+    border: 2px solid var(--color);
   }
 }
 .book-card-link {
