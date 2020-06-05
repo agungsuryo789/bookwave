@@ -436,6 +436,7 @@ export default new Vuex.Store({
         },
         // auth action
         userLogin: ({ commit }, user) => {
+			console.log(user)
             axs.post('ahaapi/login_member', user)
                 .then(response => {
                     const token = response.data.token
@@ -447,13 +448,14 @@ export default new Vuex.Store({
                 })
         },
         userRegister: ({ commit }, user) => {
-            axs.post('ahaapi/register_member', user)
+			console.log(user)
+             axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
                     commit('authSuccess_mutation', token)
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    alert(err.message);
                 })
         },
         userLogout: ({ commit }, user) => {

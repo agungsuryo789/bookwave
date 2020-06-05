@@ -61,7 +61,6 @@ export default {
 	methods: {
       login() {
 		Firebase.login()
-		.then(() => this.$router.push('/home'))
 	  },
 	  loginfb() {
 		Firebase.loginfb();

@@ -17,7 +17,7 @@
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block @click="login"><v-icon dark left>mdi-google</v-icon>Sign up with Google</v-btn>
+							<v-btn :elevation="8" block @click="register"><v-icon dark left>mdi-google</v-icon>Sign up with Google</v-btn>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
@@ -53,8 +53,8 @@ export default {
 		NavbarSection,
 	},
 	methods: {
-      login() {
-        Firebase.login();
+      register() {
+        Firebase.register();
 	  },
 	  loginfb() {
 		  Firebase.loginfb();

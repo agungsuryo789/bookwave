@@ -1,6 +1,10 @@
 import Vue from "vue";
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import Vuex from "vuex";
+import axios from "axios";
+
+Vue.use(Vuex, axios);
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCZKqh1-bs_9iS2HHx6YDZ159MAw0CxRJ4",
@@ -14,6 +18,40 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 Vue.config.productionTip = false;
+export const axs = axios.create({
+    baseURL: "http://103.56.148.102",
+    timeout: 30000
+});
+axs.interceptors.request.use(
+    (config) => {
+        const key = 'C94D74AC6115211E9531D5082CA97F2C'
+        const token = window.localStorage.getItem("x-token")
+        config.headers["x-api-key"] = key
+        if (token) {
+            config.headers["x-api-key"] = key
+            config.headers["x-token"] = token
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+)
+axs.interceptors.response.use(
+    (config) => {
+        const key = 'C94D74AC6115211E9531D5082CA97F2C'
+        const token = window.localStorage.getItem("x-token")
+        config.headers["x-api-key"] = key
+        if (token) {
+            config.headers["x-api-key"] = key
+            config.headers["x-token"] = token
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+)
 
 export default {
 	/* eslint-disable */
@@ -22,9 +60,18 @@ export default {
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider)
       .then(function(result) {
-		const token = result.credential.accessToken
-		console.log(result)
-		localStorage.setItem('x-token', token)
+		const email = result.user.email
+		const pass = result.user.uid
+		axs.post('ahaapi/login_member', {
+			email: email,
+			password: '',
+			type: '2'
+		})
+		.then(response => {
+			console.log(response)
+			const token = response.data.token
+			localStorage.setItem('x-token', token)
+		})
 	  })
       .catch(function(error) {
         const errorCode = error.code;
@@ -34,6 +81,35 @@ export default {
         console.log(errorCode, errorMessage, email, credential);
         })
 	},
+
+	register() {
+		const provider = new firebase.auth.GoogleAuthProvider();
+		firebase.auth().signInWithPopup(provider)
+		.then(function(result) {
+		  // const email = result.user.email
+		  const email = result.user.email
+		  const pass = result.user.uid
+		  console.log(result)
+		  axs.post('ahaapi/register_member', {
+			  email: email,
+			  password: pass,
+			  type: '2'
+		  })
+		  .then(response => {
+			  console.log(error.response.data)
+			  const token = response.data.token
+			  localStorage.setItem('x-token', token)
+		  })
+		})
+		.catch(function(error) {
+		  const errorCode = error.code;
+		  const errorMessage = error.message;
+		  const email = error.email;
+		  const credential = error.credential;
+		  const dataer = error.response.data;
+		  console.log(errorCode, errorMessage, email, credential, dataer);
+		  })
+	  },
 	loginfb() {
 		const provider = new firebase.auth.FacebookAuthProvider();
 		firebase.auth().signInWithPopup(provider)
