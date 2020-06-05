@@ -11,7 +11,7 @@
             <v-icon>mdi-less-than</v-icon>
           </v-btn>
           <v-btn
-            @click="showMenuTop = !showMenuTop, showTools = false"
+            @click="showMenuTop = !showMenuTop, showTools = false, outlineMenu = false"
             depressed
             :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
           >
@@ -23,7 +23,7 @@
         <v-col style="max-width:800px;margin:0 auto;">
           <div class="d-flex flex-row justify-center align-center">
             <div class="d-flex flex-column justify-center align-center mx-4">
-              <v-btn @click="showTools = true, showMenuTop = false" depressed outlined>
+              <v-btn @click="showTools = true, showMenuTop = false, outlineMenu = false" depressed outlined>
                 <v-icon>mdi-format-color-text</v-icon>
               </v-btn>
               <p>Teks</p>
@@ -104,7 +104,7 @@
         </v-carousel>
         <v-row>
           <v-col style="position:relative;">
-            <ChapterpageText :fontSize="slider" :chapterText="chapter.isi_chapter" />
+            <ChapterpageText :fontSize="slider" :bookId="chapter.id_buku" :chapterText="chapter.isi_chapter" />
             <div
               v-if="parseInt(chapter.prev_chapter_id) > 0 && parseInt(chapter.next_chapter_id) <= 0 "
             >
@@ -116,9 +116,7 @@
                 v-if="parseInt(chapter.prev_chapter_id) > 0"
                 depressed
                 rounded
-                :loading="loading"
-                @click="loader = 'loading'"
-                :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.id_chapter - 1}}"
+                :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.prev_chapter_id}}"
                 style="position:absolute;bottom:0;left:0;margin:0 10px;"
               >
                 <v-icon x-small>mdi-less-than</v-icon>
@@ -134,8 +132,6 @@
                 v-if="parseInt(chapter.next_chapter_id) > 0"
                 depressed
                 rounded
-                :loading="loading"
-                @click="loader = 'loading'"
                 :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.next_chapter_id}}"
                 style="position:absolute;bottom:0;right:0;margin:0 10px;"
               >
@@ -177,8 +173,6 @@ export default {
       showTools: false,
       showMenuTop: false,
       outlineMenu: false,
-      loader: null,
-      loading: false,
       min: 8,
       max: 72,
       slider: 24,
@@ -199,17 +193,8 @@ export default {
       return window.history?.length > 2;
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
-  },
-  mounted() {},
-  watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-      setTimeout(() => (this[l] = false), 3000);
-      this.loader = null;
-    }
   }
 };
 </script>

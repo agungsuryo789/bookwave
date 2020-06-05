@@ -29,64 +29,94 @@
           class="font-weight-black book-section-title"
         >{{ sectionLink[0].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-          <v-skeleton-loader v-for="n in 4" :key="n" class="mx-auto" width="250" type="card"></v-skeleton-loader>
-        </div>
-        <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
-          <BookCard
+        <v-row v-if="loadSkeleton">
+          <v-col v-for="n in 4" :key="n" lg="3" md="12" sm="12" xs="12" class="my-2">
+            <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
+          </v-col>
+        </v-row>
+        <v-row v-else>
+          <v-col
             v-for="n in bukuTrending.slice(0, 4)"
             :key="n.id_buku"
-            :idBuku="n.id_buku"
-            :title="n.judul"
-            :foto_sampul="n.foto_sampul"
-            :deskripsi="n.deskripsi"
-            :warna_kategori="n.border_buku"
-            :kategori_buku="n.nama_kategori"
-          />
-        </div>
+            lg="3"
+            md="6"
+            sm="12"
+            xs="12"
+            class="my-2"
+          >
+            <BookCard
+              :key="n.id_buku"
+              :idBuku="n.id_buku"
+              :title="n.judul"
+              :foto_sampul="n.foto_sampul"
+              :deskripsi="n.deskripsi"
+              :penulis="n.penulis"
+              :warna_kategori="n.warna_kategori"
+              :kategori_buku="n.nama_kategori"
+            />
+          </v-col>
+        </v-row>
         <router-link
           :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[1].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[1].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-          <div
-            v-for="n in 4"
-            :key="n"
-            class="skeleton-episode-card d-flex flex-row justify-center mx-3 my-2"
-          >
-            <v-skeleton-loader class="mx-auto" width="150" type="card-heading"></v-skeleton-loader>
-            <v-skeleton-loader class="mx-auto" width="50" type="avatar"></v-skeleton-loader>
-          </div>
-        </div>
-        <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
-          <EpisodeCard
+        <v-row v-if="loadSkeleton">
+          <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
+            <v-skeleton-loader class="mx-auto" width="350" type="list-item-avatar-three-line" tile></v-skeleton-loader>
+          </v-col>
+        </v-row>
+        <v-row v-else>
+          <v-col
             v-for="n in episodeNew.slice(0, 4)"
             :key="n.id_chapter"
-            :episodeTitle="n.judul_chapter"
-            :warna_episode="n.warna_kategori"
-          />
-        </div>
+            lg="3"
+            md="12"
+            sm="12"
+            xs="12"
+            class="my-2"
+          >
+            <EpisodeCard
+              :idBuku="n.id_buku"
+              :idChapter="n.id_chapter"
+              :episodeTitle="n.judul_chapter"
+              :foto_sampul="n.foto_sampul"
+              :warna_episode="n.warna_kategori"
+            />
+          </v-col>
+        </v-row>
         <router-link
           :to="{ name: 'UserBookSection', params: { sectionName: sectionLink[2].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[2].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <div class="d-flex flex-row justify-start align-center" v-if="loadSkeleton">
-          <v-skeleton-loader v-for="n in 4" :key="n" class="mx-auto" width="250" type="card"></v-skeleton-loader>
-        </div>
-        <div class="d-flex flex-column flex-lg-row justify-start align-center" v-if="!loadSkeleton">
-          <BookCard
+        <v-row v-if="loadSkeleton">
+          <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
+            <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
+          </v-col>
+        </v-row>
+        <v-row v-else>
+          <v-col
             v-for="n in bukuNew.slice(0, 4)"
             :key="n.id_buku"
-            :idBuku="n.id_buku"
-            :title="n.judul"
-            :foto_sampul="n.foto_sampul"
-            :deskripsi="n.deskripsi"
-            :warna_kategori="n.border_buku"
-            :kategori_buku="n.nama_kategori"
-          />
-        </div>
+            lg="3"
+            md="12"
+            sm="12"
+            xs="12"
+            class="my-2"
+          >
+            <BookCard
+              :key="n.id_buku"
+              :idBuku="n.id_buku"
+              :title="n.judul"
+              :foto_sampul="n.foto_sampul"
+              :deskripsi="n.deskripsi"
+              :penulis="n.penulis"
+              :warna_kategori="n.warna_kategori"
+              :kategori_buku="n.nama_kategori"
+            />
+          </v-col>
+        </v-row>
       </v-container>
     </section>
     <FooterSection />
@@ -139,8 +169,8 @@ export default {
   beforeMount() {
     this.$store.dispatch("getListBookTrending");
     this.$store.dispatch("getListBookNew");
-	this.$store.dispatch("getListEpisodeNew");
-	this.loadSkeleton = false;
+    this.$store.dispatch("getListEpisodeNew");
+    this.loadSkeleton = false;
   }
 };
 </script>

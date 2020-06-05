@@ -2,25 +2,25 @@
   <div>
     <v-card class="book-card--small mx-auto" max-width="350" max-height="150">
       <div class="d-flex flex-row justify-space-between align-center">
-        <div class="mx-4">
-          <v-img
-            class="book-card-img mx-auto"
-            width="65"
-            height="90"
-            src="https://www.tibs.org.tw/images/default.jpg"
-          ></v-img>
+        <div>
+          <v-img class="book-card-img mx-auto" width="65" height="90" :src="foto_sampul"></v-img>
         </div>
         <div class>
-          <router-link to="/books/sebuah-buku" class="book-card-link">
+          <a @click="gotoBook" class="book-card-link">
             <h2>{{title}}</h2>
             <small>{{penulis}}</small>
             <p>{{deskripsi}}</p>
-          </router-link>
+          </a>
           <div class="d-flex flex-row justify-space-between mt-1">
-            <v-btn class="book-card-category" outlined color="indigo">{{kategori_buku}}</v-btn>
-            <v-btn class="book-bookmark-button" icon>
-              <v-icon>mdi-bookmark-outline</v-icon>
-            </v-btn>
+            <v-btn class="book-card-category" outlined :style="cssVars">{{kategori_buku}}</v-btn>
+            <div>
+              <v-btn class="book-bookmark-button" icon>
+                <v-icon>mdi-bookmark-outline</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +31,33 @@
 <script>
 export default {
   name: "BookCardSmall",
-  props: ["title", "deskripsi", "penulis", "warna_kategori", "kategori_buku"]
+  props: [
+    "idBuku",
+    "title",
+    "deskripsi",
+    "foto_sampul",
+    "penulis",
+    "warna_kategori",
+    "kategori_buku"
+  ],
+  methods: {
+    gotoBook() {
+      this.$router.push({
+        name: "BookPage",
+        params: {
+          bookId: this.$props.idBuku,
+          bookName: this.$props.title.toLowerCase()
+        }
+      });
+    }
+  },
+  computed: {
+    cssVars() {
+      return {
+        "--color": this.$props.warna_kategori
+      };
+    }
+  }
 };
 </script>
 
@@ -56,6 +82,7 @@ export default {
     font-size: 8px;
     height: 25px;
     margin: 6px 0;
+	border: 2px solid var(--color);
   }
 }
 .book-card-link {
