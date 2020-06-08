@@ -17,8 +17,6 @@
         "midtrans-client": "^1.1.0",
         "register-service-worker": "^1.7.1",
         "roboto-fontface": "*",
-        "tiptap": "^1.27.1",
-        "tiptap-extensions": "^1.29.1",
         "vue": "^2.6.11",
         "vue-axios-cors": "^1.0.1",
         "vue-google-login": "^2.0.3",
@@ -73,17 +71,15 @@
             "dot-notation": 0,
             "space-before-function-paren": 0
         },
-        "overrides": [
-            {
-                "files": [
-                    "**/__tests__/*.{j,t}s?(x)",
-                    "**/tests/unit/**/*.spec.{j,t}s?(x)"
-                ],
-                "env": {
-                    "jest": true
-                }
+        "overrides": [{
+            "files": [
+                "**/__tests__/*.{j,t}s?(x)",
+                "**/tests/unit/**/*.spec.{j,t}s?(x)"
+            ],
+            "env": {
+                "jest": true
             }
-        ]
+        }]
     },
     "browserslist": [
         "> 1%",

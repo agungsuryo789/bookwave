@@ -54,7 +54,7 @@ import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "UserBookSection",
+  name: "LandingBookSection",
   components: {
     NavbarSection,
     BookCard,

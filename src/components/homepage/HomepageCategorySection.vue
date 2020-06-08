@@ -14,7 +14,7 @@
     </v-row>
     <v-row class="justify-center align-center my-10">
       <v-col class="col-kategori-chip">
-        <v-card class="py-2 px-2" flat hover outlined>
+        <v-card class="py-2 px-2" flat outlined>
           <v-chip
             class="btn-chip-main mx-1 my-1"
             v-for="n in daftarKategori"
@@ -91,7 +91,7 @@ export default {
   },
   data: () => ({
     loadSkeleton: false,
-    booksToShow: 3
+    booksToShow: 4
   }),
   computed: mapState({
     daftarKategori: state => state.daftarKategori,

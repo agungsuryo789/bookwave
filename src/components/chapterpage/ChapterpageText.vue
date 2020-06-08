@@ -120,7 +120,7 @@ export default {
       this.highlightPayload.kalimat = selectionText;
       this.highlightPayload.start_char = rect.top;
       this.highlightPayload.end_char = rect.left;
-      this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+      // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
     },
     getHighlight() {
       const chapterText = document.getElementById("chapterText");

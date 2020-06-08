@@ -10,7 +10,7 @@
           magni aliquam voluptatum illo magnam corporis
           doloremque! Cupiditate, alias hic.
         </p>
-        <v-btn x-large rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
+        <v-btn :to="{name: 'Register'}" x-large rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
       </v-col>
       <v-col class="col-banner-img" lg="6" md="12" sm="12" cols="12">
         <v-img class="banner-img-1" src="@/assets/image/aha-mobile.png"></v-img>
