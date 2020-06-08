@@ -84,7 +84,6 @@ export default {
 			}
 
 			this.$store.dispatch('userLogin', data)
-			.then(() => this.$router.push('/home'))
       }
     }
 }

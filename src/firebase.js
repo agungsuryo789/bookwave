@@ -71,6 +71,7 @@ export default {
 			console.log(response)
 			const token = response.data.token
 			localStorage.setItem('x-token', token)
+			this.$router.push('/home');
 		})
 	  })
       .catch(function(error) {
@@ -99,6 +100,7 @@ export default {
 			  console.log(error.response.data)
 			  const token = response.data.token
 			  localStorage.setItem('x-token', token)
+			  this.$router.push('/home');
 		  })
 		})
 		.catch(function(error) {

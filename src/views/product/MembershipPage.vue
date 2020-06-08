@@ -37,7 +37,7 @@
                 color="#D32F2F"
                 elevation="3"
                 style="color:white;font-weight:bold;"
-				@click="pay"
+				@click="pay(item.id_langganan)"
               >Coba 7 hari gratis</v-btn>
             </div>
             <v-card-title class="m-0 p-0">{{ item.nama_langganan }}</v-card-title>
@@ -71,9 +71,9 @@ export default {
     this.$store.dispatch("getSubsOption");
   },
   methods: {
-      pay() {
+      pay(value) {
 		var data = {
-			  id_langganan: 1
+			  id_langganan: value
 		}
 		this.$store.dispatch('invoiceDetails', data)
     }
