@@ -26,7 +26,7 @@
                   @click="showCategory = !showCategory"
                   style="text-transform:none;font-size:18px;font-weight:600;"
                 >Temukan</v-btn>
-                <router-link to="/library" tag="button">
+                <router-link to="/library/book" tag="button">
                   <v-btn
                     color="transparent"
                     depressed

@@ -22,7 +22,7 @@
                   </v-btn>
                 </template>
                 <v-list>
-                  <v-list-item @click="() => {}">
+                  <v-list-item @click="addTag(idBuku)">
                     <v-list-item-title>Tambah Tag</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="() => {}">
@@ -83,7 +83,13 @@ export default {
           bookName: this.$props.title.toLowerCase()
         }
       });
-    },
+	},
+	addTag(idBuku) {
+		this.$router.push({
+        name: "LibraryTagAdd",
+        params: { idBuku: idBuku }
+      });
+	},
     setBookDone() {
       this.$store.dispatch("setBookDone", this.payloadDone);
     },

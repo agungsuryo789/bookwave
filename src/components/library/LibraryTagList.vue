@@ -7,7 +7,7 @@
     </template>
     <template v-else>
       <template v-if="!tagDetail">
-        <v-col v-for="n in koleksiTag" :key="n.tag" lg="3" md="3" sm="3" xs="6" class="my-5">
+        <v-col v-for="n in koleksiTag" :key="n" lg="3" md="3" sm="3" xs="6" class="my-5">
           <v-btn depressed text @click="toTagDetail(n.tag)">{{n.tag}}</v-btn>
         </v-col>
       </template>

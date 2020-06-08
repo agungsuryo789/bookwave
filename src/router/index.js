@@ -63,9 +63,20 @@ const MembershipPage = () =>
 // Library Component
 const LibraryPage = () =>
     import ('../views/user/LibraryPage.vue')
-const LibraryTagPage = () =>
-    import ('../components/library/librarytag/LibraryTagDetail.vue')
+const LibraryBook = () =>
+    import ('../components/library/LibraryBookList.vue')
+const LibraryEpisode = () =>
+    import ('../components/library/LibraryEpisodeList.vue')
+const LibraryColour = () =>
+    import ('../components/library/LibraryColouredList.vue')
+const LibraryFav = () =>
+    import ('../components/library/LibraryFavoriteList.vue')
+const LibraryTag = () =>
+    import ('../components/library/LibraryTagList.vue')
+const LibraryTagAdd = () =>
+    import ('../components/library/librarytag/LibraryTagAdd.vue')
 
+// Page Not Found
 const PageNotFound = () =>
     import ('../views/notfound/PageNotFound.vue')
 
@@ -227,16 +238,36 @@ const routes = [
         component: LibraryPage,
         meta: {
             requiresAuth: true
-        }
+        },
+        children: [{
+                path: 'book',
+                component: LibraryBook,
+            },
+            {
+                path: 'episode',
+                component: LibraryEpisode,
+            },
+            {
+                path: 'highlighted',
+                component: LibraryColour,
+            },
+            {
+                path: 'favorite',
+                component: LibraryFav,
+            },
+            {
+                path: 'tag',
+                component: LibraryTag,
+            },
+            {
+                path: 'add-tag/:idBuku',
+                name: 'LibraryTagAdd',
+                component: LibraryTagAdd
+            }
+        ]
+
     },
-    {
-        path: '/library/:tagName',
-        name: 'LibraryTagPage',
-        component: LibraryTagPage,
-        meta: {
-            requiresAuth: true
-        }
-    },
+    // Page not Found Route
     {
         path: '*',
         name: 'catchAll',

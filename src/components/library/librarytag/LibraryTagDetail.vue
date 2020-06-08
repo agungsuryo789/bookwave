@@ -26,7 +26,7 @@
         <template v-else>
           <v-col
             v-for="n in koleksiTagSingle"
-            :key="n.id_buku"
+            :key="n"
             lg="4"
             md="6"
             sm="12"

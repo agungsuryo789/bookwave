@@ -88,6 +88,7 @@ export default new Vuex.Store({
         koleksiTag: {},
         koleksiTagSingle: [],
         delTagRes: {},
+        addTagRes: {},
         invoiceDetails: {},
         midtransToken: ''
     },
@@ -188,6 +189,12 @@ export default new Vuex.Store({
         setChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
+        },
+        addTag_mutation: (state, response) => {
+            state.addTagRes = response
+            state.loaderStatus = true
+            alert("Berhasil tambah tag")
+            router.push("/home")
         },
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
@@ -408,6 +415,15 @@ export default new Vuex.Store({
             axs.post('/ahaapi/hapus_highlight', delHighlightPayload)
                 .then(response => {
                     commit('setDelChapterHighlight_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        addTag: ({ commit }, tagPayload) => {
+            axs.post('/ahaapi/tambah_tag', tagPayload)
+                .then(response => {
+                    commit('addTag_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
