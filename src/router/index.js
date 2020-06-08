@@ -62,7 +62,7 @@ const MembershipPage = () =>
 
 // Library Component
 const LibraryPage = () =>
-    import ('../views/product/LibraryPage.vue')
+    import ('../views/user/LibraryPage.vue')
 
 
 const routes = [
@@ -70,7 +70,10 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            ifLoggedIn: true
+        }
     },
     {
         path: '/about',
@@ -80,22 +83,34 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {
+            ifLoggedIn: true
+        }
     },
     {
         path: '/login/email',
         name: 'LoginEmail',
-        component: LoginEmail
+        component: LoginEmail,
+        meta: {
+            ifLoggedIn: true
+        }
     },
     {
         path: '/register',
         name: 'Register',
-        component: Register
+        component: Register,
+        meta: {
+            ifLoggedIn: true
+        }
     },
     {
         path: '/register/email',
         name: 'RegisterEmail',
-        component: RegisterEmail
+        component: RegisterEmail,
+        meta: {
+            ifLoggedIn: true
+        }
     },
     {
         path: '/disclaimer',
@@ -192,7 +207,7 @@ const routes = [
     {
         path: '/promo',
         name: 'PromoPage',
-        component: PromoPage,
+        component: PromoPage
     },
     {
         path: '/plans',
@@ -223,6 +238,15 @@ router.beforeEach((to, from, next) => {
             return
         }
         next('/login')
+    } else {
+        next()
+    }
+    if (to.matched.some(record => record.meta.ifLoggedIn)) {
+        if (store.getters.isLoggedIn) {
+            next('/home')
+            return
+        }
+        next()
     } else {
         next()
     }

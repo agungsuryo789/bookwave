@@ -55,8 +55,20 @@
                     <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                   </template>
                   <v-list>
-                    <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-                      <v-list-item-title>Option {{ n }}</v-list-item-title>
+                    <v-list-item @click="() => {}">
+                      <v-list-item-title>Payment History</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="() => {}">
+                      <v-list-item-title>Wishlist</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="() => {}">
+                      <v-list-item-title>Setting</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="() => {}">
+                      <v-list-item-title>Help & Support</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="() => {}">
+                      <v-list-item-title>Log Out</v-list-item-title>
                     </v-list-item>
                   </v-list>
                 </v-menu>
