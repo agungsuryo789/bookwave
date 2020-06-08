@@ -509,7 +509,8 @@ export default new Vuex.Store({
                 .then(response => {
                     const token = response.data.token
                     localStorage.setItem('x-token', token)
-                    commit('authSuccess_mutation', token)
+					commit('authSuccess_mutation', token)
+					this.$router.push('/home');
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -519,7 +520,8 @@ export default new Vuex.Store({
             axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
-                    commit('authSuccess_mutation', token)
+					commit('authSuccess_mutation', token)
+					this.$router.push('/home');
                 })
                 .catch(err => {
                     alert(err.message);

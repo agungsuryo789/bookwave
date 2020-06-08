@@ -77,6 +77,49 @@
 		</v-row>
 		<v-row class="mt-2 my-2">
 			<v-col sm="12" md="12">
+				<h2>Kebijakan Pembatalan </h2>
+					<p>
+					Jika Anda seorang konsumen (yaitu, seseorang yang menyelesaikan transaksi hukum untuk tujuan yang sebagian besar tidak dapat dikaitkan dengan komersial maupun aktivitas profesional independen mereka), Anda berhak atas hak penarikan berdasarkan undang-undang saat membuat perjanjian penjualan jarak jauh, yang tentang Ahabaca memberikan informasi di bawah ini sesuai dengan model perundang-undangan. Harap perhatikan bahwa dalam hal pembelian dalam aplikasi, Anda memiliki hak penarikan di dalam masing-masing app store, mis., Apple-App-Store atau Google Play Store. Formulir penarikan model dapat ditemukan di Bawah</p><br/>
+					<p class="font-weight-bold">
+						- INSTRUKSI PENARIKAN -
+					</p>
+					<p class="font-weight-bold">Hak penarikan</p>
+					<p>Anda memiliki hak untuk menarik diri dari kontrak ini dalam 14 hari tanpa memberikan alasan apa pun. Periode penarikan akan berakhir setelah 14 hari sejak hari berakhirnya kontrak. Untuk menggunakan hak penarikan, Anda harus memberi tahu kami.</p>
+					<h3>PT AHA CERAH BANGSA</h3>
+					<h4>Menara Kuningan Lt.9.G-9.H, Jl. Rasuna V Blok X-7,</h4>
+					<h4>Kel. Karet Kuningan, Kec. Setiabudi,</h4>
+					<h4>Kab. Jakarta Selatan, Prov. DKI Jakarta</h4>
+					<h4>Telp. (021) 2941 0380</h4>
+					<h4>support@ahabaca.com</h4>
+					<br/>
+					<p>Keputusan Anda untuk menarik diri dari kontrak ini dengan pernyataan tegas (mis. surat yang dikirim melalui pos, faks, atau email). Anda dapat menggunakan formulir penarikan model terlampir, tetapi tidak wajib.Untuk memenuhi tenggat waktu penarikan, cukup bagi Anda untuk mengirim komunikasi Anda tentang pelaksanaan hak penarikan sebelum periode penarikan berakhir.</p>
+					<p class="font-weight-bold">Efek penarikan</p>
+					<p>Jika Anda menarik diri dari kontrak ini, kami akan mengembalikan kepada Anda semua pembayaran yang diterima dari Anda, termasuk biaya pengiriman (dengan pengecualian biaya tambahan yang dihasilkan dari pilihan jenis pengiriman Anda selain jenis pengiriman standar yang paling murah yang ditawarkan. oleh kami) tanpa penundaan yang tidak semestinya dan dalam hal apa pun selambat-lambatnya 14 hari sejak hari kami diberitahu tentang keputusan Anda untuk menarik diri dari kontrak ini. Kami akan melakukan penggantian tersebut dengan menggunakan cara pembayaran yang sama seperti yang Anda gunakan untuk transaksi awal, kecuali jika Anda telah menyetujui sebaliknya; dalam hal apa pun, Anda tidak akan dikenakan biaya apa pun sebagai akibat dari penggantian tersebut</p>
+					<p>Jika Anda diminta untuk memulai kinerja layanan selama periode penarikan, Anda harus membayar kami jumlah yang sebanding dengan apa yang telah disediakan sampai Anda telah mengomunikasikan penarikan Anda dari kontrak ini kepada kami, dibandingkan dengan cakupan penuh kontrak.</p>
+					<p class="font-weight-bold">- AKHIR INSTRUKSI PENARIKAN -</p>
+					<v-spacer></v-spacer>
+					<p>Hak penarikan berakhir sehubungan dengan kontrak Konten Audiobook jika kinerja telah dimulai (yaitu Anda mengunduh Konten Audiobook ke Perpustakaan Ahabaca Anda) dengan persetujuan Anda sebelum akhir periode penarikan dan pengakuan Anda bahwa dengan demikian Anda kehilangan hak penarikan.</p>
+					<p>Menurut ketentuan hukum, Ahabaca menyatakan yang berikut tentang contoh formulir pembatalan:</p>
+					<p class="font-weight-bold">Contoh Formulir Pembatalan</p>
+					<p class="font-weight-bold">(Silakan isi formulir ini dan kirimkan kembali jika Anda ingin membatalkan Perjanjian.)<br/>
+					- Kepada: <br/>
+					PT AHA CERAH BANGSA<br/>
+					Menara Kuningan Lt.9.G-9.H, Jl. Rasuna V Blok X-7, <br/>
+					Kel. Karet Kuningan, Kec. Setiabudi<br/>
+					Kab. Jakarta Selatan, Prov. DKI Jakarta<br/>
+					support@ahabaca.com<br/><br/>
+					- Saya dengan ini mencabut Perjanjian yang saya lakukan sehubungan dengan pembelian produk berikut (*) / layanan berikut (*) yang disediakan<br/>
+					- Dipesan pada (*) / diterima pada (*)<br/>
+					- Nama konsumen<br/>
+					- Alamat konsumen<br/>
+					- Tanda tangan konsumen (hanya jika pemberitahuan di atas kertas)<br/>
+					- Tanggal<br/><br/>
+					(*) Coret jika tidak berlaku.<br/>
+					</p>
+			</v-col>
+		</v-row>
+		<v-row class="mt-2 my-2">
+			<v-col sm="12" md="12">
 				<h2>Penggantian dan Metode Pembayaran, Kompensasi dan Hak Retensi </h2>
 				<p> Syarat dan ketentuan ini berlaku untuk semua kasus retur dan penukaran produk AHABACA.COM. </p>
 				<ul>
@@ -99,6 +142,22 @@
 				</ul>
 			</v-col>
 		</v-row>
+		<v-row class="mt-2 my-2">
+			<v-col sm="12" md="12">
+				<h2>Ketentuan dan Pembatalan </h2>
+				<ul>
+					<li>
+					Perjanjian penggunaan gratis dimulai dari saat Anda mendaftar dari Ketentuan Penggunaan ini dan berjalan tanpa batas waktu. Anda dapat membatalkan perjanjian penggunaan gratis kapan saja. Untuk efek ini, Anda dapat menghapus akun Anda melalui aplikasi web kami di item menu "Pengaturan". </li>
+					<li>
+					Langganan berbayar untuk Akses Langganan akan berjalan setidaknya untuk jangka waktu yang Anda pilih dan secara otomatis akan diperpanjang jika tidak dibatalkan setidaknya 24 jam sebelum akhir periode itu. Jangka waktu berlangganan akan diperpanjang sesuai dengan model berlangganan yang digunakan sejauh ini.</li>
+					<li>
+					Pembatalan Akses Berlangganan mulai berlaku pada hari setelah hari terakhir periode berlangganan Anda saat ini dan Anda akan diturunkan ke perjanjian pengguna gratis (akun gratis). Namun, begitu Anda memperbarui langganan lagi, Anda akan dapat mengakses status lama dan daftar bacaan Anda. Jika Anda ingin menghapus seluruh akun Anda, Anda dapat melakukannya dari pengaturan di aplikasi web kami. Semua data akan dihapus tanpa dapat ditarik kembali.</li>
+					<li>
+					Hak untuk memblokir dan pembatalan karena alasan penting karena alasan yang baik tetap tidak terpengaruh oleh ketentuan sebelumnya.</li>
+				</ul>
+			</v-col>
+		</v-row>
+		<v-spacer></v-spacer>
 		</div>
 		<FooterSection />
 	</div>
