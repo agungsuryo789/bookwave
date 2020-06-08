@@ -154,7 +154,6 @@ export default new Vuex.Store({
             state.token = ''
             Object.assign(state)
             router.push('/')
-            location.reload()
         },
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response

@@ -67,7 +67,7 @@
                     <v-list-item @click="() => {}">
                       <v-list-item-title>Help & Support</v-list-item-title>
                     </v-list-item>
-                    <v-list-item @click="() => {}">
+                    <v-list-item @click="userLogout">
                       <v-list-item-title>Log Out</v-list-item-title>
                     </v-list-item>
                   </v-list>
@@ -100,26 +100,26 @@
                   alt="Vuetify Logo"
                   class="shrink ml-5 mr-2"
                   contain
-                  src="@/assets/image/aha-red-icon.svg"
+                  src="@/assets/image/aha-white-icon.svg"
                   transition="scale-transition"
                   width="100"
                 />
               </router-link>
               <v-spacer></v-spacer>
               <v-btn
+                to="register"
                 class="button-subscribe"
                 rounded
                 color="#39DF8C"
                 elevation="2"
                 depressed
               >Start Trial</v-btn>
-              <router-link to="login">
-                <v-btn
-                  color="transparent"
-                  depressed
-                  style="text-transform:none;font-size:18px;font-weight:600;"
-                >Login</v-btn>
-              </router-link>
+              <v-btn
+                to="login"
+                color="transparent"
+                depressed
+                style="text-transform:none;font-size:18px;font-weight:600;color:white;"
+              >Login</v-btn>
             </v-app-bar>
           </v-col>
         </v-row>
@@ -147,6 +147,9 @@ export default {
   methods: {
     onCloseSearchBar(e) {
       this.showSearchBar = e;
+    },
+    userLogout() {
+      this.$store.dispatch("userLogout");
     }
   }
 };
