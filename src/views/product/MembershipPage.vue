@@ -71,6 +71,7 @@
                 color="#D32F2F"
                 elevation="3"
                 style="color:white;font-weight:bold;"
+				@click="pay"
               >Coba 7 hari gratis</v-btn>
             </div>
             <v-card-title class="m-0 p-0">{{ item.nama_langganan }}</v-card-title>
@@ -89,6 +90,8 @@
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
+import Midtrans from '@/midtrans.js'
+/* eslint-disable */
 export default {
   name: "MembershipPage",
   components: {
@@ -100,6 +103,11 @@ export default {
   }),
   created() {
     this.$store.dispatch("getSubsOption");
+  },
+  methods: {
+      pay() {
+		Midtrans.pay()
+    }
   }
 };
 </script>
