@@ -66,6 +66,9 @@ const LibraryPage = () =>
 const LibraryTagPage = () =>
     import ('../components/library/librarytag/LibraryTagDetail.vue')
 
+const PageNotFound = () =>
+    import ('../views/notfound/PageNotFound.vue')
+
 
 const routes = [
     //Main Layout (No Auth)
@@ -233,6 +236,11 @@ const routes = [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: '*',
+        name: 'catchAll',
+        component: PageNotFound
     }
 ]
 
