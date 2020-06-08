@@ -56,7 +56,8 @@ const vuexSession = new VuexPersist({
         koleksiBukuFav: state.koleksiBukuFav,
         koleksiBukuHighlight: state.koleksiBukuHighlight,
         koleksiAudio: state.koleksiAudio,
-        koleksiTag: state.koleksiTag
+        koleksiTag: state.koleksiTag,
+        koleksiTagSingle: state.koleksiTagSingle
     })
 })
 
@@ -91,7 +92,8 @@ export default new Vuex.Store({
         koleksiBukuFav: {},
         koleksiBukuHighlight: {},
         koleksiAudio: {},
-        koleksiTag: {}
+        koleksiTag: {},
+        koleksiTagSingle: []
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -219,6 +221,10 @@ export default new Vuex.Store({
         },
         koleksiTag_mutation: (state, response) => {
             state.koleksiTag = response
+            state.loaderStatus = true
+        },
+        koleksiTagSingle_mutation: (state, response) => {
+            state.koleksiTagSingle = response
             state.loaderStatus = true
         }
     },
@@ -444,6 +450,15 @@ export default new Vuex.Store({
             axs.get('/ahaapi/tag_buku')
                 .then(response => {
                     commit('koleksiTag_mutation', response.data.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        koleksiTagSingle: ({ commit }, tagPayload) => {
+            axs.get('/ahaapi/tag_buku?tag=' + tagPayload)
+                .then(response => {
+                    commit('koleksiTagSingle_mutation', response.data.data);
                 })
                 .catch(err => {
                     console.log(err.message);

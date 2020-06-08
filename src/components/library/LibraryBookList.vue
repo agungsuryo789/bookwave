@@ -10,7 +10,7 @@
         <v-col v-for="n in koleksiBuku" :key="n.id_buku" lg="4" md="6" sm="12" xs="12" class="my-5">
           <BookCardSmall
             :idBuku="n.id_buku"
-            :title="n.judul"
+            :title="n.judul_buku"
             :penulis="n.penulis"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
@@ -53,7 +53,7 @@ export default {
       }, 800);
     }
   },
-  mounted() {
+  created() {
     this.callFunction();
   }
 };

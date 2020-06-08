@@ -63,6 +63,8 @@ const MembershipPage = () =>
 // Library Component
 const LibraryPage = () =>
     import ('../views/user/LibraryPage.vue')
+const LibraryTagPage = () =>
+    import ('../components/library/librarytag/LibraryTagDetail.vue')
 
 
 const routes = [
@@ -220,6 +222,14 @@ const routes = [
         path: '/library',
         name: 'LibraryPage',
         component: LibraryPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/library/:tagName',
+        name: 'LibraryTagPage',
+        component: LibraryTagPage,
         meta: {
             requiresAuth: true
         }

@@ -52,7 +52,7 @@ export default {
       }, 800);
     }
   },
-  mounted() {
+  created() {
     this.callFunction();
   }
 };

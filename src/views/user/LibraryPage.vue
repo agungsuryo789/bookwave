@@ -17,27 +17,19 @@
         </v-tab>
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <LibraryBookList />
+            <LibraryBookList :key="componentKey" />
           </v-tab-item>
           <v-tab-item>
-            <v-row>
-              <LibraryEpisodeList />
-            </v-row>
+            <LibraryEpisodeList :key="componentKey" />
           </v-tab-item>
           <v-tab-item>
-            <v-row>
-              <LibraryColouredList />
-            </v-row>
+            <LibraryColouredList :key="componentKey" />
           </v-tab-item>
           <v-tab-item>
-            <v-row>
-              <LibraryFavoriteList />
-            </v-row>
+            <LibraryFavoriteList :key="componentKey" />
           </v-tab-item>
           <v-tab-item>
-            <v-row>
-              <LibraryTagList />
-            </v-row>
+            <LibraryTagList :key="componentKey" />
           </v-tab-item>
         </v-tabs-items>
       </v-tabs>
@@ -67,7 +59,8 @@ export default {
     LibraryTagList
   },
   data: () => ({
-    tab: null
+    tab: null,
+    componentKey: 0
   })
 };
 </script>
