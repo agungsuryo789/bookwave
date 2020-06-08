@@ -91,7 +91,9 @@ export default new Vuex.Store({
         koleksiBukuFav: {},
         koleksiBukuHighlight: {},
         koleksiAudio: {},
-        koleksiTag: {}
+		koleksiTag: {},
+		invoiceDetails: {},
+		midtransToken: ''
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -220,7 +222,15 @@ export default new Vuex.Store({
         koleksiTag_mutation: (state, response) => {
             state.koleksiTag = response
             state.loaderStatus = true
-        }
+		},
+		invoiceDetail_mutation: (state, response) => {
+			state.invoiceDetails = response
+			state.loaderStatus = true
+		},
+		midtransToken_mutation: (state, response) => {
+			state.midtransToken = response
+			state.loaderStatus = true
+		}
     },
     actions: {
         getSearchByDefault: ({ commit }, payload) => {
@@ -448,7 +458,17 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message);
                 })
-        },
+		},
+		invoiceDetails: ({ commit }, data) => {
+			console.log(data)
+			axs.post('/ahaapi/invoices', data)
+				.then(response => {
+					window.location = 'https://app.sandbox.midtrans.com/snap/v2/vtweb/' + response.data.token;
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
         // auth action
         userLogin: ({ commit }, user) => {
             console.log(user)
