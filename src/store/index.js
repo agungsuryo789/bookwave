@@ -50,14 +50,7 @@ const vuexSession = new VuexPersist({
         episodeListNew: state.episodeListNew,
         bookListByKategori: state.bookListByKategori,
         bookDetail: state.bookDetail,
-        chapterDetail: state.chapterDetail,
-        bookList: state.bookList,
-        koleksiBuku: state.koleksiBuku,
-        koleksiBukuFav: state.koleksiBukuFav,
-        koleksiBukuHighlight: state.koleksiBukuHighlight,
-        koleksiAudio: state.koleksiAudio,
-        koleksiTag: state.koleksiTag,
-        koleksiTagSingle: state.koleksiTagSingle
+        chapterDetail: state.chapterDetail
     })
 })
 
@@ -94,6 +87,7 @@ export default new Vuex.Store({
         koleksiAudio: {},
         koleksiTag: {},
         koleksiTagSingle: [],
+        delTagRes: {},
         invoiceDetails: {},
         midtransToken: ''
     },
@@ -171,23 +165,21 @@ export default new Vuex.Store({
             state.bookStatus = response
             state.loaderStatus = true
             alert("Selamat!! kamu sudah selesai membaca buku ini ^_^")
-            router.push('/library')
+            router.push("/", () => {})
         },
         setDeleteKoleksi_mutation: (state, response) => {
             state.bookStatus = response
             state.loaderStatus = true
             alert("Buku berhasil dihapus dari koleksi")
-            router.push('/library')
+            router.push("/", () => {})
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
             state.loaderStatus = true
-            location.reload()
         },
         setBookmark_mutation: (state, response) => {
             state.bookBookmarked = response
             state.loaderStatus = true
-            location.reload()
         },
         getSubsOption_mutation: (state, response) => {
             state.subList = response
@@ -196,13 +188,11 @@ export default new Vuex.Store({
         setChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
-            location.reload()
         },
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
             alert("Berhasil hapus highligth text")
-            location.reload()
         },
         koleksiBuku_mutation: (state, response) => {
             state.koleksiBuku = response
@@ -226,6 +216,10 @@ export default new Vuex.Store({
         },
         koleksiTagSingle_mutation: (state, response) => {
             state.koleksiTagSingle = response
+            state.loaderStatus = true
+        },
+        delTagRes_mutation: (state, response) => {
+            state.delTagRes = response
             state.loaderStatus = true
         },
         invoiceDetail_mutation: (state, response) => {
@@ -473,6 +467,16 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        deleteTagFromAll: ({ commit }, tagPayload) => {
+            axs.get('/ahaapi/hapus_tag', tagPayload)
+                .then(response => {
+                    commit('delTagRes_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        // Payment Action
         invoiceDetails: ({ commit }, data) => {
             console.log(data)
             axs.post('/ahaapi/invoices', data)
@@ -485,7 +489,6 @@ export default new Vuex.Store({
         },
         // auth action
         userLogin: ({ commit }, user) => {
-            console.log(user)
             axs.post('ahaapi/login_member', user)
                 .then(response => {
                     const token = response.data.token
@@ -497,7 +500,6 @@ export default new Vuex.Store({
                 })
         },
         userRegister: ({ commit }, user) => {
-            console.log(user)
             axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
