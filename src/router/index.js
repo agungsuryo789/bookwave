@@ -53,6 +53,8 @@ const CategoryPage = () =>
     import ('../views/main/CategoryPage.vue')
 const BookChapter = () =>
     import ('../views/main/BookChapter.vue')
+const PaymentHistoryView = () =>
+    import ('../views/user/PaymentHistoryView.vue')
 
 // Pricing Component
 const PromoPage = () =>
@@ -215,6 +217,15 @@ const routes = [
         path: '/read/:bookId/:chapterId',
         name: 'BookChapter',
         component: BookChapter,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    // User Layout
+    {
+        path: '/user/payment-history',
+        name: 'PaymentHistoryView',
+        component: PaymentHistoryView,
         meta: {
             requiresAuth: true
         }
