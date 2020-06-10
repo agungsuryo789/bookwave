@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import Vuex from "vuex";
 import axios from "axios";
+import router from "./router"
 
 Vue.use(Vuex, axios);
 
@@ -71,7 +72,7 @@ export default {
 			console.log(response)
 			const token = response.data.token
 			localStorage.setItem('x-token', token)
-			this.$router.push('/home');
+			router.push('/home');
 		})
 	  })
       .catch(function(error) {
@@ -100,7 +101,7 @@ export default {
 			  console.log(error.response.data)
 			  const token = response.data.token
 			  localStorage.setItem('x-token', token)
-			  this.$router.push('/home');
+			  router.push('/home');
 		  })
 		})
 		.catch(function(error) {
