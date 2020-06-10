@@ -23,8 +23,8 @@ export default {
         kalimat: "",
         warna: "#E76464",
         id_chapter: this.$route.params.chapterId,
-        start_char: "",
-        end_char: ""
+        x_web: "",
+        y_web: ""
       },
       delHighlightPayload: {
         kalimat: "",
@@ -118,8 +118,8 @@ export default {
 
       // Set & Save Highlight Node Data
       this.highlightPayload.kalimat = selectionText;
-      this.highlightPayload.start_char = rect.top;
-      this.highlightPayload.end_char = rect.left;
+      this.highlightPayload.x_web = rect.top;
+      this.highlightPayload.y_web = rect.left;
       // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
     },
     getHighlight() {
@@ -133,8 +133,8 @@ export default {
         span.textContent = x[i].kalimat;
         span.style.backgroundColor = x[i].warna;
         span.style.position = "absolute";
-        span.style.top = x[i].start_char - this.varTop + "px";
-        span.style.left = x[i].end_char - this.varLeft + "px";
+        span.style.top = x[i].x_web - this.varTop + "px";
+        span.style.left = x[i].y_web - this.varLeft + "px";
         span.style.zIndex = "2";
         chapterText.appendChild(span);
         // Create Tooltip Delete Highlight

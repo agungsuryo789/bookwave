@@ -177,6 +177,7 @@ export default new Vuex.Store({
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
             state.loaderStatus = true
+            alert("Berhasil Ditambahkan ke Favorit")
         },
         setBookmark_mutation: (state, response) => {
             state.bookBookmarked = response
@@ -333,7 +334,6 @@ export default new Vuex.Store({
             axs.get('/ahaapi/list_subscription')
                 .then(response => {
                     commit('getSubsOption_mutation', response.data);
-                    console.log(response)
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -403,7 +403,7 @@ export default new Vuex.Store({
                 })
         },
         setChapterHighlight: ({ commit }, highlightPayload) => {
-            axs.post('/ahaapi/highlight_chapter', highlightPayload)
+            axs.post('/ahaapi/highlight_chapter_web', highlightPayload)
                 .then(response => {
                     commit('setChapterHighlight_mutation', response.data);
                 })
@@ -432,7 +432,7 @@ export default new Vuex.Store({
         koleksiBuku: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_member')
                 .then(response => {
-                    commit('koleksiBuku_mutation', response.data.data);
+                    commit('koleksiBuku_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -441,7 +441,7 @@ export default new Vuex.Store({
         koleksiBukuFav: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_favorit')
                 .then(response => {
-                    commit('koleksiBukuFav_mutation', response.data.data);
+                    commit('koleksiBukuFav_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -450,7 +450,7 @@ export default new Vuex.Store({
         koleksiBukuHighlight: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_highlight')
                 .then(response => {
-                    commit('koleksiBukuHighlight_mutation', response.data.data);
+                    commit('koleksiBukuHighlight_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -459,16 +459,16 @@ export default new Vuex.Store({
         koleksiAudio: ({ commit }) => {
             axs.get('/ahaapi/koleksi_audio_member')
                 .then(response => {
-                    commit('koleksiAudio_mutation', response.data.data);
+                    commit('koleksiAudio_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
                 })
         },
         koleksiTag: ({ commit }) => {
-            axs.get('/ahaapi/tag_buku')
+            axs.get('/ahaapi/list_tag')
                 .then(response => {
-                    commit('koleksiTag_mutation', response.data.data);
+                    commit('koleksiTag_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -509,8 +509,8 @@ export default new Vuex.Store({
                 .then(response => {
                     const token = response.data.token
                     localStorage.setItem('x-token', token)
-					commit('authSuccess_mutation', token)
-					this.$router.push('/home');
+                    commit('authSuccess_mutation', token)
+                    this.$router.push('/home');
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -520,8 +520,8 @@ export default new Vuex.Store({
             axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
-					commit('authSuccess_mutation', token)
-					this.$router.push('/home');
+                    commit('authSuccess_mutation', token)
+                    this.$router.push('/home');
                 })
                 .catch(err => {
                     alert(err.message);

@@ -6,13 +6,27 @@
       </v-col>
     </template>
     <template v-else>
-      <template v-if="!tagDetail">
-        <v-col v-for="n in koleksiTag" :key="n" lg="3" md="3" sm="3" xs="6" class="my-5">
-          <v-btn depressed text @click="toTagDetail(n.tag)">{{n.tag}}</v-btn>
-        </v-col>
+      <template v-if="koleksiTag.data">
+        <template v-if="!showTagDetail">
+          <v-col v-for="n in koleksiTag.data" :key="n.id_tag" lg="3" md="3" sm="3" xs="6" class="my-5">
+            <v-btn depressed text @click="toTagDetail(n.tag)">{{n.tag}}</v-btn>
+          </v-col>
+        </template>
+        <template v-if="showTagDetail">
+          <LibraryTagDetail :tagName="tagName" />
+        </template>
       </template>
-      <template v-if="tagDetail">
-        <LibraryTagDetail :tagName="tagName" />
+      <template v-else>
+        <v-col lg="12" class="align-center justify-center text-center">
+          <v-img
+            src="@/assets/image/bookNotFound.svg"
+            aspect-ratio="1"
+            width="100px"
+            height="100px"
+            style="margin: 0 auto;"
+          ></v-img>
+          <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+        </v-col>
       </template>
     </template>
   </v-row>
@@ -29,7 +43,7 @@ export default {
   data() {
     return {
       loadSkeleton: true,
-      tagDetail: false,
+      showTagDetail: false,
       tagName: ""
     };
   },
@@ -50,7 +64,7 @@ export default {
       }, 800);
     },
     toTagDetail(tagName) {
-      this.tagDetail = true;
+      this.showTagDetail = true;
       this.tagName = tagName;
     }
   },

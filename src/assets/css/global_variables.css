@@ -1,0 +1,15 @@
+.bgWhite {
+  background-color: white !important;
+  color: black !important;
+}
+
+.bgGrey {
+  background-color: #e5e5e5 !important;
+  color: black !important;
+}
+
+.bgBlack {
+  background-color: #353131 !important;
+  color: white !important;
+}
+/*# sourceMappingURL=global_variables.css.map */

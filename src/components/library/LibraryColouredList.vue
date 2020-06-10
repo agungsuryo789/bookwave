@@ -6,22 +6,36 @@
       </v-col>
     </template>
     <template v-else>
-      <v-col
-        v-for="n in koleksiBukuHighlight"
-        :key="n.id_buku_highlight"
-        lg="4"
-        md="6"
-        sm="12"
-        xs="12"
-        class="my-5"
-        style="text-align:center;"
-      >
-        <v-card flat link>
-          <p style="font-weight:bold;">{{n.kalimat}}</p>
-          <small style="color:gray;">{{n.judul_buku}}</small>
-          <hr />
-        </v-card>
-      </v-col>
+      <template v-if="koleksiBukuHighlight.data">
+        <v-col
+          v-for="n in koleksiBukuHighlight.data"
+          :key="n.id_buku_highlight"
+          lg="4"
+          md="6"
+          sm="12"
+          xs="12"
+          class="my-5"
+          style="text-align:center;"
+        >
+          <v-card flat link>
+            <p style="font-weight:bold;">{{n.kalimat}}</p>
+            <small style="color:gray;">{{n.judul_buku}}</small>
+            <hr />
+          </v-card>
+        </v-col>
+      </template>
+      <template v-else>
+        <v-col lg="12" class="align-center justify-center text-center">
+          <v-img
+            src="@/assets/image/bookNotFound.svg"
+            aspect-ratio="1"
+            width="100px"
+            height="100px"
+            style="margin: 0 auto;"
+          ></v-img>
+          <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+        </v-col>
+      </template>
     </template>
   </v-row>
 </template>
