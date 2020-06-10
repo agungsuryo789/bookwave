@@ -6,23 +6,37 @@
       </v-col>
     </template>
     <template v-else>
-      <v-col
-        v-for="n in koleksiAudio"
-        :key="n.id_chapter"
-        lg="4"
-        md="6"
-        sm="12"
-        xs="12"
-        class="my-5"
-      >
-        <EpisodeCard
-          :idBuku="n.id_buku"
-          :idChapter="n.id_chapter"
-          :episodeTitle="n.judul_chapter"
-          :foto_sampul="n.foto_sampul"
-          :warna_episode="n.warna_kategori"
-        />
-      </v-col>
+      <template v-if="koleksiAudio.data">
+        <v-col
+          v-for="n in koleksiAudio.data"
+          :key="n.id_chapter"
+          lg="4"
+          md="6"
+          sm="12"
+          xs="12"
+          class="my-5"
+        >
+          <EpisodeCard
+            :idBuku="n.id_buku"
+            :idChapter="n.id_chapter"
+            :episodeTitle="n.judul_chapter"
+            :foto_sampul="n.foto_sampul"
+            :warna_episode="n.warna_kategori"
+          />
+        </v-col>
+      </template>
+      <template v-else>
+        <v-col lg="12" class="align-center justify-center text-center">
+          <v-img
+            src="@/assets/image/bookNotFound.svg"
+            aspect-ratio="1"
+            width="100px"
+            height="100px"
+            style="margin: 0 auto;"
+          ></v-img>
+          <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+        </v-col>
+      </template>
     </template>
   </v-row>
 </template>

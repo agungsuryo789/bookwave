@@ -23,7 +23,7 @@
           </ul>
         </v-col>
         <v-col lg="4" md="6" sm="12" xs="12" v-for="item in subList" :key="item.id_langganan">
-          <v-card link ripple height="180px">
+          <v-card height="180px">
             <div class="d-flex flex-row justify-space-between pt-2">
               <div
                 v-if="item.id_langganan == 2"
@@ -36,6 +36,7 @@
               <v-btn
                 color="#D32F2F"
                 elevation="3"
+				ripple
                 style="color:white;font-weight:bold;"
 				@click="pay(item.id_langganan)"
               >Coba 7 hari gratis</v-btn>

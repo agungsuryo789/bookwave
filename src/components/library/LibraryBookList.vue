@@ -6,8 +6,8 @@
       </v-col>
     </template>
     <template v-else>
-      <template v-if="koleksiBuku.status !== 0">
-        <v-col v-for="n in koleksiBuku" :key="n.id_buku" lg="4" md="6" sm="12" xs="12" class="my-5">
+      <template v-if="koleksiBuku.data">
+        <v-col v-for="n in koleksiBuku.data" :key="n.id_buku" lg="4" md="6" sm="12" xs="12" class="my-5">
           <BookCardSmall
             :idBuku="n.id_buku"
             :title="n.judul_buku"
@@ -17,6 +17,18 @@
             :warna_kategori="n.warna_kategori"
             :kategori_buku="n.nama_kategori"
           />
+        </v-col>
+      </template>
+      <template v-else>
+        <v-col lg="12" class="align-center justify-center text-center">
+          <v-img
+            src="@/assets/image/bookNotFound.svg"
+            aspect-ratio="1"
+            width="100px"
+            height="100px"
+            style="margin: 0 auto;"
+          ></v-img>
+          <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
         </v-col>
       </template>
     </template>

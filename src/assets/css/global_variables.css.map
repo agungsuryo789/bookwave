@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAgBA,AAAA,QAAQ,CAAC;EACL,gBAAgB,EAAE,gBAAgB;EAClC,KAAK,EAAE,gBAAgB;CAC1B;;AAED,AAAA,OAAO,CAAC;EACJ,gBAAgB,EAAE,kBAAkB;EACpC,KAAK,EAAE,gBAAgB;CAC1B;;AAED,AAAA,QAAQ,CAAC;EACL,gBAAgB,EAAE,OAAe,CAAC,UAAU;EAC5C,KAAK,EAAE,gBAAgB;CAC1B",
+    "sources": [
+        "global_variables.scss"
+    ],
+    "names": [],
+    "file": "global_variables.css"
+}
