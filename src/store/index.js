@@ -90,7 +90,8 @@ export default new Vuex.Store({
         delTagRes: {},
         addTagRes: {},
         invoiceDetails: {},
-        midtransToken: ''
+		midtransToken: '',
+		notifMessage: ''
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -237,7 +238,10 @@ export default new Vuex.Store({
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
             state.loaderStatus = true
-        }
+		},
+		notifMessage_mutation: (state, response) => {
+			state.notifMessage = response
+		}
     },
     actions: {
         getSearchByDefault: ({ commit }, payload) => {
@@ -491,7 +495,21 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message);
                 })
-        },
+		},
+		forgotPassword: ({ commit }, data) => {
+			axs.post('/ahaapi/lupa_password', data)
+			.then(response => {
+				commit('notifMessage_mutation', response.data.message)
+				console.log(response.data.message)
+			})
+		},
+		resetPassword: ({ commit }, data) => {
+			axs.post('/ahaapi/lupa_password', data)
+			.then(response => {
+				commit('notifMessage_mutation', response.data.message)
+				console.log(response.data.message)
+			})
+		},
         // Payment Action
         invoiceDetails: ({ commit }, data) => {
             console.log(data)
@@ -505,23 +523,23 @@ export default new Vuex.Store({
         },
         // auth action
         userLogin: ({ commit }, user) => {
-            axs.post('ahaapi/login_member', user)
-                .then(response => {
-                    const token = response.data.token
-                    localStorage.setItem('x-token', token)
-                    commit('authSuccess_mutation', token)
-                    this.$router.push('/home');
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
+			axs.post('ahaapi/login_member', user)
+			.then(response => {
+				const token = response.data.token
+				localStorage.setItem('x-token', token)
+				commit('authSuccess_mutation', token)
+				router.push('/home');
+			})
+			.catch(err => {
+				console.log(err.message);
+			})
         },
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
                     const token = response.data.token
                     commit('authSuccess_mutation', token)
-                    this.$router.push('/home');
+                    router.push('/home');
                 })
                 .catch(err => {
                     alert(err.message);
