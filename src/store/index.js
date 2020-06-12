@@ -88,6 +88,7 @@ export default new Vuex.Store({
         koleksiTagSingle: [],
         delTagRes: {},
         addTagRes: {},
+        editTagRes: {},
         invoiceDetails: {},
         paymentHistoryList: {},
         midtransToken: ''
@@ -197,6 +198,18 @@ export default new Vuex.Store({
             alert("Berhasil tambah tag")
             router.push("/home")
         },
+        editTagRes_mutation: (state, response) => {
+            state.editTagRes = response
+            state.loaderStatus = true
+            alert("Berhasil edit tag")
+            router.push("/library/book")
+        },
+        delTagRes_mutation: (state, response) => {
+            state.delTagRes = response
+            state.loaderStatus = true
+            alert("Berhasil hapus tag")
+            router.push("/library/book")
+        },
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
@@ -224,10 +237,6 @@ export default new Vuex.Store({
         },
         koleksiTagSingle_mutation: (state, response) => {
             state.koleksiTagSingle = response
-            state.loaderStatus = true
-        },
-        delTagRes_mutation: (state, response) => {
-            state.delTagRes = response
             state.loaderStatus = true
         },
         invoiceDetail_mutation: (state, response) => {
@@ -488,8 +497,17 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        editTagAll: ({ commit }, tagPayload) => {
+            axs.post('/ahaapi/ubah_tag', tagPayload)
+                .then(response => {
+                    commit('editTagRes_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         deleteTagFromAll: ({ commit }, tagPayload) => {
-            axs.get('/ahaapi/hapus_tag', tagPayload)
+            axs.post('/ahaapi/hapus_tag', tagPayload)
                 .then(response => {
                     commit('delTagRes_mutation', response.data);
                 })

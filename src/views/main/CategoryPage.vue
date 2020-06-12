@@ -5,7 +5,7 @@
       <template v-if="bookListByKategori.buku_populer && bookListByKategori.status == 1">
         <v-row>
           <v-col class="category-page-title" :style="{'background-color': warnaKategori}">
-            <h1>{{ bookListByKategori.nama_kategori }} {{ bookListByKategori.status}}</h1>
+            <h1>{{ bookListByKategori.nama_kategori }}</h1>
           </v-col>
         </v-row>
         <v-row>
@@ -65,6 +65,7 @@
               color="#39DF8C"
               elevation="2"
               depressed
+              style="text-transform:none;color:white;"
               @click="booksToShow += 3"
             >Lihat lebih banyak</v-btn>
           </v-col>
@@ -115,7 +116,7 @@ export default {
     warnaKategori: state => state.bookListByKategori.warna_kategori
   }),
   mounted() {
-	this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
+    this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
   }
 };
 </script>

@@ -17,7 +17,7 @@
               </router-link>
               <v-spacer></v-spacer>
               <template v-if="!showSearchBar">
-                <v-btn icon @click="showSearchBar = !showSearchBar">
+                <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
                 <v-btn
@@ -182,6 +182,11 @@ export default {
   .category-chip--navbar {
     position: fixed;
     z-index: 999;
+	background-color: white;
+	border: 2px solid rgb(184, 184, 184);
+	border-bottom: 6px solid rgb(184, 184, 184);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
   }
 }
 .fade-enter-active,

@@ -8,7 +8,7 @@
     >
       <v-row style="max-width:850px;margin:0 auto;">
         <v-col lg="6" md="6" sm="12" cols="12">
-          <v-card max-width="250">
+          <v-card max-width="250" :style="{backgroundColor: book.warna_kategori}">
             <div class="d-flex flex-column justify-end py-10">
               <v-img class="book-card-img mx-auto" width="150" :src="book.foto_sampul"></v-img>
               <ButtonBookmark :idBuku="book.id_buku" style="position:absolute;right:0;bottom:0;" />

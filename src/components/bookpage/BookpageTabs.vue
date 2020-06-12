@@ -8,17 +8,17 @@
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
-          <v-card-text>{{ sinopsis }}</v-card-text>
+          <v-card-text style="font-size:15px;">{{ sinopsis }}</v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-text>{{ tujuan }}</v-card-text>
+          <v-card-text style="font-size:15px;">{{ tujuan }}</v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-text>{{ author }}</v-card-text>
+          <v-card-text style="font-size:15px;">{{ author }}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
