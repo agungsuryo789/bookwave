@@ -48,7 +48,6 @@ const vuexSession = new VuexPersist({
         bookListTrending: state.bookListTrending,
         bookListNew: state.bookListNew,
         episodeListNew: state.episodeListNew,
-        bookListByKategori: state.bookListByKategori,
         bookDetail: state.bookDetail,
         chapterDetail: state.chapterDetail
     })
@@ -235,6 +234,10 @@ export default new Vuex.Store({
             state.invoiceDetails = response
             state.loaderStatus = true
         },
+        getPaymentHistory_mutation: (state, response) => {
+            state.paymentHistoryList = response
+            state.loaderStatus = true
+        },
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
             state.loaderStatus = true
@@ -349,7 +352,8 @@ export default new Vuex.Store({
                     commit('getBookByKategori_mutation', response.data);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    var data = err.message;
+                    commit('getBookByKategori_mutation', data);
                 })
         },
         getBookDetailByID: ({ commit }, bookId) => {
@@ -512,10 +516,18 @@ export default new Vuex.Store({
 		},
         // Payment Action
         invoiceDetails: ({ commit }, data) => {
-            console.log(data)
             axs.post('/ahaapi/invoices', data)
                 .then(response => {
                     window.location = 'https://app.sandbox.midtrans.com/snap/v2/vtweb/' + response.data.token;
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getPaymentHistory: ({ commit }) => {
+            axs.get('/ahaapi/riwayat_pembayaran')
+                .then(response => {
+                    commit('getPaymentHistory_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);

@@ -55,7 +55,7 @@
                     <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                   </template>
                   <v-list>
-                    <v-list-item @click="() => {}">
+                    <v-list-item @click="toPaymentHistory">
                       <v-list-item-title>Payment History</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="() => {}">
@@ -147,6 +147,11 @@ export default {
   methods: {
     onCloseSearchBar(e) {
       this.showSearchBar = e;
+    },
+    toPaymentHistory() {
+      this.$router.push({
+        name: "PaymentHistoryView"
+      });
     },
     userLogout() {
       this.$store.dispatch("userLogout");
