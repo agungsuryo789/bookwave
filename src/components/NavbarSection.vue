@@ -10,7 +10,7 @@
                   alt="Vuetify Logo"
                   class="shrink ml-5 mr-2"
                   contain
-                  src="@/assets/image/aha-red-icon.svg"
+                  src="@/assets/image/aha-red.svg"
                   transition="scale-transition"
                   width="100"
                 />
@@ -94,7 +94,7 @@
                   alt="Vuetify Logo"
                   class="shrink ml-5 mr-2"
                   contain
-                  src="@/assets/image/aha-white-icon.svg"
+                  src="@/assets/image/aha-white.svg"
                   transition="scale-transition"
                   width="100"
                 />

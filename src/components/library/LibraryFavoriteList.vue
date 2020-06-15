@@ -17,8 +17,8 @@
           class="my-5"
         >
           <BookCardSmall
-            :idBuku="n.id_buku"
-            :title="n.judul"
+            :idBuku="parseInt(n.id_buku)"
+            :title="n.judul_buku"
             :penulis="n.penulis"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"

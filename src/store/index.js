@@ -59,6 +59,7 @@ export default new Vuex.Store({
         loaderStatus: false,
         daftarKategori: [],
         bookList: [],
+        bookTrending: [],
         bookListTrending: [],
         bookListNew: [],
         status: '',
@@ -115,7 +116,7 @@ export default new Vuex.Store({
             state.loaderStatus = true
         },
         getBookTrending_mutation: (state, response) => {
-            state.bookList = response
+            state.bookTrending = response
             state.loaderStatus = true
         },
         getBookNew_mutation: (state, response) => {
@@ -207,8 +208,6 @@ export default new Vuex.Store({
         delTagRes_mutation: (state, response) => {
             state.delTagRes = response
             state.loaderStatus = true
-            alert("Berhasil hapus tag")
-            router.push("/library/book")
         },
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
@@ -308,7 +307,7 @@ export default new Vuex.Store({
                 })
         },
         getListBookNew: ({ commit }) => {
-            axs.get('/ahaapi/beranda_buku_noauth')
+            axs.get('/ahaapi/beranda_buku')
                 .then(response => {
                     commit('getListBookNew_mutation', response.data.buku_terbaru);
                 })
@@ -319,7 +318,7 @@ export default new Vuex.Store({
         getBookTrending: ({ commit }) => {
             axs.get('/ahaapi/buku_trending')
                 .then(response => {
-                    commit('getBookTrending_mutation', response.data);
+                    commit('getBookTrending_mutation', response.data.data);
                 })
                 .catch(err => {
                     console.log(err.message);

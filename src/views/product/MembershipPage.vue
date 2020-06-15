@@ -3,11 +3,10 @@
     <NavbarSection />
     <v-container fluid>
       <v-row>
-        <v-col
-          class="d-flex align-center justify-center"
-          style="height:300px;border:1px solid red;"
-        >
-          <h1>AHA</h1>
+        <v-col class="d-flex align-center justify-center mx-0 px-0">
+          <v-img src="@/assets/image/banner-sub.png" aspect-ratio="5.5">
+            <h1 style="position:absolute;top:45%;left:50%;color:white;">AHA</h1>
+          </v-img>
         </v-col>
       </v-row>
       <div class="d-flex flex-row justify-center align-center my-12">
@@ -36,9 +35,9 @@
               <v-btn
                 color="#D32F2F"
                 elevation="3"
-				ripple
+                ripple
                 style="color:white;font-weight:bold;"
-				@click="pay(item.id_langganan)"
+                @click="pay(item.id_langganan)"
               >Coba 7 hari gratis</v-btn>
             </div>
             <v-card-title class="m-0 p-0">{{ item.nama_langganan }}</v-card-title>
@@ -72,11 +71,11 @@ export default {
     this.$store.dispatch("getSubsOption");
   },
   methods: {
-      pay(value) {
-		var data = {
-			  id_langganan: value
-		}
-		this.$store.dispatch('invoiceDetails', data)
+    pay(value) {
+      var data = {
+        id_langganan: value
+      };
+      this.$store.dispatch("invoiceDetails", data);
     }
   }
 };

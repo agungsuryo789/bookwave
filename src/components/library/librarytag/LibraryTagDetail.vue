@@ -28,7 +28,7 @@
             <v-btn icon @click="showEditTag = !showEditTag">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn icon @click="dispatchDelTag(tagName)">
+            <v-btn icon @click="dispatchDelTag">
               <v-icon>mdi-backspace-outline</v-icon>
             </v-btn>
           </div>
@@ -51,7 +51,7 @@
             class="my-5"
           >
             <BookCardSmall
-              :idBuku="n.id_buku"
+              :idBuku="parseInt(n.id_buku)"
               :title="n.judul"
               :penulis="n.penulis"
               :foto_sampul="n.foto_sampul"
@@ -87,7 +87,7 @@ export default {
         tag_baru: ""
       },
       delTagPayload: {
-        tag: this.tagName
+        tag: this.tagName.toString()
       }
     };
   },
@@ -111,9 +111,10 @@ export default {
       this.editTagPayload.tag_baru = this.inputTag;
       this.$store.dispatch("editTagAll", this.editTagPayload);
     },
-    dispatchDelTag(tagName) {
-      this.delTagPayload.tag = tagName;
+    dispatchDelTag() {
       this.$store.dispatch("deleteTagFromAll", this.delTagPayload);
+      alert("Berhasil hapus tag");
+      this.$router.push("/home");
     }
   },
   mounted() {

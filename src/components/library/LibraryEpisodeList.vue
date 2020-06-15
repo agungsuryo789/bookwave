@@ -17,7 +17,7 @@
           class="my-5"
         >
           <EpisodeCard
-            :idBuku="n.id_buku"
+            :idBuku="parseInt(n.id_buku)"
             :idChapter="n.id_chapter"
             :episodeTitle="n.judul_chapter"
             :foto_sampul="n.foto_sampul"

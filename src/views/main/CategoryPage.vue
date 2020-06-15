@@ -19,8 +19,7 @@
             class="my-2"
           >
             <BookCard
-              :key="n.id_buku"
-              :idBuku="n.id_buku"
+              :idBuku="parseInt(n.id_buku)"
               :title="n.judul"
               :foto_sampul="n.foto_sampul"
               :deskripsi="n.deskripsi"
@@ -46,8 +45,7 @@
             class="my-2"
           >
             <BookCardSmall
-              :key="n.id_buku"
-              :idBuku="n.id_buku"
+              :idBuku="parseInt(n.id_buku)"
               :title="n.judul"
               :foto_sampul="n.foto_sampul"
               :deskripsi="n.deskripsi"
@@ -68,6 +66,19 @@
               style="text-transform:none;color:white;"
               @click="booksToShow += 3"
             >Lihat lebih banyak</v-btn>
+          </v-col>
+        </v-row>
+        <v-row v-if="booksToShow == bookListByKategori.buku_terbaru.length">
+          <v-col class="text-center d-flex flex-column justify-center align-center">
+            <v-btn
+              class="btnLihat"
+              rounded
+              color="#39DF8C"
+              elevation="2"
+              depressed
+              style="text-transform:none;color:white;"
+              @click="booksToShow -= 3"
+            >Lihat lebih Sedikit</v-btn>
           </v-col>
         </v-row>
       </template>

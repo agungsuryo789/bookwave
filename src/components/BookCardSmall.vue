@@ -25,7 +25,7 @@
                   <v-list-item @click="addTag(idBuku)">
                     <v-list-item-title>Tambah Tag</v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="() => {}">
+                  <v-list-item @click="editTag">
                     <v-list-item-title>Edit Tag</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="setBookDone">
@@ -34,9 +34,11 @@
                   <v-list-item @click="setBookFavorit">
                     <v-list-item-title>Tambah ke Favorit</v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="setDeleteKoleksi">
-                    <v-list-item-title>Hapus Dari Koleksi</v-list-item-title>
-                  </v-list-item>
+                  <template v-if="isCollected">
+                    <v-list-item @click="setDeleteKoleksi">
+                      <v-list-item-title>Hapus Dari Koleksi</v-list-item-title>
+                    </v-list-item>
+                  </template>
                 </v-list>
               </v-menu>
             </div>
@@ -72,6 +74,9 @@ export default {
     },
     kategori_buku: {
       type: String
+    },
+    isCollected: {
+      type: Boolean
     }
   },
   components: {
@@ -102,6 +107,11 @@ export default {
       this.$router.push({
         name: "LibraryTagAdd",
         params: { idBuku: idBuku }
+      });
+    },
+    editTag() {
+      this.$router.push({
+        path: "/library/tag"
       });
     },
     setBookDone() {

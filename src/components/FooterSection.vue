@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col
-          class="justify-center align-center text-center"
+          class="justify-center align-center text-center footer--screenshot"
           lg="3"
           md="12"
           sm="12"
@@ -23,59 +23,70 @@
           sm="12"
           style="margin: 0 auto;"
         >
-          <table class="table-footer-links text-left">
-            <tr>
-              <th>Top Kategori</th>
-              <th>Useful Links</th>
-              <th>Company</th>
-            </tr>
-            <tr>
-              <td>
-                <a href>Makanan</a>
-              </td>
-              <td>
-                <a href>Pricing</a>
-              </td>
-              <td>
-                <router-link to="/about">About</router-link>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href>Politik</a>
-              </td>
-              <td>
-                <a href>Pricing for Teams</a>
-              </td>
-              <td>
-                <a href>Carreers</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href>Komunikasi</a>
-              </td>
-              <td>
-                <a href>Magazine</a>
-              </td>
-              <td>
-                <router-link to="/partnership">Partners</router-link>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <a href>Contact & Help</a>
-              </td>
-              <td></td>
-            </tr>
-          </table>
+          <v-row>
+            <v-col cols="12" lg="4" md="4" sm="12">
+              <table class="table-footer-links text-center text-lg-left text-xl-left">
+                <tr>
+                  <th>Top Kategori</th>
+                </tr>
+                <tr>
+                  <td>Makanan</td>
+                </tr>
+                <tr>
+                  <td>Politik</td>
+                </tr>
+                <tr>
+                  <td>Komunikasi</td>
+                </tr>
+              </table>
+            </v-col>
+            <v-col cols="12" lg="4" md="4" sm="12">
+              <table class="table-footer-links text-center text-lg-left text-xl-left">
+                <tr>
+                  <th>Useful Links</th>
+                </tr>
+                <tr>
+                  <td>Pricing</td>
+                </tr>
+                <tr>
+                  <td>Pricing for Teams</td>
+                </tr>
+                <tr>
+                  <td>Magazine</td>
+                </tr>
+                <tr>
+                  <td>Contact & Help</td>
+                </tr>
+              </table>
+            </v-col>
+            <v-col cols="12" lg="4" md="4" sm="12">
+              <table class="table-footer-links text-center text-lg-left text-xl-left">
+                <tr>
+                  <th>Company</th>
+                </tr>
+                <tr>
+                  <td>
+                    <router-link to="/about">About</router-link>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Careers</td>
+                </tr>
+                <tr>
+                  <td>
+                    <router-link to="/partnership">Partners</router-link>
+                  </td>
+                </tr>
+              </table>
+            </v-col>
+          </v-row>
         </v-col>
         <v-col
           class="justify-center align-center text-center"
           lg="2"
           md="12"
           sm="12"
+          cols="12"
           style="margin: 0 auto;"
         >
           <img
@@ -88,7 +99,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col class="text-center" lg="8" md="8" sm="12" style="margin: 0 auto;">
+        <v-col class="text-center" lg="8" md="8" sm="12" cols="12" style="margin: 0 auto;">
           <ul class="footer-list-sitelink mt-2">
             <li>AHA 2020 |</li>
             <li>
@@ -108,7 +119,7 @@
             </li>
           </ul>
         </v-col>
-        <v-col class="text-center" lg="4" md="4" sm="12" style="margin: 0 auto;">
+        <v-col class="text-center" lg="4" md="4" sm="12" cols="12" style="margin: 0 auto;">
           <v-btn icon>
             <v-icon>mdi-facebook</v-icon>
           </v-btn>
@@ -155,6 +166,14 @@ export default {
     li {
       display: inline;
       padding: 4px 6px;
+    }
+  }
+  .footer--screenshot {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+    @media screen and (max-width: 900px) {
+      display: none;
     }
   }
 }

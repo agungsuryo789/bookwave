@@ -7,15 +7,24 @@
     </template>
     <template v-else>
       <template v-if="koleksiBuku.data">
-        <v-col v-for="n in koleksiBuku.data" :key="n.id_buku" lg="4" md="6" sm="12" xs="12" class="my-5">
+        <v-col
+          v-for="n in koleksiBuku.data"
+          :key="n.id_buku"
+          lg="4"
+          md="6"
+          sm="12"
+          xs="12"
+          class="my-5"
+        >
           <BookCardSmall
-            :idBuku="n.id_buku"
+            :idBuku="parseInt(n.id_buku)"
             :title="n.judul_buku"
             :penulis="n.penulis"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
             :warna_kategori="n.warna_kategori"
             :kategori_buku="n.nama_kategori"
+            :isCollected="true"
           />
         </v-col>
       </template>
