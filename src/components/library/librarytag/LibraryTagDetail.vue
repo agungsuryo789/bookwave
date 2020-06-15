@@ -28,7 +28,7 @@
             <v-btn icon @click="showEditTag = !showEditTag">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn icon @click="dispatchDelTag">
+            <v-btn icon @click="dispatchDelTag(tagName)">
               <v-icon>mdi-backspace-outline</v-icon>
             </v-btn>
           </div>
@@ -69,7 +69,10 @@ import { mapState } from "vuex";
 export default {
   name: "LibraryTagDetail",
   props: {
-    tagName: String
+    tagName: {
+      type: String,
+      required: true
+    }
   },
   components: {
     BookCardSmall
@@ -108,7 +111,8 @@ export default {
       this.editTagPayload.tag_baru = this.inputTag;
       this.$store.dispatch("editTagAll", this.editTagPayload);
     },
-    dispatchDelTag() {
+    dispatchDelTag(tagName) {
+      this.delTagPayload.tag = tagName;
       this.$store.dispatch("deleteTagFromAll", this.delTagPayload);
     }
   },

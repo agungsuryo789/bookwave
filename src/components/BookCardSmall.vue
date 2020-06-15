@@ -51,15 +51,29 @@
 import ButtonBookmark from "@/components/ButtonBookmark.vue";
 export default {
   name: "BookCardSmall",
-  props: [
-    "idBuku",
-    "title",
-    "deskripsi",
-    "foto_sampul",
-    "penulis",
-    "warna_kategori",
-    "kategori_buku"
-  ],
+  props: {
+    idBuku: {
+      type: Number
+    },
+    title: {
+      type: String
+    },
+    foto_sampul: {
+      type: String
+    },
+    deskripsi: {
+      type: String
+    },
+    penulis: {
+      type: String
+    },
+    warna_kategori: {
+      type: String
+    },
+    kategori_buku: {
+      type: String
+    }
+  },
   components: {
     ButtonBookmark
   },
@@ -83,13 +97,13 @@ export default {
           bookName: this.$props.title.toLowerCase()
         }
       });
-	},
-	addTag(idBuku) {
-		this.$router.push({
+    },
+    addTag(idBuku) {
+      this.$router.push({
         name: "LibraryTagAdd",
         params: { idBuku: idBuku }
       });
-	},
+    },
     setBookDone() {
       this.$store.dispatch("setBookDone", this.payloadDone);
     },
