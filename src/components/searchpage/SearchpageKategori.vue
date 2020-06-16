@@ -17,7 +17,7 @@
           class="my-5"
         >
           <BookCardSmall
-            :idBuku="n.id_buku"
+            :idBuku="parseInt(n.id_buku)"
             :title="n.judul"
             :penulis="n.penulis"
             :foto_sampul="n.foto_sampul"
@@ -44,7 +44,7 @@ export default {
     return {
       loadSkeleton: true,
       payload: {
-        pencarian: this.$route.params.searchParams,
+        pencarian: this.$route.params.searchParams.replace(/-/g, " "),
         type_filter: "3"
       }
     };

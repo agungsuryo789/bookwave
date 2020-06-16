@@ -44,8 +44,7 @@
         class="my-2"
       >
         <BookCard
-          :key="n.id_buku"
-          :idBuku="n.id_buku"
+          :idBuku="parseInt(n.id_buku)"
           :title="n.judul"
           :foto_sampul="n.foto_sampul"
           :deskripsi="n.deskripsi"

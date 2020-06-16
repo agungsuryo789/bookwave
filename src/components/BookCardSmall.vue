@@ -95,11 +95,12 @@ export default {
   },
   methods: {
     gotoBook() {
+      const urlName = this.$props.title.toLowerCase();
       this.$router.push({
         name: "BookPage",
         params: {
           bookId: this.$props.idBuku,
-          bookName: this.$props.title.toLowerCase()
+          bookName: urlName.replace(/ /g, "-")
         }
       });
     },

@@ -169,10 +169,10 @@ export default {
     }
   }
   .footer--screenshot {
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 900px) {
       display: none;
     }
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 600px) {
       display: none;
     }
   }

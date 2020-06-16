@@ -44,13 +44,15 @@ export default {
   },
   methods: {
     gotoBook() {
+      const urlName = this.$props.title.toLowerCase();
       this.$router.push({
         name: "BookPage",
         params: {
           bookId: this.$props.idBuku,
-          bookName: this.$props.title.toLowerCase()
+          bookName: urlName.replace(/ /g, "-")
         }
       });
+      // alert(urlName.replace(/ /g, "-"));
     }
   },
   computed: {
@@ -69,7 +71,6 @@ export default {
     height: 180px;
     position: relative;
     border-radius: 8px;
-    // background-color: var(--color);
     border: 5px solid var(--color);
     border-bottom: 10px solid var(--color);
     .book-bookmark-button {

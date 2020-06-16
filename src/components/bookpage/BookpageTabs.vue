@@ -28,7 +28,17 @@
 <script>
 export default {
   name: "BookpageTabs",
-  props: ["sinopsis", "tujuan", "author"],
+  props: {
+    sinopsis: {
+      type: String
+    },
+    tujuan: {
+      type: String
+    },
+    author: {
+      type: String
+    }
+  },
   data: () => ({
     tab: null
   })
