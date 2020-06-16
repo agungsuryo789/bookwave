@@ -241,9 +241,6 @@ export default new Vuex.Store({
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
             state.loaderStatus = true
-		},
-		notifMessage_mutation: (state, response) => {
-			state.notifMessage = response
 		}
     },
     actions: {
@@ -540,6 +537,7 @@ export default new Vuex.Store({
 				const token = response.data.token
 				localStorage.setItem('x-token', token)
 				commit('authSuccess_mutation', token)
+				alert(response.data.message)
 				router.push('/home');
 			})
 			.catch(err => {
