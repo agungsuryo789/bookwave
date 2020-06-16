@@ -153,9 +153,11 @@ export default new Vuex.Store({
         user_mutation: (state, response) => {
             state.user = response
         },
-        authSuccess_mutation: (state, token) => {
+        authSuccess_mutation: (state, response) => {
             state.status = 'success'
-            state.token = token
+			state.token = response.data.token
+			state.notifMessage = response.data.message
+			alert(response.data.message)
             router.push('/home')
         },
         authError_mutation: (state) => {
@@ -264,6 +266,9 @@ export default new Vuex.Store({
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
             state.loaderStatus = true
+		},
+		notifMessage_mutation: (state, response) => {
+			state.notifMessage = response.data.message
 		}
     },
     actions: {
@@ -539,7 +544,7 @@ export default new Vuex.Store({
 		resetPassword: ({ commit }, data) => {
 			axs.post('/ahaapi/lupa_password', data)
 			.then(response => {
-				commit('notifMessage_mutation', response.data.message)
+				commit('notifMessage_mutation', response)
 				console.log(response.data.message)
 			})
 		},
@@ -568,8 +573,7 @@ export default new Vuex.Store({
 			.then(response => {
 				const token = response.data.token
 				localStorage.setItem('x-token', token)
-				commit('authSuccess_mutation', token)
-				alert(response.data.message)
+				commit('authSuccess_mutation', response)
 				router.push('/home');
 			})
 			.catch(err => {
@@ -579,8 +583,9 @@ export default new Vuex.Store({
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
-                    const token = response.data.token
-                    commit('authSuccess_mutation', token)
+					const token = response.data.token
+					localStorage.setItem('x-token', token)
+                    commit('authSuccess_mutation', response)
                     router.push('/home');
                 })
                 .catch(err => {
@@ -601,7 +606,7 @@ export default new Vuex.Store({
 				console.log(response)
 				const token = response.data.token
 				localStorage.setItem('x-token', token)
-				commit('authSuccess_mutation', token)
+				commit('authSuccess_mutation', response)
 				router.push('/home');
 				})
 			})
@@ -629,7 +634,7 @@ export default new Vuex.Store({
 				.then(response => {
 					const token = response.data.token
 					localStorage.setItem('x-token', token)
-					commit('authSuccess_mutation', token)
+					commit('authSuccess_mutation', response)
 					router.push('/home');
 				})
 			})

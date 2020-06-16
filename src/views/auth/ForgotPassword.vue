@@ -26,8 +26,8 @@
 				</v-col>
             </v-row>
 			<v-snackbar v-model="snackbar">
-				{{ text }}
-				<v-btn color="pink"	text @click="snackbar = false">
+				{{ notifMessage }}
+				<v-btn color="blue"	text @click="snackbar = false">
 					Close
 				</v-btn>
 			</v-snackbar>
@@ -62,10 +62,11 @@ export default {
               email: this.email
 			}
 			this.$store.dispatch('forgotPassword', data)
+			this.snackbar = true
       }
 	},
 	computed: mapState({
-		message: state => state.emailSentStatus.message
+		notifMessage: state => state.notifMessage
 	})
 }
 </script>

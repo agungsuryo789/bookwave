@@ -44,6 +44,12 @@
 					<router-link to="/forgot">Lupa Kata Sandi</router-link>
 				</v-col>
 			</v-row>
+			<v-snackbar v-model="snackbar">
+				{{ notifMessage }}
+				<v-btn color="blue"	text @click="snackbar = false">
+					Close
+				</v-btn>
+			</v-snackbar>
         </v-container>
     </v-app>
 </div>
@@ -51,6 +57,7 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
+import { mapState } from "vuex";
 
 /* eslint-disable */
 export default {
@@ -82,8 +89,12 @@ export default {
 			}
 
 			this.$store.dispatch('userLogin', data)
+			this.snacbar = true
       }
-    }
+	},
+	computed: mapState({
+		notifMessage: state => state.notifMessage
+	})
 }
 </script>
 
