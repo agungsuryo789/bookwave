@@ -5,10 +5,8 @@
       <ButtonBookmark :idBuku="idBuku" />
     </div>
     <a @click="gotoBook" class="book-card-title">
-      <v-card-title class="text-right">{{ title }}</v-card-title>
-      <v-card-subtitle class="text--primary text-right">
-        <p>{{ penulis }}</p>
-      </v-card-subtitle>
+      <v-card-title>{{ title }}</v-card-title>
+      <v-card-subtitle>{{ penulis }}</v-card-subtitle>
     </a>
   </v-card>
 </template>
@@ -18,15 +16,29 @@
 import ButtonBookmark from "@/components/ButtonBookmark.vue";
 export default {
   name: "BookCard",
-  props: [
-    "idBuku",
-    "title",
-    "foto_sampul",
-    "deskripsi",
-    "penulis",
-    "warna_kategori",
-    "kategori_buku"
-  ],
+  props: {
+    idBuku: {
+      type: Number
+    },
+    title: {
+      type: String
+    },
+    foto_sampul: {
+      type: String
+    },
+    deskripsi: {
+      type: String
+    },
+    penulis: {
+      type: String
+    },
+    warna_kategori: {
+      type: String
+    },
+    kategori_buku: {
+      type: String
+    }
+  },
   components: {
     ButtonBookmark
   },

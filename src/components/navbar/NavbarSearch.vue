@@ -10,6 +10,7 @@
         @keyup="liveSearch"
         class="mt-4 mx-2"
         clearable
+		autofocus
         label="Temukan yang anda cari disini"
       ></v-text-field>
       <v-btn icon class="my-2" @click="onClose">

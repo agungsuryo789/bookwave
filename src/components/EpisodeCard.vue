@@ -9,12 +9,11 @@
     :to="{ name: 'BookChapter', params: {bookId: idBuku, chapterId: idChapter}}"
   >
     <div class="d-flex flex-row justify-space-between align-center div--episode-card">
-      <div class="mx-3">
-        <p>Baru</p>
-        <p>{{ episodeTitle }}</p>
-        <small>Tema Episode</small>
+      <div class="mx-1">
+		<p style="font-size:12px;">Baru</p>
+        <p class="my-4" style="font-size:15px;">{{ episodeTitle }}</p>
       </div>
-      <div class="mx-3 episode-card-img-color">
+      <div class="mx-1 episode-card-img-color">
         <div>
           <v-img class="book-card-img mx-auto" width="40" height="40" :src="foto_sampul"></v-img>
         </div>

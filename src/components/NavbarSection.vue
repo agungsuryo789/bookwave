@@ -10,14 +10,14 @@
                   alt="Vuetify Logo"
                   class="shrink ml-5 mr-2"
                   contain
-                  src="@/assets/image/aha-red-icon.svg"
+                  src="@/assets/image/aha-red.svg"
                   transition="scale-transition"
                   width="100"
                 />
               </router-link>
               <v-spacer></v-spacer>
               <template v-if="!showSearchBar">
-                <v-btn icon @click="showSearchBar = !showSearchBar">
+                <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
                 <v-btn
@@ -59,12 +59,6 @@
                       <v-list-item-title>Payment History</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="() => {}">
-                      <v-list-item-title>Wishlist</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="() => {}">
-                      <v-list-item-title>Setting</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="() => {}">
                       <v-list-item-title>Help & Support</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="userLogout">
@@ -100,7 +94,7 @@
                   alt="Vuetify Logo"
                   class="shrink ml-5 mr-2"
                   contain
-                  src="@/assets/image/aha-white-icon.svg"
+                  src="@/assets/image/aha-white.svg"
                   transition="scale-transition"
                   width="100"
                 />
@@ -182,6 +176,11 @@ export default {
   .category-chip--navbar {
     position: fixed;
     z-index: 999;
+	background-color: white;
+	border: 2px solid rgb(184, 184, 184);
+	border-bottom: 6px solid rgb(184, 184, 184);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
   }
 }
 .fade-enter-active,

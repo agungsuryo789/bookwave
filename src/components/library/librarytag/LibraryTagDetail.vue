@@ -3,19 +3,36 @@
     <v-col lg="12">
       <v-card flat>
         <div class="d-flex flex-row justify-space-between align-center">
-          <div>
-            <v-card-title>{{ tagName }}</v-card-title>
+          <div style="width:90%;">
+            <template v-if="!showEditTag">
+              <v-text-field
+                :value="tagName"
+                color="purple darken-2"
+                disabled
+                full-width
+                style="font-size:18px;"
+              ></v-text-field>
+            </template>
+            <template v-if="showEditTag">
+              <v-text-field
+                label="Edit Tag"
+                autofocus
+                clearable
+                full-width
+                v-model="inputTag"
+                @keyup.enter="dispatchEditTag"
+              ></v-text-field>
+            </template>
           </div>
           <div>
-            <v-btn icon>
+            <v-btn icon @click="showEditTag = !showEditTag">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn icon @click="dispatchDelTag">
               <v-icon>mdi-backspace-outline</v-icon>
             </v-btn>
           </div>
         </div>
-        <hr />
       </v-card>
       <v-row>
         <template v-if="loadSkeleton">
@@ -34,7 +51,7 @@
             class="my-5"
           >
             <BookCardSmall
-              :idBuku="n.id_buku"
+              :idBuku="parseInt(n.id_buku)"
               :title="n.judul"
               :penulis="n.penulis"
               :foto_sampul="n.foto_sampul"
@@ -51,13 +68,27 @@ import BookCardSmall from "@/components/BookCardSmall.vue";
 import { mapState } from "vuex";
 export default {
   name: "LibraryTagDetail",
-  props: ["tagName"],
+  props: {
+    tagName: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     BookCardSmall
   },
   data() {
     return {
-      loadSkeleton: true
+      loadSkeleton: true,
+      showEditTag: false,
+      inputTag: "",
+      editTagPayload: {
+        tag: this.tagName,
+        tag_baru: ""
+      },
+      delTagPayload: {
+        tag: this.tagName.toString()
+      }
     };
   },
   computed: mapState({
@@ -75,6 +106,15 @@ export default {
           v.loadSkeleton = true;
         }
       }, 800);
+    },
+    dispatchEditTag() {
+      this.editTagPayload.tag_baru = this.inputTag;
+      this.$store.dispatch("editTagAll", this.editTagPayload);
+    },
+    dispatchDelTag() {
+      this.$store.dispatch("deleteTagFromAll", this.delTagPayload);
+      alert("Berhasil hapus tag");
+      this.$router.push("/home");
     }
   },
   mounted() {

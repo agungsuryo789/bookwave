@@ -1,5 +1,5 @@
 <template>
-  <v-card class="py-2 px-4">
+  <v-card class="py-2 px-4" flat>
     <v-chip
       class="btn-chip-main mx-1 my-1"
       v-for="n in daftarKategori"
