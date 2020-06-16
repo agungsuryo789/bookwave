@@ -28,7 +28,7 @@
             </v-col>
             <v-col class="card--book-detail" lg="12" md="12" sm="12" cols="12">
               <div class="d-flex flex-column flex-lg-row justify-space-between my-10">
-                <template v-if="book.is_premium == 0">
+                <template v-if="book.is_premium == 0 && book.data_chapter.length > 1">
                   <div class="d-flex flex-row justify-space-between">
                     <v-btn
                       :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
@@ -39,7 +39,7 @@
                     >Mulai Baca atau Dengarkan Audio</v-btn>
                   </div>
                 </template>
-                <template v-else>
+                <template v-if="book.is_premium == 1 && book.data_chapter.length > 1">
                   <div class="d-flex flex-row justify-space-between">
                     <v-btn
                       rounded
@@ -48,6 +48,17 @@
                       :to="{ name: 'MembershipPage'}"
                       style="font-size:12px;text-transform:none;color:white;"
                     >Upgrade now to read.</v-btn>
+                  </div>
+                </template>
+                <template v-if="book.data_chapter.length < 1">
+                  <div class="d-flex flex-row justify-space-between">
+                    <v-btn
+                      rounded
+                      depressed
+                      color="#49E295"
+                      :to="{ name: 'MembershipPage'}"
+                      style="font-size:12px;text-transform:none;color:white;"
+                    >Data Chapter tidak ditemukan</v-btn>
                   </div>
                 </template>
                 <ul style="font-size:12px;">

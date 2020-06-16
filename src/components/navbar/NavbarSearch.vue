@@ -53,7 +53,7 @@ export default {
     },
     goSearch() {
       if (this.payload.pencarian !== "") {
-        this.$router.push({ name: "SearchPage", params: { searchParams: this.payload.pencarian } });
+        this.$router.push({ name: "SearchPage", params: { searchParams: this.payload.pencarian.replace(/ /g, "-") } });
       } else {
         this.isResult = false;
         return false;

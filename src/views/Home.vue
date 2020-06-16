@@ -2,14 +2,14 @@
   <div class="home">
     <NavbarSection />
     <header class="banner">
+      <HomepageBannerSection style="padding:0; margin:0;" />
       <img class="banner-bg-img-1" src="@/assets/image/banner-1.png" />
       <img class="banner-bg-img-2" src="@/assets/image/banner-2.png" />
-      <HomepageBannerSection />
     </header>
     <section class="hero-section">
       <v-container fluid>
         <v-row class="row-hero-1">
-          <v-col lg="6" md="12" sm="12" cols="12">
+          <v-col class="home-banner-hero" lg="6" md="12" sm="12" cols="12">
             <v-img
               class="hero-img-1"
               src="@/assets/image/aha-hero.svg"
@@ -72,6 +72,8 @@ export default {
 .banner {
   height: 700px;
   position: relative;
+  padding: 0;
+  margin: 0;
   .banner-bg-img-1,
   .banner-bg-img-2 {
     position: absolute;
@@ -81,12 +83,37 @@ export default {
     left: 0;
     width: 100%;
     height: 550px;
+    @media screen and (max-width: 900px) {
+      width: 120%;
+      height: 70%;
+    }
+    @media screen and (max-width: 720px) {
+      height: 60%;
+      width: 120%;
+    }
+    @media screen and (max-width: 650px) {
+      height: 50%;
+    }
+    @media screen and (max-width: 450px) {
+      height: 40%;
+    }
+    @media screen and (max-width: 360px) {
+      height: 60%;
+      width: 120%;
+    }
   }
   .banner-bg-img-2 {
     bottom: 10px;
     left: 0;
     width: 115%;
     transform: rotate(-2deg);
+    @media screen and (max-width: 900px) {
+      bottom: 110px;
+      width: 135%;
+    }
+    @media screen and (max-width: 650px) {
+      bottom: 350px;
+    }
   }
 }
 
@@ -101,6 +128,14 @@ export default {
   .row-hero-2 {
     margin-top: 150px;
     margin-bottom: 150px;
+  }
+  .home-banner-hero {
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
   }
   .hero-2 {
     height: 250px;
