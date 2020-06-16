@@ -223,7 +223,7 @@ const routes = [
         }
     },
     {
-        path: '/books/:bookId/:bookName',
+        path: '/books/:bookId/',
         name: 'BookPage',
         component: BookPage,
         meta: {

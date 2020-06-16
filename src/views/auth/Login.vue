@@ -31,11 +31,6 @@
 							<v-btn :elevation="1" block @click="loginfb"><v-icon dark left>mdi-facebook</v-icon>Sign in with Facebook</v-btn>
 						</v-col>
 					</v-row>
-					<v-row justify="center">
-						<v-col cols="12" md="4" align="center">
-							<v-btn :elevation="1" block><v-icon dark left>mdi-apple</v-icon>Sign in with Apple</v-btn>
-						</v-col>
-					</v-row>
 				</v-col>
             </v-row>
 			<v-spacer></v-spacer>
@@ -51,7 +46,7 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue';
-import Firebase from '@/firebase.js'
+
 /* eslint-disable */
 export default {
     name: 'Login',
@@ -60,8 +55,8 @@ export default {
 	},
 	methods: {
       login() {
-		Firebase.login()
-	  },
+     	 this.$store.dispatch("loginFirebase");
+    	},
 	  loginfb() {
 		Firebase.loginfb();
 	  },

@@ -11,23 +11,20 @@
                         </v-col>
                     </v-row>
 					<v-row justify="center">
-						<v-col cols="6" md="4" align="center">
-							<v-btn href="/register/email" :elevation="8" block><v-icon dark left>mdi-email-outline</v-icon> Sign up with Email</v-btn>
+						<v-col cols="12" md="4" align="center">
+							<router-link to="/register/email" tag="button" style="width:100%;">
+								<v-btn :elevation="1" block><v-icon dark left>mdi-email-outline</v-icon> Sign up with Email</v-btn>
+							</router-link>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
-						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block @click="register"><v-icon dark left>mdi-google</v-icon>Sign up with Google</v-btn>
+						<v-col cols="12" md="4" align="center">
+							<v-btn :elevation="1" block @click="register"><v-icon dark left>mdi-google</v-icon>Sign up with Google</v-btn>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
-						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block @click="loginfb"><v-icon dark left>mdi-facebook</v-icon>Sign up with Facebook</v-btn>
-						</v-col>
-					</v-row>
-					<v-row justify="center">
-						<v-col cols="6" md="4" align="center">
-							<v-btn :elevation="8" block><v-icon dark left>mdi-apple</v-icon>Sign up with Apple</v-btn>
+						<v-col cols="12" md="4" align="center">
+							<v-btn :elevation="1" block @click="loginfb"><v-icon dark left>mdi-facebook</v-icon>Sign up with Facebook</v-btn>
 						</v-col>
 					</v-row>
 					<v-spacer></v-spacer>
@@ -45,7 +42,7 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
-import Firebase from '@/firebase.js'
+
 /* eslint-disable */
 export default {
     name: 'Register',
@@ -54,7 +51,7 @@ export default {
 	},
 	methods: {
       register() {
-        Firebase.register();
+        this.$store.dispatch("registerFirebase");
 	  },
 	  loginfb() {
 		  Firebase.loginfb();
