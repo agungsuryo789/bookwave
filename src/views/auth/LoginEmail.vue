@@ -15,12 +15,12 @@
 					<v-row justify="center">
 						<v-col cols="10" md="4" align="center">
 							<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email</p>
-							<v-text-field v-model="email" class="centered-input" :rules="emailRules" solo background-color="grey lighten-2"></v-text-field>
+							<v-text-field v-model="email" class="centered-input" :error-messages="emailErrors" required @input="$v.email.$touch()" @blur="$v.email.$touch()" solo background-color="grey lighten-2"></v-text-field>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
 						<v-col cols="3" md="1" align="center">
-							<v-btn v-bind:disabled="email.length == 0" :elevation="8" color="red darken-1" block x-large class="white--text" v-on:click="isShow = !isShow">Lanjut</v-btn>
+							<v-btn :elevation="8" color="red darken-1" block x-large class="white--text" v-on:click="lanjut">Lanjut</v-btn>
 						</v-col>
 					</v-row>
 				</v-col>
@@ -28,7 +28,7 @@
 					<v-row justify="center">
 						<v-col cols="10" md="4" align="center">
 							<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-lock-outline</v-icon>Kata Sandi</p>
-							<v-text-field class="centered-input" v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"  :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="show1 = !show1" solo background-color="grey lighten-2"></v-text-field>
+							<v-text-field class="centered-input" v-model="password" :error-messages="passwordErrors" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"  :type="show1 ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="show1 = !show1" @input="$v.password.$touch()" @blur="$v.password.$touch()" solo background-color="grey lighten-2"></v-text-field>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
@@ -45,7 +45,7 @@
 				</v-col>
 			</v-row>
 			<v-snackbar v-model="snackbar">
-				{{ notifMessage }}
+				Email dan Password tidak sesuai
 				<v-btn color="blue"	text @click="snackbar = false">
 					Close
 				</v-btn>
@@ -57,11 +57,20 @@
 
 <script>
 import NavbarSection from '@/components/NavbarSection.vue'
-import { mapState } from "vuex";
+import { validationMixin } from 'vuelidate'
+import { required, email, minLength } from 'vuelidate/lib/validators'
 
 /* eslint-disable */
 export default {
-    name: 'LoginEmail',
+	name: 'LoginEmail',
+	mixins: [validationMixin],
+	validations: {
+		email: { required, email },
+		password: {
+			required,
+			minLength: minLength(8)
+		}
+    },
     components: {
 		NavbarSection
 	},
@@ -69,32 +78,50 @@ export default {
 		return {
 			isShow : true,
 			email: '',
-			emailRules: [
-				v => !!v || 'E-mail is required',
-				v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-			],
 			lazy: false,
 			show1: false,
-        	rules: {
-				required: value => !!value || 'Required.'
-			}
+			password: ''
+		}
+	},
+	computed: {
+		emailErrors () {
+			const errors = []
+			if (!this.$v.email.$dirty) return errors
+			!this.$v.email.email && errors.push('Must be valid e-mail')
+			!this.$v.email.required && errors.push('E-mail is required')
+			return errors
+		  },
+		passwordErrors () {
+			const errors = []
+			if (!this.$v.password.$dirty) return errors
+			!this.$v.password.minLength && errors.push('At least must be 8 character')
+			!this.$v.password.required && errors.push('Password is required')
+			return errors
 		}
 	},
 	methods: {
-      submit () {
-          var data = {
-              email: this.email,
-			  password: this.password,
-			  type: 1
+		lanjut () {
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.isShow = true
+			} else {
+				this.isShow = false
 			}
-
-			this.$store.dispatch('userLogin', data)
-			this.snacbar = true
-      }
-	},
-	computed: mapState({
-		notifMessage: state => state.notifMessage
-	})
+		},
+      	submit () {
+			this.$v.$touch()
+			if (this.$v.$invalid) {
+				this.snackbar = true
+			} else {
+				var data = {
+					email: this.email,
+					password: this.password,
+					type: 1
+				}
+				this.$store.dispatch('userLogin', data)
+			}
+      	}
+	}
 }
 </script>
 
