@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <NavbarSection />
+    <NavbarSection style="background-color:#D84B5B;" />
     <header class="banner">
-      <HomepageBannerSection style="padding:0; margin:0;" />
+      <HomepageBannerSection style="margin:0;" />
       <img class="banner-bg-img-1" src="@/assets/image/banner-1.png" />
       <img class="banner-bg-img-2" src="@/assets/image/banner-2.png" />
     </header>
     <section class="hero-section">
       <v-container fluid>
         <v-row class="row-hero-1">
-          <v-col class="home-banner-hero" lg="6" md="12" sm="12" cols="12">
+          <v-col class="home-banner-hero" lg="6" md="6" sm="12" cols="12">
             <v-img
               class="hero-img-1"
               src="@/assets/image/aha-hero.svg"
@@ -18,7 +18,7 @@
               contain
             ></v-img>
           </v-col>
-          <v-col class="col-hero-text" lg="6" md="12" sm="12" cols="12">
+          <v-col class="col-hero-text" lg="6" md="6" sm="12" cols="12">
             <h1 class="my-5">Apa yang AHA miliki ?</h1>
             <p class="pr-5" style="font-size:18px;">
               Lorem ipsum dolor sit amet, consectetur adipisicing

@@ -11,5 +11,7 @@
 
 #app {
   font-family: "Nunito Sans", sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 </style>
