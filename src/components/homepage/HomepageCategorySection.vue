@@ -29,7 +29,7 @@
       </v-col>
     </v-row>
     <v-row v-if="loadSkeleton">
-      <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
+      <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" cols="12" class="my-2">
         <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
       </v-col>
     </v-row>
@@ -40,7 +40,7 @@
         lg="3"
         md="12"
         sm="12"
-        xs="12"
+        cols="12"
         class="my-2"
       >
         <BookCard
@@ -72,7 +72,7 @@
           elevation="2"
           depressed
           v-else
-          @click="booksToShow -= 3"
+          @click="booksToShow = 4"
         >Lihat lebih sedikit</v-btn>
       </v-col>
     </v-row>
