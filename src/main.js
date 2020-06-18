@@ -13,7 +13,6 @@ Vue.config.productionTip = false;
 Vue.config.performance = false;
 Vue.use(Vuelidate)
 
-
 new Vue({
     router,
     store,
