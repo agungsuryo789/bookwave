@@ -55,7 +55,7 @@
                   <td>Magazine</td>
                 </tr>
                 <tr>
-                  <td>Contact & Help</td>
+                  <td><router-link to="/contact">Contact & Help </router-link></td>
                 </tr>
               </table>
             </v-col>
