@@ -295,20 +295,26 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (store.getters.isLoggedIn) {
             next()
+            window.scrollTo(0, 0)
             return
         }
         next('/login')
+        window.scrollTo(0, 0)
     } else {
         next()
+        window.scrollTo(0, 0)
     }
     if (to.matched.some(record => record.meta.ifLoggedIn)) {
         if (store.getters.isLoggedIn) {
             next('/home')
+            window.scrollTo(0, 0)
             return
         }
         next()
+        window.scrollTo(0, 0)
     } else {
         next()
+        window.scrollTo(0, 0)
     }
 })
 

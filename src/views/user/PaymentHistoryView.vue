@@ -7,10 +7,17 @@
           <h1>Payment History</h1>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row v-if="paymentHistoryList.data.length > 0">
         <v-col lg="7" md="12" sm="12" xs="12">
           <v-row>
-            <v-col lg="12" md="12" sm="12" xs="12" v-for="item in paymentHistoryList.data" :key="item.id_transaksi">
+            <v-col
+              lg="12"
+              md="12"
+              sm="12"
+              xs="12"
+              v-for="item in paymentHistoryList.data"
+              :key="item.id_transaksi"
+            >
               <v-card>
                 <v-row style="margin:0 auto;">
                   <v-col lg="3">
@@ -46,6 +53,12 @@
           ></v-img>
         </v-col>
       </v-row>
+      <v-row v-else>
+        <v-col>
+          <p>Anda belum mempunyai riwayat pembayaran</p>
+          <v-btn rounded dark color="#49E295" to="/plans">Explore more</v-btn>
+        </v-col>
+      </v-row>
     </v-container>
     <FooterSection />
   </div>
@@ -68,8 +81,8 @@ export default {
     paymentHistoryList: state => state.paymentHistoryList
   }),
   mounted() {
-	this.$store.dispatch("getPaymentHistory");
-	console.log(this.paymentHistoryList);
+    this.$store.dispatch("getPaymentHistory");
+    console.log(this.paymentHistoryList);
   }
 };
 </script>

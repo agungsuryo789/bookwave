@@ -6,7 +6,7 @@
           <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
         </v-btn>
       </div>
-      <p id="chapterText">{{chapterText}}</p>
+      <p id="chapterText" class="text-center text-lg-left">{{chapterText}}</p>
     </div>
   </div>
 </template>
@@ -98,63 +98,76 @@ export default {
     },
     setHighlight() {
       this.setHighlight = function() {};
-      const userSelection = this.getSelected();
+      // const chapterText = document.getElementById("chapterText");
+      const userSelection = window.getSelection();
       const selectionText = userSelection.toString();
-      const chapterText = document.getElementById("chapterText");
-      const range = userSelection.getRangeAt(0).cloneRange();
-      const rect = range.getBoundingClientRect();
+      const range = userSelection.getRangeAt(0);
+      // const rect = range.getBoundingClientRect();
 
       // Create Highlight Color Span
       const span = document.createElement("span");
       const tooltipSpan = document.getElementById("tooltip");
       span.textContent = selectionText;
       span.style.backgroundColor = "#E76464";
-      span.style.position = "absolute";
-      span.style.top = rect.top - this.varTop + "px";
-      span.style.left = rect.left + "px";
+      //   span.style.position = "absolute";
+      //   span.style.top = rect.top - this.varTop + "px";
+      //   span.style.left = rect.left + "px";
       span.style.zIndex = "2";
-      chapterText.appendChild(span);
+      //   chapterText.appendChild(span);
+      range.deleteContents();
+      range.insertNode(span);
       tooltipSpan.style.display = "none";
+      console.log(range);
+      console.log(selectionText);
 
       // Set & Save Highlight Node Data
       this.highlightPayload.kalimat = selectionText;
-      this.highlightPayload.x_web = rect.top;
-      this.highlightPayload.y_web = rect.left;
+      //   this.highlightPayload.x_web = rect.top;
+      //   this.highlightPayload.y_web = rect.left;
       // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
     },
     getHighlight() {
       const chapterText = document.getElementById("chapterText");
-      var deletePayload = this.delHighlightPayload;
-      const store = this.$store;
+      //   var deletePayload = this.delHighlightPayload;
+      //   const store = this.$store;
+      // const textNode = chapterText.innerHTML;
       const x = this.dataHighlight.data[0].data_highlight;
       for (let i = 0; i < x.length; i++) {
         // Create Highlight text Span
         const span = document.createElement("span");
-        span.textContent = x[i].kalimat;
+        // span.textContent = x[i].kalimat;
         span.style.backgroundColor = x[i].warna;
-        span.style.position = "absolute";
-        span.style.top = x[i].x_web - this.varTop + "px";
-        span.style.left = x[i].y_web - this.varLeft + "px";
+        // span.style.position = "absolute";
+        // span.style.top = x[i].start_char + "px";
+        // span.style.left = x[i].end_char + "px";
         span.style.zIndex = "2";
-        chapterText.appendChild(span);
+        // chapterText.appendChild(span);
+        var range = new Range();
+        range.setStart(chapterText.childNodes[0], x[i].start_char);
+        range.setEnd(chapterText.childNodes[0], x[i].end_char);
+        range.surroundContents(span);
+        if (chapterText.hasChildNodes()) {
+          console.log(chapterText.textContent);
+        }
+
         // Create Tooltip Delete Highlight
-        const tooltip2 = document.createElement("button");
-        tooltip2.textContent = "Hapus Highlight";
-        tooltip2.setAttribute("style", this.styleTooltipDelete);
-        tooltip2.onclick = function() {
-          deletePayload.kalimat = x[i].kalimat;
-          console.log(deletePayload.kalimat);
-          store.dispatch("setDelChapterHighlight", deletePayload);
-        };
-        span.appendChild(tooltip2);
-        span.onmouseover = function() {
-          tooltip2.style.display = "block";
-        };
-        span.onmouseout = function() {
-          setTimeout(() => {
-            tooltip2.style.display = "none";
-          }, 3000);
-        };
+        // const tooltip2 = document.createElement("button");
+        // tooltip2.textContent = "Hapus Highlight";
+        // tooltip2.setAttribute("style", this.styleTooltipDelete);
+        // tooltip2.onclick = function() {
+        //   deletePayload.kalimat = x[i].kalimat;
+        //   console.log(deletePayload.kalimat);
+        //   store.dispatch("setDelChapterHighlight", deletePayload);
+        // };
+        // span.appendChild(tooltip2);
+        // span.onmouseover = function() {
+        //   tooltip2.style.display = "block";
+        // };
+        // span.onmouseout = function() {
+        //   setTimeout(() => {
+        //     tooltip2.style.display = "none";
+        //   }, 3000);
+        // };
       }
     }
   },
