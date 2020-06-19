@@ -3,6 +3,7 @@
     <v-app>
         <NavbarSection />
         <v-container fluid>
+			<v-form>
             <v-row>
                 <v-col cols="12" class="mt-12">
 					<v-row justify="center" class="mt-12">
@@ -15,7 +16,7 @@
 					<v-row justify="center">
 						<v-col cols="10" md="4" align="center">
 							<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email</p>
-							<v-text-field v-model="email" class="centered-input" :error-messages="emailErrors" required @input="$v.email.$touch()" @blur="$v.email.$touch()" solo background-color="grey lighten-2"></v-text-field>
+							<v-text-field class="centered-input" solo background-color="grey lighten-2" v-model="email" :error-messages="emailErrors" required @input="$v.email.$touch()" @blur="$v.email.$touch()"></v-text-field>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
@@ -44,12 +45,7 @@
 					<router-link to="/forgot">Lupa Kata Sandi</router-link>
 				</v-col>
 			</v-row>
-			<v-snackbar v-model="snackbar">
-				Email dan Password tidak sesuai
-				<v-btn color="blue"	text @click="snackbar = false">
-					Close
-				</v-btn>
-			</v-snackbar>
+			</v-form>
         </v-container>
     </v-app>
 </div>
@@ -90,6 +86,7 @@ export default {
 			!this.$v.email.email && errors.push('Must be valid e-mail')
 			!this.$v.email.required && errors.push('E-mail is required')
 			return errors
+			console.log(errors)
 		  },
 		passwordErrors () {
 			const errors = []
@@ -101,17 +98,17 @@ export default {
 	},
 	methods: {
 		lanjut () {
-			this.$v.$touch()
-			if (this.$v.$invalid) {
+			this.$v.email.$touch()
+			if (this.$v.email.$invalid) {
 				this.isShow = true
 			} else {
 				this.isShow = false
 			}
 		},
       	submit () {
-			this.$v.$touch()
-			if (this.$v.$invalid) {
-				this.snackbar = true
+			this.$v.password.$touch()
+			if (this.$v.password.$invalid) {
+				alert('kesalahan!')
 			} else {
 				var data = {
 					email: this.email,

@@ -2,8 +2,9 @@
 <div class="Login">
     <v-app>
         <NavbarSection />
+		<v-form>
         <v-container fluid>
-            <v-row class="submit-form">
+            <v-row>
                 <v-col cols="12" class="mt-12">
 					<v-row justify="center" class="mt-12">
                         <v-col cols="6" md="4" align="center">
@@ -28,7 +29,7 @@
 					<v-row justify="center">
 						<v-col cols="6" md="4" align="center">
 							<p class="red--text text--lighten-1"><v-icon class="red--text text--lighten-1 mr-3">mdi-lock-outline</v-icon>Kata Sandi</p>
-							<v-text-field class="centered-input" v-model="password" :error-messages="passwordErrors" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"  :type="show1 ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="show1 = !show1" @input="$v.password.$touch()" @blur="$v.password.$touch()" solo background-color="grey lighten-2"></v-text-field>
+							<v-text-field class="centered-input" v-model="password" :error-messages="passwordErrors" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"  :type="show1 ? 'text' :'password'" counter @click:append="show1 = !show1" @input="$v.password.$touch()" @blur="$v.password.$touch()" solo background-color="grey lighten-2"></v-text-field>
 						</v-col>
 					</v-row>
 					<v-row justify="center">
@@ -45,6 +46,7 @@
 				</v-col>
 			</v-row>
         </v-container>
+		</v-form>
     </v-app>
 </div>
 </template>
@@ -95,16 +97,16 @@ export default {
 	},
 	methods: {
 		lanjut () {
-			this.$v.$touch()
-			if (this.$v.$invalid) {
+			this.$v.email.$touch()
+			if (this.$v.email.$invalid) {
 				this.isShow = true
 			} else {
 				this.isShow = false
 			}
 		},
       	submit () {
-			this.$v.$touch()
-			if (this.$v.$invalid) {
+			this.$v.password.$touch()
+			if (this.$v.password.$invalid) {
 				this.snackbar = true
 			} else {
 				var data = {

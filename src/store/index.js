@@ -589,7 +589,8 @@ export default new Vuex.Store({
                     router.push('/home');
                 })
                 .catch(err => {
-                    alert(err.message);
+					alert(err.message);
+					console.log(err.message);
                 })
 		},
 		loginFirebase: ({ commit }) => {
