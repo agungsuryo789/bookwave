@@ -1,10 +1,9 @@
 module.exports = {
+	publicPath: process.env.NODE_ENV === 'production' ?
+	'/': '/',
     pwa: {
         name: 'AHA',
         themeColor: '#BA4D4F'
-    },
-    devServer: {
-        proxy: 'https://app.sandbox.midtrans.com/snap/'
     },
     transpileDependencies: [
         'vuetify'

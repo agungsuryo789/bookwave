@@ -36,7 +36,11 @@ const LoginEmail = () =>
 const Register = () =>
     import ('../views/auth/Register.vue')
 const RegisterEmail = () =>
-    import ('../views/auth/RegisterEmail.vue')
+	import ('../views/auth/RegisterEmail.vue')
+const ForgotPassword = () =>
+	import ('../views/auth/ForgotPassword.vue')
+const ResetPassword = () =>
+    import ('../views/auth/ResetPassword.vue')
 
 // User Component
 const LandingUser = () =>
@@ -105,6 +109,19 @@ const routes = [
         meta: {
             ifLoggedIn: true
         }
+	},
+	{
+        path: '/forgot',
+        name: 'ForgotPassword',
+        component: ForgotPassword
+	},
+	{
+        path: '/reset',
+        name: 'ResetPassword',
+		component: ResetPassword,
+		meta: {
+			requiresAuth: true
+		}
     },
     {
         path: '/login/email',

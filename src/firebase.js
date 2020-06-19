@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import Vuex from "vuex";
 import axios from "axios";
+import router from "./router"
 
 Vue.use(Vuex, axios);
 
@@ -57,75 +58,75 @@ export default {
     /* eslint-disable */
     auth: firebase.auth(),
     login() {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-            .then(function(result) {
-                const email = result.user.email
-                const pass = result.user.uid
-                axs.post('ahaapi/login_member', {
-                        email: email,
-                        password: '',
-                        type: '2'
-                    })
-                    .then(response => {
-                        console.log(response)
-                        const token = response.data.token
-                        localStorage.setItem('x-token', token)
-                        location.reload()
-                    })
-            })
-            .catch(function(error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                const credential = error.credential;
-                console.log(errorCode, errorMessage, email, credential);
-            })
-    },
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+      .then(function(result) {
+		const email = result.user.email
+		const pass = result.user.uid
+		axs.post('ahaapi/login_member', {
+			email: email,
+			password: '',
+			type: '2'
+		})
+		.then(response => {
+			console.log(response)
+			const token = response.data.token
+			localStorage.setItem('x-token', token)
+			router.push('/home');
+		})
+	  })
+      .catch(function(error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = error.credential;
+        console.log(errorCode, errorMessage, email, credential);
+        })
+	},
 
-    register() {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-            .then(function(result) {
-                // const email = result.user.email
-                const email = result.user.email
-                const pass = result.user.uid
-                console.log(result)
-                axs.post('ahaapi/register_member', {
-                        email: email,
-                        password: pass,
-                        type: '2'
-                    })
-                    .then(response => {
-                        console.log(error.response.data)
-                        const token = response.data.token
-                        localStorage.setItem('x-token', token)
-                        location.reload()
-                    })
-            })
-            .catch(function(error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                const credential = error.credential;
-                const dataer = error.response.data;
-                console.log(errorCode, errorMessage, email, credential, dataer);
-            })
-    },
-    loginfb() {
-        const provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-            .then(function(result) {
-                console.log(result);
-            })
-            .catch(function(error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                const credential = error.credential;
-                console.log(errorCode, errorMessage, email, credential);
-            })
-    },
+	register() {
+		const provider = new firebase.auth.GoogleAuthProvider();
+		firebase.auth().signInWithPopup(provider)
+		.then(function(result) {
+		  // const email = result.user.email
+		  const email = result.user.email
+		  const pass = result.user.uid
+		  console.log(result)
+		  axs.post('ahaapi/register_member', {
+			  email: email,
+			  password: pass,
+			  type: '2'
+		  })
+		  .then(response => {
+			  console.log(error.response.data)
+			  const token = response.data.token
+			  localStorage.setItem('x-token', token)
+			  router.push('/home');
+		  })
+		})
+		.catch(function(error) {
+		  const errorCode = error.code;
+		  const errorMessage = error.message;
+		  const email = error.email;
+		  const credential = error.credential;
+		  const dataer = error.response.data;
+		  console.log(errorCode, errorMessage, email, credential, dataer);
+		  })
+	  },
+	loginfb() {
+		const provider = new firebase.auth.FacebookAuthProvider();
+		firebase.auth().signInWithPopup(provider)
+		.then(function(result) {
+		  console.log(result);
+		})
+		.catch(function(error) {
+		  const errorCode = error.code;
+		  const errorMessage = error.message;
+		  const email = error.email;
+		  const credential = error.credential;
+		  console.log(errorCode, errorMessage, email, credential);
+		  })
+	  },
     logout() {
         firebase.auth().signOut()
             .then(function() {})

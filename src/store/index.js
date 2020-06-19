@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import axios from "axios";
 import router from "../router";
 import VuexPersist from 'vuex-persistedstate';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 Vue.use(Vuex, axios);
 
@@ -39,6 +41,19 @@ axs.interceptors.response.use(
         return Promise.reject(error);
     }
 )
+
+// Firebase Config
+const firebaseConfig = {
+	apiKey: "AIzaSyCZKqh1-bs_9iS2HHx6YDZ159MAw0CxRJ4",
+	authDomain: "aha-project-d39ef.firebaseapp.com",
+	databaseURL: "https://aha-project-d39ef.firebaseio.com",
+	projectId: "aha-project-d39ef",
+	storageBucket: "aha-project-d39ef.appspot.com",
+	messagingSenderId: "412849291381",
+	appId: "1:412849291381:web:a4a0098111c9c01c16783c",
+	measurementId: "G-HVT7P9KW8P"
+};
+firebase.initializeApp(firebaseConfig);
 
 // Vuex Persistedstated for caching data
 const vuexSession = new VuexPersist({
@@ -91,8 +106,8 @@ export default new Vuex.Store({
         addTagRes: {},
         editTagRes: {},
         invoiceDetails: {},
-        paymentHistoryList: {},
-        midtransToken: ''
+		midtransToken: '',
+		notifMessage: ''
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -138,9 +153,11 @@ export default new Vuex.Store({
         user_mutation: (state, response) => {
             state.user = response
         },
-        authSuccess_mutation: (state, token) => {
+        authSuccess_mutation: (state, response) => {
             state.status = 'success'
-            state.token = token
+			state.token = response.data.token
+			state.notifMessage = response.data.message
+			alert(response.data.message)
             router.push('/home')
         },
         authError_mutation: (state) => {
@@ -249,7 +266,10 @@ export default new Vuex.Store({
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
             state.loaderStatus = true
-        }
+		},
+		notifMessage_mutation: (state, response) => {
+			state.notifMessage = response.data.message
+		}
     },
     actions: {
         getSearchByDefault: ({ commit }, payload) => {
@@ -513,7 +533,21 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message);
                 })
-        },
+		},
+		forgotPassword: ({ commit }, data) => {
+			axs.post('/ahaapi/lupa_password', data)
+			.then(response => {
+				commit('notifMessage_mutation', response.data.message)
+				console.log(response.data.message)
+			})
+		},
+		resetPassword: ({ commit }, data) => {
+			axs.post('/ahaapi/lupa_password', data)
+			.then(response => {
+				commit('notifMessage_mutation', response)
+				console.log(response.data.message)
+			})
+		},
         // Payment Action
         invoiceDetails: ({ commit }, data) => {
             axs.post('/ahaapi/invoices', data)
@@ -535,28 +569,85 @@ export default new Vuex.Store({
         },
         // auth action
         userLogin: ({ commit }, user) => {
-            axs.post('ahaapi/login_member', user)
-                .then(response => {
-                    const token = response.data.token
-                    localStorage.setItem('x-token', token)
-                    commit('authSuccess_mutation', token)
-                    this.$router.push('/home');
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
+			axs.post('ahaapi/login_member', user)
+			.then(response => {
+				const token = response.data.token
+				localStorage.setItem('x-token', token)
+				commit('authSuccess_mutation', response)
+				router.push('/home');
+			})
+			.catch(err => {
+				console.log(err.message);
+			})
         },
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
-                    const token = response.data.token
-                    commit('authSuccess_mutation', token)
-                    this.$router.push('/home');
+					const token = response.data.token
+					localStorage.setItem('x-token', token)
+                    commit('authSuccess_mutation', response)
+                    router.push('/home');
                 })
                 .catch(err => {
-                    alert(err.message);
+					alert(err.message);
+					console.log(err.message);
                 })
-        },
+		},
+		loginFirebase: ({ commit }) => {
+			const provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithPopup(provider)
+			.then(function(result) {
+				const email = result.user.email
+				axs.post('ahaapi/login_member', {
+					email: email,
+					password: '',
+					type: '2'
+				})
+			.then(response => {
+				console.log(response)
+				const token = response.data.token
+				localStorage.setItem('x-token', token)
+				commit('authSuccess_mutation', response)
+				router.push('/home');
+				})
+			})
+			.catch(function(error) {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				const email = error.email;
+				const credential = error.credential;
+				console.log(errorCode, errorMessage, email, credential);
+			})
+		},
+		registerFirebase: ({ commit }) => {
+			const provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithPopup(provider)
+			.then(function(result) {
+				// const email = result.user.email
+				const email = result.user.email
+				const pass = result.user.uid
+				console.log(result)
+				axs.post('ahaapi/register_member', {
+					email: email,
+					password: pass,
+					type: '2'
+				})
+				.then(response => {
+					const token = response.data.token
+					localStorage.setItem('x-token', token)
+					commit('authSuccess_mutation', response)
+					router.push('/home');
+				})
+			})
+			.catch(function(error) {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				const email = error.email;
+				const credential = error.credential;
+				const dataer = error.response.data;
+				console.log(errorCode, errorMessage, email, credential, dataer);
+				})
+		},
         userLogout: ({ commit }, user) => {
                 return new Promise((resolve, reject) => {
                     commit('authDown_mutation')
