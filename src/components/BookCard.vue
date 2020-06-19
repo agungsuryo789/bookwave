@@ -5,7 +5,7 @@
       <ButtonBookmark :idBuku="idBuku" />
     </div>
     <a @click="gotoBook" class="book-card-title">
-      <v-card-title>{{ title }}</v-card-title>
+      <v-card-title class="book-title">{{ title }}</v-card-title>
       <v-card-subtitle>{{ penulis }}</v-card-subtitle>
     </a>
   </v-card>
@@ -82,9 +82,10 @@ export default {
   .book-card-title {
     text-decoration: none;
     color: black;
-    p {
+    .book-title {
+      font-size: 15px;
+	  font-weight: bold;
       width: 250px;
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }

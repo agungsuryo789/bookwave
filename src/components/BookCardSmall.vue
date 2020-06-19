@@ -7,7 +7,7 @@
         </div>
         <div class>
           <a @click="gotoBook" class="book-card-link">
-            <h2>{{title}}</h2>
+            <h2 class="book-card--title">{{title}}</h2>
             <small>{{penulis}}</small>
             <p>{{deskripsi}}</p>
           </a>
@@ -138,7 +138,10 @@ export default {
 <style scoped lang="scss">
 .book-card--small {
   h2 {
-    font-size: 16px;
+    font-size: 14px;
+	width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   small {
     font-size: 12px;

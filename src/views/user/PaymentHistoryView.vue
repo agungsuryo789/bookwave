@@ -68,7 +68,8 @@ export default {
     paymentHistoryList: state => state.paymentHistoryList
   }),
   mounted() {
-    this.$store.dispatch("getPaymentHistory");
+	this.$store.dispatch("getPaymentHistory");
+	console.log(this.paymentHistoryList);
   }
 };
 </script>

@@ -26,11 +26,8 @@
                     />
                   </router-link>
                 </v-toolbar-title>
-                <v-toolbar-items
-                  v-if="!showSearchBar"
-                  class="d-flex flex-row justify-center px-3 hide-on--sm"
-                  style="width:90%;"
-                >
+                <v-spacer></v-spacer>
+                <v-toolbar-items class="hide-on--md" v-if="!showSearchBar">
                   <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
                     <v-icon>mdi-magnify</v-icon>
                   </v-btn>
@@ -52,7 +49,9 @@
                     depressed
                     style="text-transform:none;font-size:18px;font-weight:600;"
                   >Promo</v-btn>
-                  <v-spacer></v-spacer>
+                </v-toolbar-items>
+                <v-spacer></v-spacer>
+                <v-toolbar-items v-if="!showSearchBar" class="hide-on--md">
                   <v-btn
                     class="button-subscribe mx-5"
                     rounded
@@ -71,6 +70,65 @@
                       </v-list-item>
                       <v-list-item @click="() => {}">
                         <v-list-item-title><router-link to="/contact">Help & Support</router-link></v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="userLogout">
+                        <v-list-item-title>Log Out</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </v-toolbar-items>
+                <v-toolbar-items v-if="!showSearchBar" class="hide-on--lg">
+                  <v-menu left bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        class="button-dropdown-nav"
+                        v-on="on"
+                        @click="showCategory = false"
+                        color="transparent"
+                        depressed
+                      >
+                        <v-icon>mdi-menu</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list style="z-index:3;width:200px;">
+                      <v-list-item @click="showSearchBar = !showSearchBar, showCategory = false">
+                        <v-list-item-title>
+                          <v-icon>mdi-magnify</v-icon>
+                        </v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="showCategory = !showCategory">
+                        <v-list-item-title>Temukan</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item to="/library/book">
+                        <v-list-item-title>Library</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item to="/promo">
+                        <v-list-item-title>Promo</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                  <v-menu left bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item to="/plans">
+                        <v-list-item-title>
+                          <v-btn
+                            class="button-subscribe mx-5"
+                            rounded
+                            depressed
+                            color="#39DF8C"
+                            elevation="2"
+							style="text-transform:none;color:white;"
+                          >Upgrade Premium</v-btn>
+                        </v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="toPaymentHistory">
+                        <v-list-item-title>Payment History</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="() => {}">
+                        <v-list-item-title>Help & Support</v-list-item-title>
                       </v-list-item>
                       <v-list-item @click="userLogout">
                         <v-list-item-title>Log Out</v-list-item-title>
@@ -202,9 +260,14 @@ export default {
     border-bottom-right-radius: 10px;
   }
 }
-.hide-on--sm {
-  @media screen and (max-width: 600px) {
-    display: none !important;
+.hide-on--md {
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+}
+.hide-on--lg {
+  @media screen and (min-width: 800px) {
+    display: none;
   }
 }
 .fade-enter-active,
