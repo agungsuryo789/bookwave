@@ -128,27 +128,46 @@ export default {
     },
     getHighlight() {
       const chapterText = document.getElementById("chapterText");
+      const chapterBody = document.getElementById("chapterBody");
       //   var deletePayload = this.delHighlightPayload;
       //   const store = this.$store;
-      // const textNode = chapterText.innerHTML;
       const x = this.dataHighlight.data[0].data_highlight;
+
+      // Every iteration will create the text body and it's highlighted span
       for (let i = 0; i < x.length; i++) {
         // Create Highlight text Span
+        const hgText = document.createElement("p");
         const span = document.createElement("span");
-        // span.textContent = x[i].kalimat;
+
+        hgText.textContent = this.chapterText;
+        hgText.style.color = "transparent";
+        hgText.style.position = "absolute";
+        hgText.style.top = 0;
+        hgText.style.left = 0;
+        hgText.style.zIndex = 2 + i;
+        hgText.id = "highlight-" + i;
+        hgText.classList.add("text-center", "text-lg-left", "mx-3", "my-3");
+        hgText.onmouseover = function() {
+          hgText.style.display = "none";
+        };
+        chapterText.onmouseout = function() {
+          hgText.style.display = "block";
+        };
+        chapterBody.appendChild(hgText);
+
         span.style.backgroundColor = x[i].warna;
-        // span.style.position = "absolute";
-        // span.style.top = x[i].start_char + "px";
-        // span.style.left = x[i].end_char + "px";
-        span.style.zIndex = "2";
-        // chapterText.appendChild(span);
+        span.style.color = "black";
+        span.style.zIndex = 2 + i;
         var range = new Range();
-        range.setStart(chapterText.childNodes[0], x[i].start_char);
-        range.setEnd(chapterText.childNodes[0], x[i].end_char);
+        range.setStart(
+          document.getElementById("highlight-" + i).childNodes[0],
+          x[i].start_char
+        );
+        range.setEnd(
+          document.getElementById("highlight-" + i).childNodes[0],
+          x[i].end_char
+        );
         range.surroundContents(span);
-        if (chapterText.hasChildNodes()) {
-          console.log(chapterText.textContent);
-        }
 
         // Create Tooltip Delete Highlight
         // const tooltip2 = document.createElement("button");

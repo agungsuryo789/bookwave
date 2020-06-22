@@ -14,7 +14,7 @@
           <div class="d-flex flex-row justify-space-between mt-1">
             <v-btn disabled class="book-card-category" outlined :style="cssVars">{{kategori_buku}}</v-btn>
             <div class="d-flex flex-row justify-space-between">
-              <ButtonBookmark class="book-bookmark-button" :idBuku="idBuku" />
+              <ButtonBookmark class="book-bookmark-button" :idBuku="parseInt(idBuku)" />
               <v-menu left bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on" icon depressed>
