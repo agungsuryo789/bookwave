@@ -105,6 +105,7 @@ export default new Vuex.Store({
         delTagRes: {},
         addTagRes: {},
         editTagRes: {},
+        paymentHistoryList: [],
         invoiceDetails: {},
         midtransToken: '',
         notifMessage: ''
@@ -561,7 +562,7 @@ export default new Vuex.Store({
         getPaymentHistory: ({ commit }) => {
             axs.get('/ahaapi/riwayat_pembayaran')
                 .then(response => {
-                    commit('getPaymentHistory_mutation', response.data);
+                    commit('getPaymentHistory_mutation', response.data.data);
                 })
                 .catch(err => {
                     console.log(err.message);

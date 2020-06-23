@@ -102,29 +102,28 @@ export default {
       const userSelection = window.getSelection();
       const selectionText = userSelection.toString();
       const range = userSelection.getRangeAt(0);
-      // const rect = range.getBoundingClientRect();
 
       // Create Highlight Color Span
       const span = document.createElement("span");
       const tooltipSpan = document.getElementById("tooltip");
       span.textContent = selectionText;
       span.style.backgroundColor = "#E76464";
-      //   span.style.position = "absolute";
-      //   span.style.top = rect.top - this.varTop + "px";
-      //   span.style.left = rect.left + "px";
       span.style.zIndex = "2";
-      //   chapterText.appendChild(span);
-      range.deleteContents();
-      range.insertNode(span);
-      tooltipSpan.style.display = "none";
-      console.log(range);
-      console.log(selectionText);
+      const charLength = selectionText.length;
+      console.log(charLength);
+      console.log(range.startOffset);
+      console.log(range.startOffset + charLength);
 
       // Set & Save Highlight Node Data
-      this.highlightPayload.kalimat = selectionText;
-      //   this.highlightPayload.x_web = rect.top;
-      //   this.highlightPayload.y_web = rect.left;
-      // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+      if (charLength > 1) {
+        range.deleteContents();
+        range.insertNode(span);
+        this.highlightPayload.kalimat = selectionText;
+        // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+        tooltipSpan.style.display = "none";
+      } else {
+        tooltipSpan.style.display = "none";
+      }
     },
     getHighlight() {
       const chapterText = document.getElementById("chapterText");
