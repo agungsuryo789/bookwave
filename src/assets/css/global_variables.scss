@@ -28,3 +28,15 @@ $mainColor: #E76464;
     background-color: rgb(53, 49, 49) !important;
     color: white !important;
 }
+
+.hide-on--md {
+    @media screen and (max-width: 800px) {
+        display: none;
+    }
+}
+
+.hide-on--lg {
+    @media screen and (min-width: 800px) {
+        display: none;
+    }
+}

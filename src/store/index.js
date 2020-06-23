@@ -210,6 +210,7 @@ export default new Vuex.Store({
         setChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
+            location.reload()
         },
         addTag_mutation: (state, response) => {
             state.addTagRes = response
@@ -437,7 +438,7 @@ export default new Vuex.Store({
                 })
         },
         setChapterHighlight: ({ commit }, highlightPayload) => {
-            axs.post('/ahaapi/highlight_chapter_web', highlightPayload)
+            axs.post('/ahaapi/highlight_chapter', highlightPayload)
                 .then(response => {
                     commit('setChapterHighlight_mutation', response.data);
                 })

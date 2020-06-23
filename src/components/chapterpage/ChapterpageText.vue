@@ -6,7 +6,7 @@
           <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
         </v-btn>
       </div>
-      <p id="chapterText" class="text-center text-lg-left">{{chapterText}}</p>
+      <p id="chapterText" class="text-left">{{chapterText}}</p>
     </div>
   </div>
 </template>
@@ -23,8 +23,8 @@ export default {
         kalimat: "",
         warna: "#E76464",
         id_chapter: this.$route.params.chapterId,
-        x_web: "",
-        y_web: ""
+        start_char: "",
+        end_char: ""
       },
       delHighlightPayload: {
         kalimat: "",
@@ -119,7 +119,9 @@ export default {
         range.deleteContents();
         range.insertNode(span);
         this.highlightPayload.kalimat = selectionText;
-        // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+        this.highlightPayload.start_char = range.startOffset;
+        this.highlightPayload.end_char = range.startOffset + charLength;
+        this.$store.dispatch("setChapterHighlight", this.highlightPayload);
         tooltipSpan.style.display = "none";
       } else {
         tooltipSpan.style.display = "none";
@@ -145,7 +147,7 @@ export default {
         hgText.style.left = 0;
         hgText.style.zIndex = 2 + i;
         hgText.id = "highlight-" + i;
-        hgText.classList.add("text-center", "text-lg-left", "mx-3", "my-3");
+        hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
         hgText.onmouseover = function() {
           hgText.style.display = "none";
         };
