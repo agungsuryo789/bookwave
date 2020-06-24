@@ -27,22 +27,12 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
-// import LibraryBookList from "@/components/library/LibraryBookList.vue";
-// import LibraryEpisodeList from "@/components/library/LibraryEpisodeList.vue";
-// import LibraryColouredList from "@/components/library/LibraryColouredList.vue";
-// import LibraryFavoriteList from "@/components/library/LibraryFavoriteList.vue";
-// import LibraryTagList from "@/components/library/LibraryTagList.vue";
 
 export default {
   name: "LibraryPage",
   components: {
     NavbarSection,
     FooterSection
-    // LibraryBookList,
-    // LibraryEpisodeList,
-    // LibraryColouredList,
-    // LibraryFavoriteList,
-    // LibraryTagList
   },
   data: () => ({
     tab: null,

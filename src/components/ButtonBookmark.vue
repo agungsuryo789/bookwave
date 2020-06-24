@@ -6,7 +6,7 @@
       </v-btn>
     </template>
     <template v-if="bookDetail[0].is_collected">
-      <v-btn class="book-bookmark-button" icon>
+      <v-btn class="book-bookmark-button" icon @click="delBookmark">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
     </template>
@@ -32,7 +32,10 @@ export default {
   methods: {
     setBookmark() {
       this.$store.dispatch("setBookmark", this.payloadBookmark);
-    }
+	},
+	delBookmark() {
+		this.$store.dispatch("setDeleteKoleksi", this.payloadBookmark);
+	}
   },
   computed: mapState({
     bookDetail: state => state.bookDetail.data

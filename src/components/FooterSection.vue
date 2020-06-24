@@ -1,6 +1,6 @@
 <template>
   <div class="footer-body">
-    <v-container>
+    <v-container fluid class="footer-container px-12">
       <v-row>
         <v-col
           class="justify-center align-center text-center footer--screenshot"
@@ -24,7 +24,7 @@
           style="margin: 0 auto;"
         >
           <v-row>
-            <v-col cols="12" lg="4" md="4" sm="12">
+            <v-col cols="12" lg="4" md="4" sm="4">
               <table class="table-footer-links text-center text-lg-left text-xl-left">
                 <tr>
                   <th>Top Kategori</th>
@@ -40,7 +40,7 @@
                 </tr>
               </table>
             </v-col>
-            <v-col cols="12" lg="4" md="4" sm="12">
+            <v-col cols="12" lg="4" md="4" sm="4">
               <table class="table-footer-links text-center text-lg-left text-xl-left">
                 <tr>
                   <th>Useful Links</th>
@@ -55,11 +55,13 @@
                   <td>Magazine</td>
                 </tr>
                 <tr>
-                  <td><router-link to="/contact">Contact & Help </router-link></td>
+                  <td>
+                    <router-link to="/contact">Contact & Help</router-link>
+                  </td>
                 </tr>
               </table>
             </v-col>
-            <v-col cols="12" lg="4" md="4" sm="12">
+            <v-col cols="12" lg="4" md="4" sm="4">
               <table class="table-footer-links text-center text-lg-left text-xl-left">
                 <tr>
                   <th>Company</th>
@@ -87,7 +89,7 @@
           md="12"
           sm="12"
           cols="12"
-          style="margin: 0 auto;"
+          style="margin: 20px auto;"
         >
           <img
             class="my-2"
@@ -144,6 +146,9 @@ export default {
 
 <style lang="scss" scoped>
 .footer-body {
+  .footer-container {
+	box-shadow: 0 -2px 3px #c0c0c0;
+  }
   .footer-links {
     div {
       margin: 0 30px;

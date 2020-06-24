@@ -136,10 +136,10 @@ export default {
 
       // Every iteration will create the text body and it's highlighted span
       for (let i = 0; i < x.length; i++) {
-        // Create Highlight text Span
         const hgText = document.createElement("p");
         const span = document.createElement("span");
 
+        // Create Highlighted text text body
         hgText.textContent = this.chapterText;
         hgText.style.color = "transparent";
         hgText.style.position = "absolute";
@@ -148,14 +148,21 @@ export default {
         hgText.style.zIndex = 2 + i;
         hgText.id = "highlight-" + i;
         hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
-        hgText.onmouseover = function() {
-          hgText.style.display = "none";
+        const hgClass = document.getElementsByClassName("highlight-data");
+        // Hide Highlighted text on mouseover (on highlight text action)
+        hgText.onclick = function() {
+          for (var i = 0; i < hgClass.length; i += 1) {
+            hgClass[i].style.display = "none";
+          }
         };
+        // Show highlighted text again on mouseout (on highlight text action)
         chapterText.onmouseout = function() {
-          hgText.style.display = "block";
+          for (var i = 0; i < hgClass.length; i += 1) {
+            hgClass[i].style.display = "block";
+          }
         };
         chapterBody.appendChild(hgText);
-
+        // Create Highlight span color
         span.style.backgroundColor = x[i].warna;
         span.style.color = "black";
         span.style.zIndex = 2 + i;
@@ -171,23 +178,21 @@ export default {
         range.surroundContents(span);
 
         // Create Tooltip Delete Highlight
-        // const tooltip2 = document.createElement("button");
-        // tooltip2.textContent = "Hapus Highlight";
-        // tooltip2.setAttribute("style", this.styleTooltipDelete);
-        // tooltip2.onclick = function() {
-        //   deletePayload.kalimat = x[i].kalimat;
-        //   console.log(deletePayload.kalimat);
-        //   store.dispatch("setDelChapterHighlight", deletePayload);
-        // };
-        // span.appendChild(tooltip2);
-        // span.onmouseover = function() {
-        //   tooltip2.style.display = "block";
-        // };
-        // span.onmouseout = function() {
-        //   setTimeout(() => {
-        //     tooltip2.style.display = "none";
-        //   }, 3000);
-        // };
+        const tooltip2 = document.createElement("button");
+        tooltip2.textContent = "Hapus Highlight";
+        tooltip2.setAttribute("style", this.styleTooltipDelete);
+        tooltip2.onclick = function() {
+          // deletePayload.kalimat = x[i].kalimat;
+          // console.log(deletePayload.kalimat);
+          // store.dispatch("setDelChapterHighlight", deletePayload);
+        };
+        span.appendChild(tooltip2);
+        span.onmouseover = function() {
+          tooltip2.style.display = "block";
+        };
+        span.onmouseout = function() {
+          tooltip2.style.display = "none";
+        };
       }
     }
   },
