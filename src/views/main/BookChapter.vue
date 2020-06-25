@@ -23,7 +23,11 @@
         <v-col style="max-width:800px;margin:0 auto;">
           <div class="d-flex flex-row justify-center align-center">
             <div class="d-flex flex-column justify-center align-center mx-4">
-              <v-btn @click="showTools = true, showMenuTop = false, outlineMenu = false" depressed outlined>
+              <v-btn
+                @click="showTools = true, showMenuTop = false, outlineMenu = false"
+                depressed
+                outlined
+              >
                 <v-icon>mdi-format-color-text</v-icon>
               </v-btn>
               <p>Teks</p>
@@ -104,7 +108,14 @@
         </v-carousel>
         <v-row>
           <v-col style="position:relative;">
-            <ChapterpageText :fontSize="slider" :bookId="chapter.id_buku" :chapterText="chapter.isi_chapter" />
+            <ChapterpageText
+              :fontSize="slider"
+              :bookId="chapter.id_buku"
+              :chapterText="chapter.isi_chapter"
+            />
+            <v-row v-if="!parseInt(chapter.prev_chapter_id) > 0">
+              <ChapterpageIntisari :bookId="parseInt(chapter.id_buku)" />
+            </v-row>
             <div
               v-if="parseInt(chapter.prev_chapter_id) > 0 && parseInt(chapter.next_chapter_id) <= 0 "
             >
@@ -158,6 +169,7 @@
 import { mapState } from "vuex";
 import ChapterpageOutline from "@/components/chapterpage/ChapterpageOutline.vue";
 import ChapterpageBookmark from "@/components/chapterpage/ChapterpageBookmark.vue";
+import ChapterpageIntisari from "@/components/chapterpage/ChapterpageIntisari.vue";
 import ChapterpageText from "@/components/chapterpage/ChapterpageText.vue";
 
 export default {
@@ -165,6 +177,7 @@ export default {
   components: {
     ChapterpageOutline,
     ChapterpageBookmark,
+    ChapterpageIntisari,
     ChapterpageText,
     VuetifyAudio: () => import("vuetify-audio")
   },

@@ -87,6 +87,7 @@ export default new Vuex.Store({
         kategoriId: '',
         bookDetail: {},
         chapterDetail: {},
+        intisariDetail: {},
         bookStatus: {},
         bookFavorit: {},
         bookBookmarked: {},
@@ -182,6 +183,10 @@ export default new Vuex.Store({
             state.chapterDetail = response
             state.loaderStatus = true
         },
+        getBookIntisari_mutation: (state, response) => {
+            state.intisariDetail = response
+            state.loaderStatus = true
+        },
         setBookDone_mutation: (state, response) => {
             state.bookStatus = response
             state.loaderStatus = true
@@ -234,6 +239,7 @@ export default new Vuex.Store({
             state.chapterHighlight = response
             state.loaderStatus = true
             alert("Berhasil hapus highligth text")
+            location.reload()
         },
         koleksiBuku_mutation: (state, response) => {
             state.koleksiBuku = response
@@ -403,6 +409,15 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        getBookIntisari: ({ commit }, dispatchPayload) => {
+            axs.get('/ahaapi/intisari?id_buku=' + dispatchPayload)
+                .then(response => {
+                    commit('getBookIntisari_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         setBookDone: ({ commit }, payloadDone) => {
             axs.post('/ahaapi/selesai_baca', payloadDone)
                 .then(response => {
@@ -463,7 +478,7 @@ export default new Vuex.Store({
                     commit('setDelChapterHighlight_mutation', response.data);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    alert(err.message);
                 })
         },
         addTag: ({ commit }, tagPayload) => {
@@ -607,14 +622,14 @@ export default new Vuex.Store({
                     const credential = error.credential;
                     console.log(errorCode, errorMessage, email, credential);
                 })
-		},
-		loginFacebook: ({ commit }) => {
+        },
+        loginFacebook: ({ commit }) => {
             const provider = new firebase.auth.FacebookAuthProvider();
             firebase.auth().signInWithPopup(provider)
                 .then(function(result) {
-					console.log(result)
-                     const email = result.user.email
-                     axs.post('ahaapi/login_member', {
+                    console.log(result)
+                    const email = result.user.email
+                    axs.post('ahaapi/login_member', {
                             email: email,
                             password: '',
                             type: '2'

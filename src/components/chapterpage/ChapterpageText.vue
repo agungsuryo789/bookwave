@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div id="chapterBody" :style="styleObject" @mouseup="showHighlightTool">
+    <div id="chapterBody" :style="styleObject">
       <div id="tooltip" style="z-index:3;position:relative;">
         <v-btn class="button-tooltip py-2 px-2" depressed @click="setHighlight">
           <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
         </v-btn>
       </div>
-      <p id="chapterText" class="text-left">{{chapterText}}</p>
+      <p id="chapterText" class="text-left" @mouseup="showHighlightTool">{{chapterText}}</p>
     </div>
   </div>
 </template>
@@ -26,9 +26,8 @@ export default {
         start_char: "",
         end_char: ""
       },
-      delHighlightPayload: {
-        kalimat: "",
-        id_chapter: this.$route.params.chapterId
+      delHgPayload: {
+        id_highlight: ""
       },
       dispatchPayload: {
         bookId: this.$route.params.bookId,
@@ -36,21 +35,20 @@ export default {
       },
       varTop: 248,
       varLeft: 0,
-      styleTooltipDelete: `font-size: 10px;
+      styleTooltipDelete: `font-size: 8px;
 		top: -35px;
 		left: 0px;
 		letter-spacing: 1.3px;
 		position: absolute;
-		z-index: 4;
-		padding: 0 4px;
+		padding: 2px 2px;
 		background-color: rgb(243, 243, 243);
         border-radius: 0;
-        border-top: 4px solid rgb(173, 173, 173);
+        box-shadow: 0 -2px 3px #c0c0c0;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
 		color: #e76464;
 		display: none;
-		width:100px;`
+		width:70px;`
     };
   },
   computed: mapState({
@@ -110,7 +108,6 @@ export default {
       span.style.backgroundColor = "#E76464";
       span.style.zIndex = "2";
       const charLength = selectionText.length;
-      console.log(charLength);
       console.log(range.startOffset);
       console.log(range.startOffset + charLength);
 
@@ -121,7 +118,7 @@ export default {
         this.highlightPayload.kalimat = selectionText;
         this.highlightPayload.start_char = range.startOffset;
         this.highlightPayload.end_char = range.startOffset + charLength;
-        this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+        // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
         tooltipSpan.style.display = "none";
       } else {
         tooltipSpan.style.display = "none";
@@ -130,69 +127,82 @@ export default {
     getHighlight() {
       const chapterText = document.getElementById("chapterText");
       const chapterBody = document.getElementById("chapterBody");
-      //   var deletePayload = this.delHighlightPayload;
-      //   const store = this.$store;
+      const store = this.$store;
+      var deletePayload = this.delHgPayload;
       const x = this.dataHighlight.data[0].data_highlight;
+      if (x.length > 0) {
+        // Every iteration will create the text body and it's highlighted span
+        for (let i = 0; i < x.length; i++) {
+          const hgText = document.createElement("p");
+          const span = document.createElement("span");
 
-      // Every iteration will create the text body and it's highlighted span
-      for (let i = 0; i < x.length; i++) {
-        const hgText = document.createElement("p");
-        const span = document.createElement("span");
+          // Create Highlighted text text body
+          hgText.textContent = this.chapterText;
+          hgText.style.color = "transparent";
+          hgText.style.position = "absolute";
+          hgText.style.top = 0;
+          hgText.style.left = 0;
+          hgText.style.zIndex = 2 + i;
+          hgText.id = "highlight-" + i;
+          hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
+          const hgClass = document.getElementsByClassName("highlight-data");
+          // Hide Highlighted text on mouseover (on highlight text action)
+          hgText.onmouseover = function() {
+            setTimeout(function() {
+              for (var i = 0; i < hgClass.length; i += 1) {
+                hgClass[i].style.display = "none";
+              }
+            }, 1500);
+          };
+          // Show highlighted text again on mouseout (on highlight text action)
+          chapterText.onmouseout = function() {
+            for (var i = 0; i < hgClass.length; i += 1) {
+              hgClass[i].style.display = "block";
+            }
+          };
+          chapterBody.appendChild(hgText);
+          // Create Highlight span color
+          span.classList.add("span-hg-color");
+          const spanClass = document.getElementsByClassName("span-hg-color");
+          span.style.backgroundColor = x[i].warna;
+          span.style.color = "black";
+          span.style.position = "relative";
+          span.style.zIndex = 2 + i;
+          var range = new Range();
+          range.setStart(
+            document.getElementById("highlight-" + i).childNodes[0],
+            x[i].start_char
+          );
+          range.setEnd(
+            document.getElementById("highlight-" + i).childNodes[0],
+            x[i].end_char
+          );
+          range.surroundContents(span);
 
-        // Create Highlighted text text body
-        hgText.textContent = this.chapterText;
-        hgText.style.color = "transparent";
-        hgText.style.position = "absolute";
-        hgText.style.top = 0;
-        hgText.style.left = 0;
-        hgText.style.zIndex = 2 + i;
-        hgText.id = "highlight-" + i;
-        hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
-        const hgClass = document.getElementsByClassName("highlight-data");
-        // Hide Highlighted text on mouseover (on highlight text action)
-        hgText.onclick = function() {
-          for (var i = 0; i < hgClass.length; i += 1) {
-            hgClass[i].style.display = "none";
+          // Create Tooltip Delete Highlight
+
+          for (var j = 0; j < spanClass.length; j++) {
+            const tooltip2 = document.createElement("button");
+
+            tooltip2.classList.add("button-del-hg");
+            const tooltipClass = document.getElementsByClassName(
+              "button-del-hg"
+            );
+            tooltip2.textContent = "Hapus Highlight";
+            tooltip2.setAttribute("style", this.styleTooltipDelete);
+            tooltip2.style.zIndex = 3 + i + j;
+            tooltip2.onclick = function() {
+              deletePayload.id_highlight = parseInt(x[i].id_buku_highlight);
+              store.dispatch("setDelChapterHighlight", deletePayload);
+            };
+            spanClass[i].onmouseover = function() {
+              for (var i = 0; i < tooltipClass.length; i += 1) {
+                tooltipClass[i].style.display = "block";
+              }
+            };
+            spanClass[i].appendChild(tooltip2);
           }
-        };
-        // Show highlighted text again on mouseout (on highlight text action)
-        chapterText.onmouseout = function() {
-          for (var i = 0; i < hgClass.length; i += 1) {
-            hgClass[i].style.display = "block";
-          }
-        };
-        chapterBody.appendChild(hgText);
-        // Create Highlight span color
-        span.style.backgroundColor = x[i].warna;
-        span.style.color = "black";
-        span.style.zIndex = 2 + i;
-        var range = new Range();
-        range.setStart(
-          document.getElementById("highlight-" + i).childNodes[0],
-          x[i].start_char
-        );
-        range.setEnd(
-          document.getElementById("highlight-" + i).childNodes[0],
-          x[i].end_char
-        );
-        range.surroundContents(span);
-
-        // Create Tooltip Delete Highlight
-        const tooltip2 = document.createElement("button");
-        tooltip2.textContent = "Hapus Highlight";
-        tooltip2.setAttribute("style", this.styleTooltipDelete);
-        tooltip2.onclick = function() {
-          // deletePayload.kalimat = x[i].kalimat;
-          // console.log(deletePayload.kalimat);
-          // store.dispatch("setDelChapterHighlight", deletePayload);
-        };
-        span.appendChild(tooltip2);
-        span.onmouseover = function() {
-          tooltip2.style.display = "block";
-        };
-        span.onmouseout = function() {
-          tooltip2.style.display = "none";
-        };
+        }
       }
     }
   },
