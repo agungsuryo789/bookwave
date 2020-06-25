@@ -85,6 +85,9 @@
           </v-col>
         </v-row>
       </v-form>
+      <v-snackbar v-model="snackbar">Mencoba Masuk...
+        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
+      </v-snackbar>
     </v-container>
   </div>
 </template>
@@ -114,7 +117,8 @@ export default {
       email: "",
       lazy: false,
       show1: false,
-      password: ""
+	  password: "",
+	  snackbar: false,
     };
   },
   computed: {
@@ -124,7 +128,7 @@ export default {
       !this.$v.email.email && errors.push("Must be valid e-mail");
       !this.$v.email.required && errors.push("E-mail is required");
       return errors;
-      console.log(errors);
+	  console.log(errors);
     },
     passwordErrors() {
       const errors = [];
@@ -154,7 +158,8 @@ export default {
           password: this.password,
           type: 1
         };
-        this.$store.dispatch("userLogin", data);
+		this.$store.dispatch("userLogin", data);
+		this.snackbar = true
       }
     }
   }

@@ -40,9 +40,12 @@
       <v-spacer></v-spacer>
       <v-row justify="center">
         <v-col cols="6" md="4" align="center" class="mt-12">
-          <router-link to="/register">Lupa Kata Sandi</router-link>
+          <router-link to="/forgot">Lupa Kata Sandi</router-link>
         </v-col>
       </v-row>
+      <v-snackbar v-model="snackbar">Mencoba Masuk...
+        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
+      </v-snackbar>
     </v-container>
   </div>
 </template>
@@ -56,12 +59,19 @@ export default {
   components: {
     NavbarSection
   },
+  data() {
+    return {
+	  snackbar: false
+    };
+  },
   methods: {
     login() {
-      this.$store.dispatch("loginFirebase");
+	  this.$store.dispatch("loginFirebase");
+	  this.snackbar = true;
     },
     loginfb() {
-      this.$store.dispatch("loginFacebook");
+	  this.$store.dispatch("loginFacebook");
+	  this.snackbar = true;
     },
     logout() {
       Firebase.logout();

@@ -97,6 +97,9 @@
             />
           </v-col>
         </v-row>
+		<v-snackbar v-model="snackbar" :timeout="timeout">Berhasil Masuk. Happy Reading! ^_^
+        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
+      </v-snackbar>
       </v-container>
     </section>
     <FooterSection />
@@ -122,7 +125,9 @@ export default {
   },
   data: () => ({
     loadSkeleton: true,
-    underlineValue: 15,
+	underlineValue: 15,
+	snackbar: true,
+	timeout: 2000,
     sectionLink: [
       {
         sectionName: "Buku Trending",
