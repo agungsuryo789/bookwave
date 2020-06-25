@@ -40,7 +40,7 @@
         </v-col>
       </v-row>
       <v-snackbar v-model="snackbar">
-        Berhasil Kirim Email ^_^
+        Berhasil Kirim Email. Cek Email Kamu ^_^
         <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
       </v-snackbar>
       <v-spacer></v-spacer>
@@ -50,7 +50,6 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
-import { mapState } from "vuex";
 
 /* eslint-disable */
 export default {
@@ -60,11 +59,12 @@ export default {
   },
   data() {
     return {
-      email: "",
+	  email: "",
+	  snackbar: false,
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ]
+	  ],
     };
   },
   methods: {
@@ -75,10 +75,7 @@ export default {
       this.$store.dispatch("forgotPassword", data);
       this.snackbar = true;
     }
-  },
-  computed: mapState({
-    notifMessage: state => state.notifMessage
-  })
+  }
 };
 </script>
 
