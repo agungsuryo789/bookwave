@@ -61,7 +61,7 @@ export default {
       this.$store.dispatch("loginFirebase");
     },
     loginfb() {
-      Firebase.loginfb();
+      this.$store.dispatch("loginFacebook");
     },
     logout() {
       Firebase.logout();

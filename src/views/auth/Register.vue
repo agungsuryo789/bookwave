@@ -58,7 +58,7 @@ export default {
       this.$store.dispatch("registerFirebase");
     },
     loginfb() {
-      Firebase.loginfb();
+      this.$store.dispatch("loginFacebook");
     },
     logout() {
       Firebase.logout();
