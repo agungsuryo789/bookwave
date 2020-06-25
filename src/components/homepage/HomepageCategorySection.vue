@@ -63,7 +63,7 @@
           elevation="2"
           depressed
           v-if="booksToShow < parseInt(bookListTrending.length)"
-          @click="booksToShow += 3"
+          @click="booksToShow += 4"
         >Lihat lebih banyak</v-btn>
         <v-btn
           class="btnLihat"

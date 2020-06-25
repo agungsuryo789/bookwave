@@ -6,7 +6,7 @@
           <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
         </v-btn>
       </div>
-      <p id="chapterText" class="text-center text-lg-left">{{chapterText}}</p>
+      <p id="chapterText" class="text-left">{{chapterText}}</p>
     </div>
   </div>
 </template>
@@ -23,8 +23,8 @@ export default {
         kalimat: "",
         warna: "#E76464",
         id_chapter: this.$route.params.chapterId,
-        x_web: "",
-        y_web: ""
+        start_char: "",
+        end_char: ""
       },
       delHighlightPayload: {
         kalimat: "",
@@ -102,29 +102,30 @@ export default {
       const userSelection = window.getSelection();
       const selectionText = userSelection.toString();
       const range = userSelection.getRangeAt(0);
-      // const rect = range.getBoundingClientRect();
 
       // Create Highlight Color Span
       const span = document.createElement("span");
       const tooltipSpan = document.getElementById("tooltip");
       span.textContent = selectionText;
       span.style.backgroundColor = "#E76464";
-      //   span.style.position = "absolute";
-      //   span.style.top = rect.top - this.varTop + "px";
-      //   span.style.left = rect.left + "px";
       span.style.zIndex = "2";
-      //   chapterText.appendChild(span);
-      range.deleteContents();
-      range.insertNode(span);
-      tooltipSpan.style.display = "none";
-      console.log(range);
-      console.log(selectionText);
+      const charLength = selectionText.length;
+      console.log(charLength);
+      console.log(range.startOffset);
+      console.log(range.startOffset + charLength);
 
       // Set & Save Highlight Node Data
-      this.highlightPayload.kalimat = selectionText;
-      //   this.highlightPayload.x_web = rect.top;
-      //   this.highlightPayload.y_web = rect.left;
-      // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+      if (charLength > 1) {
+        range.deleteContents();
+        range.insertNode(span);
+        this.highlightPayload.kalimat = selectionText;
+        this.highlightPayload.start_char = range.startOffset;
+        this.highlightPayload.end_char = range.startOffset + charLength;
+        this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+        tooltipSpan.style.display = "none";
+      } else {
+        tooltipSpan.style.display = "none";
+      }
     },
     getHighlight() {
       const chapterText = document.getElementById("chapterText");
@@ -135,10 +136,10 @@ export default {
 
       // Every iteration will create the text body and it's highlighted span
       for (let i = 0; i < x.length; i++) {
-        // Create Highlight text Span
         const hgText = document.createElement("p");
         const span = document.createElement("span");
 
+        // Create Highlighted text text body
         hgText.textContent = this.chapterText;
         hgText.style.color = "transparent";
         hgText.style.position = "absolute";
@@ -146,15 +147,22 @@ export default {
         hgText.style.left = 0;
         hgText.style.zIndex = 2 + i;
         hgText.id = "highlight-" + i;
-        hgText.classList.add("text-center", "text-lg-left", "mx-3", "my-3");
-        hgText.onmouseover = function() {
-          hgText.style.display = "none";
+        hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
+        const hgClass = document.getElementsByClassName("highlight-data");
+        // Hide Highlighted text on mouseover (on highlight text action)
+        hgText.onclick = function() {
+          for (var i = 0; i < hgClass.length; i += 1) {
+            hgClass[i].style.display = "none";
+          }
         };
+        // Show highlighted text again on mouseout (on highlight text action)
         chapterText.onmouseout = function() {
-          hgText.style.display = "block";
+          for (var i = 0; i < hgClass.length; i += 1) {
+            hgClass[i].style.display = "block";
+          }
         };
         chapterBody.appendChild(hgText);
-
+        // Create Highlight span color
         span.style.backgroundColor = x[i].warna;
         span.style.color = "black";
         span.style.zIndex = 2 + i;
@@ -170,23 +178,21 @@ export default {
         range.surroundContents(span);
 
         // Create Tooltip Delete Highlight
-        // const tooltip2 = document.createElement("button");
-        // tooltip2.textContent = "Hapus Highlight";
-        // tooltip2.setAttribute("style", this.styleTooltipDelete);
-        // tooltip2.onclick = function() {
-        //   deletePayload.kalimat = x[i].kalimat;
-        //   console.log(deletePayload.kalimat);
-        //   store.dispatch("setDelChapterHighlight", deletePayload);
-        // };
-        // span.appendChild(tooltip2);
-        // span.onmouseover = function() {
-        //   tooltip2.style.display = "block";
-        // };
-        // span.onmouseout = function() {
-        //   setTimeout(() => {
-        //     tooltip2.style.display = "none";
-        //   }, 3000);
-        // };
+        const tooltip2 = document.createElement("button");
+        tooltip2.textContent = "Hapus Highlight";
+        tooltip2.setAttribute("style", this.styleTooltipDelete);
+        tooltip2.onclick = function() {
+          // deletePayload.kalimat = x[i].kalimat;
+          // console.log(deletePayload.kalimat);
+          // store.dispatch("setDelChapterHighlight", deletePayload);
+        };
+        span.appendChild(tooltip2);
+        span.onmouseover = function() {
+          tooltip2.style.display = "block";
+        };
+        span.onmouseout = function() {
+          tooltip2.style.display = "none";
+        };
       }
     }
   },

@@ -237,7 +237,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "@/assets/css/global_variables.scss";
 
 .navbar {
@@ -263,16 +263,6 @@ export default {
     border-bottom: 6px solid rgb(184, 184, 184);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-  }
-}
-.hide-on--md {
-  @media screen and (max-width: 800px) {
-    display: none;
-  }
-}
-.hide-on--lg {
-  @media screen and (min-width: 800px) {
-    display: none;
   }
 }
 .fade-enter-active,

@@ -105,6 +105,7 @@ export default new Vuex.Store({
         delTagRes: {},
         addTagRes: {},
         editTagRes: {},
+        paymentHistoryList: [],
         invoiceDetails: {},
         midtransToken: '',
         notifMessage: ''
@@ -190,17 +191,19 @@ export default new Vuex.Store({
         setDeleteKoleksi_mutation: (state, response) => {
             state.bookStatus = response
             state.loaderStatus = true
-            alert("Buku berhasil dihapus dari koleksi")
+            alert("Berhasil hapus koleksi")
             router.push("/", () => {})
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
             state.loaderStatus = true
             alert("Berhasil Ditambahkan ke Favorit")
+            router.push("/", () => {})
         },
         setBookmark_mutation: (state, response) => {
             state.bookBookmarked = response
             state.loaderStatus = true
+            router.push("/", () => {})
         },
         getSubsOption_mutation: (state, response) => {
             state.subList = response
@@ -209,6 +212,7 @@ export default new Vuex.Store({
         setChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
+            location.reload()
         },
         addTag_mutation: (state, response) => {
             state.addTagRes = response
@@ -435,8 +439,17 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        delBookFavorit: ({ commit }, payloadFav) => {
+            axs.post('/ahaapi/hapus_favorite', payloadFav)
+                .then(response => {
+                    commit('setBookFavorit_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         setChapterHighlight: ({ commit }, highlightPayload) => {
-            axs.post('/ahaapi/highlight_chapter_web', highlightPayload)
+            axs.post('/ahaapi/highlight_chapter', highlightPayload)
                 .then(response => {
                     commit('setChapterHighlight_mutation', response.data);
                 })
@@ -528,24 +541,11 @@ export default new Vuex.Store({
         deleteTagFromAll: ({ commit }, tagPayload) => {
             axs.post('/ahaapi/hapus_tag', tagPayload)
                 .then(response => {
-                    commit('delTagRes_mutation', response.data);
+                    alert(response.message);
+                    router.push("/");
                 })
                 .catch(err => {
                     console.log(err.message);
-                })
-        },
-        forgotPassword: ({ commit }, data) => {
-            axs.post('/ahaapi/lupa_password', data)
-                .then(response => {
-                    commit('notifMessage_mutation', response.data.message)
-                    console.log(response.data.message)
-                })
-        },
-        resetPassword: ({ commit }, data) => {
-            axs.post('/ahaapi/lupa_password', data)
-                .then(response => {
-                    commit('notifMessage_mutation', response)
-                    console.log(response.data.message)
                 })
         },
         // Payment Action
@@ -561,7 +561,7 @@ export default new Vuex.Store({
         getPaymentHistory: ({ commit }) => {
             axs.get('/ahaapi/riwayat_pembayaran')
                 .then(response => {
-                    commit('getPaymentHistory_mutation', response.data);
+                    commit('getPaymentHistory_mutation', response.data.data);
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -658,13 +658,26 @@ export default new Vuex.Store({
                 })
         },
         userLogout: ({ commit }, user) => {
-                return new Promise((resolve, reject) => {
-                    commit('authDown_mutation')
-                    localStorage.removeItem('x-token')
-                    resolve()
+            return new Promise((resolve, reject) => {
+                commit('authDown_mutation')
+                localStorage.removeItem('x-token')
+                resolve()
+            })
+        },
+        forgotPassword: ({ commit }, data) => {
+            axs.post('/ahaapi/lupa_password', data)
+                .then(response => {
+                    commit('notifMessage_mutation', response.data.message)
+                    console.log(response.data.message)
                 })
-            }
-            // end auth action
+        },
+        resetPassword: ({ commit }, data) => {
+            axs.post('/ahaapi/lupa_password', data)
+                .then(response => {
+                    commit('notifMessage_mutation', response)
+                    console.log(response.data.message)
+                })
+        }
     },
     getters: {
         isLoggedIn: state => !!state.token,

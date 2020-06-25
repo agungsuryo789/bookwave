@@ -12,4 +12,16 @@
   background-color: #353131 !important;
   color: white !important;
 }
+
+@media screen and (max-width: 800px) {
+  .hide-on--md {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .hide-on--lg {
+    display: none;
+  }
+}
 /*# sourceMappingURL=global_variables.css.map */

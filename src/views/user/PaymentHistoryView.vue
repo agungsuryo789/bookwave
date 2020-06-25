@@ -7,7 +7,7 @@
           <h1>Payment History</h1>
         </v-col>
       </v-row>
-      <v-row v-if="paymentHistoryList.data.length > 0">
+      <v-row v-if="paymentHistoryList.length > 0">
         <v-col lg="7" md="12" sm="12" xs="12">
           <v-row>
             <v-col
@@ -15,7 +15,7 @@
               md="12"
               sm="12"
               xs="12"
-              v-for="item in paymentHistoryList.data"
+              v-for="item in paymentHistoryList"
               :key="item.id_transaksi"
             >
               <v-card>

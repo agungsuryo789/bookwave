@@ -31,9 +31,16 @@
                   <v-list-item @click="setBookDone">
                     <v-list-item-title>Tandai Selesai</v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="setBookFavorit">
-                    <v-list-item-title>Tambah ke Favorit</v-list-item-title>
-                  </v-list-item>
+                  <template v-if="!isFavorited">
+                    <v-list-item @click="setBookFavorit">
+                      <v-list-item-title>Tambah ke Favorit</v-list-item-title>
+                    </v-list-item>
+                  </template>
+                  <template v-if="isFavorited">
+                    <v-list-item @click="delBookFavorit">
+                      <v-list-item-title>Hapus Favorit</v-list-item-title>
+                    </v-list-item>
+                  </template>
                   <template v-if="isCollected">
                     <v-list-item @click="setDeleteKoleksi">
                       <v-list-item-title>Hapus Dari Koleksi</v-list-item-title>
@@ -74,6 +81,9 @@ export default {
     },
     kategori_buku: {
       type: String
+    },
+    isFavorited: {
+      type: Boolean
     },
     isCollected: {
       type: Boolean
@@ -123,6 +133,9 @@ export default {
     },
     setBookFavorit() {
       this.$store.dispatch("setBookFavorit", this.payloadFav);
+    },
+    delBookFavorit() {
+      this.$store.dispatch("delBookFavorit", this.payloadFav);
     }
   },
   computed: {
@@ -139,8 +152,9 @@ export default {
 .book-card--small {
   h2 {
     font-size: 14px;
-	width: 250px;
+    width: 250px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
   small {

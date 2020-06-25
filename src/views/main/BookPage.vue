@@ -15,7 +15,7 @@
           >
             <div class="d-flex flex-column justify-end py-10">
               <v-img class="book-card-img mx-auto" width="150" :src="book.foto_sampul"></v-img>
-              <ButtonBookmark :idBuku="book.id_buku" style="position:absolute;right:0;bottom:0;" />
+              <ButtonBookmark :idBuku="parseInt(book.id_buku)" style="position:absolute;right:0;bottom:0;" />
             </div>
           </v-card>
         </v-col>

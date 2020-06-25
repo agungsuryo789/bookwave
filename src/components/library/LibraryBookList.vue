@@ -24,7 +24,8 @@
             :deskripsi="n.deskripsi"
             :warna_kategori="n.warna_kategori"
             :kategori_buku="n.nama_kategori"
-            :isCollected="true"
+            :isCollected="n.is_collected"
+            :isFavorited="n.is_favorite"
           />
         </v-col>
       </template>

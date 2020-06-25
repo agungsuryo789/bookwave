@@ -52,6 +52,8 @@
               :penulis="n.penulis"
               :warna_kategori="n.border_buku"
               :kategori_buku="n.nama_kategori"
+              :isCollected="n.is_collected"
+              :isFavorited="n.is_favorite"
             />
           </v-col>
         </v-row>
