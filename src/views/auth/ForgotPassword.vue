@@ -40,8 +40,8 @@
         </v-col>
       </v-row>
       <v-snackbar v-model="snackbar">
-        {{ notifMessage }}
-        <v-btn color="blue" text @click="snackbar = false">Close</v-btn>
+        Berhasil Kirim Email ^_^
+        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
       </v-snackbar>
       <v-spacer></v-spacer>
     </v-container>

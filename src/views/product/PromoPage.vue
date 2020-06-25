@@ -16,19 +16,17 @@
         </v-col>
       </v-row>
       <v-row class="d-flex flex-row flex-xs-column justify-center">
-        <v-col lg="4" md="6" sm="6" xs="6" v-for="item in 2" :key="item">
+        <v-col lg="4" md="6" sm="6" xs="6" v-for="item in subList" :key="item.id_langganan">
           <v-card link ripple height="180px">
             <div class="d-flex flex-row justify-space-between pt-2">
-              <div
-                class="subcription-page--price-badge justify-center align-center"
-                style="background-color:#B2FF59;height:35px;padding:3px;color:white;"
-              >
+              <div v-if="item.id_langganan == 2" class="subcription-page--price-badge justify-center align-center" style="background-color:#B2FF59;height:35px;padding:3px;color:white;">
                 <p>Hemat 20%</p>
               </div>
               <v-btn
                 color="#D32F2F"
                 elevation="3"
                 style="color:white;font-weight:bold;"
+				@click="pay(item.id_langganan)"
               >Coba 7 hari gratis</v-btn>
             </div>
             <v-card-title class="m-0 p-0">Tahunan</v-card-title>
@@ -47,6 +45,7 @@
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import PromoCard from "@/components/PromoCard.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "PromoPage",
@@ -54,6 +53,20 @@ export default {
     NavbarSection,
     FooterSection,
     PromoCard
+  },
+  computed: mapState({
+    subList: state => state.subList.data
+  }),
+  created() {
+    this.$store.dispatch("getSubsOption");
+  },
+  methods: {
+    pay(value) {
+      var data = {
+        id_langganan: value
+      };
+      this.$store.dispatch("invoiceDetails", data);
+    }
   },
   data: () => ({
     loadSkeleton: false,

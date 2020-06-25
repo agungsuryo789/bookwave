@@ -69,7 +69,7 @@
                         <v-list-item-title>Payment History</v-list-item-title>
                       </v-list-item>
                       <v-list-item @click="() => {}">
-                        <v-list-item-title><router-link to="/contact">Help & Support</router-link></v-list-item-title>
+                        <v-list-item-title @click="toContact">Help & Support</v-list-item-title>
                       </v-list-item>
                       <v-list-item @click="userLogout">
                         <v-list-item-title>Log Out</v-list-item-title>
@@ -224,7 +224,12 @@ export default {
       this.$router.push({
         name: "PaymentHistoryView"
       });
-    },
+	},
+	toContact() {
+		this.$router.push({
+			name: "Contact"
+		})
+	},
     userLogout() {
       this.$store.dispatch("userLogout");
     }
