@@ -3,25 +3,34 @@
     <v-container fluid>
       <v-row>
         <v-col class="d-flex flex-row justify-space-between">
-          <v-btn
-            depressed
-            :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
-            @click="hasHistory() ? $router.go(-1) : $router.push('/')"
-          >
-            <v-icon>mdi-less-than</v-icon>
-          </v-btn>
-          <v-btn
-            @click="showMenuTop = !showMenuTop, showTools = false, outlineMenu = false"
-            depressed
-            :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
-          >
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
+          <div>
+            <v-btn
+              depressed
+              :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
+              @click="hasHistory() ? $router.go(-1) : $router.push('/')"
+            >
+              <v-icon>mdi-less-than</v-icon>
+            </v-btn>
+          </div>
+          <div>
+            <v-btn icon depressed @click="toggleHighlight = !toggleHighlight">
+              <v-icon>mdi-grease-pencil</v-icon>
+            </v-btn>
+            <v-btn
+              @click="showMenuTop = !showMenuTop, showTools = false, outlineMenu = false"
+              depressed
+              :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
+            >
+              <v-icon>mdi-menu</v-icon>
+            </v-btn>
+          </div>
         </v-col>
       </v-row>
       <v-row v-if="showMenuTop">
         <v-col style="max-width:800px;margin:0 auto;">
-          <div class="d-flex flex-row justify-center align-center">
+          <div
+            class="d-flex flex-row justify-center align-center"
+          >
             <div class="d-flex flex-column justify-center align-center mx-4">
               <v-btn
                 @click="showTools = true, showMenuTop = false, outlineMenu = false"
@@ -31,6 +40,12 @@
                 <v-icon>mdi-format-color-text</v-icon>
               </v-btn>
               <p>Teks</p>
+            </div>
+            <div class="d-flex flex-column justify-center align-center mx-4">
+              <v-btn @click="urlDownload(bookDetail.data[0].buku_file)" depressed text>
+                <v-icon>mdi-download</v-icon>
+              </v-btn>
+              <p>Download</p>
             </div>
             <div class="d-flex flex-column justify-center align-center mx-4">
               <v-btn @click="outlineMenu = !outlineMenu" depressed text>
@@ -109,9 +124,10 @@
         <v-row>
           <v-col style="position:relative;">
             <ChapterpageText
-              :fontSize="slider"
-              :bookId="chapter.id_buku"
+              :fontSize="parseInt(slider)"
+              :bookId="parseInt(chapter.id_buku)"
               :chapterText="chapter.isi_chapter"
+              :toggleHg="toggleHighlight"
             />
             <v-row v-if="!parseInt(chapter.prev_chapter_id) > 0">
               <ChapterpageIntisari :bookId="parseInt(chapter.id_buku)" />
@@ -186,6 +202,7 @@ export default {
       showTools: false,
       showMenuTop: false,
       outlineMenu: false,
+      toggleHighlight: true,
       min: 8,
       max: 72,
       slider: 24,
@@ -199,15 +216,20 @@ export default {
     };
   },
   computed: mapState({
-    chapterDetail: state => state.chapterDetail
+    chapterDetail: state => state.chapterDetail,
+    bookDetail: state => state.bookDetail
   }),
   methods: {
     hasHistory() {
       return window.history?.length > 2;
+    },
+    urlDownload(url) {
+      window.open(url, "_blank");
     }
   },
   mounted() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
+    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
   }
 };
 </script>
