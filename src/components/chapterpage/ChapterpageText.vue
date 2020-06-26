@@ -1,12 +1,23 @@
 <template>
   <div>
+    <v-snackbar v-model="showPopAlert">
+      You now can highlight the text!
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="showPopAlert = false">Close</v-btn>
+      </template>
+    </v-snackbar>
     <div id="chapterBody" :style="styleObject">
       <div id="tooltip" style="z-index:3;position:relative;">
         <v-btn class="button-tooltip py-2 px-2" depressed @click="setHighlight">
           <v-icon class="mx-1" small>mdi-pencil</v-icon>Warnai
         </v-btn>
       </div>
-      <p id="chapterText" class="text-left" @mouseup="showHighlightTool">{{chapterText}}</p>
+      <p
+        id="chapterText"
+        class="text-left"
+        v-if="toggleHighlight"
+        @mouseup="showHighlightTool"
+      >{{chapterText}}</p>
     </div>
   </div>
 </template>
@@ -16,7 +27,20 @@ import { mapState } from "vuex";
 
 export default {
   name: "ChapterpageText",
-  props: ["fontSize", "bookId", "chapterText"],
+  props: {
+    fontSize: {
+      type: Number
+    },
+    bookId: {
+      type: Number
+    },
+    chapterText: {
+      type: String
+    },
+    toggleHg: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       highlightPayload: {
@@ -33,8 +57,8 @@ export default {
         bookId: this.$route.params.bookId,
         chapterId: this.$route.params.chapterId
       },
-      varTop: 248,
-      varLeft: 0,
+      toggleHighlight: true,
+      showPopAlert: false,
       styleTooltipDelete: `font-size: 8px;
 		top: -35px;
 		left: 0px;
@@ -51,6 +75,22 @@ export default {
 		width:70px;`
     };
   },
+  watch: {
+    toggleHg: function(newValue, oldValue) {
+      const hgClass = document.getElementsByClassName("highlight-data");
+      if (!newValue) {
+        for (var i = 0; i < hgClass.length; i += 1) {
+          hgClass[i].style.display = "none";
+		}
+		this.showPopAlert = true;
+      } else {
+        for (var j = 0; j < hgClass.length; j += 1) {
+          hgClass[j].style.display = "block";
+		}
+		this.showPopAlert = false;
+      }
+    }
+  },
   computed: mapState({
     dataHighlight: state => state.chapterDetail,
     styleObject() {
@@ -61,7 +101,6 @@ export default {
   }),
   methods: {
     getSelected() {
-      // Get Mouse Selection Data
       if (window.getSelection) {
         return window.getSelection();
       } else if (document.getSelection) {
@@ -76,11 +115,11 @@ export default {
       }
     },
     showHighlightTool(e) {
+      // Show the highlight tool button on selection
       const selection = this.getSelected();
       const anchorSelection = selection.extentOffset - selection.anchorOffset;
       const tooltipSpan = document.getElementById("tooltip");
 
-      // Show the highlight tool button on selection
       if (selection && anchorSelection > 0) {
         const x = e.clientX;
         const y = e.clientY;
@@ -108,8 +147,6 @@ export default {
       span.style.backgroundColor = "#E76464";
       span.style.zIndex = "2";
       const charLength = selectionText.length;
-      console.log(range.startOffset);
-      console.log(range.startOffset + charLength);
 
       // Set & Save Highlight Node Data
       if (charLength > 1) {
@@ -118,14 +155,14 @@ export default {
         this.highlightPayload.kalimat = selectionText;
         this.highlightPayload.start_char = range.startOffset;
         this.highlightPayload.end_char = range.startOffset + charLength;
-        // this.$store.dispatch("setChapterHighlight", this.highlightPayload);
+        this.$store.dispatch("setChapterHighlight", this.highlightPayload);
         tooltipSpan.style.display = "none";
       } else {
         tooltipSpan.style.display = "none";
       }
     },
     getHighlight() {
-      const chapterText = document.getElementById("chapterText");
+      // const chapterText = document.getElementById("chapterText");
       const chapterBody = document.getElementById("chapterBody");
       const store = this.$store;
       var deletePayload = this.delHgPayload;
@@ -145,22 +182,12 @@ export default {
           hgText.style.zIndex = 2 + i;
           hgText.id = "highlight-" + i;
           hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
-          const hgClass = document.getElementsByClassName("highlight-data");
-          // Hide Highlighted text on mouseover (on highlight text action)
-          hgText.onmouseover = function() {
-            setTimeout(function() {
-              for (var i = 0; i < hgClass.length; i += 1) {
-                hgClass[i].style.display = "none";
-              }
-            }, 1500);
+          hgText.onmouseup = function() {
+            alert("Click the Pencil Icon(Top Right) to enable Highlight Text");
           };
-          // Show highlighted text again on mouseout (on highlight text action)
-          chapterText.onmouseout = function() {
-            for (var i = 0; i < hgClass.length; i += 1) {
-              hgClass[i].style.display = "block";
-            }
-          };
+
           chapterBody.appendChild(hgText);
+
           // Create Highlight span color
           span.classList.add("span-hg-color");
           const spanClass = document.getElementsByClassName("span-hg-color");
@@ -179,11 +206,10 @@ export default {
           );
           range.surroundContents(span);
 
-          // Create Tooltip Delete Highlight
-
           for (var j = 0; j < spanClass.length; j++) {
-            const tooltip2 = document.createElement("button");
+            // Create Tooltip delete highlight
 
+            const tooltip2 = document.createElement("button");
             tooltip2.classList.add("button-del-hg");
             const tooltipClass = document.getElementsByClassName(
               "button-del-hg"
@@ -198,6 +224,11 @@ export default {
             spanClass[i].onmouseover = function() {
               for (var i = 0; i < tooltipClass.length; i += 1) {
                 tooltipClass[i].style.display = "block";
+              }
+            };
+            spanClass[i].onmouseout = function() {
+              for (var i = 0; i < tooltipClass.length; i += 1) {
+                tooltipClass[i].style.display = "none";
               }
             };
             spanClass[i].appendChild(tooltip2);
@@ -243,7 +274,5 @@ export default {
       border: 1px solid transparent;
     }
   }
-}
-.tooltipDelete {
 }
 </style>

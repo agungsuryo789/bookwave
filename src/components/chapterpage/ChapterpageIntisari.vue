@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-col class="col-intisari">
-      <p style="font-weight:bold;font-size:20px;">In these book you will learn</p>
       <ul>
         <li v-for="item in intisariDetail.data" :key="item.id_intisari">{{ item.intisari }}</li>
       </ul>
