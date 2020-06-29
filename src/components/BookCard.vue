@@ -87,6 +87,7 @@ export default {
 	  font-weight: bold;
       width: 250px;
       overflow: hidden;
+	  white-space: nowrap;
       text-overflow: ellipsis;
     }
   }

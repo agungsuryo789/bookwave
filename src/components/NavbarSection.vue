@@ -59,7 +59,7 @@
                       depressed
                       color="#39DF8C"
                       elevation="2"
-                      v-if="memberDetail && !memberDetail.data[0].premium_member"
+                      v-if="!memberDetail.data[0].premium_member"
                       to="/plans"
                       style="text-transform:none;color:white;"
                     >Upgrade Premium</v-btn>
@@ -125,7 +125,7 @@
                       <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                     </template>
                     <v-list>
-                      <v-list-item v-if="memberDetail && !memberDetail.data[0].premium_member" to="/plans">
+                      <v-list-item v-if="!memberDetail.data[0].premium_member" to="/plans">
                         <v-list-item-title>
                           <v-btn
                             class="button-subscribe"
@@ -196,7 +196,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                  <div>
+                  <div class="my-3">
                     <v-btn
                       to="register"
                       class="button-subscribe"

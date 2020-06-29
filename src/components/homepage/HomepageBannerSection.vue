@@ -1,6 +1,6 @@
 <template>
   <v-container class="my-12">
-    <v-row class="row-banner-image">
+    <v-row class="row-banner-image d-flex flex-row justify-space-between">
       <v-col class="col-banner-text text-center text-lg-left " lg="6" md="12" sm="12" cols="12">
         <h1 class="my-5">Halo Saya AHA</h1>
         <p class="my-5">

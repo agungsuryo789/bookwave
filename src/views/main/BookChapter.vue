@@ -69,7 +69,7 @@
               depressed
               outlined
               ripple
-              @click="bgWhite = !bgWhite"
+              @click="bgWhite = !bgWhite, bgBlack = false, bgGrey = false"
               width="150"
               style="border:2px solid #ededed;text-transform:none;background-color:white;"
             >Aa</v-btn>
@@ -79,7 +79,7 @@
               depressed
               outlined
               ripple
-              @click="bgGrey = !bgGrey"
+              @click="bgGrey = !bgGrey, bgWhite = false, bgBlack = false"
               width="150"
               style="border:2px solid #ededed;text-transform:none;background-color:#E5E5E5;"
             >Aa</v-btn>
@@ -89,7 +89,7 @@
               depressed
               outlined
               ripple
-              @click="bgBlack = !bgBlack"
+              @click="bgBlack = !bgBlack, bgWhite = false, bgGrey = false"
               width="150"
               color="white"
               style="border:2px solid #ededed;text-transform:none;background-color:black;"
@@ -195,6 +195,14 @@
             <vuetify-audio :file="chapter.audio_chapter" :autoPlay="false" color="#FF8A80"></vuetify-audio>
           </div>
         </div>
+        <template v-if="!chapter.audio_chapter">
+          <v-snackbar v-model="showPopAlert">
+            There are no audio file
+            <template v-slot:action="{ attrs }">
+              <v-btn color="pink" text v-bind="attrs" @click="showPopAlert = false">Close</v-btn>
+            </template>
+          </v-snackbar>
+        </template>
       </v-container>
     </template>
     <template v-if="outlineMenu">
@@ -225,6 +233,7 @@ export default {
       showMenuTop: false,
       outlineMenu: false,
       shareMenu: false,
+      showPopAlert: true,
       toggleHighlight: true,
       min: 8,
       max: 72,
@@ -250,7 +259,8 @@ export default {
       window.open(url, "_blank");
     },
     currentUrl() {
-      return window.location.href;
+      // return window.location.href;
+      return "https://ahabaca.com";
     }
   },
   mounted() {
