@@ -78,6 +78,7 @@ export default new Vuex.Store({
         bookListTrending: [],
         bookListNew: [],
         status: '',
+        memberDetail: {},
         token: window.localStorage.getItem('x-token') || '',
         email: {},
         episodeListNew: [],
@@ -170,6 +171,10 @@ export default new Vuex.Store({
             state.token = ''
             Object.assign(state)
             router.push('/')
+        },
+        getMemberDetail_mutation: (state, response) => {
+            state.memberDetail = response
+            state.loaderStatus = true
         },
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response
@@ -583,6 +588,15 @@ export default new Vuex.Store({
                 })
         },
         // auth action
+        getMemberDetail: ({ commit }) => {
+            axs.get('ahaapi/member')
+                .then(response => {
+                    commit('getMemberDetail_mutation', response.data)
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         userLogin: ({ commit }, user) => {
             axs.post('ahaapi/login_member', JSON.stringify(user))
                 .then(response => {

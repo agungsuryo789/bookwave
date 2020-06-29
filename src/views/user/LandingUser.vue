@@ -157,7 +157,8 @@ export default {
     this.$store.dispatch("getBookTrending");
     this.$store.dispatch("getListBookNew");
     this.$store.dispatch("getListEpisodeNew");
-    this.loadSkeleton = false;
+	this.loadSkeleton = false;
+	window.document.title = "Home";
   }
 };
 </script>

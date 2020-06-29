@@ -120,7 +120,8 @@ export default {
     bookDetail: state => state.bookDetail
   }),
   created() {
-    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
+	this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
+	window.document.title = "Read " + this.bookDetail.data[0].judul + "| Ahabaca";
   }
 };
 </script>

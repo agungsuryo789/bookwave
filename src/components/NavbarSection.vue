@@ -52,14 +52,27 @@
                 </v-toolbar-items>
                 <v-spacer></v-spacer>
                 <v-toolbar-items v-if="!showSearchBar" class="hide-on--md">
-                  <v-btn
-                    class="button-subscribe mx-5"
-                    rounded
-                    depressed
-                    color="#39DF8C"
-                    elevation="2"
-                    to="/plans"
-                  >Upgrade Premium</v-btn>
+                  <div>
+                    <v-btn
+                      class="button-subscribe mx-5 my-3"
+                      rounded
+                      depressed
+                      color="#39DF8C"
+                      elevation="2"
+                      v-if="memberDetail && !memberDetail.data[0].premium_member"
+                      to="/plans"
+                      style="text-transform:none;color:white;"
+                    >Upgrade Premium</v-btn>
+                  </div>
+                  <v-chip
+                    v-if="memberDetail.data[0].premium_member"
+                    class="my-4"
+                    color="primary"
+                    outlined
+                  >
+                    Premium Account
+                    <v-icon right>mdi-account-check-outline</v-icon>
+                  </v-chip>
                   <v-menu left bottom>
                     <template v-slot:activator="{ on }">
                       <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
@@ -112,16 +125,23 @@
                       <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                     </template>
                     <v-list>
-                      <v-list-item to="/plans">
+                      <v-list-item v-if="memberDetail && !memberDetail.data[0].premium_member" to="/plans">
                         <v-list-item-title>
                           <v-btn
-                            class="button-subscribe mx-5"
+                            class="button-subscribe"
                             rounded
                             depressed
                             color="#39DF8C"
-                            elevation="2"
-							style="text-transform:none;color:white;"
+                            style="text-transform:none;color:white;"
                           >Upgrade Premium</v-btn>
+                        </v-list-item-title>
+                      </v-list-item>
+                      <v-list-item v-if="memberDetail.data[0].premium_member">
+                        <v-list-item-title>
+                          <v-chip class="my-4" color="primary" outlined>
+                            Premium Account
+                            <v-icon right>mdi-account-check-outline</v-icon>
+                          </v-chip>
                         </v-list-item-title>
                       </v-list-item>
                       <v-list-item @click="toPaymentHistory">
@@ -176,20 +196,22 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                  <v-btn
-                    to="register"
-                    class="button-subscribe"
-                    rounded
-                    color="#39DF8C"
-                    elevation="2"
-                    depressed
-                  >Start Trial</v-btn>
-                  <v-btn
-                    to="login"
-                    color="transparent"
-                    depressed
-                    style="text-transform:none;font-size:18px;font-weight:600;color:white;"
-                  >Login</v-btn>
+                  <div>
+                    <v-btn
+                      to="register"
+                      class="button-subscribe"
+                      rounded
+                      color="#39DF8C"
+                      elevation="2"
+                      depressed
+                    >Start Trial</v-btn>
+                    <v-btn
+                      to="login"
+                      color="transparent"
+                      depressed
+                      style="text-transform:none;font-size:18px;font-weight:600;color:white;"
+                    >Login</v-btn>
+                  </div>
                 </v-toolbar-items>
               </v-toolbar>
             </v-col>
@@ -203,6 +225,7 @@
 <script>
 import NavbarCategoryChip from "@/components/navbar/NavbarCategoryChip.vue";
 import NavbarSearch from "@/components/navbar/NavbarSearch.vue";
+import { mapState } from "vuex";
 export default {
   name: "NavbarSection",
   components: {
@@ -216,6 +239,9 @@ export default {
       showSearchBar: false
     };
   },
+  computed: mapState({
+    memberDetail: state => state.memberDetail
+  }),
   methods: {
     onCloseSearchBar(e) {
       this.showSearchBar = e;
@@ -224,15 +250,18 @@ export default {
       this.$router.push({
         name: "PaymentHistoryView"
       });
-	},
-	toContact() {
-		this.$router.push({
-			name: "Contact"
-		})
-	},
+    },
+    toContact() {
+      this.$router.push({
+        name: "Contact"
+      });
+    },
     userLogout() {
       this.$store.dispatch("userLogout");
     }
+  },
+  mounted() {
+    this.$store.dispatch("getMemberDetail");
   }
 };
 </script>

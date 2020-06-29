@@ -1,7 +1,7 @@
 <template>
   <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
-      <v-img class="book-card-img mx-auto" width="120" height="120" :src="foto_sampul"></v-img>
+      <v-img class="book-card-img mx-auto" width="120px" height="120px" :src="foto_sampul"></v-img>
       <ButtonBookmark :idBuku="parseInt(idBuku)" />
     </div>
     <a @click="gotoBook" class="book-card-title">

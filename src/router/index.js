@@ -36,9 +36,9 @@ const LoginEmail = () =>
 const Register = () =>
     import ('../views/auth/Register.vue')
 const RegisterEmail = () =>
-	import ('../views/auth/RegisterEmail.vue')
+    import ('../views/auth/RegisterEmail.vue')
 const ForgotPassword = () =>
-	import ('../views/auth/ForgotPassword.vue')
+    import ('../views/auth/ForgotPassword.vue')
 const ResetPassword = () =>
     import ('../views/auth/ResetPassword.vue')
 
@@ -100,35 +100,44 @@ const routes = [
     {
         path: '/about',
         name: 'About',
-        component: About
+        component: About,
+        meta: {
+            title: "About | Ahabaca"
+        }
     },
     {
         path: '/login',
         name: 'Login',
         component: Login,
         meta: {
-            ifLoggedIn: true
+            ifLoggedIn: true,
+            title: "Login | Ahabaca"
         }
-	},
-	{
+    },
+    {
         path: '/forgot',
         name: 'ForgotPassword',
-        component: ForgotPassword
-	},
-	{
+        component: ForgotPassword,
+        meta: {
+            title: "Forgot Password | Ahabaca"
+        }
+    },
+    {
         path: '/reset',
         name: 'ResetPassword',
-		component: ResetPassword,
-		meta: {
-			requiresAuth: true
-		}
+        component: ResetPassword,
+        meta: {
+            requiresAuth: true,
+            title: "Reset Password | Ahabaca"
+        }
     },
     {
         path: '/login/email',
         name: 'LoginEmail',
         component: LoginEmail,
         meta: {
-            ifLoggedIn: true
+            ifLoggedIn: true,
+            title: "Login | Ahabaca"
         }
     },
     {
@@ -136,7 +145,8 @@ const routes = [
         name: 'Register',
         component: Register,
         meta: {
-            ifLoggedIn: true
+            ifLoggedIn: true,
+            title: "Register | Ahabaca"
         }
     },
     {
@@ -144,48 +154,73 @@ const routes = [
         name: 'RegisterEmail',
         component: RegisterEmail,
         meta: {
-            ifLoggedIn: true
+            ifLoggedIn: true,
+            title: "Register | Ahabaca"
         }
     },
     {
         path: '/disclaimer',
         name: 'DisclaimerPage',
-        component: DisclaimerPage
+        component: DisclaimerPage,
+        meta: {
+            title: "Disclaimer | Ahabaca"
+        }
     },
     {
         path: '/sitemap',
         name: 'SitemapPage',
-        component: SitemapPage
+        component: SitemapPage,
+        meta: {
+            title: "Sitemap | Ahabaca"
+        }
     },
     {
         path: '/usersprivacy',
         name: 'UsersPrivacy',
-        component: UsersPrivacy
+        component: UsersPrivacy,
+        meta: {
+            title: "User Privacy | Ahabaca"
+        }
     },
     {
         path: '/terms',
         name: 'TermsCondition',
-        component: TermsCondition
+        component: TermsCondition,
+        meta: {
+            title: "Term & Condition | Ahabaca"
+        }
     },
     {
         path: '/privacy',
         name: 'AppPrivacy',
-        component: AppPrivacy
+        component: AppPrivacy,
+        meta: {
+            title: "Privacy | Ahabaca"
+        }
     },
     {
         path: '/faq',
         name: 'Faq',
-        component: Faq
+        component: Faq,
+        meta: {
+            title: "Faq | Ahabaca"
+        }
     },
     {
         path: '/contact',
         name: 'Contact',
-        component: Contact
+        component: Contact,
+        meta: {
+            title: "Contact AHA | Ahabaca"
+        }
     },
     {
         path: '/partnership',
         name: 'PartnersPage',
-        component: PartnersPage
+        component: PartnersPage,
+        meta: {
+            title: "Partnership | Ahabaca"
+        }
     },
     // User Layout (Auth)
     // Landing Layout
@@ -194,7 +229,8 @@ const routes = [
         name: 'LandingUser',
         component: LandingUser,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "Home | Ahabaca"
         }
     },
     {
@@ -210,7 +246,8 @@ const routes = [
         name: 'SearchPage',
         component: SearchPage,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "Search AHA | Ahabaca"
         }
     },
     // Main Feature Layout
@@ -219,7 +256,8 @@ const routes = [
         name: 'CategoryPage',
         component: CategoryPage,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "Category | Ahabaca"
         }
     },
     {
@@ -235,7 +273,7 @@ const routes = [
         name: 'BookChapter',
         component: BookChapter,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
         }
     },
     // User Layout
@@ -244,19 +282,26 @@ const routes = [
         name: 'PaymentHistoryView',
         component: PaymentHistoryView,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "Payment History | Ahabaca"
         }
     },
     // Promo etc Layout
     {
         path: '/promo',
         name: 'PromoPage',
-        component: PromoPage
+        component: PromoPage,
+        meta: {
+            title: "Promo AHA | Ahabaca"
+        }
     },
     {
         path: '/plans',
         name: 'MembershipPage',
-        component: MembershipPage
+        component: MembershipPage,
+        meta: {
+            title: "Membership AHA | Ahabaca"
+        }
     },
 
     // Library Layout
@@ -265,7 +310,8 @@ const routes = [
         name: 'LibraryPage',
         component: LibraryPage,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "My Library | Ahabaca"
         },
         children: [{
                 path: 'book',
@@ -299,7 +345,10 @@ const routes = [
     {
         path: '*',
         name: 'catchAll',
-        component: PageNotFound
+        component: PageNotFound,
+        meta: {
+            title: "Not Found | Ahabaca"
+        }
     }
 ]
 
@@ -311,25 +360,31 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (store.getters.isLoggedIn) {
+            window.document.title = to.meta && to.meta.title ? to.meta.title : 'Ahabaca';
             next()
             window.scrollTo(0, 0)
             return
         }
+        window.document.title = to.meta && to.meta.title ? to.meta.title : 'Ahabaca';
         next('/login')
         window.scrollTo(0, 0)
     } else {
+        window.document.title = to.meta && to.meta.title ? to.meta.title : 'Ahabaca';
         next()
         window.scrollTo(0, 0)
     }
     if (to.matched.some(record => record.meta.ifLoggedIn)) {
         if (store.getters.isLoggedIn) {
+            window.document.title = to.meta && to.meta.title ? to.meta.title : 'Ahabaca';
             next('/home')
             window.scrollTo(0, 0)
             return
         }
+        window.document.title = to.meta && to.meta.title ? to.meta.title : 'Ahabaca';
         next()
         window.scrollTo(0, 0)
     } else {
+        window.document.title = to.meta && to.meta.title ? to.meta.title : 'Ahabaca';
         next()
         window.scrollTo(0, 0)
     }

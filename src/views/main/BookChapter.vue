@@ -17,7 +17,7 @@
               <v-icon>mdi-grease-pencil</v-icon>
             </v-btn>
             <v-btn
-              @click="showMenuTop = !showMenuTop, showTools = false, outlineMenu = false"
+              @click="showMenuTop = !showMenuTop, showTools = false, outlineMenu = false, shareMenu = false"
               depressed
               :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
             >
@@ -28,9 +28,7 @@
       </v-row>
       <v-row v-if="showMenuTop">
         <v-col style="max-width:800px;margin:0 auto;">
-          <div
-            class="d-flex flex-row justify-center align-center"
-          >
+          <div class="d-flex flex-row justify-center align-center">
             <div class="d-flex flex-column justify-center align-center mx-4">
               <v-btn
                 @click="showTools = true, showMenuTop = false, outlineMenu = false"
@@ -54,7 +52,7 @@
               <p>Outlined</p>
             </div>
             <div class="d-flex flex-column justify-center align-center mx-4">
-              <v-btn @click="showMenuTop = false" depressed text>
+              <v-btn @click="shareMenu = true, showMenuTop = false" depressed text>
                 <v-icon>mdi-share-variant</v-icon>
               </v-btn>
               <p>Share</p>
@@ -102,6 +100,30 @@
             <v-slider v-model="slider" class="align-center" :max="max" :min="min" thumb-label></v-slider>
             <span class="font-weight-bold headline">Aa</span>
           </div>
+        </v-col>
+      </v-row>
+      <v-row v-if="shareMenu">
+        <v-col class="d-flex flex-row justify-center align-center mx-4">
+          <ShareNetwork
+            class="social-links mx-2"
+            network="facebook"
+            :url="currentUrl()"
+            :title="bookDetail.data[0].judul"
+            :description="bookDetail.data[0].deskripsi"
+            :quote="bookDetail.data[0].judul"
+            hashtags="Ahabaca"
+          >
+            <v-icon style="color:white;">mdi-facebook</v-icon>Facebook
+          </ShareNetwork>
+          <ShareNetwork
+            class="social-links mx-2"
+            network="twitter"
+            :url="currentUrl()"
+            :title="bookDetail.data[0].judul"
+            hashtags="Ahabaca"
+          >
+            <v-icon style="color:white;">mdi-twitter</v-icon>Twitter
+          </ShareNetwork>
         </v-col>
       </v-row>
     </v-container>
@@ -175,7 +197,7 @@
         </div>
       </v-container>
     </template>
-    <template v-else>
+    <template v-if="outlineMenu">
       <ChapterpageOutline />
     </template>
   </div>
@@ -202,6 +224,7 @@ export default {
       showTools: false,
       showMenuTop: false,
       outlineMenu: false,
+      shareMenu: false,
       toggleHighlight: true,
       min: 8,
       max: 72,
@@ -225,15 +248,29 @@ export default {
     },
     urlDownload(url) {
       window.open(url, "_blank");
+    },
+    currentUrl() {
+      return window.location.href;
     }
   },
   mounted() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
     this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
+    window.document.title =
+      "Read " + this.bookDetail.data[0].judul + "| Ahabaca";
   }
 };
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/css/global_variables.scss";
+
+.social-links {
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  border-radius: 50px;
+  padding: 0 4px;
+  background-color: rgb(75, 159, 255);
+}
 </style>
