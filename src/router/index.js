@@ -26,7 +26,9 @@ const Faq = () =>
 const Contact = () =>
     import ('../views/pages/ContactUs.vue')
 const PartnersPage = () =>
-    import ('../views/pages/PartnersPage.vue')
+	import ('../views/pages/PartnersPage.vue')
+const HelpSupport = () =>
+    import ('../views/pages/HelpSupport.vue')
 
 // Auth Component
 const Login = () =>
@@ -221,6 +223,15 @@ const routes = [
         meta: {
             title: "Partnership | Ahabaca"
         }
+	},
+	{
+        path: '/help',
+        name: 'HelpSupport',
+        component: HelpSupport,
+        meta: {
+			requiresAuth: true,
+            title: "Help & Support | Ahabaca"
+        }
     },
     // User Layout (Auth)
     // Landing Layout
@@ -265,7 +276,8 @@ const routes = [
         name: 'BookPage',
         component: BookPage,
         meta: {
-            requiresAuth: true
+			requiresAuth: true,
+			title: "Read Book | Ahabaca"
         }
     },
     {
@@ -273,7 +285,8 @@ const routes = [
         name: 'BookChapter',
         component: BookChapter,
         meta: {
-            requiresAuth: true,
+			requiresAuth: true,
+			title: "Read Chapter | Ahabaca"
         }
     },
     // User Layout

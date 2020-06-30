@@ -126,7 +126,7 @@ export default {
   data: () => ({
     loadSkeleton: true,
 	underlineValue: 15,
-	snackbar: true,
+	snackbar: false,
 	timeout: 2000,
     sectionLink: [
       {
