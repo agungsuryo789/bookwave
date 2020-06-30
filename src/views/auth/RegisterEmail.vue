@@ -13,7 +13,7 @@
           </v-col>
           <v-col v-show="isShow" class="mt-8" cols="12">
             <v-row justify="center">
-              <v-col cols="10" md="4" align="center">
+              <v-col align="center">
                 <p class="red--text text--lighten-1">
                   <v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email
                 </p>
@@ -26,15 +26,15 @@
                   @blur="$v.registerPayload.email.$touch()"
                   solo
                   background-color="grey lighten-2"
+                  style="max-width:50%;"
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-row justify="center">
-              <v-col cols="3" md="1" align="center">
+              <v-col align="center">
                 <v-btn
                   :elevation="8"
                   color="red darken-1"
-                  block
                   x-large
                   class="white--text"
                   v-on:click="lanjut"
@@ -68,7 +68,6 @@
                 <v-btn
                   :elevation="8"
                   color="red darken-1"
-                  block
                   x-large
                   class="white--text"
                   @click="submit"
@@ -115,18 +114,20 @@ export default {
       lazy: false,
       show1: false,
       registerPayload: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
         type: "1"
       }
-    }
+    };
   },
   computed: {
     emailErrors() {
       const errors = [];
       if (!this.$v.registerPayload.email.$dirty) return errors;
-      !this.$v.registerPayload.email.email && errors.push("Must be valid e-mail");
-      !this.$v.registerPayload.email.required && errors.push("E-mail is required");
+      !this.$v.registerPayload.email.email &&
+        errors.push("Must be valid e-mail");
+      !this.$v.registerPayload.email.required &&
+        errors.push("E-mail is required");
       return errors;
     },
     passwordErrors() {
@@ -134,7 +135,8 @@ export default {
       if (!this.$v.registerPayload.password.$dirty) return errors;
       !this.$v.registerPayload.password.minLength &&
         errors.push("At least must be 8 character");
-      !this.$v.registerPayload.password.required && errors.push("Password is required");
+      !this.$v.registerPayload.password.required &&
+        errors.push("Password is required");
       return errors;
     }
   },

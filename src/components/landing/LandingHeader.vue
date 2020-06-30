@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <div v-for="item in bookTrending.slice(0, 1)" :key="item.id_buku">
+  <v-container v-if="bookTrending.data.length > 0">
+    <div v-for="item in bookTrending.data.slice(0, 1)" :key="item.id_buku">
       <v-row justify="center" align="center">
         <v-col
           lg="6"

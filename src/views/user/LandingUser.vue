@@ -18,7 +18,7 @@
         </v-row>
         <v-row v-else>
           <v-col
-            v-for="n in bookTrending.slice(0, 4)"
+            v-for="n in bookBerandaAuth.buku_trending.slice(0, 4)"
             :key="n.id_buku"
             lg="3"
             md="6"
@@ -49,7 +49,7 @@
         </v-row>
         <v-row v-else>
           <v-col
-            v-for="n in episodeNew.slice(0, 4)"
+            v-for="n in bookBerandaAuth.audio_new.slice(0, 4)"
             :key="n.id_chapter"
             lg="3"
             md="6"
@@ -78,7 +78,7 @@
         </v-row>
         <v-row v-else>
           <v-col
-            v-for="n in bukuNew.slice(0, 4)"
+            v-for="n in bookBerandaAuth.buku_terbaru.slice(0, 4)"
             :key="n.id_buku"
             lg="3"
             md="6"
@@ -97,9 +97,10 @@
             />
           </v-col>
         </v-row>
-		<v-snackbar v-model="snackbar" :timeout="timeout">Berhasil Masuk. Happy Reading! ^_^
-        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
-      </v-snackbar>
+        <v-snackbar v-model="snackbar" :timeout="timeout">
+          Berhasil Masuk. Happy Reading! ^_^
+          <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
+        </v-snackbar>
       </v-container>
     </section>
     <FooterSection />
@@ -125,9 +126,9 @@ export default {
   },
   data: () => ({
     loadSkeleton: true,
-	underlineValue: 15,
-	snackbar: true,
-	timeout: 2000,
+    underlineValue: 15,
+    snackbar: true,
+    timeout: 2000,
     sectionLink: [
       {
         sectionName: "Buku Trending",
@@ -149,16 +150,11 @@ export default {
     }
   },
   computed: mapState({
-    bookTrending: state => state.bookTrending,
-    bukuNew: state => state.bookListNew,
-    episodeNew: state => state.episodeListNew
+    bookBerandaAuth: state => state.bookBerandaAuth
   }),
-  mounted() {
-    this.$store.dispatch("getBookTrending");
-    this.$store.dispatch("getListBookNew");
-    this.$store.dispatch("getListEpisodeNew");
-	this.loadSkeleton = false;
-	window.document.title = "Home";
+  created() {
+    this.$store.dispatch("getBerandaBukuAuth");
+    this.loadSkeleton = false;
   }
 };
 </script>

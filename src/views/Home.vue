@@ -74,6 +74,9 @@ export default {
   position: relative;
   padding: 0;
   margin: 0;
+  @media screen and (max-width: 450px) {
+    height: 300px;
+  }
   .banner-bg-img-1,
   .banner-bg-img-2 {
     position: absolute;
@@ -95,11 +98,11 @@ export default {
       height: 50%;
     }
     @media screen and (max-width: 450px) {
-      height: 40%;
+      height: 95%;
     }
     @media screen and (max-width: 360px) {
-      height: 60%;
-      width: 120%;
+      height: 100%;
+      width: 130%;
     }
   }
   .banner-bg-img-2 {
@@ -113,6 +116,14 @@ export default {
     }
     @media screen and (max-width: 650px) {
       bottom: 350px;
+    }
+    @media screen and (max-width: 450px) {
+      bottom: 0;
+    }
+    @media screen and (max-width: 360px) {
+      bottom: -20px;
+	  left: 5px;
+	  width: 110%;
     }
   }
 }

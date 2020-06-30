@@ -52,7 +52,7 @@
                 </v-toolbar-items>
                 <v-spacer></v-spacer>
                 <v-toolbar-items v-if="!showSearchBar" class="hide-on--md">
-                  <div>
+                  <div v-if="memberDetail.data">
                     <v-btn
                       class="button-subscribe mx-5 my-3"
                       rounded
@@ -64,15 +64,17 @@
                       style="text-transform:none;color:white;"
                     >Upgrade Premium</v-btn>
                   </div>
-                  <v-chip
-                    v-if="memberDetail.data[0].premium_member"
-                    class="my-4"
-                    color="primary"
-                    outlined
-                  >
-                    Premium Account
-                    <v-icon right>mdi-account-check-outline</v-icon>
-                  </v-chip>
+                  <template v-if="memberDetail.data">
+                    <v-chip
+                      v-if="memberDetail.data[0].premium_member"
+                      class="my-4"
+                      color="primary"
+                      outlined
+                    >
+                      Premium Account
+                      <v-icon right>mdi-account-check-outline</v-icon>
+                    </v-chip>
+                  </template>
                   <v-menu left bottom>
                     <template v-slot:activator="{ on }">
                       <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
@@ -125,25 +127,29 @@
                       <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                     </template>
                     <v-list>
-                      <v-list-item v-if="!memberDetail.data[0].premium_member" to="/plans">
-                        <v-list-item-title>
-                          <v-btn
-                            class="button-subscribe"
-                            rounded
-                            depressed
-                            color="#39DF8C"
-                            style="text-transform:none;color:white;"
-                          >Upgrade Premium</v-btn>
-                        </v-list-item-title>
-                      </v-list-item>
-                      <v-list-item v-if="memberDetail.data[0].premium_member">
-                        <v-list-item-title>
-                          <v-chip class="my-4" color="primary" outlined>
-                            Premium Account
-                            <v-icon right>mdi-account-check-outline</v-icon>
-                          </v-chip>
-                        </v-list-item-title>
-                      </v-list-item>
+                      <template v-if="memberDetail.data">
+                        <v-list-item v-if="!memberDetail.data[0].premium_member" to="/plans">
+                          <v-list-item-title>
+                            <v-btn
+                              class="button-subscribe"
+                              rounded
+                              depressed
+                              color="#39DF8C"
+                              style="text-transform:none;color:white;"
+                            >Upgrade Premium</v-btn>
+                          </v-list-item-title>
+                        </v-list-item>
+                      </template>
+                      <template v-if="memberDetail.data">
+                        <v-list-item v-if="memberDetail.data[0].premium_member">
+                          <v-list-item-title>
+                            <v-chip class="my-4" color="primary" outlined>
+                              Premium Account
+                              <v-icon right>mdi-account-check-outline</v-icon>
+                            </v-chip>
+                          </v-list-item-title>
+                        </v-list-item>
+                      </template>
                       <v-list-item @click="toPaymentHistory">
                         <v-list-item-title>Payment History</v-list-item-title>
                       </v-list-item>
@@ -260,7 +266,7 @@ export default {
       this.$store.dispatch("userLogout");
     }
   },
-  mounted() {
+  created() {
     this.$store.dispatch("getMemberDetail");
   }
 };
@@ -277,6 +283,13 @@ export default {
     color: white;
     .button-subscribe {
       @include btn-main-green();
+      @media screen and (max-width: 425px) {
+        width: 50%;
+      }
+      @media screen and (max-width: 340px) {
+        width: 40%;
+		font-size: 10px;
+      }
     }
     .button-dropdown-nav {
       font-size: 18px;

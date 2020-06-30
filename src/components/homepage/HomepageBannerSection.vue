@@ -1,16 +1,24 @@
 <template>
-  <v-container class="my-12">
+  <v-container class>
     <v-row class="row-banner-image d-flex flex-row justify-space-between">
-      <v-col class="col-banner-text text-center text-lg-left " lg="6" md="12" sm="12" cols="12">
-        <h1 class="my-5">Halo Saya AHA</h1>
-        <p class="my-5">
+      <v-col class="col-banner-text text-center text-lg-left" lg="6" md="12" sm="12" cols="12">
+        <h1 class="my-1">Halo Saya AHA</h1>
+        <p class="my-1">
           Lorem ipsum dolor sit amet consectetur adipisicing
           elit. Sapiente unde dolorum iste optio, repellendus
           laborum recusandae sit natus voluptate, tempore
           magni aliquam voluptatum illo magnam corporis
           doloremque! Cupiditate, alias hic.
         </p>
-        <v-btn :to="{name: 'Register'}" x-large rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
+        <v-btn
+          :to="{name: 'Register'}"
+          class="button-banner"
+          elevation="2"
+          x-large
+          rounded
+          color="#39DF8C"
+          depressed
+        >Start Free Trial</v-btn>
       </v-col>
       <v-col class="col-banner-img" lg="6" md="12" sm="12" cols="12">
         <v-img class="banner-img-2" src="@/assets/image/aha-screenshot.png"></v-img>
@@ -31,9 +39,13 @@ export default {
 .col-banner-text {
   color: white;
   z-index: 2;
-  button {
+  .button-banner {
     @include btn-main-green();
-    width: 60%;
+    width: 40%;
+    @media screen and (max-width: 340px) {
+      width: 60%;
+      font-size: 12px;
+    }
   }
   p {
     font-size: 20px;
@@ -84,13 +96,13 @@ export default {
   position: relative;
   .banner-img-2 {
     position: absolute;
-	z-index: 2;
+    z-index: 2;
   }
   .banner-img-1 {
     position: absolute;
     right: -40px;
     top: 100px;
-	z-index: 3;
+    z-index: 3;
   }
   @media screen and (max-width: 1100px) {
     display: none;

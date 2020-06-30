@@ -17,7 +17,7 @@
         <v-card class="py-2 px-2" flat outlined>
           <v-chip
             class="btn-chip-main mx-1 my-1"
-            v-for="n in daftarKategori"
+            v-for="n in daftarKategoriNoAuth"
             :key="n.id_daftar_kategori"
             @click="gotoKategori(n.id_daftar_kategori)"
             filter
@@ -35,7 +35,7 @@
     </v-row>
     <v-row v-else style="margin:0 auto;">
       <v-col
-        v-for="n in bookListTrending.slice(0, booksToShow)"
+        v-for="n in bookListTrendingNoAuth.slice(0, booksToShow)"
         :key="n.id_buku"
         lg="3"
         md="12"
@@ -62,7 +62,7 @@
           color="#39DF8C"
           elevation="2"
           depressed
-          v-if="booksToShow < parseInt(bookListTrending.length)"
+          v-if="booksToShow < parseInt(bookListTrendingNoAuth.length)"
           @click="booksToShow += 4"
         >Lihat lebih banyak</v-btn>
         <v-btn
@@ -93,8 +93,8 @@ export default {
     booksToShow: 4
   }),
   computed: mapState({
-    daftarKategori: state => state.daftarKategori,
-    bookListTrending: state => state.bookListTrending
+    daftarKategoriNoAuth: state => state.daftarKategoriNoAuth,
+    bookListTrendingNoAuth: state => state.bookListTrendingNoAuth
   }),
   methods: {
     gotoKategori(idKategori) {
@@ -105,8 +105,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("getKategori");
-    this.$store.dispatch("getListBookTrending");
+    this.$store.dispatch("getKategoriNoAuth");
+    this.$store.dispatch("getListBookTrendingNoAuth");
   }
 };
 </script>

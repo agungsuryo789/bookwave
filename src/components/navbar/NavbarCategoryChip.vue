@@ -18,7 +18,7 @@ import { mapState } from "vuex";
 export default {
   name: "NavbarCategoryChip",
   computed: mapState({
-    daftarKategori: state => state.daftarKategori
+    daftarKategori: state => state.daftarKategoriAuth
   }),
   methods: {
     gotoKategori(idKategori) {
@@ -29,7 +29,7 @@ export default {
     }
   },
   beforeMount() {
-    this.$store.dispatch("getKategori");
+    this.$store.dispatch("getDaftarKategoriAuth");
   }
 };
 </script>
