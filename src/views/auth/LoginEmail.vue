@@ -85,8 +85,8 @@
           </v-col>
         </v-row>
       </v-form>
-      <v-snackbar v-model="snackbar">Mencoba Masuk...
-        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
+      <v-snackbar v-model="snackbar">Login gagal! Periksa Email dan Password Anda
+        <v-btn color="red" text @click="snackbar=false">Close</v-btn>
       </v-snackbar>
     </v-container>
   </div>
@@ -119,9 +119,13 @@ export default {
       show1: false,
 	  password: "",
 	  snackbar: false,
+	  status:""
     };
   },
   computed: {
+	status () {
+      return store.state.status
+    },
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
@@ -137,7 +141,7 @@ export default {
         errors.push("At least must be 8 character");
       !this.$v.password.required && errors.push("Password is required");
       return errors;
-    }
+	}
   },
   methods: {
     lanjut() {
@@ -159,6 +163,7 @@ export default {
           type: 1
         };
 		this.$store.dispatch("userLogin", data);
+		console.log(status)
 		this.snackbar = true
       }
     }

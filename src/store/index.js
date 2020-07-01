@@ -157,14 +157,14 @@ export default new Vuex.Store({
             state.user = response
         },
         authSuccess_mutation: (state, response) => {
-            state.status = 'success'
-            state.token = response.data.token
-            localStorage.setItem('x-token', response.data.token)
-            state.notifMessage = response.data.message
-            router.push('/home')
+			state.status = 'success'
+			state.token = response.data.token
+			localStorage.setItem('x-token', response.data.token)
+			state.notifMessage = response.data.message
+			router.push('/home')
         },
         authError_mutation: (state) => {
-            state.status = 'error'
+			state.status = 'error'
         },
         authDown_mutation: (state) => {
             state.status = ''
@@ -598,13 +598,13 @@ export default new Vuex.Store({
                 })
         },
         userLogin: ({ commit }, user) => {
-            axs.post('ahaapi/login_member', JSON.stringify(user))
-                .then(response => {
-                    commit('authSuccess_mutation', response)
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
+			axs.post('ahaapi/login_member', user)
+			.then(response => {
+				commit('authSuccess_mutation', response)
+			})
+			.catch(err => {
+				console.log(err.message);
+				})
         },
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', JSON.stringify(user))
@@ -612,7 +612,8 @@ export default new Vuex.Store({
                     commit('authSuccess_mutation', response)
                 })
                 .catch(err => {
-                    console.log(err.message);
+					commit('authError_mutation')
+					console.log(err.message)
                 })
         },
         loginFirebase: ({ commit }) => {
