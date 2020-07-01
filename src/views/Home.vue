@@ -2,7 +2,7 @@
   <div class="home">
     <NavbarSection style="background-color:#D84B5B;" />
     <header class="banner">
-      <HomepageBannerSection style="margin:0;" />
+      <HomepageBannerSection />
       <img class="banner-bg-img-1" src="@/assets/image/banner-1.png" />
       <img class="banner-bg-img-2" src="@/assets/image/banner-2.png" />
     </header>
@@ -19,15 +19,22 @@
             ></v-img>
           </v-col>
           <v-col class="col-hero-text" lg="6" md="6" sm="12" cols="12">
-            <h1 class="my-5">Apa yang AHA miliki ?</h1>
-            <p class="pr-5" style="font-size:18px;">
+            <h1 class="my-5" style="font-size:36px;">Apa yang AHA miliki ?</h1>
+            <div class="title-underline d-flex flex-row justify-start">
+              <img src="@/assets/image/underline-1.svg" height="10" />
+              <img src="@/assets/image/underline-2.svg" height="10" />
+            </div>
+            <p class="pr-5" style="font-size:18px;width:450px;">
               Lorem ipsum dolor sit amet, consectetur adipisicing
               elit. Nobis laborum ex atque in libero. Libero eum
               labore illum ipsa blanditiis earum, aliquid mollitia
               doloremque quidem, odit quas animi dolores
               consequuntur!
             </p>
-            <a href>Lihat Lebih Banyak</a>
+            <router-link to="/home" class="hero-link text-right">
+              Lihat lebih banyak
+              <v-icon class="mb-1">mdi-arrow-right</v-icon>
+            </router-link>
           </v-col>
         </v-row>
         <v-row class="row-hero-2">
@@ -122,8 +129,8 @@ export default {
     }
     @media screen and (max-width: 360px) {
       bottom: -20px;
-	  left: 5px;
-	  width: 110%;
+      left: 5px;
+      width: 110%;
     }
   }
 }
@@ -134,6 +141,21 @@ export default {
     h1 {
       color: $mainColor;
       font-weight: bold;
+    }
+  }
+  .row-hero-1 {
+    .col-hero-text {
+      text-align: right;
+      h1,
+      p {
+        text-align: left;
+      }
+      .hero-link {
+        color: #4f2e53;
+        font-weight: bold;
+        text-decoration: none;
+		margin-right: 32%;
+      }
     }
   }
   .row-hero-2 {
@@ -161,6 +183,13 @@ export default {
       @include btn-main-green();
       width: 15%;
     }
+  }
+}
+.title-underline {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  img {
+    margin: 0 4px;
   }
 }
 </style>

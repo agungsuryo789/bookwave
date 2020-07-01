@@ -1,8 +1,12 @@
 <template>
   <v-container>
-    <v-row class="kategori-desc">
+    <v-row class="kategori-desc mx-auto" style="max-width:900px;">
       <v-col lg="6" md="12" sm="12" cols="12">
-        <h1>Kategori yang sering di cari</h1>
+        <h1 style="width:400px;">Kategori yang sering di cari</h1>
+        <div class="title-underline d-flex flex-row justify-start" style="margin-left: -4px;">
+          <img class="mx-2" src="@/assets/image/underline-1.svg" height="8" />
+          <img src="@/assets/image/underline-2.svg" height="8" />
+        </div>
       </v-col>
       <v-col lg="6" md="12" sm="12" cols="12">
         <p>
@@ -14,7 +18,7 @@
     </v-row>
     <v-row class="justify-center align-center my-10">
       <v-col class="col-kategori-chip">
-        <v-card class="py-2 px-2" flat outlined>
+        <v-card class="chip-card py-7 px-10" flat outlined>
           <v-chip
             class="btn-chip-main mx-1 my-1"
             v-for="n in daftarKategoriNoAuth"
@@ -33,11 +37,20 @@
         <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
       </v-col>
     </v-row>
-    <v-row v-else style="margin:0 auto;">
+    <v-row style="margin:0 auto;max-width:900px;">
+      <v-col>
+        <h1 style="color:#6c3f72;">Terpopuler di Kategori Semua</h1>
+        <div class="title-underline d-flex flex-row justify-start" style="margin-left: -4px;">
+          <img class="mx-2" src="@/assets/image/underline-1.svg" height="8" />
+          <img src="@/assets/image/underline-2.svg" height="8" />
+        </div>
+      </v-col>
+    </v-row>
+    <v-row v-if="!loadSkeleton" style="margin:0 auto;max-width:800px;">
       <v-col
         v-for="n in bookListTrendingNoAuth.slice(0, booksToShow)"
         :key="n.id_buku"
-        lg="3"
+        lg="4"
         md="12"
         sm="12"
         cols="12"
@@ -72,7 +85,7 @@
           elevation="2"
           depressed
           v-else
-          @click="booksToShow = 4"
+          @click="booksToShow = 6"
         >Lihat lebih sedikit</v-btn>
       </v-col>
     </v-row>
@@ -90,7 +103,7 @@ export default {
   },
   data: () => ({
     loadSkeleton: false,
-    booksToShow: 4
+    booksToShow: 6
   }),
   computed: mapState({
     daftarKategoriNoAuth: state => state.daftarKategoriNoAuth,
@@ -124,7 +137,11 @@ export default {
   }
 }
 .col-kategori-chip {
-  max-width: 400px;
+  max-width: 500px;
+  .chip-card {
+    border-top: none;
+    border-bottom: none;
+  }
 }
 .btnLihat {
   @include btn-main-green();

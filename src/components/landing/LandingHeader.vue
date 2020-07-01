@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="bookTrending.data.length > 0">
-    <div v-for="item in bookTrending.data.slice(0, 1)" :key="item.id_buku">
-      <v-row justify="center" align="center">
+    <div>
+      <v-row class="mx-auto mt-10" justify="center" align="center" style="max-width:50%;">
         <v-col
           lg="6"
           md="6"
@@ -10,13 +10,13 @@
           class="d-flex justify-center align-center"
           style="margin:0 auto;"
         >
-          <h1>{{ item.judul }}</h1>
+          <h1>{{ bookTrending.data[0].judul }}</h1>
         </v-col>
         <v-col lg="6" md="6" sm="12" cols="12" style="margin:0 auto;">
           <BookCard
-            :idBuku="parseInt(item.id_buku)"
-            :foto_sampul="item.foto_sampul"
-            :warna_kategori="item.warna_kategori"
+            :idBuku="parseInt(bookTrending.data[0].id_buku)"
+            :foto_sampul="bookTrending.data[0].foto_sampul"
+            :warna_kategori="bookTrending.data[0].warna_kategori"
           />
         </v-col>
       </v-row>
