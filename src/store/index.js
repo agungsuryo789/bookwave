@@ -170,14 +170,16 @@ export default new Vuex.Store({
 			router.push('/home')
         },
         authError_mutation: (state, response) => {
-			router.push({ name: 'Login' })
 			state.snackbar.text = response
 			state.snackbar.visible = true
+			location.reload()
+			// router.push({ name: 'Login' })
 		},
 		registerError_mutation: (state, response) => {
 			state.snackbar.text = response
 			state.snackbar.visible = true
-			router.push({ name: 'Register' })
+			location.reload()
+			// router.push({ name: 'Register' })
         },
         authDown_mutation: (state) => {
             state.status = ''
@@ -300,6 +302,7 @@ export default new Vuex.Store({
 		},
 		showSnackbar(state, response) {
 			state.snackbar.text = response
+			state.snackbar.timeout = 3000
 			state.snackbar.visible = true
 			},
 		closeSnackbar(state) {
@@ -641,7 +644,7 @@ export default new Vuex.Store({
 					commit('showSnackbar', response.data.message)
                 })
                 .catch(err => {
-					commit('showSnackbar', 'Email Sudah Terdaftar!')
+					commit('registerError_mutation', 'Email Sudah Terdaftar!')
 					console.log(err.message)
                 })
         },

@@ -18,7 +18,7 @@
                   <v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email
                 </p>
                 <v-text-field
-                  v-model="email"
+                  v-model="emailReg"
                   class="centered-input"
                   :error-messages="emailErrors"
                   required
@@ -50,7 +50,7 @@
                 </p>
                 <v-text-field
                   class="centered-input"
-                  v-model="password"
+                  v-model="passwordReg"
                   :error-messages="passwordErrors"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' :'password'"
@@ -101,8 +101,8 @@ export default {
   name: "RegisterEmail",
   mixins: [validationMixin],
   validations: {
-	email: { required, email },
-	password: {
+	emailReg: { required, email },
+	passwordReg: {
 	required,
 	minLength: minLength(8)
 	}
@@ -116,45 +116,45 @@ export default {
       isShow: true,
       lazy: false,
       show1: false,
-		email: "",
-		password: ""
+		emailReg: "",
+		passwordReg: ""
     }
   },
   computed: {
     emailErrors() {
       const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
+      if (!this.$v.emailReg.$dirty) return errors;
+      !this.$v.emailReg.email && errors.push("Must be valid e-mail");
+      !this.$v.emailReg.required && errors.push("E-mail is required");
       return errors;
     },
     passwordErrors() {
       const errors = [];
-      if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.minLength &&
+      if (!this.$v.passwordReg.$dirty) return errors;
+      !this.$v.passwordReg.minLength &&
         errors.push("At least must be 8 character");
-      !this.$v.password.required && errors.push("Password is required");
+      !this.$v.passwordReg.required && errors.push("Password is required");
       return errors;
     }
   },
   methods: {
 	  ...mapMutations(["showSnackbar", "closeSnackbar"]),
     lanjut() {
-      this.$v.email.$touch();
-      if (this.$v.email.$invalid) {
+      this.$v.emailReg.$touch();
+      if (this.$v.emailReg.$invalid) {
         this.isShow = true;
       } else {
         this.isShow = false;
       }
     },
     submit() {
-      this.$v.password.$touch();
-      if (this.$v.password.$invalid) {
+      this.$v.passwordReg.$touch();
+      if (this.$v.passwordReg.$invalid) {
 
       } else {
 		var data = {
-          email: this.email,
-          password: this.password,
+          email: this.emailReg,
+          password: this.passwordReg,
           type: 1
         };
 		this.$store.dispatch("userRegister", data);

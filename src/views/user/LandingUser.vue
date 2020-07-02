@@ -97,9 +97,7 @@
             />
           </v-col>
         </v-row>
-		<v-snackbar v-model="snackbar" :timeout="timeout">Berhasil Masuk. Happy Reading! ^_^
-        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
-      </v-snackbar>
+		<SnackbarToast />
       </v-container>
     </section>
     <FooterSection />
@@ -112,7 +110,8 @@ import BookCard from "@/components/BookCard.vue";
 import LandingHeader from "@/components/landing/LandingHeader.vue";
 import EpisodeCard from "@/components/EpisodeCard.vue";
 import FooterSection from "@/components/FooterSection.vue";
-import { mapState } from "vuex";
+import SnackbarToast from "@/components/SnackbarToast.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "LandingUser",
@@ -121,13 +120,12 @@ export default {
     BookCard,
     LandingHeader,
     EpisodeCard,
-    FooterSection
+	FooterSection,
+	SnackbarToast
   },
   data: () => ({
     loadSkeleton: true,
 	underlineValue: 15,
-	snackbar: false,
-	timeout: 2000,
     sectionLink: [
       {
         sectionName: "Buku Trending",
@@ -144,6 +142,7 @@ export default {
     ]
   }),
   methods: {
+	...mapMutations(["showSnackbar", "closeSnackbar"]),
     bookSectionAction(event) {
       this.underlineValue = 100;
     }

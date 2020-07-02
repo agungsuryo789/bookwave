@@ -7,7 +7,7 @@
 
       {{ snackbar.text }}
 
-      <v-btn flat dark text @click="closeSnackbar">X</v-btn>
+      <v-btn dark text @click="closeSnackbar">X</v-btn>
 
   </v-snackbar>
 </template>
