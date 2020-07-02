@@ -109,8 +109,14 @@ export default new Vuex.Store({
         editTagRes: {},
         paymentHistoryList: [],
         invoiceDetails: {},
-        midtransToken: '',
-        notifMessage: ''
+		midtransToken: '',
+		snackbar: {
+			visible: false,
+			text: null,
+			timeout: 6000,
+			multiline: false,
+			color: 'cyan darken-2'
+		}
     },
     mutations: {
         getKategori_mutation: (state, response) => {
@@ -163,8 +169,15 @@ export default new Vuex.Store({
 			state.notifMessage = response.data.message
 			router.push('/home')
         },
-        authError_mutation: (state) => {
-			state.status = 'error'
+        authError_mutation: (state, response) => {
+			router.push({ name: 'Login' })
+			state.snackbar.text = response
+			state.snackbar.visible = true
+		},
+		registerError_mutation: (state, response) => {
+			state.snackbar.text = response
+			state.snackbar.visible = true
+			router.push({ name: 'Register' })
         },
         authDown_mutation: (state) => {
             state.status = ''
@@ -284,8 +297,18 @@ export default new Vuex.Store({
         },
         notifMessage_mutation: (state, response) => {
             state.notifMessage = response.data.message
-        }
-    },
+		},
+		showSnackbar(state, response) {
+			state.snackbar.text = response
+			state.snackbar.visible = true
+			},
+		closeSnackbar(state) {
+			state.snackbar.visible = false
+			state.snackbar.multiline = false
+			state.snackbar.timeout = 6000
+			state.snackbar.text = null
+			}
+		},
     actions: {
         getSearchByDefault: ({ commit }, payload) => {
             axs.post('/ahaapi/pencarian', payload)
@@ -600,19 +623,25 @@ export default new Vuex.Store({
         userLogin: ({ commit }, user) => {
 			axs.post('ahaapi/login_member', user)
 			.then(response => {
+				console.log(response)
 				commit('authSuccess_mutation', response)
+				commit('showSnackbar', response.data.message)
 			})
 			.catch(err => {
-				console.log(err.message);
+				// commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
+				commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
+				console.log(err.message)
 				})
         },
         userRegister: ({ commit }, user) => {
-            axs.post('ahaapi/register_member', JSON.stringify(user))
+            axs.post('ahaapi/register_member', user)
                 .then(response => {
-                    commit('authSuccess_mutation', response)
+					console.log(response)
+					commit('authSuccess_mutation', response)
+					commit('showSnackbar', response.data.message)
                 })
                 .catch(err => {
-					commit('authError_mutation')
+					commit('showSnackbar', 'Email Sudah Terdaftar!')
 					console.log(err.message)
                 })
         },
@@ -697,8 +726,10 @@ export default new Vuex.Store({
         forgotPassword: ({ commit }, data) => {
             axs.post('/ahaapi/lupa_password', data)
                 .then(response => {
-                    commit('notifMessage_mutation', response.data.message)
-                    console.log(response.data.message)
+					console.log(response.data)
+					commit('showSnackbar', response.data.message)
+                    // commit('notifMessage_mutation', response.data.message)
+                    // console.log(response.data.message)
                 })
         },
         resetPassword: ({ commit }, data) => {

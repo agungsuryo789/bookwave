@@ -85,17 +85,17 @@
           </v-col>
         </v-row>
       </v-form>
-      <v-snackbar v-model="snackbar">Login gagal! Periksa Email dan Password Anda
-        <v-btn color="red" text @click="snackbar=false">Close</v-btn>
-      </v-snackbar>
+      <SnackbarToast />
     </v-container>
   </div>
 </template>
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import SnackbarToast from "@/components/SnackbarToast.vue";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import { mapMutations } from "vuex";
 
 /* eslint-disable */
 export default {
@@ -109,7 +109,8 @@ export default {
     }
   },
   components: {
-    NavbarSection
+	NavbarSection,
+	SnackbarToast
   },
   data() {
     return {
@@ -117,15 +118,10 @@ export default {
       email: "",
       lazy: false,
       show1: false,
-	  password: "",
-	  snackbar: false,
-	  status:""
+	  password: ""
     };
   },
   computed: {
-	status () {
-      return store.state.status
-    },
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
@@ -144,6 +140,7 @@ export default {
 	}
   },
   methods: {
+	...mapMutations(["showSnackbar", "closeSnackbar"]),
     lanjut() {
       this.$v.email.$touch();
       if (this.$v.email.$invalid) {
@@ -164,9 +161,9 @@ export default {
         };
 		this.$store.dispatch("userLogin", data);
 		console.log(status)
-		this.snackbar = true
+		this.showSnackbar()
       }
-    }
+	}
   }
 };
 </script>
