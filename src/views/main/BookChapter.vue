@@ -259,8 +259,7 @@ export default {
       window.open(url, "_blank");
     },
     currentUrl() {
-      // return window.location.href;
-      return "https://ahabaca.com";
+      return window.location.href;
     }
   },
   mounted() {

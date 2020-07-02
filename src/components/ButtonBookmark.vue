@@ -1,11 +1,11 @@
 <template>
   <div v-if="this.$store.getters.isLoggedIn">
-    <template v-if="!bookDetail[0].is_collected">
+    <template v-if="!isBookmarked">
       <v-btn class="book-bookmark-button" icon @click="setBookmark">
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </template>
-    <template v-if="bookDetail[0].is_collected">
+    <template v-if="isBookmarked">
       <v-btn class="book-bookmark-button" icon @click="delBookmark">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
   name: "ButtonBookmark",
   props: {
@@ -26,22 +25,19 @@ export default {
     return {
       payloadBookmark: {
         id_buku: this.idBuku
-      }
+      },
+      isBookmarked: false
     };
   },
   methods: {
     setBookmark() {
+      this.isBookmarked = true;
       this.$store.dispatch("setBookmark", this.payloadBookmark);
-	},
-	delBookmark() {
-		this.$store.dispatch("setDeleteKoleksi", this.payloadBookmark);
-	}
-  },
-  computed: mapState({
-    bookDetail: state => state.bookDetail.data
-  }),
-  mounted() {
-    this.$store.dispatch("getBookDetailByID", this.idBuku);
+    },
+    delBookmark() {
+      this.isBookmarked = false;
+      this.$store.dispatch("setDeleteKoleksi", this.payloadBookmark);
+    }
   }
 };
 </script>

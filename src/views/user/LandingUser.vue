@@ -11,14 +11,14 @@
           class="font-weight-black book-section-title"
         >{{ sectionLink[0].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <v-row v-if="loadSkeleton">
+        <v-row class="my-6" v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="12" sm="12" cols="12" class="my-2">
             <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
           </v-col>
         </v-row>
-        <v-row v-else>
+        <v-row class="my-6" v-else>
           <v-col
-            v-for="n in bookTrending.slice(0, 4)"
+            v-for="n in bookBerandaAuth.buku_trending.slice(0, 4)"
             :key="n.id_buku"
             lg="3"
             md="6"
@@ -42,14 +42,14 @@
           class="font-weight-black book-section-title"
         >{{ sectionLink[1].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <v-row v-if="loadSkeleton">
+        <v-row class="my-6" v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" cols="12" class="my-2">
             <v-skeleton-loader class="mx-auto" width="350" type="list-item-avatar-three-line" tile></v-skeleton-loader>
           </v-col>
         </v-row>
-        <v-row v-else>
+        <v-row class="my-6" v-else>
           <v-col
-            v-for="n in episodeNew.slice(0, 4)"
+            v-for="n in bookBerandaAuth.audio_new.slice(0, 4)"
             :key="n.id_chapter"
             lg="3"
             md="6"
@@ -71,14 +71,14 @@
           class="font-weight-black book-section-title"
         >{{ sectionLink[2].sectionName }}</router-link>
         <v-progress-linear v-model="underlineValue"></v-progress-linear>
-        <v-row v-if="loadSkeleton">
+        <v-row class="my-6" v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" cols="12" class="my-2">
             <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
           </v-col>
         </v-row>
-        <v-row v-else>
+        <v-row class="my-6" v-else>
           <v-col
-            v-for="n in bukuNew.slice(0, 4)"
+            v-for="n in bookBerandaAuth.buku_terbaru.slice(0, 4)"
             :key="n.id_buku"
             lg="3"
             md="6"
@@ -148,16 +148,11 @@ export default {
     }
   },
   computed: mapState({
-    bookTrending: state => state.bookTrending,
-    bukuNew: state => state.bookListNew,
-    episodeNew: state => state.episodeListNew
+    bookBerandaAuth: state => state.bookBerandaAuth
   }),
-  mounted() {
-    this.$store.dispatch("getBookTrending");
-    this.$store.dispatch("getListBookNew");
-    this.$store.dispatch("getListEpisodeNew");
-	this.loadSkeleton = false;
-	window.document.title = "Home";
+  created() {
+    this.$store.dispatch("getBerandaBukuAuth");
+    this.loadSkeleton = false;
   }
 };
 </script>

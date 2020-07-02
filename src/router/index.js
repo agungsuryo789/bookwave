@@ -329,27 +329,51 @@ const routes = [
         children: [{
                 path: 'book',
                 component: LibraryBook,
+                meta: {
+                    requiresAuth: true,
+                    title: "My Library | Ahabaca"
+                },
             },
             {
                 path: 'episode',
                 component: LibraryEpisode,
+                meta: {
+                    requiresAuth: true,
+                    title: "My Library | Ahabaca"
+                },
             },
             {
                 path: 'highlighted',
                 component: LibraryColour,
+                meta: {
+                    requiresAuth: true,
+                    title: "My Library | Ahabaca"
+                },
             },
             {
                 path: 'favorite',
                 component: LibraryFav,
+                meta: {
+                    requiresAuth: true,
+                    title: "My Library | Ahabaca"
+                },
             },
             {
                 path: 'tag',
                 component: LibraryTag,
+                meta: {
+                    requiresAuth: true,
+                    title: "My Library | Ahabaca"
+                },
             },
             {
                 path: 'add-tag/:idBuku',
                 name: 'LibraryTagAdd',
-                component: LibraryTagAdd
+                component: LibraryTagAdd,
+                meta: {
+                    requiresAuth: true,
+                    title: "My Library | Ahabaca"
+                },
             }
         ]
 

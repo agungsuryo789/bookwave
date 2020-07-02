@@ -3,165 +3,167 @@
     <v-row>
       <v-col>
         <nav v-if="userState" class="navbar" style="background-color:white;">
-          <v-row>
-            <v-col>
-              <v-toolbar
-                class="app-bar"
-                id="appBar"
-                color="white"
-                absolute
-                light
-                flat
-                style="width:100%;"
-              >
-                <v-toolbar-title>
-                  <router-link to="/home">
-                    <v-img
-                      alt="Vuetify Logo"
-                      class="shrink ml-5 mr-2"
-                      contain
-                      src="@/assets/image/aha-red.svg"
-                      transition="scale-transition"
-                      width="100"
-                    />
-                  </router-link>
-                </v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items class="hide-on--md" v-if="!showSearchBar">
-                  <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
-                    <v-icon>mdi-magnify</v-icon>
-                  </v-btn>
+          <v-toolbar
+            class="app-bar"
+            id="appBar"
+            color="white"
+            absolute
+            light
+            flat
+            style="width:100%;"
+          >
+            <v-toolbar-title>
+              <router-link to="/home">
+                <v-img
+                  alt="Vuetify Logo"
+                  class="shrink ml-5 mr-2"
+                  contain
+                  src="@/assets/image/aha-red.svg"
+                  transition="scale-transition"
+                  width="100"
+                />
+              </router-link>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items class="hide-on--md" v-if="!showSearchBar">
+              <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+              <v-btn
+                color="transparent"
+                depressed
+                @click="showCategory = !showCategory"
+                style="text-transform:none;font-size:18px;font-weight:600;"
+              >Temukan</v-btn>
+              <v-btn
+                to="/library/book"
+                color="transparent"
+                depressed
+                style="text-transform:none;font-size:18px;font-weight:600;"
+              >Library</v-btn>
+              <v-btn
+                to="/promo"
+                color="transparent"
+                depressed
+                style="text-transform:none;font-size:18px;font-weight:600;"
+              >Promo</v-btn>
+            </v-toolbar-items>
+            <v-spacer></v-spacer>
+            <v-toolbar-items v-if="!showSearchBar" class="hide-on--md">
+              <div v-if="memberDetail.data">
+                <v-btn
+                  class="button-subscribe mx-5 my-3"
+                  rounded
+                  depressed
+                  color="#39DF8C"
+                  elevation="2"
+                  v-if="!memberDetail.data[0].premium_member"
+                  to="/plans"
+                  style="text-transform:none;color:white;"
+                >Upgrade Premium</v-btn>
+              </div>
+              <template v-if="memberDetail.data">
+                <v-chip
+                  v-if="memberDetail.data[0].premium_member"
+                  class="my-4"
+                  color="primary"
+                  outlined
+                >
+                  Premium Account
+                  <v-icon right>mdi-account-check-outline</v-icon>
+                </v-chip>
+              </template>
+              <v-menu left bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
+                </template>
+                <v-list>
+                  <v-list-item @click="toPaymentHistory">
+                    <v-list-item-title>Payment History</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="() => {}">
+                    <v-list-item-title @click="toContact">Help & Support</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="userLogout">
+                    <v-list-item-title>Log Out</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </v-toolbar-items>
+            <v-toolbar-items v-if="!showSearchBar" class="hide-on--lg">
+              <v-menu left bottom>
+                <template v-slot:activator="{ on }">
                   <v-btn
+                    class="button-dropdown-nav"
+                    v-on="on"
+                    @click="showCategory = false"
                     color="transparent"
                     depressed
-                    @click="showCategory = !showCategory"
-                    style="text-transform:none;font-size:18px;font-weight:600;"
-                  >Temukan</v-btn>
-                  <v-btn
-                    to="/library/book"
-                    color="transparent"
-                    depressed
-                    style="text-transform:none;font-size:18px;font-weight:600;"
-                  >Library</v-btn>
-                  <v-btn
-                    to="/promo"
-                    color="transparent"
-                    depressed
-                    style="text-transform:none;font-size:18px;font-weight:600;"
-                  >Promo</v-btn>
-                </v-toolbar-items>
-                <v-spacer></v-spacer>
-                <v-toolbar-items v-if="!showSearchBar" class="hide-on--md">
-                  <div>
-                    <v-btn
-                      class="button-subscribe mx-5 my-3"
-                      rounded
-                      depressed
-                      color="#39DF8C"
-                      elevation="2"
-                      v-if="!memberDetail.data[0].premium_member"
-                      to="/plans"
-                      style="text-transform:none;color:white;"
-                    >Upgrade Premium</v-btn>
-                  </div>
-                  <v-chip
-                    v-if="memberDetail.data[0].premium_member"
-                    class="my-4"
-                    color="primary"
-                    outlined
                   >
-                    Premium Account
-                    <v-icon right>mdi-account-check-outline</v-icon>
-                  </v-chip>
-                  <v-menu left bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
-                    </template>
-                    <v-list>
-                      <v-list-item @click="toPaymentHistory">
-                        <v-list-item-title>Payment History</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item  @click="toHelp">
-                        <v-list-item-title>Help & Support</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="userLogout">
-                        <v-list-item-title>Log Out</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-                </v-toolbar-items>
-                <v-toolbar-items v-if="!showSearchBar" class="hide-on--lg">
-                  <v-menu left bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        class="button-dropdown-nav"
-                        v-on="on"
-                        @click="showCategory = false"
-                        color="transparent"
-                        depressed
-                      >
-                        <v-icon>mdi-menu</v-icon>
-                      </v-btn>
-                    </template>
-                    <v-list style="z-index:3;width:200px;">
-                      <v-list-item @click="showSearchBar = !showSearchBar, showCategory = false">
-                        <v-list-item-title>
-                          <v-icon>mdi-magnify</v-icon>
-                        </v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="showCategory = !showCategory">
-                        <v-list-item-title>Temukan</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item to="/library/book">
-                        <v-list-item-title>Library</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item to="/promo">
-                        <v-list-item-title>Promo</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-                  <v-menu left bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
-                    </template>
-                    <v-list>
-                      <v-list-item v-if="!memberDetail.data[0].premium_member" to="/plans">
-                        <v-list-item-title>
-                          <v-btn
-                            class="button-subscribe"
-                            rounded
-                            depressed
-                            color="#39DF8C"
-                            style="text-transform:none;color:white;"
-                          >Upgrade Premium</v-btn>
-                        </v-list-item-title>
-                      </v-list-item>
-                      <v-list-item v-if="memberDetail.data[0].premium_member">
-                        <v-list-item-title>
-                          <v-chip class="my-4" color="primary" outlined>
-                            Premium Account
-                            <v-icon right>mdi-account-check-outline</v-icon>
-                          </v-chip>
-                        </v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="toPaymentHistory">
-                        <v-list-item-title>Payment History</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="() => {}">
-                        <v-list-item-title>Help & Support</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="userLogout">
-                        <v-list-item-title>Log Out</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-                </v-toolbar-items>
-                <v-toolbar-items v-else style="width:90%;">
-                  <NavbarSearch @clicked="onCloseSearchBar" />
-                </v-toolbar-items>
-              </v-toolbar>
-            </v-col>
-          </v-row>
+                    <v-icon>mdi-menu</v-icon>
+                  </v-btn>
+                </template>
+                <v-list style="z-index:3;width:200px;">
+                  <v-list-item @click="showSearchBar = !showSearchBar, showCategory = false">
+                    <v-list-item-title>
+                      <v-icon>mdi-magnify</v-icon>
+                    </v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="showCategory = !showCategory">
+                    <v-list-item-title>Temukan</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item to="/library/book">
+                    <v-list-item-title>Library</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item to="/promo">
+                    <v-list-item-title>Promo</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+              <v-menu left bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
+                </template>
+                <v-list>
+                  <template v-if="memberDetail.data">
+                    <v-list-item v-if="!memberDetail.data[0].premium_member" to="/plans">
+                      <v-list-item-title>
+                        <v-btn
+                          class="button-subscribe"
+                          rounded
+                          depressed
+                          color="#39DF8C"
+                          style="text-transform:none;color:white;"
+                        >Upgrade Premium</v-btn>
+                      </v-list-item-title>
+                    </v-list-item>
+                  </template>
+                  <template v-if="memberDetail.data">
+                    <v-list-item v-if="memberDetail.data[0].premium_member">
+                      <v-list-item-title>
+                        <v-chip class="my-4" color="primary" outlined>
+                          Premium Account
+                          <v-icon right>mdi-account-check-outline</v-icon>
+                        </v-chip>
+                      </v-list-item-title>
+                    </v-list-item>
+                  </template>
+                  <v-list-item @click="toPaymentHistory">
+                    <v-list-item-title>Payment History</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="() => {}">
+                    <v-list-item-title>Help & Support</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="userLogout">
+                    <v-list-item-title>Log Out</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </v-toolbar-items>
+            <v-toolbar-items v-else style="width:90%;">
+              <NavbarSearch @clicked="onCloseSearchBar" />
+            </v-toolbar-items>
+          </v-toolbar>
           <v-row>
             <transition name="fade" mode="out-in">
               <v-col v-if="showCategory" class="category-chip--navbar ml-3 my-5">
@@ -171,51 +173,39 @@
           </v-row>
         </nav>
         <nav v-else class="navbar" style="background-color:#D84B5B;">
-          <v-row>
-            <v-col>
-              <v-toolbar
-                class="app-bar"
-                id="appBar"
-                color="#D84B5B"
-                absolute
-                light
-                flat
-                style="width:100%;"
-              >
-                <v-toolbar-title>
-                  <router-link to="/">
-                    <v-img
-                      alt="Vuetify Logo"
-                      class="shrink ml-5 mr-2"
-                      contain
-                      src="@/assets/image/aha-white.svg"
-                      transition="scale-transition"
-                      width="100px"
-                    />
-                  </router-link>
-                </v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items>
-                  <div class="my-3">
-                    <v-btn
-                      to="register"
-                      class="button-subscribe"
-                      rounded
-                      color="#39DF8C"
-                      elevation="2"
-                      depressed
-                    >Start Trial</v-btn>
-                    <v-btn
-                      to="login"
-                      color="transparent"
-                      depressed
-                      style="text-transform:none;font-size:18px;font-weight:600;color:white;"
-                    >Login</v-btn>
-                  </div>
-                </v-toolbar-items>
-              </v-toolbar>
-            </v-col>
-          </v-row>
+          <v-toolbar class="app-bar--no-auth" id="appBar" color="#D84B5B" absolute light flat style>
+            <v-toolbar-title>
+              <router-link to="/">
+                <v-img
+                  alt="Vuetify Logo"
+                  class="shrink ml-5 mr-2"
+                  contain
+                  src="@/assets/image/aha-white.svg"
+                  transition="scale-transition"
+                  width="100px"
+                />
+              </router-link>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <div class="my-3">
+                <v-btn
+                  to="register"
+                  class="button-subscribe"
+                  rounded
+                  color="#39DF8C"
+                  elevation="2"
+                  depressed
+                >Start Trial</v-btn>
+                <v-btn
+                  to="login"
+                  color="transparent"
+                  depressed
+                  style="text-transform:none;font-size:18px;font-weight:600;color:white;"
+                >Login</v-btn>
+              </div>
+            </v-toolbar-items>
+          </v-toolbar>
         </nav>
       </v-col>
     </v-row>
@@ -260,7 +250,7 @@ export default {
       this.$store.dispatch("userLogout");
     }
   },
-  mounted() {
+  created() {
     this.$store.dispatch("getMemberDetail");
   }
 };
@@ -273,15 +263,34 @@ export default {
   .navbarChangeColor {
     background-color: white;
   }
-  .app-bar {
+  .app-bar,
+  .app-bar--no-auth {
     color: white;
     .button-subscribe {
       @include btn-main-green();
+      @media screen and (max-width: 425px) {
+        width: 50%;
+      }
+      @media screen and (max-width: 340px) {
+        width: 40%;
+        font-size: 10px;
+      }
     }
     .button-dropdown-nav {
       font-size: 18px;
       font-weight: 600;
       text-transform: none;
+    }
+  }
+  .app-bar {
+    width: 100%;
+    padding: 0 5%;
+  }
+  .app-bar--no-auth {
+    width: 100%;
+    padding: 0 11%;
+    @media screen and (max-width: 425px) {
+      padding: 0 2%;
     }
   }
   .category-chip--navbar {
