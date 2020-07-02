@@ -18,12 +18,12 @@
                   <v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email
                 </p>
                 <v-text-field
-                  v-model="registerPayload.email"
+                  v-model="emailReg"
                   class="centered-input"
                   :error-messages="emailErrors"
                   required
-                  @input="$v.registerPayload.email.$touch()"
-                  @blur="$v.registerPayload.email.$touch()"
+                  @input="$v.email.$touch()"
+                  @blur="$v.email.$touch()"
                   solo
                   background-color="grey lighten-2"
                   style="max-width:50%;"
@@ -50,14 +50,14 @@
                 </p>
                 <v-text-field
                   class="centered-input"
-                  v-model="registerPayload.password"
+                  v-model="passwordReg"
                   :error-messages="passwordErrors"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' :'password'"
                   counter
                   @click:append="show1 = !show1"
-                  @input="$v.registerPayload.password.$touch()"
-                  @blur="$v.registerPayload.password.$touch()"
+                  @input="$v.password.$touch()"
+                  @blur="$v.password.$touch()"
                   solo
                   background-color="grey lighten-2"
                 ></v-text-field>
@@ -82,6 +82,7 @@
             <router-link to="/login">Masuk</router-link>
           </v-col>
         </v-row>
+		<SnackbarToast />
       </v-container>
     </v-form>
   </div>
@@ -90,71 +91,73 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import { validationMixin } from "vuelidate";
+import { mapMutations } from "vuex";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import SnackbarToast from "@/components/SnackbarToast.vue";
 
 /* eslint-disable */
 export default {
   name: "RegisterEmail",
   mixins: [validationMixin],
   validations: {
-    registerPayload: {
-      email: { required, email },
-      password: {
-        required,
-        minLength: minLength(8)
-      }
-    }
+	emailReg: { required, email },
+	passwordReg: {
+	required,
+	minLength: minLength(8)
+	}
   },
   components: {
-    NavbarSection
+	NavbarSection,
+	SnackbarToast
   },
   data() {
     return {
       isShow: true,
       lazy: false,
       show1: false,
-      registerPayload: {
-        email: "",
-        password: "",
-        type: "1"
-      }
-    };
+		emailReg: "",
+		passwordReg: ""
+    }
   },
   computed: {
     emailErrors() {
       const errors = [];
-      if (!this.$v.registerPayload.email.$dirty) return errors;
-      !this.$v.registerPayload.email.email &&
-        errors.push("Must be valid e-mail");
-      !this.$v.registerPayload.email.required &&
-        errors.push("E-mail is required");
+      if (!this.$v.emailReg.$dirty) return errors;
+      !this.$v.emailReg.email && errors.push("Must be valid e-mail");
+      !this.$v.emailReg.required && errors.push("E-mail is required");
       return errors;
     },
     passwordErrors() {
       const errors = [];
-      if (!this.$v.registerPayload.password.$dirty) return errors;
-      !this.$v.registerPayload.password.minLength &&
+      if (!this.$v.passwordReg.$dirty) return errors;
+      !this.$v.passwordReg.minLength &&
         errors.push("At least must be 8 character");
-      !this.$v.registerPayload.password.required &&
-        errors.push("Password is required");
+      !this.$v.passwordReg.required && errors.push("Password is required");
       return errors;
     }
   },
   methods: {
+	  ...mapMutations(["showSnackbar", "closeSnackbar"]),
     lanjut() {
-      this.$v.registerPayload.email.$touch();
-      if (this.$v.registerPayload.email.$invalid) {
+      this.$v.emailReg.$touch();
+      if (this.$v.emailReg.$invalid) {
         this.isShow = true;
       } else {
         this.isShow = false;
       }
     },
     submit() {
-      this.$v.registerPayload.password.$touch();
-      if (this.$v.registerPayload.password.$invalid) {
-        this.snackbar = true;
+      this.$v.passwordReg.$touch();
+      if (this.$v.passwordReg.$invalid) {
+
       } else {
-        this.$store.dispatch("userRegister", this.registerPayload);
+		var data = {
+          email: this.emailReg,
+          password: this.passwordReg,
+          type: 1
+        };
+		this.$store.dispatch("userRegister", data);
+		this.showSnackbar()
       }
     }
   }

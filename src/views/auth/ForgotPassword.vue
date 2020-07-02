@@ -17,12 +17,15 @@
                 <v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email
               </p>
               <v-text-field
-                v-model="email"
-                class="centered-input"
-                :rules="emailRules"
-                solo
-                background-color="grey lighten-2"
-              ></v-text-field>
+                  class="centered-input"
+                  solo
+                  background-color="grey lighten-2"
+                  v-model="email"
+                  :error-messages="emailErrors"
+                  required
+                  @input="$v.email.$touch()"
+                  @blur="$v.email.$touch()"
+                ></v-text-field>
             </v-col>
           </v-row>
           <v-row justify="center">
@@ -39,10 +42,11 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-snackbar v-model="snackbar">
+      <!--<v-snackbar v-model="snackbar">
         Berhasil Kirim Email. Cek Email Kamu ^_^
         <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
-      </v-snackbar>
+      </v-snackbar>-->
+		<SnackbarToast />
       <v-spacer></v-spacer>
     </v-container>
   </div>
@@ -50,31 +54,52 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import SnackbarToast from "@/components/SnackbarToast.vue";
+import { mapMutations } from "vuex";
+import { validationMixin } from "vuelidate";
+import { required, email } from "vuelidate/lib/validators";
 
 /* eslint-disable */
 export default {
   name: "ForgotPassword",
   components: {
-    NavbarSection
+	NavbarSection,
+	SnackbarToast
+  },
+  mixins: [validationMixin],
+  validations: {
+    email: { required, email }
   },
   data() {
     return {
-	  email: "",
-	  snackbar: false,
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-	  ],
+	  email: ""
     };
   },
+  computed: {
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.required && errors.push("E-mail is required");
+      return errors;
+	  console.log(errors);
+	}
+  },
   methods: {
+	...mapMutations(["showSnackbar", "closeSnackbar"]),
     submit() {
-      var data = {
-        email: this.email
-      };
-      this.$store.dispatch("forgotPassword", data);
-      this.snackbar = true;
-    }
+		this.$v.email.$touch();
+		if (this.$v.email.$invalid) {
+
+		}
+		else{
+			var data = {
+			email: this.email
+		};
+		this.$store.dispatch("forgotPassword", data);
+		this.showSnackbar()
+		}
+	}
   }
 };
 </script>

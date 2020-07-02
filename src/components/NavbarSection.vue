@@ -242,9 +242,9 @@ export default {
         name: "PaymentHistoryView"
       });
     },
-    toContact() {
+    toHelp() {
       this.$router.push({
-        name: "Contact"
+        name: "HelpSupport"
       });
     },
     userLogout() {

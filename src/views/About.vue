@@ -17,7 +17,7 @@
 		</v-container>
 		<v-container fluid>
 			<v-row>
-				<v-img src="@/assets/image/images.png"></v-img>
+				<v-img src="@/assets/image/images.png" class="my-4"></v-img>
 			</v-row>
 		</v-container>
 		<v-container>
@@ -48,3 +48,12 @@ export default {
   }
 };
 </script>
+
+<style>
+	div .container{
+		font-size: larger;
+	}
+	p {
+		line-height: 1.6;
+	}
+</style>

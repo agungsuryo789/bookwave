@@ -1,12 +1,12 @@
 <template>
 	<div class="container mt-10">
-		<v-row>
-			<v-col md="4">
-				<h1> {{ title }} </h1>
+		<v-row justify="center">
+			<v-col md="5">
+					<h1> {{ title }} </h1>
 					<p> {{ subtitle }} </p>
 			</v-col>
-			<v-col md="8">
-				<v-img src="@/assets/image/Group21.png"></v-img>
+			<v-col md="6">
+				<v-img src="@/assets/image/Group21.png" height="240px" position="right 25%"></v-img>
 			</v-col>
 		</v-row>
 		<hr class="mt-5">
@@ -22,3 +22,9 @@ export default {
   }
 }
 </script>
+
+<style>
+	h1, h2, h3 {
+		color: rgb(46, 0, 78);
+	}
+</style>

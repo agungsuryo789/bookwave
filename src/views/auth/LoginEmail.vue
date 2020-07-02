@@ -85,17 +85,17 @@
           </v-col>
         </v-row>
       </v-form>
-      <v-snackbar v-model="snackbar">Mencoba Masuk...
-        <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
-      </v-snackbar>
+      <SnackbarToast />
     </v-container>
   </div>
 </template>
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import SnackbarToast from "@/components/SnackbarToast.vue";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import { mapMutations } from "vuex";
 
 /* eslint-disable */
 export default {
@@ -109,7 +109,8 @@ export default {
     }
   },
   components: {
-    NavbarSection
+	NavbarSection,
+	SnackbarToast
   },
   data() {
     return {
@@ -117,8 +118,7 @@ export default {
       email: "",
       lazy: false,
       show1: false,
-	  password: "",
-	  snackbar: false,
+	  password: ""
     };
   },
   computed: {
@@ -137,9 +137,10 @@ export default {
         errors.push("At least must be 8 character");
       !this.$v.password.required && errors.push("Password is required");
       return errors;
-    }
+	}
   },
   methods: {
+	...mapMutations(["showSnackbar", "closeSnackbar"]),
     lanjut() {
       this.$v.email.$touch();
       if (this.$v.email.$invalid) {
@@ -159,9 +160,10 @@ export default {
           type: 1
         };
 		this.$store.dispatch("userLogin", data);
-		this.snackbar = true
+		console.log(status)
+		this.showSnackbar()
       }
-    }
+	}
   }
 };
 </script>
