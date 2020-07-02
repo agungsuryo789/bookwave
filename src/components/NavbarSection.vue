@@ -2,7 +2,7 @@
   <v-container class="navbar-section px-0" fluid>
     <v-row>
       <v-col>
-        <nav v-if="userState" class="navbar" style="background-color:white;">
+        <nav v-if="userState" class="navbar navbar--auth" style="background-color:white;">
           <v-toolbar
             class="app-bar"
             id="appBar"
@@ -10,6 +10,7 @@
             absolute
             light
             flat
+			elevation="3"
             style="width:100%;"
           >
             <v-toolbar-title>
@@ -160,13 +161,13 @@
                 </v-list>
               </v-menu>
             </v-toolbar-items>
-            <v-toolbar-items v-else style="width:90%;">
+            <v-toolbar-items v-else style="width:100%;">
               <NavbarSearch @clicked="onCloseSearchBar" />
             </v-toolbar-items>
           </v-toolbar>
           <v-row>
             <transition name="fade" mode="out-in">
-              <v-col v-if="showCategory" class="category-chip--navbar ml-3 my-5">
+              <v-col v-if="showCategory" class="category-chip--navbar ml-3 my-7">
                 <NavbarCategoryChip />
               </v-col>
             </transition>
@@ -285,6 +286,10 @@ export default {
   .app-bar {
     width: 100%;
     padding: 0 5%;
+    border-bottom: 2px solid black;
+	@media screen and (max-width: 425px) {
+      padding: 0;
+    }
   }
   .app-bar--no-auth {
     width: 100%;

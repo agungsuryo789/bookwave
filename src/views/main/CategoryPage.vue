@@ -4,7 +4,7 @@
     <v-container fluid class="px-0 py-0 mx-0 my-0">
       <template v-if="bookListByKategori.buku_populer && bookListByKategori.status == 1">
         <v-row>
-          <v-col class="category-page-title" :style="{'background-color': warnaKategori}">
+          <v-col class="category-page-title px-12" :style="{'background-color': warnaKategori}">
             <h1>{{ bookListByKategori.nama_kategori }}</h1>
           </v-col>
         </v-row>
@@ -26,6 +26,8 @@
               :penulis="n.penulis"
               :warna_kategori="n.border_buku"
               :kategori_buku="n.nama_kategori"
+              :isCollected="n.is_collected"
+              :isFavorited="n.is_favorite"
             />
           </v-col>
         </v-row>

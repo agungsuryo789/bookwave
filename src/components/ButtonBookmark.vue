@@ -1,11 +1,11 @@
 <template>
   <div v-if="this.$store.getters.isLoggedIn">
-    <template v-if="!isBookmarked">
+    <template v-if="isBookmarked == false || isCollected == false">
       <v-btn class="book-bookmark-button" icon @click="setBookmark">
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </template>
-    <template v-if="isBookmarked">
+    <template v-if="isBookmarked == true || isCollected == true">
       <v-btn class="book-bookmark-button" icon @click="delBookmark">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
@@ -19,6 +19,9 @@ export default {
   props: {
     idBuku: {
       type: Number
+    },
+    isCollected: {
+      type: Boolean
     }
   },
   data() {
@@ -37,6 +40,11 @@ export default {
     delBookmark() {
       this.isBookmarked = false;
       this.$store.dispatch("setDeleteKoleksi", this.payloadBookmark);
+    }
+  },
+  mounted() {
+    if (this.isCollected) {
+      this.isBookmarked = true;
     }
   }
 };

@@ -24,7 +24,7 @@
             :deskripsi="n.deskripsi"
             :warna_kategori="n.warna_kategori"
             :kategori_buku="n.nama_kategori"
-			:isCollected="n.is_collected"
+            :isCollected="n.is_collected"
             :isFavorited="n.is_favorite"
           />
         </v-col>
@@ -39,6 +39,10 @@
             style="margin: 0 auto;"
           ></v-img>
           <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+          <router-link
+            to="/home"
+            style="text-decoration:none;color:#E76464;font-weight:bold;"
+          >Jelajahi AHA</router-link>
         </v-col>
       </template>
     </template>

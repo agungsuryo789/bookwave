@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex flex-column justify-center" style="width:100%;">
-    <div class="d-flex flex-row justify-space-between px-4" style="width:100%;">
+  <div class="navbar-search-form d-flex flex-column justify-center ml-lg-12">
+    <div class="d-flex flex-row justify-space-between px-4">
       <v-btn icon class="my-2" @click="goSearch">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -10,17 +10,21 @@
         @keyup="liveSearch"
         class="mt-4 mx-2"
         clearable
-		autofocus
+        autofocus
         label="Temukan yang anda cari disini"
       ></v-text-field>
       <v-btn icon class="my-2" @click="onClose">
-        <v-icon>mdi-close</v-icon>
+        <v-icon>mdi-close-circle-outline</v-icon>
       </v-btn>
     </div>
     <div v-if="isResult" class="search-result">
       <v-list>
         <v-list-item-group>
-          <v-list-item v-for="item in searchResult.data_buku" :key="item.id_buku" @click="gotoBook(item.id_buku, item.judul)">
+          <v-list-item
+            v-for="item in searchResult.data_buku"
+            :key="item.id_buku"
+            @click="gotoBook(item.id_buku, item.judul)"
+          >
             <div style="width:100%;">
               {{ item.judul }}
               <v-divider></v-divider>
@@ -53,7 +57,10 @@ export default {
     },
     goSearch() {
       if (this.payload.pencarian !== "") {
-        this.$router.push({ name: "SearchPage", params: { searchParams: this.payload.pencarian.replace(/ /g, "-") } });
+        this.$router.push({
+          name: "SearchPage",
+          params: { searchParams: this.payload.pencarian.replace(/ /g, "-") }
+        });
       } else {
         this.isResult = false;
         return false;
@@ -86,13 +93,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.search-result {
-  position: absolute;
-  top: 100%;
-  width: 75%;
-  border: 3px solid rgb(160, 160, 160);
-  border-bottom: 10px solid rgb(160, 160, 160);
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+.navbar-search-form {
+  width: 90%;
+  .search-result {
+    position: absolute;
+    top: 100%;
+    width: 68%;
+    margin-left: 5%;
+    border: 3px solid rgb(160, 160, 160);
+    border-bottom: 10px solid rgb(160, 160, 160);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    @media screen and (max-width: 425px) {
+      margin-left: -25%;
+      width: 95%;
+    }
+  }
 }
 </style>

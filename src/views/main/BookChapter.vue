@@ -40,12 +40,6 @@
               <p>Teks</p>
             </div>
             <div class="d-flex flex-column justify-center align-center mx-4">
-              <v-btn @click="urlDownload(bookDetail.data[0].buku_file)" depressed text>
-                <v-icon>mdi-download</v-icon>
-              </v-btn>
-              <p>Download</p>
-            </div>
-            <div class="d-flex flex-column justify-center align-center mx-4">
               <v-btn @click="outlineMenu = !outlineMenu" depressed text>
                 <v-icon>mdi-format-list-bulleted</v-icon>
               </v-btn>

@@ -10,7 +10,7 @@
           :to="{ name: 'LandingBookSection', params: { sectionName: sectionLink[0].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[0].sectionName }}</router-link>
-        <v-progress-linear v-model="underlineValue"></v-progress-linear>
+        <v-progress-linear v-model="underlineValue" color="#E76464"></v-progress-linear>
         <v-row class="my-6" v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="12" sm="12" cols="12" class="my-2">
             <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
@@ -37,11 +37,8 @@
             />
           </v-col>
         </v-row>
-        <router-link
-          :to="{ name: 'LandingBookSection', params: { sectionName: sectionLink[1].url }}"
-          class="font-weight-black book-section-title"
-        >{{ sectionLink[1].sectionName }}</router-link>
-        <v-progress-linear v-model="underlineValue"></v-progress-linear>
+        <h1 class="font-weight-black book-section-title">{{ sectionLink[1].sectionName }}</h1>
+        <v-progress-linear v-model="underlineValue" color="#E76464"></v-progress-linear>
         <v-row class="my-6" v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" cols="12" class="my-2">
             <v-skeleton-loader class="mx-auto" width="350" type="list-item-avatar-three-line" tile></v-skeleton-loader>
@@ -70,7 +67,7 @@
           :to="{ name: 'LandingBookSection', params: { sectionName: sectionLink[2].url }}"
           class="font-weight-black book-section-title"
         >{{ sectionLink[2].sectionName }}</router-link>
-        <v-progress-linear v-model="underlineValue"></v-progress-linear>
+        <v-progress-linear v-model="underlineValue" color="#E76464"></v-progress-linear>
         <v-row class="my-6" v-if="loadSkeleton">
           <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" cols="12" class="my-2">
             <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
@@ -163,7 +160,9 @@ export default {
 .landing--user-body {
   .book-section-title {
     letter-spacing: 1px;
-    font-size: 24px;
+    font-size: 22px;
+	color: #E76464;
+	text-transform: uppercase;
     font-weight: bold;
     text-decoration: none;
   }

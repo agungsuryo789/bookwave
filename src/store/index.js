@@ -60,10 +60,12 @@ const vuexSession = new VuexPersist({
     key: 'a7ac33d1966354c33537e0584f42d58d',
     reducer: state => ({
         daftarKategoriNoAuth: state.daftarKategoriNoAuth,
+        daftarKategoriAuth: state.daftarKategoriAuth,
         bookListTrendingNoAuth: state.bookListTrendingNoAuth,
         bookBerandaAuth: state.bookBerandaAuth,
-        bookNew: state.bookNew,
-        bookTrending: state.bookTrending
+        bookSectionList: state.bookSectionList,
+        bookTrending: state.bookTrending,
+        bookNew: state.bookNew
     })
 })
 
@@ -73,8 +75,9 @@ export default new Vuex.Store({
         loaderStatus: false,
         daftarKategoriNoAuth: [],
         daftarKategoriAuth: [],
-        bookNew: [],
+        bookSectionList: [],
         bookTrending: [],
+        bookNew: [],
         bookListTrendingNoAuth: [],
         bookBerandaAuth: {},
         status: '',
@@ -134,10 +137,12 @@ export default new Vuex.Store({
             state.loaderStatus = true
         },
         getBookTrending_mutation: (state, response) => {
+            state.bookSectionList = response
             state.bookTrending = response
             state.loaderStatus = true
         },
         getBookNew_mutation: (state, response) => {
+            state.bookSectionList = response
             state.bookNew = response
             state.loaderStatus = true
         },
@@ -202,16 +207,19 @@ export default new Vuex.Store({
             state.bookStatus = response
             state.loaderStatus = true
             alert("Berhasil hapus koleksi")
+            router.push("/library/book")
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
             state.loaderStatus = true
             alert("Berhasil Ditambahkan ke Favorit")
+            router.push("/library/book")
         },
         setBookmark_mutation: (state, response) => {
             state.bookBookmarked = response
             state.loaderStatus = true
             alert("Berhasil di simpan")
+            router.push("/library/book")
         },
         getSubsOption_mutation: (state, response) => {
             state.subList = response
@@ -226,7 +234,7 @@ export default new Vuex.Store({
             state.addTagRes = response
             state.loaderStatus = true
             alert("Berhasil tambah tag")
-            router.push("/home")
+            router.push("/library/book")
         },
         editTagRes_mutation: (state, response) => {
             state.editTagRes = response
@@ -237,6 +245,7 @@ export default new Vuex.Store({
         delTagRes_mutation: (state, response) => {
             state.delTagRes = response
             state.loaderStatus = true
+            router.push("/library/book")
         },
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
@@ -501,8 +510,18 @@ export default new Vuex.Store({
         deleteTagFromAll: ({ commit }, tagPayload) => {
             axs.post('/ahaapi/hapus_tag', tagPayload)
                 .then(response => {
-                    alert(response.message);
-                    router.push("/");
+                    alert("Berhasil Hapus Tag");
+                    router.push("/library/book");
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        deleteTagByBook: ({ commit }, tagPayload) => {
+            axs.post('/ahaapi/hapus_tag', tagPayload)
+                .then(response => {
+                    alert("Berhasil Hapus Buku dari Tag");
+                    router.push("/home");
                 })
                 .catch(err => {
                     console.log(err.message);

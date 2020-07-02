@@ -2,7 +2,7 @@
   <div class="book-page">
     <NavbarSection />
     <v-container
-      class="py-0 justify-center align-center"
+      class="my-3 justify-center align-center"
       v-for="book in bookDetail.data"
       :key="book.id_buku"
     >
@@ -15,7 +15,10 @@
           >
             <div class="d-flex flex-column justify-end py-10">
               <v-img class="book-card-img mx-auto" width="150" :src="book.foto_sampul"></v-img>
-              <ButtonBookmark :idBuku="parseInt(book.id_buku)" style="position:absolute;right:0;bottom:0;" />
+              <ButtonBookmark
+                :idBuku="parseInt(book.id_buku)"
+                style="position:absolute;right:0;bottom:0;"
+              />
             </div>
           </v-card>
         </v-col>
@@ -28,7 +31,7 @@
             </v-col>
             <v-col class="card--book-detail" lg="12" md="12" sm="12" cols="12">
               <div class="d-flex flex-column flex-lg-row justify-space-between my-10">
-                <template v-if="book.is_premium == 0 && book.data_chapter.length > 1">
+                <template v-if="book.is_premium == 0 && book.data_chapter.length > 0">
                   <div class="d-flex flex-row justify-space-between">
                     <v-btn
                       :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
@@ -92,8 +95,6 @@ import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "BookPage",
-  props: ["bookID"],
   components: {
     NavbarSection,
     BookpageTabs,
@@ -120,8 +121,12 @@ export default {
     bookDetail: state => state.bookDetail
   }),
   created() {
-	this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
-	window.document.title = "Read " + this.bookDetail.data[0].judul + "| Ahabaca";
+    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
+    const pageTitle = this.$route.params.bookName;
+    window.document.title =
+      "Read " +
+      this.$route.params.bookName.replace(/^./, pageTitle[0].toUpperCase()) +
+      " | Ahabaca";
   }
 };
 </script>
