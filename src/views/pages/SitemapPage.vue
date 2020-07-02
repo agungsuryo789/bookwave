@@ -9,17 +9,17 @@
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
-				<v-col sm="4" md="2">
+				<v-col xs="4" md="3">
 					<p> Home </p>
 					<p> Books </p>
 					<p> Pricing </p>
 				</v-col>
-				<v-col sm="4" md="2">
+				<v-col xs="4" md="3">
 					<p> Pricing for Teams </p>
 					<p> Magazine </p>
 					<p> Help & Contact </p>
 				</v-col>
-				<v-col sm="4" md="2">
+				<v-col xs="4" md="3">
 					<p> About </p>
 					<p> Careers </p>
 					<p> Partners </p>
@@ -33,7 +33,7 @@
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
-				<v-col sm="12" md="4">
+				<v-col xs="12" md="4">
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
@@ -41,7 +41,7 @@
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 				</v-col>
-				<v-col sm="12" md="4">
+				<v-col xs="12" md="4">
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
@@ -49,7 +49,7 @@
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 				</v-col>
-				<v-col sm="12" md="4">
+				<v-col xs="12" md="4">
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
@@ -77,3 +77,9 @@ export default {
   }
 };
 </script>
+
+<style>
+	div .container{
+		font-size: larger;
+	}
+</style>
