@@ -2,8 +2,8 @@
   <div>
     <NavbarSection />
     <v-container class="mt-12">
-      <h2 class="font-weight-black book-section-title">{{this.$route.params.sectionName}}</h2>
-      <v-progress-linear v-model="underlineValue"></v-progress-linear>
+      <h2 class="font-weight-black book-section-title">{{this.$route.params.sectionName.replace(/-/g, " ")}}</h2>
+      <v-progress-linear v-model="underlineValue" color="#E76464"></v-progress-linear>
       <v-row v-if="loadSkeleton">
         <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
           <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
@@ -11,26 +11,27 @@
       </v-row>
       <v-row v-else>
         <v-col
-          v-for="n in bookList.data.slice(0, booksToShow)"
+          v-for="n in bookSectionList.data.slice(0, booksToShow)"
           :key="n.id_buku"
           lg="3"
-          md="12"
+          md="6"
           sm="12"
           xs="12"
           class="my-2"
         >
           <BookCard
-            :key="n.id_buku"
-            :idBuku="n.id_buku"
+            :key="parseInt(n.id_buku)"
+            :idBuku="parseInt(n.id_buku)"
             :title="n.judul"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
+			:penulis="n.penulis"
             :warna_kategori="n.border_buku"
             :kategori_buku="n.nama_kategori"
           />
         </v-col>
       </v-row>
-      <v-row v-if="booksToShow < bookList.data.length">
+      <v-row v-if="booksToShow < bookSectionList.data.length">
         <v-col class="text-center d-flex flex-column justify-center align-center">
           <v-btn
             class="btnLihat"
@@ -60,10 +61,15 @@ export default {
     BookCard,
     FooterSection
   },
-  data: () => ({
-    loadSkeleton: true,
-    underlineValue: 15,
-    booksToShow: 12
+  data() {
+    return {
+      loadSkeleton: true,
+      underlineValue: 15,
+      booksToShow: 12
+    };
+  },
+  computed: mapState({
+    bookSectionList: state => state.bookSectionList
   }),
   methods: {
     matchUrl() {
@@ -89,10 +95,7 @@ export default {
       }, 800);
     }
   },
-  computed: mapState({
-    bookList: state => state.bookList
-  }),
-  beforeMount() {
+  created() {
     this.matchUrl();
   },
   mounted() {
@@ -106,6 +109,8 @@ export default {
   letter-spacing: 1px;
   font-size: 24px;
   font-weight: bold;
+  color: #E76464;
   text-decoration: none;
+  text-transform: uppercase;
 }
 </style>

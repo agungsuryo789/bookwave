@@ -194,7 +194,7 @@ export default {
   }
 }
 .footer-foot-row {
-  padding: auto 14%;
+  padding: 0 14%;
   color: white;
   font-size: 14px;
   background-color: black;

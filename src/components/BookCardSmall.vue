@@ -14,7 +14,11 @@
           <div class="d-flex flex-row justify-space-between mt-1">
             <v-btn disabled class="book-card-category" outlined :style="cssVars">{{kategori_buku}}</v-btn>
             <div class="d-flex flex-row justify-space-between">
-              <ButtonBookmark class="book-bookmark-button" :idBuku="parseInt(idBuku)" />
+              <ButtonBookmark
+                class="book-bookmark-button"
+                :idBuku="parseInt(idBuku)"
+                :isCollected="isCollected"
+              />
               <v-menu left bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on" icon depressed>
@@ -44,6 +48,11 @@
                   <template v-if="isCollected">
                     <v-list-item @click="setDeleteKoleksi">
                       <v-list-item-title>Hapus Dari Koleksi</v-list-item-title>
+                    </v-list-item>
+                  </template>
+                  <template v-if="isTagged">
+                    <v-list-item @click="delTagByBook">
+                      <v-list-item-title>Hapus Dari Tag</v-list-item-title>
                     </v-list-item>
                   </template>
                 </v-list>
@@ -87,6 +96,12 @@ export default {
     },
     isCollected: {
       type: Boolean
+    },
+    isTagged: {
+      type: Boolean
+    },
+    tagName: {
+      type: String
     }
   },
   components: {
@@ -100,6 +115,10 @@ export default {
       },
       payloadFav: {
         id_buku: this.$props.idBuku
+      },
+      payloadDelTagByBook: {
+        id_buku: this.$props.idBuku,
+        tag: this.$props.tagName
       }
     };
   },
@@ -136,6 +155,9 @@ export default {
     },
     delBookFavorit() {
       this.$store.dispatch("delBookFavorit", this.payloadFav);
+    },
+    delTagByBook() {
+      this.$store.dispatch("deleteTagByBook", this.payloadDelTagByBook);
     }
   },
   computed: {

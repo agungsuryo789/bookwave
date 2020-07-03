@@ -39,6 +39,10 @@
             style="margin: 0 auto;"
           ></v-img>
           <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+          <router-link
+            to="/home"
+            style="text-decoration:none;color:#E76464;font-weight:bold;"
+          >Jelajahi AHA</router-link>
         </v-col>
       </template>
     </template>

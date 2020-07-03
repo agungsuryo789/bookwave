@@ -4,28 +4,18 @@
       <v-card flat>
         <div class="d-flex flex-row justify-space-between align-center">
           <div style="width:90%;">
-            <template v-if="!showEditTag">
-              <v-text-field
-                :value="tagName"
-                color="purple darken-2"
-                disabled
-                full-width
-                style="font-size:18px;"
-              ></v-text-field>
-            </template>
-            <template v-if="showEditTag">
-              <v-text-field
-                label="Edit Tag"
-                autofocus
-                clearable
-                full-width
-                v-model="inputTag"
-                @keyup.enter="dispatchEditTag"
-              ></v-text-field>
-            </template>
+            <v-text-field
+              v-model="inputTag"
+              class="input-tag-disabled"
+              id="inputTagEdit"
+              color="purple darken-2"
+              full-width
+              @keyup.enter="dispatchEditTag"
+              style="font-size:18px;"
+            ></v-text-field>
           </div>
           <div>
-            <v-btn icon @click="showEditTag = !showEditTag">
+            <v-btn icon @click="inputFocus()">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
             <v-btn icon @click="dispatchDelTag">
@@ -55,6 +45,13 @@
               :title="n.judul"
               :penulis="n.penulis"
               :foto_sampul="n.foto_sampul"
+              :deskripsi="n.deskripsi"
+              :warna_kategori="n.warna_kategori"
+              :kategori_buku="n.nama_kategori"
+              :isCollected="n.is_collected"
+              :isFavorited="n.is_favorite"
+              :isTagged="true"
+              :tagName="tagName"
             />
           </v-col>
         </template>
@@ -81,7 +78,7 @@ export default {
     return {
       loadSkeleton: true,
       showEditTag: false,
-      inputTag: "",
+      inputTag: this.tagName,
       editTagPayload: {
         tag: this.tagName,
         tag_baru: ""
@@ -107,14 +104,15 @@ export default {
         }
       }, 800);
     },
+    inputFocus() {
+      document.getElementById("inputTagEdit").focus();
+    },
     dispatchEditTag() {
       this.editTagPayload.tag_baru = this.inputTag;
       this.$store.dispatch("editTagAll", this.editTagPayload);
     },
     dispatchDelTag() {
       this.$store.dispatch("deleteTagFromAll", this.delTagPayload);
-      alert("Berhasil hapus tag");
-      this.$router.push("/home");
     }
   },
   mounted() {
@@ -123,5 +121,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.input-tag-disabled {
+  border: none;
+}
 </style>

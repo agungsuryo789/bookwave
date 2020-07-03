@@ -28,13 +28,17 @@
       <template v-else>
         <v-col lg="12" class="align-center justify-center text-center">
           <v-img
-            src="@/assets/image/bookNotFound.svg"
+            src="@/assets/image/aha-radio-icon.svg"
             aspect-ratio="1"
             width="100px"
             height="100px"
             style="margin: 0 auto;"
           ></v-img>
-          <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+          <p class="my-3" style="color:#DDDDDD;">AHA Episode Tidak Ditemukan</p>
+          <router-link
+            to="/home"
+            style="text-decoration:none;color:#E76464;font-weight:bold;"
+          >Jelajahi AHA</router-link>
         </v-col>
       </template>
     </template>

@@ -52,7 +52,6 @@ export default {
           bookName: urlName.replace(/ /g, "-")
         }
       });
-      // alert(urlName.replace(/ /g, "-"));
     }
   },
   computed: {
