@@ -73,7 +73,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Careers</td>
+					<td>
+						<router-link to="/career">Careers</router-link>
+					</td>
                 </tr>
                 <tr>
                   <td>

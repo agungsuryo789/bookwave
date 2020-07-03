@@ -116,7 +116,17 @@ export default new Vuex.Store({
 			timeout: 6000,
 			multiline: false,
 			color: 'cyan darken-2'
-		}
+		},
+		termsCondition: [],
+		userPrivacy: [],
+		applicationPrivacy: [],
+		disclaimer: [],
+		aboutUs: [],
+		contactUs: [],
+		career: [],
+		detailCareer: [],
+		listBlog: [],
+		detailBlog: []
     },
     mutations: {
         getKategoriNoAuth_mutation: (state, response) => {
@@ -308,8 +318,33 @@ export default new Vuex.Store({
 			state.snackbar.multiline = false
 			state.snackbar.timeout = 6000
 			state.snackbar.text = null
-			}
+			},
+		getTerms_mutation: (state, response) => {
+			state.termsCondition = response
 		},
+		getUserPrivacy_mutation: (state, response) => {
+			state.userPrivacy = response
+		},
+		getApplicationPrivacy_mutation: (state, response) => {
+			state.applicationPrivacy = response
+		},
+		getDisclaimer_mutation: (state, response) => {
+			state.disclaimer = response
+			state.loaderStatus = true
+		},
+		getAbout_mutation: (state, response) => {
+			state.aboutUs = response
+		},
+		getContact_mutation: (state, response) => {
+			state.contactUs = response
+		},
+		getCareer_mutation: (state, response) => {
+			state.career = response
+		},
+		getBlog_mutation: (state, response) => {
+			state.listBlog = response
+		}
+	},
     actions: {
         // No Auth Action
         getKategoriNoAuth: ({ commit }) => {
@@ -602,7 +637,7 @@ export default new Vuex.Store({
         invoiceDetails: ({ commit }, data) => {
             axs.post('/ahaapi/invoices', data)
                 .then(response => {
-                    window.location = 'https://app.midtrans.com/snap/v2/vtweb/' + response.data.token;
+                    window.location = 'https://app.sandbox.midtrans.com/snap/v2/vtweb/' + response.data.token;
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -745,7 +780,89 @@ export default new Vuex.Store({
                     commit('notifMessage_mutation', response)
                     console.log(response.data.message)
                 })
-        }
+		},
+
+		// Footerpage action
+		getTerms: ({ commit }) => {
+			axs.get('/ahaapi/ketentuan')
+				.then(response => {
+					console.log(response.data)
+					commit('getTerms_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getUserPrivacy: ({ commit }) => {
+			axs.get('/ahaapi/privasi_user')
+				.then(response => {
+					console.log(response.data)
+					commit('getUserPrivacy_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getApplicationPrivacy: ({ commit }) => {
+			axs.get('/ahaapi/privasi_aplikasi')
+				.then(response => {
+					console.log(response.data)
+					commit('getApplicationPrivacy_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getDisclaimer: ({ commit }) => {
+			axs.get('/ahaapi/disclaimer')
+				.then(response => {
+					console.log(response.data)
+					commit('getDisclaimer_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getAbout: ({ commit }) => {
+			axs.get('/ahaapi/about')
+				.then(response => {
+					console.log(response.data)
+					commit('getAbout_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getContact: ({ commit }) => {
+			axs.get('/ahaapi/contact')
+				.then(response => {
+					console.log(response.data)
+					commit('getContact_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getCareer: ({ commit }) => {
+			axs.get('/ahaapi/karir')
+				.then(response => {
+					console.log(response.data)
+					commit('getCareer_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		},
+		getBlog: ({ commit }) => {
+			axs.get('/ahaapi/blog')
+				.then(response => {
+					console.log(response.data)
+					commit('getBlog_mutation', response.data)
+				})
+				.catch(err => {
+                    console.log(err.message);
+                })
+		}
     },
     getters: {
         isLoggedIn: state => !!state.token,

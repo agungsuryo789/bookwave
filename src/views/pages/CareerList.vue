@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<NavbarSection />
-		<PageHeader title="Disclaimer"/>
+		<PageHeader title="Karir"/>
 		<div class="container">
 		<v-row class="mt-2 my-2">
-			<v-col sm="12" md="12" v-for="item in disclaimer" :key="item.id_disclaimer">
-				<h2 class="my-4"> {{ item.judul }} </h2>
-				<p class="my-4"> {{ item.deskripsi }} </p>
+			<v-col sm="12" md="4" v-for="item in career" :key="item.id_karir">
+				<h4> {{ item.karir }} </h4>
+				<p> {{ item.deskripsi.substring(0,50)+"..." }} </p>
 			</v-col>
 		</v-row>
 		</div>
@@ -21,17 +21,17 @@ import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "DisclaimerPage",
+  name: "AppPrivacy",
   components: {
     NavbarSection,
     PageHeader,
     FooterSection
   },
   created() {
-    this.$store.dispatch("getDisclaimer");
+    this.$store.dispatch("getCareer");
   },
   computed: mapState({
-	disclaimer: state => state.disclaimer.data
+	career: state => state.career.data
   })
 };
 </script>

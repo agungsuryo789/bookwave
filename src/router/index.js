@@ -28,7 +28,11 @@ const Contact = () =>
 const PartnersPage = () =>
 	import ('../views/pages/PartnersPage.vue')
 const HelpSupport = () =>
-    import ('../views/pages/HelpSupport.vue')
+	import ('../views/pages/HelpSupport.vue')
+const Blog = () =>
+	import ('../views/pages/BlogList.vue')
+const Career = () =>
+    import ('../views/pages/CareerList.vue')
 
 // Auth Component
 const Login = () =>
@@ -198,6 +202,22 @@ const routes = [
         component: AppPrivacy,
         meta: {
             title: "Privacy | Ahabaca"
+        }
+	},
+	{
+        path: '/blog',
+        name: 'Blog',
+        component: Blog,
+        meta: {
+            title: "Blog | Ahabaca"
+        }
+	},
+	{
+        path: '/career',
+        name: 'Career',
+        component: Career,
+        meta: {
+            title: "Career | Ahabaca"
         }
     },
     {

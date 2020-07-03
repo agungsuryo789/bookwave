@@ -33,29 +33,8 @@
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
-				<v-col xs="12" md="4">
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-				</v-col>
-				<v-col xs="12" md="4">
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-				</v-col>
-				<v-col xs="12" md="4">
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+				<v-col xs="12" md="4" v-for="item in blog" :key="item.id_blog">
+					<p>{{ item.judul }} </p>
 				</v-col>
 			</v-row>
 		</div>
@@ -67,6 +46,7 @@
 import NavbarSection from "@/components/NavbarSection.vue";
 import PageHeader from "@/components/pages/PageHeader.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "SitemapPage",
@@ -74,7 +54,13 @@ export default {
     NavbarSection,
     PageHeader,
     FooterSection
-  }
+  },
+  created() {
+    this.$store.dispatch("getBlog");
+  },
+  computed: mapState({
+	blog: state => state.listBlog.data
+  })
 };
 </script>
 

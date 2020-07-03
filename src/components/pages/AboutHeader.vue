@@ -2,7 +2,7 @@
 	<div class="container mt-10">
 		<v-row justify="center">
 			<v-col md="5">
-					<h1> {{ title }} </h1>
+					<h1 class="ungu"> {{ title }} </h1>
 					<p> {{ subtitle }} </p>
 			</v-col>
 			<v-col md="6">
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style>
-	h1, h2, h3 {
+	.ungu {
 		color: rgb(46, 0, 78);
 	}
 </style>
