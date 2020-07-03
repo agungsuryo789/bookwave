@@ -56,9 +56,11 @@ export default {
   methods: {
     register() {
       this.$store.dispatch("registerFirebase");
+	  this.$store.dispatch("getMemberDetail");
     },
     loginfb() {
       this.$store.dispatch("loginFacebook");
+	  this.$store.dispatch("getMemberDetail");
     },
     logout() {
       Firebase.logout();

@@ -2,7 +2,7 @@
   <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
       <v-img class="book-card-img mx-auto" width="120px" height="120px" :src="foto_sampul"></v-img>
-      <ButtonBookmark :idBuku="parseInt(idBuku)" />
+      <ButtonBookmark :idBuku="parseInt(idBuku)" :isCollected="isCollected" />
     </div>
     <a @click="gotoBook" class="book-card-title">
       <v-card-title class="book-title">{{ title }}</v-card-title>
@@ -12,7 +12,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import ButtonBookmark from "@/components/ButtonBookmark.vue";
 export default {
   name: "BookCard",
@@ -37,6 +36,15 @@ export default {
     },
     kategori_buku: {
       type: String
+    },
+    isCollected: {
+      type: Boolean
+    },
+    isFavorited: {
+      type: Boolean
+    },
+    is_premium: {
+      type: String
     }
   },
   components: {
@@ -45,13 +53,28 @@ export default {
   methods: {
     gotoBook() {
       const urlName = this.$props.title.toLowerCase();
-      this.$router.push({
-        name: "BookPage",
-        params: {
-          bookId: this.$props.idBuku,
-          bookName: urlName.replace(/ /g, "-")
-        }
-      });
+      if (this.is_premium === "0") {
+        this.$router.push({
+          name: "BookPage",
+          params: {
+            bookId: this.$props.idBuku,
+            bookName: urlName.replace(/ /g, "-")
+          }
+        });
+      } else if (this.is_premium === "1" && this.$store.getters.premiumStatus) {
+        this.$router.push({
+          name: "BookPage",
+          params: {
+            bookId: this.$props.idBuku,
+            bookName: urlName.replace(/ /g, "-")
+          }
+        });
+      } else if (
+        this.is_premium === "1" &&
+        !this.$store.getters.premiumStatus
+      ) {
+        return false;
+      }
     }
   },
   computed: {
@@ -83,10 +106,10 @@ export default {
     color: black;
     .book-title {
       font-size: 15px;
-	  font-weight: bold;
+      font-weight: bold;
       width: 250px;
       overflow: hidden;
-	  white-space: nowrap;
+      white-space: nowrap;
       text-overflow: ellipsis;
     }
   }

@@ -32,8 +32,11 @@
               :foto_sampul="n.foto_sampul"
               :deskripsi="n.deskripsi"
               :penulis="n.penulis"
+              :is_premium="n.is_premium"
               :warna_kategori="n.warna_kategori"
               :kategori_buku="n.nama_kategori"
+              :isCollected="n.is_collected"
+              :isFavorited="n.is_favorite"
             />
           </v-col>
         </v-row>
@@ -59,6 +62,9 @@
               :idChapter="parseInt(n.id_chapter)"
               :episodeTitle="n.judul_chapter"
               :foto_sampul="n.foto_sampul"
+              :judul_buku="n.judul_buku"
+              :is_premium_chapter="n.is_premium_chapter"
+              :premium_member="n.premium_member"
               :warna_episode="n.warna_kategori"
             />
           </v-col>
@@ -89,12 +95,15 @@
               :foto_sampul="n.foto_sampul"
               :deskripsi="n.deskripsi"
               :penulis="n.penulis"
+              :is_premium="n.is_premium"
               :warna_kategori="n.warna_kategori"
               :kategori_buku="n.nama_kategori"
+              :isCollected="n.is_collected"
+              :isFavorited="n.is_favorite"
             />
           </v-col>
         </v-row>
-		<SnackbarToast />
+        <SnackbarToast />
       </v-container>
     </section>
     <FooterSection />
@@ -117,12 +126,12 @@ export default {
     BookCard,
     LandingHeader,
     EpisodeCard,
-	FooterSection,
-	SnackbarToast
+    FooterSection,
+    SnackbarToast
   },
   data: () => ({
     loadSkeleton: true,
-	underlineValue: 15,
+    underlineValue: 15,
     sectionLink: [
       {
         sectionName: "Buku Trending",
@@ -139,7 +148,7 @@ export default {
     ]
   }),
   methods: {
-	...mapMutations(["showSnackbar", "closeSnackbar"]),
+    ...mapMutations(["showSnackbar", "closeSnackbar"]),
     bookSectionAction(event) {
       this.underlineValue = 100;
     }
@@ -159,8 +168,8 @@ export default {
   .book-section-title {
     letter-spacing: 1px;
     font-size: 22px;
-	color: #E76464;
-	text-transform: uppercase;
+    color: #e76464;
+    text-transform: uppercase;
     font-weight: bold;
     text-decoration: none;
   }

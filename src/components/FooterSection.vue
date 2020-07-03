@@ -147,8 +147,9 @@ export default {
 <style lang="scss" scoped>
 .footer-body {
   .footer-container {
-    box-shadow: 0 -2px 3px #c0c0c0;
 	padding-bottom: 0;
+	background-color: #F7F7F7;
+	border-top: 4px solid #F0F0F0;
   }
   .footer-links {
     div {

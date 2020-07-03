@@ -256,11 +256,15 @@ export default {
       return window.location.href;
     }
   },
-  mounted() {
+  created() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
     this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
-    window.document.title =
-      "Read " + this.bookDetail.data[0].judul + "| Ahabaca";
+  },
+  mounted() {
+    const bookDetail = this.bookDetail;
+    setTimeout(function() {
+      window.document.title = "Read " + bookDetail.data[0].judul + "| Ahabaca";
+    }, 500);
   }
 };
 </script>

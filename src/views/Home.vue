@@ -40,7 +40,13 @@
         <v-row class="row-hero-2">
           <v-col class="hero-2 text-center d-flex flex-column justify-center align-center">
             <p>Temukan Jutaan Buku Lainnya hanya di AHA</p>
-            <v-btn :to="{name: 'Register'}" rounded color="#39DF8C" depressed>Start Free Trial</v-btn>
+            <v-btn
+              :to="{name: 'Register'}"
+              rounded
+              color="#39DF8C"
+              depressed
+              style="text-transform:capitalize;color:white;"
+            >Start Free Trial</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -154,7 +160,7 @@ export default {
         color: #4f2e53;
         font-weight: bold;
         text-decoration: none;
-		margin-right: 32%;
+        margin-right: 32%;
       }
     }
   }
@@ -172,7 +178,10 @@ export default {
   }
   .hero-2 {
     height: 250px;
-    background-color: #4f2e53;
+    background-image: url("../assets/image/aha-homepage-bg-purp.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
     width: 100%;
     p {

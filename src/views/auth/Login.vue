@@ -67,10 +67,12 @@ export default {
   methods: {
     login() {
 	  this.$store.dispatch("loginFirebase");
+	  this.$store.dispatch("getMemberDetail");
 	  this.snackbar = true;
     },
     loginfb() {
 	  this.$store.dispatch("loginFacebook");
+	  this.$store.dispatch("getMemberDetail");
 	  this.snackbar = true;
     },
     logout() {

@@ -17,6 +17,9 @@
             :idBuku="parseInt(bookTrending.data[0].id_buku)"
             :foto_sampul="bookTrending.data[0].foto_sampul"
             :warna_kategori="bookTrending.data[0].warna_kategori"
+            :is_premium="bookTrending.data[0].is_premium"
+            :isCollected="bookTrending.data[0].is_collected"
+            :isFavorited="bookTrending.data[0].is_favorite"
           />
         </v-col>
       </v-row>

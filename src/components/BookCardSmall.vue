@@ -5,12 +5,17 @@
         <div>
           <v-img class="book-card-img mx-auto" width="65" height="90" :src="foto_sampul"></v-img>
         </div>
-        <div class>
-          <a @click="gotoBook" class="book-card-link">
-            <h2 class="book-card--title">{{title}}</h2>
-            <small>{{penulis}}</small>
-            <p>{{deskripsi}}</p>
-          </a>
+        <div>
+          <div>
+            <a @click="gotoBook" class="book-card-link">
+              <h2 class="book-card--title font-weight-bold">{{title}}</h2>
+              <small>{{penulis}}</small>
+              <p>{{deskripsi}}</p>
+            </a>
+            <template v-if="is_premium && !premiumMemberStatus">
+              <v-icon class="book-card-icon-lock">mdi-lock</v-icon>
+            </template>
+          </div>
           <div class="d-flex flex-row justify-space-between mt-1">
             <v-btn disabled class="book-card-category" outlined :style="cssVars">{{kategori_buku}}</v-btn>
             <div class="d-flex flex-row justify-space-between">
@@ -97,6 +102,9 @@ export default {
     isCollected: {
       type: Boolean
     },
+    is_premium: {
+      type: String
+    },
     isTagged: {
       type: Boolean
     },
@@ -119,19 +127,35 @@ export default {
       payloadDelTagByBook: {
         id_buku: this.$props.idBuku,
         tag: this.$props.tagName
-      }
+      },
+      premiumMemberStatus: this.$store.getters.premiumStatus
     };
   },
   methods: {
     gotoBook() {
       const urlName = this.$props.title.toLowerCase();
-      this.$router.push({
-        name: "BookPage",
-        params: {
-          bookId: this.$props.idBuku,
-          bookName: urlName.replace(/ /g, "-")
-        }
-      });
+      if (this.is_premium === "0") {
+        this.$router.push({
+          name: "BookPage",
+          params: {
+            bookId: this.$props.idBuku,
+            bookName: urlName.replace(/ /g, "-")
+          }
+        });
+      } else if (this.is_premium === "1" && this.$store.getters.premiumStatus) {
+        this.$router.push({
+          name: "BookPage",
+          params: {
+            bookId: this.$props.idBuku,
+            bookName: urlName.replace(/ /g, "-")
+          }
+        });
+      } else if (
+        this.is_premium === "1" &&
+        !this.$store.getters.premiumStatus
+      ) {
+        return false;
+      }
     },
     addTag(idBuku) {
       this.$router.push({
@@ -174,7 +198,7 @@ export default {
 .book-card--small {
   h2 {
     font-size: 14px;
-    width: 250px;
+    width: 200px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -202,5 +226,10 @@ export default {
 .book-card-link {
   text-decoration: none;
   color: black;
+}
+.book-card-icon-lock {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>

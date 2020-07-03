@@ -5,13 +5,19 @@
     max-height="250px"
     flat
     ripple
+    @click="toChapter"
     :style="cssVars"
-    :to="{ name: 'BookChapter', params: {bookId: idBuku, chapterId: idChapter}}"
   >
     <div class="d-flex flex-row justify-space-between align-center div--episode-card">
       <div class="mx-1">
-		<p style="font-size:12px;">Baru</p>
-        <p class="my-4" style="font-size:15px;">{{ episodeTitle }}</p>
+        <p style="font-size:12px;">
+          <span v-if="is_premium_chapter && !premiumMemberStatus">
+            <v-icon>mdi-lock</v-icon>
+          </span>
+          Baru
+        </p>
+        <p class="my-3 episode-title font-weight-bold" style="font-size:15px;">{{ judul_buku }}</p>
+        <p class="my-0" style="font-size:15px;">{{ episodeTitle }}</p>
       </div>
       <div class="mx-1 episode-card-img-color">
         <div>
@@ -23,21 +29,64 @@
 </template>
 
 <script>
-/* eslint-disable */
 export default {
   name: "EpisodeCard",
-  props: [
-    "idBuku",
-    "idChapter",
-    "episodeTitle",
-    "foto_sampul",
-    "warna_episode"
-  ],
+  props: {
+    idBuku: {
+      type: Number
+    },
+    idChapter: {
+      type: Number
+    },
+    episodeTitle: {
+      type: String
+    },
+    foto_sampul: {
+      type: String
+    },
+    judul_buku: {
+      type: String
+    },
+    is_premium_chapter: {
+      type: Boolean
+    },
+    premium_member: {
+      type: Boolean
+    },
+    warna_episode: {
+      type: String
+    }
+  },
+  data() {
+    return {
+      premiumMemberStatus: this.$store.getters.premiumStatus
+    };
+  },
   computed: {
     cssVars() {
       return {
         "--color": this.warna_episode
       };
+    }
+  },
+  methods: {
+    toChapter() {
+      if (!this.is_premium_chapter) {
+        this.$router.push({
+          name: "BookChapter",
+          params: { bookId: this.idBuku, chapterId: this.idChapter }
+        });
+      } else if (this.is_premium_chapter && this.$store.getters.premiumStatus) {
+        this.$router.push({
+          name: "BookChapter",
+          params: { bookId: this.idBuku, chapterId: this.idChapter }
+        });
+      } else if (
+        this.is_premium_chapter &&
+        !this.$store.getters.premiumStatus
+      ) {
+        return false;
+      }
     }
   }
 };
@@ -49,11 +98,23 @@ export default {
   border-bottom: 8px solid var(--color);
   border-radius: 6px;
 }
+.episode-card-link {
+  text-decoration: none;
+  .div--episode-card {
+    color: black;
+  }
+}
 .episode-card {
   .episode-card-img-color {
     border-radius: 8px;
     padding: 9px;
     background-color: var(--color);
   }
+}
+.episode-title {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

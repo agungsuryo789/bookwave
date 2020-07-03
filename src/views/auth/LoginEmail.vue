@@ -128,7 +128,6 @@ export default {
       !this.$v.email.email && errors.push("Must be valid e-mail");
       !this.$v.email.required && errors.push("E-mail is required");
       return errors;
-	  console.log(errors);
     },
     passwordErrors() {
       const errors = [];
@@ -160,7 +159,7 @@ export default {
           type: 1
         };
 		this.$store.dispatch("userLogin", data);
-		console.log(status)
+		this.$store.dispatch("getMemberDetail");
 		this.showSnackbar()
       }
 	}

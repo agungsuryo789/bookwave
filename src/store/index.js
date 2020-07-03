@@ -81,6 +81,7 @@ export default new Vuex.Store({
         bookListTrendingNoAuth: [],
         bookBerandaAuth: {},
         status: '',
+        premiumStatus: null,
         memberDetail: {},
         token: window.localStorage.getItem('x-token') || '',
         email: {},
@@ -97,6 +98,7 @@ export default new Vuex.Store({
         bookBookmarked: {},
         chapterHighlight: {},
         subList: [],
+        promoList: [],
         searchResult: {},
         searchResultByBook: {},
         searchResultByPenulis: {},
@@ -112,14 +114,14 @@ export default new Vuex.Store({
         editTagRes: {},
         paymentHistoryList: [],
         invoiceDetails: {},
-		midtransToken: '',
-		snackbar: {
-			visible: false,
-			text: null,
-			timeout: 6000,
-			multiline: false,
-			color: 'cyan darken-2'
-		}
+        midtransToken: '',
+        snackbar: {
+            visible: false,
+            text: null,
+            timeout: 6000,
+            multiline: false,
+            color: 'cyan darken-2'
+        }
     },
     mutations: {
         getKategoriNoAuth_mutation: (state, response) => {
@@ -168,32 +170,34 @@ export default new Vuex.Store({
             state.user = response
         },
         authSuccess_mutation: (state, response) => {
-			state.status = 'success'
-			state.token = response.data.token
-			localStorage.setItem('x-token', response.data.token)
-			state.notifMessage = response.data.message
-			router.push('/home')
+            state.status = 'success'
+            state.token = response.data.token
+            localStorage.setItem('x-token', response.data.token)
+            state.notifMessage = response.data.message
+            router.push('/home')
         },
         authError_mutation: (state, response) => {
-			state.snackbar.text = response
-			state.snackbar.visible = true
-			location.reload()
-			// router.push({ name: 'Login' })
-		},
-		registerError_mutation: (state, response) => {
-			state.snackbar.text = response
-			state.snackbar.visible = true
-			location.reload()
-			// router.push({ name: 'Register' })
+            state.snackbar.text = response
+            state.snackbar.visible = true
+            location.reload()
+                // router.push({ name: 'Login' })
+        },
+        registerError_mutation: (state, response) => {
+            state.snackbar.text = response
+            state.snackbar.visible = true
+            location.reload()
+                // router.push({ name: 'Register' })
         },
         authDown_mutation: (state) => {
             state.status = ''
             state.token = ''
+            state.premiumStatus = null
             Object.assign(state)
             router.push('/')
         },
         getMemberDetail_mutation: (state, response) => {
             state.memberDetail = response
+            state.premiumStatus = response.data[0].premium_member
             state.loaderStatus = true
         },
         getBookByKategori_mutation: (state, response) => {
@@ -300,25 +304,30 @@ export default new Vuex.Store({
             state.paymentHistoryList = response
             state.loaderStatus = true
         },
+        getPromo_mutation: (state, response) => {
+            state.promoList = response
+            state.loaderStatus = true
+            console.log(response)
+        },
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
             state.loaderStatus = true
         },
         notifMessage_mutation: (state, response) => {
             state.notifMessage = response.data.message
-		},
-		showSnackbar(state, response) {
-			state.snackbar.text = response
-			state.snackbar.timeout = 3000
-			state.snackbar.visible = true
-			},
-		closeSnackbar(state) {
-			state.snackbar.visible = false
-			state.snackbar.multiline = false
-			state.snackbar.timeout = 6000
-			state.snackbar.text = null
-			}
-		},
+        },
+        showSnackbar(state, response) {
+            state.snackbar.text = response
+            state.snackbar.timeout = 3000
+            state.snackbar.visible = true
+        },
+        closeSnackbar(state) {
+            state.snackbar.visible = false
+            state.snackbar.multiline = false
+            state.snackbar.timeout = 6000
+            state.snackbar.text = null
+        }
+    },
     actions: {
         // No Auth Action
         getKategoriNoAuth: ({ commit }) => {
@@ -618,6 +627,15 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        getPromo: ({ commit }) => {
+            axs.get('/ahaapi/banner')
+                .then(response => {
+                    commit('getPromo_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         invoiceDetails: ({ commit }, data) => {
             axs.post('/ahaapi/invoices', data)
                 .then(response => {
@@ -647,28 +665,28 @@ export default new Vuex.Store({
                 })
         },
         userLogin: ({ commit }, user) => {
-			axs.post('ahaapi/login_member', user)
-			.then(response => {
-				console.log(response)
-				commit('authSuccess_mutation', response)
-				commit('showSnackbar', response.data.message)
-			})
-			.catch(err => {
-				// commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
-				commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
-				console.log(err.message)
-				})
+            axs.post('ahaapi/login_member', user)
+                .then(response => {
+                    console.log(response)
+                    commit('authSuccess_mutation', response)
+                    commit('showSnackbar', response.data.message)
+                })
+                .catch(err => {
+                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
+                    commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
+                    console.log(err.message)
+                })
         },
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
-					console.log(response)
-					commit('authSuccess_mutation', response)
-					commit('showSnackbar', response.data.message)
+                    console.log(response)
+                    commit('authSuccess_mutation', response)
+                    commit('showSnackbar', response.data.message)
                 })
                 .catch(err => {
-					commit('registerError_mutation', 'Email Sudah Terdaftar!')
-					console.log(err.message)
+                    commit('registerError_mutation', 'Email Sudah Terdaftar!')
+                    console.log(err.message)
                 })
         },
         loginFirebase: ({ commit }) => {
@@ -752,10 +770,10 @@ export default new Vuex.Store({
         forgotPassword: ({ commit }, data) => {
             axs.post('/ahaapi/lupa_password', data)
                 .then(response => {
-					console.log(response.data)
-					commit('showSnackbar', response.data.message)
-                    // commit('notifMessage_mutation', response.data.message)
-                    // console.log(response.data.message)
+                    console.log(response.data)
+                    commit('showSnackbar', response.data.message)
+                        // commit('notifMessage_mutation', response.data.message)
+                        // console.log(response.data.message)
                 })
         },
         resetPassword: ({ commit }, data) => {
@@ -768,6 +786,7 @@ export default new Vuex.Store({
     },
     getters: {
         isLoggedIn: state => !!state.token,
-        authStatus: state => state.status
+        authStatus: state => state.status,
+        premiumStatus: state => state.premiumStatus
     }
 });
