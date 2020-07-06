@@ -5,8 +5,9 @@
 					<h1 class="ungu"> {{ title }} </h1>
 					<p> {{ subtitle }} </p>
 			</v-col>
-			<v-col md="6">
-				<v-img src="@/assets/image/Group21.png" height="240px" width="auto" position="right 25%"></v-img>
+			<v-col md="2"></v-col>
+			<v-col md="4">
+				<v-img src="@/assets/image/career.png" height="240px" position="right 25%"></v-img>
 			</v-col>
 		</v-row>
 		<hr class="mt-5">
@@ -15,7 +16,7 @@
 
 <script>
 export default {
-  name: "AboutHeader",
+  name: "CareerHeader",
   props: {
     title: String,
     subtitle: String

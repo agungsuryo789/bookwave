@@ -29,10 +29,14 @@ const PartnersPage = () =>
 	import ('../views/pages/PartnersPage.vue')
 const HelpSupport = () =>
 	import ('../views/pages/HelpSupport.vue')
-const Blog = () =>
+const BlogList = () =>
 	import ('../views/pages/BlogList.vue')
 const Career = () =>
-    import ('../views/pages/CareerList.vue')
+	import ('../views/pages/CareerPage.vue')
+const BlogDetail = () =>
+	import ('../views/pages/BlogDetail.vue')
+const CareerDetail = () =>
+	import ('../views/pages/CareerDetail.vue')
 
 // Auth Component
 const Login = () =>
@@ -206,17 +210,35 @@ const routes = [
 	},
 	{
         path: '/blog',
-        name: 'Blog',
-        component: Blog,
+        name: 'BlogList',
+        component: BlogList,
         meta: {
             title: "Blog | Ahabaca"
         }
 	},
 	{
+        path: '/blog/:idBlog',
+        name: 'BlogDetail',
+        component: BlogDetail,
+        meta: {
+            requiresAuth: true,
+            title: "Blog | Ahabaca"
+        }
+    },
+	{
         path: '/career',
         name: 'Career',
         component: Career,
         meta: {
+            title: "Career | Ahabaca"
+        }
+	},
+	{
+        path: '/career/:idKarir',
+        name: 'CareerDetail',
+        component: CareerDetail,
+        meta: {
+            requiresAuth: true,
             title: "Career | Ahabaca"
         }
     },

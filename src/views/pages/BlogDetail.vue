@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<NavbarSection />
-		<div class="container" v-for="item in blog" :key="item.id_blog">
+		<!--<div class="container">
 			<v-row class="mt-2 my-2">
 				<v-col sm="12" md="4">
-					<a @click="goDetail(item.id_blog)">
+					<a>
 						<h2 class="ungu"> {{ item.judul }} </h2>
 						<p class="blog-link"> {{ item.lokasi }} </p>
 					</a>
@@ -16,7 +16,15 @@
 				</v-col>
 			</v-row>
 			<hr/>
-		</div>
+		</div>-->
+		<v-container>
+			<v-img src="@/assets/image/blog.png" max-height="250px"></v-img>
+		</v-container>
+		<v-container v-for="item in blog" :key="item.id_blog">
+			<h2 class="ungu mt-12">{{ item.judul }}</h2>
+			<span class="mb-10"> {{ item.created_at }} </span>
+			<p class="my-12"> {{ item.isi_blog }} </p>
+		</v-container>
 		<FooterSection />
 	</div>
 </template>
@@ -27,24 +35,16 @@ import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "BlogList",
+  name: "BlogDetail",
   components: {
     NavbarSection,
     FooterSection
   },
-  created() {
-    this.$store.dispatch("getBlog");
-  },
   computed: mapState({
-	blog: state => state.listBlog.data
+	blog: state => state.detailBlog.data
   }),
-  methods: {
-    goDetail(idBlog) {
-      this.$router.push({
-        name: "BlogDetail",
-        params: { idBlog: idBlog }
-      });
-    }
+  mounted() {
+    this.$store.dispatch("getBlogDetail", this.$route.params.idBlog);
   }
 };
 </script>
@@ -54,5 +54,8 @@ export default {
 	}
 	.blog-link {
 		color: black;
+	}
+	div .container{
+		font-size: larger;
 	}
 </style>

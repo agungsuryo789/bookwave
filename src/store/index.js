@@ -361,6 +361,12 @@ export default new Vuex.Store({
 		},
 		getBlog_mutation: (state, response) => {
 			state.listBlog = response
+		},
+		getBlogDetail_mutation: (state, response) => {
+			state.detailBlog = response
+		},
+		getCareerDetail_mutation: (state, response) => {
+			state.detailCareer = response
 		}
 	},
     actions: {
@@ -898,6 +904,26 @@ export default new Vuex.Store({
 				})
 				.catch(err => {
                     console.log(err.message);
+                })
+		},
+		getBlogDetail: ({ commit }, idBlog) => {
+            axs.get('/ahaapi/detail_blog?id=' + idBlog)
+                .then(response => {
+					console.log(response.data)
+					commit('getBlogDetail_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+		},
+		getCareerDetail: ({ commit }, idKarir) => {
+            axs.get('/ahaapi/detail_karir?id=' + idKarir)
+                .then(response => {
+					console.log(response.data)
+					commit('getCareerDetail_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message)
                 })
 		}
     },
