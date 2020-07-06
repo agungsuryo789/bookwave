@@ -164,7 +164,7 @@ export default {
         } else {
           v.loadSkeleton = true;
         }
-      }, 400);
+      }, 800);
     }
   },
   computed: mapState({

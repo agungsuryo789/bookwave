@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-body">
+  <div class="footer-body mt-12">
     <v-container fluid class="footer-container px-0 mx-0">
       <v-row class="mx-auto" style="max-width:1000px;">
         <v-col

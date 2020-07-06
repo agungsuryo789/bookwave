@@ -53,28 +53,13 @@ export default {
   methods: {
     gotoBook() {
       const urlName = this.$props.title.toLowerCase();
-      if (this.is_premium === "0") {
-        this.$router.push({
-          name: "BookPage",
-          params: {
-            bookId: this.$props.idBuku,
-            bookName: urlName.replace(/ /g, "-")
-          }
-        });
-      } else if (this.is_premium === "1" && this.$store.getters.premiumStatus) {
-        this.$router.push({
-          name: "BookPage",
-          params: {
-            bookId: this.$props.idBuku,
-            bookName: urlName.replace(/ /g, "-")
-          }
-        });
-      } else if (
-        this.is_premium === "1" &&
-        !this.$store.getters.premiumStatus
-      ) {
-        return false;
-      }
+      this.$router.push({
+        name: "BookPage",
+        params: {
+          bookId: this.$props.idBuku,
+          bookName: urlName.replace(/ /g, "-")
+        }
+      });
     }
   },
   computed: {

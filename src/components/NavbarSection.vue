@@ -1,5 +1,5 @@
 <template>
-  <v-container class="navbar-section px-0" fluid>
+  <v-container class="navbar-section px-0 mb-10" fluid>
     <v-row>
       <v-col class="mb-12">
         <nav v-if="userState" class="navbar navbar--auth" style="background-color:white;">
@@ -295,7 +295,7 @@ export default {
     width: 100%;
     padding: 0 11%;
     @media screen and (max-width: 425px) {
-      padding: 0 2%;
+      padding: 0;
     }
   }
   .category-chip--navbar {

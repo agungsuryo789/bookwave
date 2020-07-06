@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="kategori-desc mx-auto" style="max-width:900px;">
       <v-col lg="6" md="12" sm="12" cols="12">
-        <h1 style="width:400px;">Kategori yang sering di cari</h1>
+        <h1 style="max-width:400px;">Kategori yang sering di cari</h1>
         <div class="title-underline d-flex flex-row justify-start" style="margin-left: -4px;">
           <img class="mx-2" src="@/assets/image/underline-1.svg" height="8" />
           <img src="@/assets/image/underline-2.svg" height="8" />
@@ -18,10 +18,7 @@
     </v-row>
     <v-row class="justify-center align-center my-10">
       <v-col class="col-kategori-chip d-flex flex-row justify-center align-center">
-        <v-btn text height="100px">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-card class="chip-card py-7 px-10" flat outlined>
+        <v-card class="chip-card py-7 px-5" flat outlined>
           <v-chip
             class="btn-chip-main mx-1 my-1"
             v-for="n in daftarKategoriNoAuth"
@@ -33,9 +30,18 @@
             :color="n.warna_kategori"
           >{{ n.nama_kategori }}</v-chip>
         </v-card>
-        <v-btn text height="100px">
-          <v-icon>mdi-arrow-right</v-icon>
-        </v-btn>
+        <!-- <v-slide-group show-arrows>
+          <v-slide-item v-for="n in daftarKategoriNoAuth" :key="n.id_daftar_kategori">
+            <v-chip
+              class="btn-chip-main mx-1 my-1"
+              filter
+              outlined
+              link
+              :color="n.warna_kategori"
+              @click="gotoKategori(n.id_daftar_kategori)"
+            >{{ n.nama_kategori }}</v-chip>
+          </v-slide-item>
+        </v-slide-group> -->
       </v-col>
     </v-row>
     <v-row v-if="loadSkeleton">
@@ -71,28 +77,6 @@
           :warna_kategori="n.warna_kategori"
           :kategori_buku="n.nama_kategori"
         />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col class="text-center d-flex flex-column justify-center align-center">
-        <v-btn
-          class="btnLihat"
-          rounded
-          color="#39DF8C"
-          elevation="2"
-          depressed
-          v-if="booksToShow < parseInt(bookListTrendingNoAuth.length)"
-          @click="booksToShow += 4"
-        >Lihat lebih banyak</v-btn>
-        <v-btn
-          class="btnLihat"
-          rounded
-          color="#39DF8C"
-          elevation="2"
-          depressed
-          v-else
-          @click="booksToShow = 6"
-        >Lihat lebih sedikit</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -143,15 +127,26 @@ export default {
   }
 }
 .col-kategori-chip {
-  max-width: 500px;
+  max-width: 600px;
+  padding: 50px 0;
   .chip-card {
     border-top: none;
     border-bottom: none;
+    width: 500px;
+  }
+  .category-slide-group {
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
   }
 }
 .btnLihat {
   @include btn-main-green();
   width: 20%;
+  @media screen and (max-width: 450px) {
+    width: 50%;
+  }
 }
 .btn-chip-main {
   @include btn-chip-main();

@@ -1,6 +1,6 @@
 <template>
   <div class="bookpage-tabs">
-    <v-tabs v-model="tab">
+    <v-tabs v-model="tab" slider-color="#E76464" color="#E76464">
       <v-tab>Sinopsis</v-tab>
       <v-tab>Untuk Siapakah Buku ini?</v-tab>
       <v-tab>Tentang Penulis</v-tab>

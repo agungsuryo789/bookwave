@@ -263,7 +263,7 @@ export default new Vuex.Store({
             state.addTagRes = response
             state.loaderStatus = true
             alert("Berhasil tambah tag")
-            router.push("/library/book")
+            router.push("/library/tag")
         },
         editTagRes_mutation: (state, response) => {
             state.editTagRes = response
@@ -317,7 +317,10 @@ export default new Vuex.Store({
         getPromo_mutation: (state, response) => {
             state.promoList = response
             state.loaderStatus = true
-            console.log(response)
+        },
+        invoiceSubsDownload_mutation: (state, response) => {
+            state.invoiceDownloadDetail = response
+            state.loaderStatus = true
         },
         midtransToken_mutation: (state, response) => {
             state.midtransToken = response
@@ -686,6 +689,15 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        invoiceSubsDownload: ({ commit }, payload) => {
+            axs.get('/ahaapi/download_invoice?id_transaksi=' + payload)
+                .then(response => {
+                    commit('invoiceSubsDownload_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         getPaymentHistory: ({ commit }) => {
             axs.get('/ahaapi/riwayat_pembayaran')
                 .then(response => {
@@ -930,6 +942,7 @@ export default new Vuex.Store({
     getters: {
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
-        premiumStatus: state => state.premiumStatus
+        premiumStatus: state => state.premiumStatus,
+        invoiceDownloadDetail: state => state.invoiceDownloadDetail
     }
 });

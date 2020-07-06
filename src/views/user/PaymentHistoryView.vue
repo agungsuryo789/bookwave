@@ -12,19 +12,19 @@
         </v-col>
       </v-row>
       <v-row v-if="paymentHistoryList.length > 0">
-        <v-col lg="7" md="12" sm="12" xs="12">
+        <v-col lg="7" md="12" sm="12" cols="12">
           <v-row>
             <v-col
               lg="12"
               md="12"
               sm="12"
-              xs="12"
+              cols="12"
               v-for="item in paymentHistoryList"
               :key="item.id_transaksi"
             >
-              <v-card>
+              <v-card @click="toDownloadInvoice(item.id_transaksi)">
                 <v-row style="margin:0 auto;">
-                  <v-col lg="3">
+                  <v-col class="hide-on-sm" lg="3">
                     <v-img
                       src="@/assets/image/payment-image.png"
                       alt="AHA Payment history"
@@ -47,7 +47,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col class="text-center" lg="5" md="12" sm="12" xs="12">
+        <v-col class="text-center hide-on-sm" lg="5" md="12" sm="12" cols="12">
           <v-img
             src="@/assets/image/aha-hero.svg"
             alt="AHA Description Section"
@@ -84,12 +84,27 @@ export default {
   computed: mapState({
     paymentHistoryList: state => state.paymentHistoryList
   }),
+  methods: {
+    toDownloadInvoice(val) {
+      this.$store.dispatch("invoiceSubsDownload", val);
+      const getter = this.$store.getters;
+
+      setTimeout(function() {
+        const invoiceUrl = getter.invoiceDownloadDetail.data.invoice_file;
+        window.open(invoiceUrl);
+      }, 300);
+    }
+  },
   mounted() {
     this.$store.dispatch("getPaymentHistory");
-    console.log(this.paymentHistoryList);
   }
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+.hide-on-sm {
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
+}
 </style>
