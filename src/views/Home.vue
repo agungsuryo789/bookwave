@@ -115,7 +115,8 @@ export default {
     }
     @media screen and (max-width: 360px) {
       height: 100%;
-      width: 130%;
+      width: 140%;
+	  margin-left: -5%;
     }
   }
   .banner-bg-img-2 {
@@ -136,7 +137,7 @@ export default {
     @media screen and (max-width: 360px) {
       bottom: -20px;
       left: 5px;
-      width: 110%;
+      width: 130%;
     }
   }
 }

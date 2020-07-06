@@ -11,11 +11,11 @@
           <v-col
             v-for="n in koleksiTag.data"
             :key="n.id_tag"
-            lg="4"
+            lg="3"
             md="4"
-            sm="4"
+            sm="2"
             cols="6"
-            class="my-5 mr-3 col-tag"
+            class="my-5 mx-12 col-tag"
           >
             <v-btn class="btn-tag" depressed text @click="toTagDetail(n.tag)">{{n.tag}}</v-btn>
           </v-col>

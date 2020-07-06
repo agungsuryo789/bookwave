@@ -14,13 +14,37 @@
               style="font-size:18px;"
             ></v-text-field>
           </div>
-          <div>
+          <div class="d-flex flex-row">
             <v-btn icon @click="inputFocus()">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn icon @click="dispatchDelTag">
-              <v-icon>mdi-backspace-outline</v-icon>
-            </v-btn>
+            <div>
+              <v-dialog v-model="dialog" width="300" hide-overlay>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn text v-bind="attrs" v-on="on">
+                    <v-icon>mdi-backspace-outline</v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title class="modal-hapus-title px-10"><h4 style="font-size:16px;">Hapus Tag "{{ inputTag }}" ?</h4></v-card-title>
+                  <v-card-actions
+                    style="border:2px solid #DDDDDD;border-top:none;border-bottom:6px solid #DDDDDD;"
+                  >
+                    <v-btn
+                      class="btn-modal-tag btn-hapus py-2 px-2"
+                      text
+                      @click="dispatchDelTag"
+                      style="color:#E76464;"
+                    >Hapus</v-btn>
+                    <v-btn
+                      class="btn-modal-tag btn-batal py-2 px-2"
+                      text
+                      @click="dialog = false"
+                    >Batal</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
           </div>
         </div>
       </v-card>
@@ -78,6 +102,7 @@ export default {
     return {
       loadSkeleton: true,
       showEditTag: false,
+      dialog: false,
       inputTag: this.tagName,
       editTagPayload: {
         tag: this.tagName,
@@ -124,5 +149,26 @@ export default {
 <style lang="scss" scoped>
 .input-tag-disabled {
   border: none;
+}
+.modal-hapus-title {
+  text-align: center;
+  border: 2px solid #dddddd;
+  color: #e76464;
+  font-size: 12px;
+}
+.btn-modal-tag {
+  color: black;
+  font-size: 12px;
+  border: 1px solid #dddddd;
+  margin: 0 auto;
+  width: 100px;
+}
+.btn-hapus {
+  border: 2px solid #e76464;
+  border-bottom: 4px solid #e76464;
+}
+.btn-batal {
+  border: 2px solid #dddddd;
+  border-bottom: 4px solid #dddddd;
 }
 </style>

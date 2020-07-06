@@ -18,8 +18,7 @@
         >Start Free Trial</v-btn>
       </v-col>
       <v-col class="col-banner-img" lg="6" md="12" sm="12" cols="12">
-        <v-img class="banner-img-2" src="@/assets/image/aha-screenshot.png"></v-img>
-        <v-img class="banner-img-1" src="@/assets/image/aha-mobile.png"></v-img>
+        <v-img src="@/assets/image/aha-homapage-banner.png" aspect-ratio="1.1" style="z-index:4;"></v-img>
       </v-col>
     </v-row>
   </v-container>
