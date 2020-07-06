@@ -67,14 +67,14 @@
                 <v-chip
                   v-if="memberDetail.data[0].premium_member"
                   class="my-4"
-                  color="primary"
+                  color="#E25757"
                   outlined
                 >
                   Premium Account
                   <v-icon right>mdi-account-check-outline</v-icon>
                 </v-chip>
               </template>
-              <v-menu left bottom>
+              <v-menu offset-y left>
                 <template v-slot:activator="{ on }">
                   <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                 </template>
@@ -82,8 +82,8 @@
                   <v-list-item @click="toPaymentHistory">
                     <v-list-item-title>Payment History</v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="() => {}">
-                    <v-list-item-title @click="toContact">Help & Support</v-list-item-title>
+                  <v-list-item @click="toHelp">
+                    <v-list-item-title>Help & Support</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="userLogout">
                     <v-list-item-title>Log Out</v-list-item-title>
@@ -142,7 +142,7 @@
                   <template v-if="memberDetail.data">
                     <v-list-item v-if="memberDetail.data[0].premium_member">
                       <v-list-item-title>
-                        <v-chip class="my-4" color="primary" outlined>
+                        <v-chip class="my-4" color="#E25757" outlined>
                           Premium Account
                           <v-icon right>mdi-account-check-outline</v-icon>
                         </v-chip>
@@ -152,7 +152,7 @@
                   <v-list-item @click="toPaymentHistory">
                     <v-list-item-title>Payment History</v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="() => {}">
+                  <v-list-item @click="toHelp">
                     <v-list-item-title>Help & Support</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="userLogout">

@@ -17,7 +17,10 @@
       </v-col>
     </v-row>
     <v-row class="justify-center align-center my-10">
-      <v-col class="col-kategori-chip">
+      <v-col class="col-kategori-chip d-flex flex-row justify-center align-center">
+        <v-btn text height="100px">
+          <v-icon>mdi-arrow-left</v-icon>
+        </v-btn>
         <v-card class="chip-card py-7 px-10" flat outlined>
           <v-chip
             class="btn-chip-main mx-1 my-1"
@@ -30,6 +33,9 @@
             :color="n.warna_kategori"
           >{{ n.nama_kategori }}</v-chip>
         </v-card>
+        <v-btn text height="100px">
+          <v-icon>mdi-arrow-right</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
     <v-row v-if="loadSkeleton">

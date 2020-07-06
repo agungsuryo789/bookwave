@@ -4,29 +4,33 @@
     <v-container>
       <v-row>
         <v-col
-          v-for="item in 4"
-          :key="item"
+          v-for="item in promoList"
+          :key="item.id_banner_promo"
           xl="12"
           lg="12"
           md="12"
           sm="12"
           style="margin: 0 auto;"
         >
-          <PromoCard style="margin: 0 auto;" />
+          <PromoCard :judulPromo="item.judul" style="margin: 0 auto;" />
         </v-col>
       </v-row>
       <v-row class="d-flex flex-row flex-xs-column justify-center">
         <v-col lg="4" md="6" sm="6" xs="6" v-for="item in subList" :key="item.id_langganan">
-          <v-card link ripple height="180px">
+          <v-card class="card-plans" shaped flat link ripple height="180px">
             <div class="d-flex flex-row justify-space-between pt-2">
-              <div v-if="item.id_langganan == 2" class="subcription-page--price-badge justify-center align-center" style="background-color:#B2FF59;height:35px;padding:3px;color:white;">
+              <div
+                v-if="item.id_langganan == 2"
+                class="subcription-page--price-badge justify-center align-center"
+                style="background-color:#B2FF59;height:35px;padding:3px;color:white;"
+              >
                 <p>Hemat 20%</p>
               </div>
               <v-btn
                 color="#D32F2F"
                 elevation="3"
                 style="color:white;font-weight:bold;"
-				@click="pay(item.id_langganan)"
+                @click="pay(item.id_langganan)"
               >Coba 7 hari gratis</v-btn>
             </div>
             <v-card-title class="m-0 p-0">Tahunan</v-card-title>
@@ -55,9 +59,11 @@ export default {
     PromoCard
   },
   computed: mapState({
+    promoList: state => state.promoList.data,
     subList: state => state.subList.data
   }),
   created() {
+    this.$store.dispatch("getPromo");
     this.$store.dispatch("getSubsOption");
   },
   methods: {
@@ -75,5 +81,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.card-plans {
+  border-bottom: 5px solid #dddddd;
+  border-top: 2px solid #dddddd;
+  border-left: 2px solid #dddddd;
+  border-right: 2px solid #dddddd;
+  border-radius: 10px;
+}
 </style>

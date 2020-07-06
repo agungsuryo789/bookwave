@@ -5,6 +5,10 @@
       <v-row>
         <v-col>
           <h1>Payment History</h1>
+          <div class="title-underline d-flex flex-row justify-start">
+            <img src="@/assets/image/underline-1.svg" height="8" />
+            <img class="mx-2" src="@/assets/image/underline-2.svg" height="8" />
+          </div>
         </v-col>
       </v-row>
       <v-row v-if="paymentHistoryList.length > 0">
@@ -31,11 +35,11 @@
                     ></v-img>
                   </v-col>
                   <v-col lg="8">
-                    <v-card-title>{{item.nama_langganan}}</v-card-title>
-                    <v-card-text>{{item.order_id}}</v-card-text>
+                    <v-card-title style="font-weight:bold;">{{item.nama_langganan}}</v-card-title>
+                    <v-card-text style="font-weight:bold;">{{item.order_id}}</v-card-text>
                     <v-card-subtitle>
-                      <span>{{item.tgl_bayar}}</span>|
-                      <span>Status: {{item.status_transaksi}}</span>
+                      <span class="mx-1">{{item.tgl_bayar}}</span>|
+                      <span class="mx-1">Status: {{item.status_transaksi}}</span>
                     </v-card-subtitle>
                   </v-col>
                 </v-row>

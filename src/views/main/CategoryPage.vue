@@ -26,6 +26,7 @@
               :penulis="n.penulis"
               :warna_kategori="n.border_buku"
               :kategori_buku="n.nama_kategori"
+              :is_premium="n.is_premium"
               :isCollected="n.is_collected"
               :isFavorited="n.is_favorite"
             />
@@ -54,6 +55,7 @@
               :penulis="n.penulis"
               :warna_kategori="n.border_buku"
               :kategori_buku="n.nama_kategori"
+              :is_premium="n.is_premium"
               :isCollected="n.is_collected"
               :isFavorited="n.is_favorite"
             />

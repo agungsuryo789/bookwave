@@ -157,6 +157,7 @@ export default {
           type: 1
         };
 		this.$store.dispatch("userRegister", data);
+		this.$store.dispatch("getMemberDetail");
 		this.showSnackbar()
       }
     }

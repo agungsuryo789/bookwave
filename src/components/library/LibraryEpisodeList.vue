@@ -22,6 +22,8 @@
             :episodeTitle="n.judul_chapter"
             :foto_sampul="n.foto_sampul"
             :warna_episode="n.warna_kategori"
+            :is_premium_chapter="n.is_premium_chapter"
+            :premium_member="n.premium_member"
           />
         </v-col>
       </template>
