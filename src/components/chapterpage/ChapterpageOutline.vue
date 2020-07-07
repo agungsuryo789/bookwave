@@ -1,19 +1,24 @@
 <template>
   <div>
-    <v-container v-for="book in bookDetail.data" :key="book.id_buku">
+    <v-container>
       <v-row>
         <v-col>
           <v-list>
             <v-list-item-group>
               <v-list-item
-                v-for="(item, i) in book.data_chapter"
+                v-for="(item, i) in bookOutline.data"
                 :key="item.id_chapter"
-                @click="toChapter(bookID = book.id_buku, chapterId = item.id_chapter)"
+                @click="toChapter(bookID = item.id_buku, chapterId = item.id_chapter)"
               >
-                <div style="width:100%;">
-                  <v-divider></v-divider>
+                <div v-if="!item.isRead" style="width:100%;">
+                  <v-divider class="my-3"></v-divider>
                   {{ i + 1 }}. {{ item.judul_chapter }}
-                  <v-divider></v-divider>
+                  <v-divider class="my-3"></v-divider>
+                </div>
+                <div v-if="item.isRead" style="width:100%;color:#E76464;">
+                  <v-divider class="my-3"></v-divider>
+                  {{ i + 1 }}. {{ item.judul_chapter }}
+                  <v-divider class="my-3"></v-divider>
                 </div>
               </v-list-item>
             </v-list-item-group>
@@ -43,10 +48,10 @@ export default {
     }
   },
   computed: mapState({
-    bookDetail: state => state.bookDetail
+    bookOutline: state => state.bookOutline
   }),
   created() {
-    this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
+    this.$store.dispatch("getBookOutline", this.$route.params.bookId);
   }
 };
 </script>

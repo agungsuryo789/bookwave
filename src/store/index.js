@@ -91,6 +91,7 @@ export default new Vuex.Store({
         bookId: '',
         kategoriId: '',
         bookDetail: {},
+        bookOutline: {},
         chapterDetail: {},
         intisariDetail: {},
         bookStatus: {},
@@ -114,24 +115,24 @@ export default new Vuex.Store({
         editTagRes: {},
         paymentHistoryList: [],
         invoiceDetails: {},
-		midtransToken: '',
-		snackbar: {
-			visible: false,
-			text: null,
-			timeout: 6000,
-			multiline: false,
-			color: 'cyan darken-2'
-		},
-		termsCondition: [],
-		userPrivacy: [],
-		applicationPrivacy: [],
-		disclaimer: [],
-		aboutUs: [],
-		contactUs: [],
-		career: [],
-		detailCareer: [],
-		listBlog: [],
-		detailBlog: []
+        midtransToken: '',
+        snackbar: {
+            visible: false,
+            text: null,
+            timeout: 6000,
+            multiline: false,
+            color: 'cyan darken-2'
+        },
+        termsCondition: [],
+        userPrivacy: [],
+        applicationPrivacy: [],
+        disclaimer: [],
+        aboutUs: [],
+        contactUs: [],
+        career: [],
+        detailCareer: [],
+        listBlog: [],
+        detailBlog: []
     },
     mutations: {
         getKategoriNoAuth_mutation: (state, response) => {
@@ -199,8 +200,8 @@ export default new Vuex.Store({
                 // router.push({ name: 'Register' })
         },
         authDown_mutation: (state) => {
-            state.status = ''
-            state.token = ''
+            state.status = null
+            state.token = null
             state.premiumStatus = null
             Object.assign(state)
             router.push('/')
@@ -218,6 +219,10 @@ export default new Vuex.Store({
             state.bookDetail = response
             state.loaderStatus = true
         },
+        getBookOutline_mutation: (state, response) => {
+            state.bookOutline = response
+            state.loaderStatus = true
+        },
         getBookChapter_mutation: (state, response) => {
             state.chapterDetail = response
             state.loaderStatus = true
@@ -229,26 +234,22 @@ export default new Vuex.Store({
         setBookDone_mutation: (state, response) => {
             state.bookStatus = response
             state.loaderStatus = true
-            alert("Selamat!! kamu sudah selesai membaca buku ini ^_^")
             router.push("/", () => {})
         },
         setDeleteKoleksi_mutation: (state, response) => {
             state.bookStatus = response
             state.loaderStatus = true
-            alert("Berhasil hapus koleksi")
-            router.push("/library/book")
+            window.history.go()
         },
         setBookFavorit_mutation: (state, response) => {
             state.bookFavorit = response
             state.loaderStatus = true
-            alert("Berhasil Ditambahkan ke Favorit")
             router.push("/library/book")
         },
         setBookmark_mutation: (state, response) => {
             state.bookBookmarked = response
             state.loaderStatus = true
-            alert("Berhasil di simpan")
-            router.push("/library/book")
+            window.history.go()
         },
         getSubsOption_mutation: (state, response) => {
             state.subList = response
@@ -262,19 +263,20 @@ export default new Vuex.Store({
         addTag_mutation: (state, response) => {
             state.addTagRes = response
             state.loaderStatus = true
-            alert("Berhasil tambah tag")
             router.push("/library/tag")
         },
         editTagRes_mutation: (state, response) => {
             state.editTagRes = response
             state.loaderStatus = true
-            alert("Berhasil edit tag")
             router.push("/library/book")
         },
         delTagRes_mutation: (state, response) => {
             state.delTagRes = response
             state.loaderStatus = true
             router.push("/library/book")
+        },
+        saveChapterSingle_mutation: (state, response) => {
+            location.reload()
         },
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
@@ -328,50 +330,50 @@ export default new Vuex.Store({
         },
         notifMessage_mutation: (state, response) => {
             state.notifMessage = response.data.message
-		},
-		showSnackbar(state, response) {
-			state.snackbar.text = response
-			state.snackbar.timeout = 3000
-			state.snackbar.visible = true
-			},
-		closeSnackbar(state) {
-			state.snackbar.visible = false
-			state.snackbar.multiline = false
-			state.snackbar.timeout = 6000
-			state.snackbar.text = null
-			},
-		getTerms_mutation: (state, response) => {
-			state.termsCondition = response
-		},
-		getUserPrivacy_mutation: (state, response) => {
-			state.userPrivacy = response
-		},
-		getApplicationPrivacy_mutation: (state, response) => {
-			state.applicationPrivacy = response
-		},
-		getDisclaimer_mutation: (state, response) => {
-			state.disclaimer = response
-			state.loaderStatus = true
-		},
-		getAbout_mutation: (state, response) => {
-			state.aboutUs = response
-		},
-		getContact_mutation: (state, response) => {
-			state.contactUs = response
-		},
-		getCareer_mutation: (state, response) => {
-			state.career = response
-		},
-		getBlog_mutation: (state, response) => {
-			state.listBlog = response
-		},
-		getBlogDetail_mutation: (state, response) => {
-			state.detailBlog = response
-		},
-		getCareerDetail_mutation: (state, response) => {
-			state.detailCareer = response
-		}
-	},
+        },
+        showSnackbar(state, response) {
+            state.snackbar.text = response
+            state.snackbar.timeout = 3000
+            state.snackbar.visible = true
+        },
+        closeSnackbar(state) {
+            state.snackbar.visible = false
+            state.snackbar.multiline = false
+            state.snackbar.timeout = 6000
+            state.snackbar.text = null
+        },
+        getTerms_mutation: (state, response) => {
+            state.termsCondition = response
+        },
+        getUserPrivacy_mutation: (state, response) => {
+            state.userPrivacy = response
+        },
+        getApplicationPrivacy_mutation: (state, response) => {
+            state.applicationPrivacy = response
+        },
+        getDisclaimer_mutation: (state, response) => {
+            state.disclaimer = response
+            state.loaderStatus = true
+        },
+        getAbout_mutation: (state, response) => {
+            state.aboutUs = response
+        },
+        getContact_mutation: (state, response) => {
+            state.contactUs = response
+        },
+        getCareer_mutation: (state, response) => {
+            state.career = response
+        },
+        getBlog_mutation: (state, response) => {
+            state.listBlog = response
+        },
+        getBlogDetail_mutation: (state, response) => {
+            state.detailBlog = response
+        },
+        getCareerDetail_mutation: (state, response) => {
+            state.detailCareer = response
+        }
+    },
     actions: {
         // No Auth Action
         getKategoriNoAuth: ({ commit }) => {
@@ -496,6 +498,15 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        getBookOutline: ({ commit }, bookId) => {
+            axs.get('/ahaapi/outline_buku?id_buku=' + bookId)
+                .then(response => {
+                    commit('getBookOutline_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         getBookIntisari: ({ commit }, dispatchPayload) => {
             axs.get('/ahaapi/intisari?id_buku=' + dispatchPayload)
                 .then(response => {
@@ -566,6 +577,15 @@ export default new Vuex.Store({
                 })
                 .catch(err => {
                     alert(err.message);
+                })
+        },
+        saveChapterSingle: ({ commit }, payload) => {
+            axs.post('/ahaapi/tambah_audio', payload)
+                .then(response => {
+                    commit('saveChapterSingle_mutation');
+                })
+                .catch(err => {
+                    console.log(err.message);
                 })
         },
         addTag: ({ commit }, tagPayload) => {
@@ -835,109 +855,109 @@ export default new Vuex.Store({
                     commit('notifMessage_mutation', response)
                     console.log(response.data.message)
                 })
-		},
+        },
 
-		// Footerpage action
-		getTerms: ({ commit }) => {
-			axs.get('/ahaapi/ketentuan')
-				.then(response => {
-					console.log(response.data)
-					commit('getTerms_mutation', response.data)
-				})
-				.catch(err => {
+        // Footerpage action
+        getTerms: ({ commit }) => {
+            axs.get('/ahaapi/ketentuan')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getTerms_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getUserPrivacy: ({ commit }) => {
-			axs.get('/ahaapi/privasi_user')
-				.then(response => {
-					console.log(response.data)
-					commit('getUserPrivacy_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getUserPrivacy: ({ commit }) => {
+            axs.get('/ahaapi/privasi_user')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getUserPrivacy_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getApplicationPrivacy: ({ commit }) => {
-			axs.get('/ahaapi/privasi_aplikasi')
-				.then(response => {
-					console.log(response.data)
-					commit('getApplicationPrivacy_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getApplicationPrivacy: ({ commit }) => {
+            axs.get('/ahaapi/privasi_aplikasi')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getApplicationPrivacy_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getDisclaimer: ({ commit }) => {
-			axs.get('/ahaapi/disclaimer')
-				.then(response => {
-					console.log(response.data)
-					commit('getDisclaimer_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getDisclaimer: ({ commit }) => {
+            axs.get('/ahaapi/disclaimer')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getDisclaimer_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getAbout: ({ commit }) => {
-			axs.get('/ahaapi/about')
-				.then(response => {
-					console.log(response.data)
-					commit('getAbout_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getAbout: ({ commit }) => {
+            axs.get('/ahaapi/about')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getAbout_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getContact: ({ commit }) => {
-			axs.get('/ahaapi/contact')
-				.then(response => {
-					console.log(response.data)
-					commit('getContact_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getContact: ({ commit }) => {
+            axs.get('/ahaapi/contact')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getContact_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getCareer: ({ commit }) => {
-			axs.get('/ahaapi/karir')
-				.then(response => {
-					console.log(response.data)
-					commit('getCareer_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getCareer: ({ commit }) => {
+            axs.get('/ahaapi/karir')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getCareer_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getBlog: ({ commit }) => {
-			axs.get('/ahaapi/blog')
-				.then(response => {
-					console.log(response.data)
-					commit('getBlog_mutation', response.data)
-				})
-				.catch(err => {
+        },
+        getBlog: ({ commit }) => {
+            axs.get('/ahaapi/blog')
+                .then(response => {
+                    console.log(response.data)
+                    commit('getBlog_mutation', response.data)
+                })
+                .catch(err => {
                     console.log(err.message);
                 })
-		},
-		getBlogDetail: ({ commit }, idBlog) => {
+        },
+        getBlogDetail: ({ commit }, idBlog) => {
             axs.get('/ahaapi/detail_blog?id=' + idBlog)
                 .then(response => {
-					console.log(response.data)
-					commit('getBlogDetail_mutation', response.data);
+                    console.log(response.data)
+                    commit('getBlogDetail_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message)
                 })
-		},
-		getCareerDetail: ({ commit }, idKarir) => {
+        },
+        getCareerDetail: ({ commit }, idKarir) => {
             axs.get('/ahaapi/detail_karir?id=' + idKarir)
                 .then(response => {
-					console.log(response.data)
-					commit('getCareerDetail_mutation', response.data);
+                    console.log(response.data)
+                    commit('getCareerDetail_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message)
                 })
-		}
+        }
     },
     getters: {
         isLoggedIn: state => !!state.token,

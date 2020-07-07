@@ -2,6 +2,9 @@
   <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
       <v-img class="book-card-img mx-auto" width="120px" height="120px" :src="foto_sampul"></v-img>
+      <template v-if="premiumStatus == '1' && !premiumMemberStatus">
+        <v-icon class="icon-book-locked">mdi-lock-outline</v-icon>
+      </template>
       <ButtonBookmark :idBuku="parseInt(idBuku)" :isCollected="isCollected" />
     </div>
     <a @click="gotoBook" class="book-card-title">
@@ -50,6 +53,12 @@ export default {
   components: {
     ButtonBookmark
   },
+  data() {
+    return {
+      premiumMemberStatus: this.$store.getters.premiumStatus,
+      premiumStatus: this.$props.is_premium
+    };
+  },
   methods: {
     gotoBook() {
       const urlName = this.$props.title.toLowerCase();
@@ -97,6 +106,9 @@ export default {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+  }
+  .icon-book-locked {
+    margin-top: -14%;
   }
 }
 </style>

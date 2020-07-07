@@ -13,7 +13,7 @@
               <p>{{deskripsi}}</p>
             </a>
             <template v-if="is_premium && !premiumMemberStatus">
-              <v-icon class="book-card-icon-lock">mdi-lock</v-icon>
+              <v-icon class="book-card-icon-lock">mdi-lock-outline</v-icon>
             </template>
           </div>
           <div class="d-flex flex-row justify-space-between mt-1">

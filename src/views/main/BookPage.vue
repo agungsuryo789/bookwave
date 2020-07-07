@@ -24,12 +24,15 @@
               </div>
             </v-card>
           </v-col>
-          <v-col class="px-0 py-0 mx-0 my-0" lg="6" md="6" sm="12" cols="12">
+          <v-col class="px-10 px-lg-0 my-0 py-0" lg="6" md="6" sm="12" cols="12">
             <v-row>
               <v-col class="card--book-detail" lg="12" md="12" sm="12" cols="12">
-                <h1 class="my-3">{{ book.judul }}</h1>
-                <p class="my-3 font-weight-bold">{{ book.sub_judul }}</p>
-                <p style="font-size:15px;font-weight:600;color:gray;">{{ book.penulis }}</p>
+                <h1 class="my-3 book-title">{{ book.judul }}</h1>
+                <p class="my-1 book-sub-title">{{ book.sub_judul }}</p>
+                <p
+                  class="book-author"
+                  style="font-size:15px;font-weight:600;color:gray;"
+                >{{ book.penulis }}</p>
               </v-col>
               <v-col class="card--book-detail" lg="12" md="12" sm="12" cols="12">
                 <div class="d-flex flex-column flex-lg-row justify-space-between my-10">
@@ -81,9 +84,9 @@
                       >Upgrade now to read.</v-btn>
                     </div>
                   </template>
-                  <ul style="font-size:12px;">
-                    <li>{{ book.durasi }} membaca</li>
-                    <li>Audio Available</li>
+                  <ul class="list-book-detail my-3 my-lg-0 mx-0 px-0" style="font-size:12px;">
+                    <li><v-icon class="mr-2" small>mdi-clock-outline</v-icon> {{ book.durasi }} membaca</li>
+                    <li><v-icon class="mr-2" small>mdi-headphones</v-icon> Audio Available</li>
                   </ul>
                 </div>
               </v-col>
@@ -153,8 +156,8 @@ export default {
           bookName: this.$props.title.toLowerCase()
         }
       });
-	},
-	callFunction: function() {
+    },
+    callFunction: function() {
       this.$store.dispatch("getBookDetailByID", this.$route.params.bookId);
       var load = this.$store.state.loaderStatus;
       var v = this;
@@ -171,7 +174,7 @@ export default {
     bookDetail: state => state.bookDetail
   }),
   created() {
-	this.callFunction();
+    this.callFunction();
     const pageTitle = this.$route.params.bookName;
     window.document.title =
       "Read " +
@@ -184,6 +187,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card--book-detail {
+  .list-book-detail {
+    li {
+      list-style-type: none;
+    }
+  }
+}
 @media only screen and (max-width: 900px) {
   .card--book-image {
     margin: 0 auto;

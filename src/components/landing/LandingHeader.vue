@@ -10,7 +10,9 @@
           class="d-flex justify-center align-center"
           style="margin:0 auto;"
         >
-          <h1>{{ bookTrending.data[0].judul }}</h1>
+          <a @click="gotoBook(bookId = bookTrending.data[0].id_buku, bookName = bookTrending.data[0].judul)" style="text-decoration:none;color:black;">
+            <h1>{{ bookTrending.data[0].judul }}</h1>
+          </a>
         </v-col>
         <v-col lg="6" md="6" sm="12" cols="12" style="margin:0 auto;">
           <BookCard
@@ -38,6 +40,18 @@ export default {
   computed: mapState({
     bookTrending: state => state.bookTrending
   }),
+  methods: {
+    gotoBook(bookId, bookName) {
+      const urlName = bookName.toLowerCase();
+      this.$router.push({
+        name: "BookPage",
+        params: {
+          bookId: bookId,
+          bookName: urlName.replace(/ /g, "-")
+        }
+      });
+    }
+  },
   created() {
     this.$store.dispatch("getBookTrending");
   }

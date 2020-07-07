@@ -12,7 +12,7 @@
       <div class="mx-1">
         <p style="font-size:12px;">
           <span v-if="is_premium_chapter && !premiumMemberStatus">
-            <v-icon>mdi-lock</v-icon>
+            <v-icon>mdi-lock-outline</v-icon>
           </span>
           Baru
         </p>

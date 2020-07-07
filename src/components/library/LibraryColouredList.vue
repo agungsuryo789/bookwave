@@ -12,12 +12,12 @@
           :key="n.id_buku_highlight"
           lg="4"
           md="6"
-          sm="12"
-          xs="12"
+          sm="6"
+          cols="12"
           class="my-5"
           style="text-align:center;"
         >
-          <v-card flat link>
+          <v-card @click="toChapter(idBuku = n.id_buku, idChapter = n.id_chapter, isPremium = n.is_premium_chapter)" flat link>
             <p style="font-weight:bold;">{{n.kalimat}}</p>
             <small style="color:gray;">{{n.judul_buku}}</small>
             <hr />
@@ -68,6 +68,24 @@ export default {
           v.loadSkeleton = true;
         }
       }, 800);
+	},
+	toChapter(idBuku, idChapter, isPremium) {
+      if (!isPremium) {
+        this.$router.push({
+          name: "BookChapter",
+          params: { bookId: idBuku, chapterId: idChapter }
+        });
+      } else if (isPremium && this.$store.getters.premiumStatus) {
+        this.$router.push({
+          name: "BookChapter",
+          params: { bookId: idBuku, chapterId: idChapter }
+        });
+      } else if (
+        isPremium &&
+        !this.$store.getters.premiumStatus
+      ) {
+        return false;
+      }
     }
   },
   created() {
