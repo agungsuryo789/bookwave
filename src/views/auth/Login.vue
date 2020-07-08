@@ -3,7 +3,7 @@
     <NavbarSection />
     <v-container fluid>
       <v-row>
-        <v-col cols="12" class="mt-12">
+        <v-col cols="12" class="mt-2">
           <v-row justify="center" class="mt-12">
             <v-col cols="6" md="4" align="center">
               <h2 class="font-weight-black">MASUK AKUN</h2>
@@ -38,11 +38,7 @@
         </v-col>
       </v-row>
       <v-spacer></v-spacer>
-      <v-row justify="center">
-        <v-col cols="6" md="4" align="center" class="mt-12">
-          <router-link to="/forgot">Lupa Kata Sandi</router-link>
-        </v-col>
-      </v-row>
+		<ForgotLink />
       <v-snackbar v-model="snackbar">Mencoba Masuk...
         <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
       </v-snackbar>
@@ -52,12 +48,14 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import ForgotLink from "@/components/auth/ForgotLink.vue";
 
 /* eslint-disable */
 export default {
   name: "Login",
   components: {
-    NavbarSection
+	NavbarSection,
+	ForgotLink
   },
   data() {
     return {
@@ -77,7 +75,7 @@ export default {
     },
     logout() {
       Firebase.logout();
-    }
+	}
   }
 };
 </script>

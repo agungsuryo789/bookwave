@@ -4,11 +4,11 @@
 		<AboutHeader title="About AHA" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, ed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
 		<v-container>
 			<v-row v-for="item in about" :key="item.id_about_us">
-				<v-col sm="12" md="2">
+				<v-col cols="12" md="2">
 					<v-img src="@/assets/image/annie-spratt-mppDYKjJ7II-unsplash.png"></v-img>
 				</v-col>
-				<v-col sm="12" md="10">
-					<p> {{ item.deskripsi }}</p>
+				<v-col cols="12" md="10">
+					<p class="larger"> {{ item.deskripsi }}</p>
 				</v-col>
 			</v-row>
 		</v-container>
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style>
-	div .container{
+	.larger{
 		font-size: larger;
 	}
 	p {

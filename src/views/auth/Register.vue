@@ -3,12 +3,14 @@
     <NavbarSection />
     <v-container fluid>
       <v-row>
-        <v-col cols="12" class="mt-12">
+        <v-col cols="12" class="mt-2">
           <v-row justify="center" class="mt-12">
             <v-col cols="6" md="4" align="center">
               <h2 class="font-weight-black">DAFTAR AKUN</h2>
             </v-col>
           </v-row>
+        </v-col>
+		<v-col cols="12" class="mt-8">
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
               <router-link to="/register/email" tag="button" style="width:100%;">
@@ -32,26 +34,24 @@
               </v-btn>
             </v-col>
           </v-row>
+		</v-col>
+		</v-row>
           <v-spacer></v-spacer>
-          <v-row justify="center">
-            <v-col cols="6" md="4" align="center" class="mt-12">
-              <router-link to="/login">Masuk</router-link>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
+          <MasukLink />
     </v-container>
   </div>
 </template>
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import MasukLink from "@/components/auth/MasukLink.vue";
 
 /* eslint-disable */
 export default {
   name: "Register",
   components: {
-    NavbarSection
+	NavbarSection,
+	MasukLink
   },
   methods: {
     register() {
@@ -64,7 +64,7 @@ export default {
     },
     logout() {
       Firebase.logout();
-    }
+	}
   }
 };
 </script>

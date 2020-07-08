@@ -6,14 +6,13 @@
         <v-col class="d-flex align-center justify-center mx-0 px-0">
           <v-img src="@/assets/image/banner-sub.png" aspect-ratio="5.3">
             <!--<h1 style="position:absolute;top:45%;left:50%;color:white;">AHA</h1>-->
-            <v-col class="my-10 my-lg-0" cols="12" sm="12" md="8">
+            <v-col class="my-10 my-lg-0" cols="12" md="8">
               <v-text-field
-                class="inputfield-help"
                 solo
-                rounded
+                rounded="4"
                 label="Temukan yang anda cari disini"
                 prepend-inner-icon="mdi-magnify"
-                style="position:absolute;top:35%;left:15%;right:15%"
+                style="position:absolute;top:40%;left:15%;right:15%"
               ></v-text-field>
             </v-col>
           </v-img>
@@ -22,21 +21,21 @@
     </v-container>
     <div class="container">
       <v-row class="mt-2 my-2">
-        <v-col xs="12" md="4">
+        <v-col cols="12" md="4">
           <v-btn large block outlined color="deep-purple accent-4" to="/about">About</v-btn>
         </v-col>
-        <v-col xs="12" md="4">
+        <v-col cols="12" md="4">
           <v-btn large block outlined color="deep-purple accent-4" to="/plans">Subscription</v-btn>
         </v-col>
-        <v-col xs="12" md="4">
+        <v-col cols="12" md="4">
           <v-btn large block outlined color="deep-purple accent-4" to="/home">My Account</v-btn>
         </v-col>
       </v-row>
       <v-row class="mt-2 my-2">
-        <v-col xs="12" md="4">
+        <v-col cols="12" md="4">
           <v-btn large block outlined color="deep-purple accent-4" to="/">Our Apps & Our Site</v-btn>
         </v-col>
-        <v-col xs="12" md="8">
+        <v-col cols="12" md="8">
           <v-btn
             large
             block
@@ -63,3 +62,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.larger {
+  font-size: larger;
+}
+</style>

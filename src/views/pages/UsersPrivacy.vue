@@ -4,9 +4,9 @@
 		<PageHeader title="User Privacy"/>
 		<div class="container">
 		<v-row class="mt-2 my-2">
-			<v-col sm="12" md="12" v-for="item in userprivacy" :key="item.id_privasi_user" >
-				<h2> {{ item.judul }} </h2>
-				<p> {{ item.deskripsi }} </p>
+			<v-col cols="12" md="12" v-for="item in userprivacy" :key="item.id_privasi_user" >
+				<h1> {{ item.judul }} </h1>
+				<p class="larger"> {{ item.deskripsi }} </p>
 			</v-col>
 		</v-row>
 		</div>
@@ -35,3 +35,9 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+	.larger{
+		font-size: larger;
+	}
+</style>

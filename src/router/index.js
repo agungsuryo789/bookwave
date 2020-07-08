@@ -221,7 +221,6 @@ const routes = [
         name: 'BlogDetail',
         component: BlogDetail,
         meta: {
-            requiresAuth: true,
             title: "Blog | Ahabaca"
         }
     },
@@ -238,7 +237,6 @@ const routes = [
         name: 'CareerDetail',
         component: CareerDetail,
         meta: {
-            requiresAuth: true,
             title: "Career | Ahabaca"
         }
     },

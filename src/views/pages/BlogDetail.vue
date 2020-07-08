@@ -5,7 +5,7 @@
 			<v-row class="mt-2 my-2">
 				<v-col sm="12" md="4">
 					<a>
-						<h2 class="ungu"> {{ item.judul }} </h2>
+						<h1 class="ungu"> {{ item.judul }} </h1>
 						<p class="blog-link"> {{ item.lokasi }} </p>
 					</a>
 				</v-col>
@@ -18,12 +18,12 @@
 			<hr/>
 		</div>-->
 		<v-container>
-			<v-img src="@/assets/image/blog.png" max-height="250px"></v-img>
+			<v-img src="@/assets/image/blog.png" max-height="250px" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
 		</v-container>
 		<v-container v-for="item in blog" :key="item.id_blog">
-			<h2 class="ungu mt-12">{{ item.judul }}</h2>
-			<span class="mb-10"> {{ item.created_at }} </span>
-			<p class="my-12"> {{ item.isi_blog }} </p>
+			<h1 class="ungu">{{ item.judul }}</h1>
+			<span class="larger mb-10"> {{ item.created_at }} </span>
+			<p class="larger my-12"> {{ item.isi_blog }} </p>
 		</v-container>
 		<FooterSection />
 	</div>
@@ -55,7 +55,7 @@ export default {
 	.blog-link {
 		color: black;
 	}
-	div .container{
+	.larger{
 		font-size: larger;
 	}
 </style>

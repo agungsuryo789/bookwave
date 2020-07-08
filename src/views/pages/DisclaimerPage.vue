@@ -5,8 +5,8 @@
 		<div class="container">
 		<v-row class="mt-2 my-2">
 			<v-col sm="12" md="12" v-for="item in disclaimer" :key="item.id_disclaimer">
-				<h2 class="my-4"> {{ item.judul }} </h2>
-				<p class="my-4"> {{ item.deskripsi }} </p>
+				<h1> {{ item.judul }} </h1>
+				<p class="larger my-4"> {{ item.deskripsi }} </p>
 			</v-col>
 		</v-row>
 		</div>
@@ -35,3 +35,9 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+	.larger{
+		font-size: larger;
+	}
+</style>

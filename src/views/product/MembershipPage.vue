@@ -12,7 +12,7 @@
       </div>
       <div class="d-flex flex-column flex-lg-row flex-xl-row">
         <v-row class="px-12">
-          <v-col lg="12" md="6" sm="12" xs="12">
+          <v-col lg="12" md="6" sm="12" cols="12">
             <ul class="list-plans">
               <li>
                 <img src="@/assets/image/icon-plans-book.svg" width="20" height="20" />Simpan lebih dari 256 buku bermanfaat
@@ -30,7 +30,7 @@
           </v-col>
         </v-row>
         <v-row class="px-12">
-          <v-col lg="6" md="6" sm="12" xs="12" v-for="item in subList" :key="item.id_langganan">
+          <v-col lg="6" md="6" sm="12" cols="12" v-for="item in subList" :key="item.id_langganan">
             <v-card class="card-plans" shaped height="180px" flat>
               <div class="d-flex flex-row justify-space-between pt-2">
                 <div

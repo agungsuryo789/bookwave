@@ -5,14 +5,14 @@
 		<v-container>
 			<v-row>
 				<v-col sm="12" md="10">
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor nisl, posuere non cursus vel, rutrum sit amet purus. Suspendisse potenti. Nullam ex nisi, ornare id mi vel, accumsan tristique ante. Nulla imperdiet purus nisl, pellentesque eleifend mi pellentesque in. Ut ultricies porta fringilla. Pellentesque et facilisis odio. Aliquam nunc erat, accumsan in nibh in, iaculis interdum mauris. Sed eget eleifend lectus, non cursus ante. Sed vitae odio ut elit malesuada dictum ac vel neque. Donec suscipit sem vitae diam finibus euismod. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ex nibh, imperdiet nec convallis nec, ornare id purus. Morbi sollicitudin tincidunt est sit amet tincidunt. Phasellus vel orci nisl.</p>
+					<p class="larger"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor nisl, posuere non cursus vel, rutrum sit amet purus. Suspendisse potenti. Nullam ex nisi, ornare id mi vel, accumsan tristique ante. Nulla imperdiet purus nisl, pellentesque eleifend mi pellentesque in. Ut ultricies porta fringilla. Pellentesque et facilisis odio. Aliquam nunc erat, accumsan in nibh in, iaculis interdum mauris. Sed eget eleifend lectus, non cursus ante. Sed vitae odio ut elit malesuada dictum ac vel neque. Donec suscipit sem vitae diam finibus euismod. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ex nibh, imperdiet nec convallis nec, ornare id purus. Morbi sollicitudin tincidunt est sit amet tincidunt. Phasellus vel orci nisl.</p>
 				</v-col>
 			</v-row>
 		</v-container>
 		<v-container>
 			<v-row>
 				<v-col sm="12" md="10">
-				<h2 class="ungu"> Tentang Kami </h2>
+				<h1 class="ungu"> Tentang Kami </h1>
 				</v-col>
 			</v-row>
 			<v-row>
@@ -20,7 +20,7 @@
 					<v-img src="@/assets/image/career.png"></v-img>
 				</v-col>
 				<v-col sm="12" md="8">
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor nisl, posuere non cursus vel, rutrum sit amet purus. Suspendisse potenti. Nullam ex nisi, ornare id mi vel, accumsan tristique ante. Nulla imperdiet purus nisl, pellentesque eleifend mi pellentesque in. Ut ultricies porta fringilla. Pellentesque et facilisis odio. Aliquam nunc erat, accumsan in nibh in, iaculis interdum mauris. Sed eget eleifend lectus, non cursus ante. Sed vitae odio ut elit malesuada dictum ac vel neque. Donec suscipit sem vitae diam finibus euismod. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ex nibh, imperdiet nec convallis nec, ornare id purus. Morbi sollicitudin tincidunt est sit amet tincidunt. Phasellus vel orci nisl.</p>
+					<p class="larger"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor nisl, posuere non cursus vel, rutrum sit amet purus. Suspendisse potenti. Nullam ex nisi, ornare id mi vel, accumsan tristique ante. Nulla imperdiet purus nisl, pellentesque eleifend mi pellentesque in. Ut ultricies porta fringilla. Pellentesque et facilisis odio. Aliquam nunc erat, accumsan in nibh in, iaculis interdum mauris. Sed eget eleifend lectus, non cursus ante. Sed vitae odio ut elit malesuada dictum ac vel neque. Donec suscipit sem vitae diam finibus euismod. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ex nibh, imperdiet nec convallis nec, ornare id purus. Morbi sollicitudin tincidunt est sit amet tincidunt. Phasellus vel orci nisl.</p>
 				</v-col>
 			</v-row>
 		</v-container>
@@ -33,14 +33,14 @@
 		<v-container>
 			<v-row>
 				<v-col sm="12" md="10">
-					<h2 class="ungu"> Kesempatan Kerja </h2>
+					<h1 class="ungu"> Kesempatan Kerja </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2" v-for="item in career" :key="item.id_karir">
 				<a @click="goDetail(item.id_karir)">
 					<v-col sm="12" md="12" class="my-3">
-						<h4 class="merah"> {{ item.karir }} </h4>
-						<p> {{ item.deskripsi.substring(0,100)+"..." }} </p>
+						<h4 class="larger merah"> {{ item.karir }} </h4>
+						<p class="larger"> {{ item.deskripsi.substring(0,100)+"..." }} </p>
 					</v-col>
 				</a>
 			</v-row>
@@ -81,11 +81,8 @@ export default {
 </script>
 
 <style>
-	div .container{
+	.larger{
 		font-size: larger;
-	}
-	p {
-		line-height: 1.6;
 	}
 	.merah {
 		color: #D84B5B;
