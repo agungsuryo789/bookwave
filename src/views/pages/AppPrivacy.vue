@@ -4,7 +4,7 @@
 		<PageHeader title="Application Privacy"/>
 		<div class="container">
 		<v-row class="mt-2 my-2">
-			<v-col sm="12" md="12" v-for="item in appprivacy" :key="item.id_privasi_aplikasi">
+			<v-col cols="12" v-for="item in appprivacy" :key="item.id_privasi_aplikasi">
 				<h1> {{ item.judul }} </h1>
 				<p class="larger"> {{ item.deskripsi }}</p>
 			</v-col>

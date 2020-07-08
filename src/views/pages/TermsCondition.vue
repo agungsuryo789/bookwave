@@ -4,7 +4,7 @@
 		<PageHeader title="Terms & Condition"/>
 		<div class="container">
 			<v-row class="mt-2 my-2">
-				<v-col sm="12" md="12" v-for="item in terms" :key="item.id_ketentuan_privasi">
+				<v-col cols="12" md="12" v-for="item in terms" :key="item.id_ketentuan_privasi">
 					<h1> {{ item.judul_ketentuan }} </h1>
 					<p class="larger"> {{ item.ketentuan }} </p>
 				</v-col>

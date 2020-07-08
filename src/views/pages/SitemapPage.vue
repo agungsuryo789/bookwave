@@ -33,7 +33,7 @@
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
-				<v-col xs="12" md="4" v-for="item in blog" :key="item.id_blog">
+				<v-col cols="12" md="4" v-for="item in blog" :key="item.id_blog">
 					<p class="larger">{{ item.judul }} </p>
 				</v-col>
 			</v-row>

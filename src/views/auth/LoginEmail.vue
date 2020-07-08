@@ -30,11 +30,10 @@
               </v-col>
             </v-row>
             <v-row justify="center">
-              <v-col cols="3" md="1" align="center">
+              <v-col cols="4" md="2" align="center">
                 <v-btn
-                  :elevation="8"
+                  :elevation="4"
                   color="red darken-1"
-                  block
                   x-large
                   class="white--text"
                   v-on:click="lanjut"
@@ -65,11 +64,10 @@
               </v-col>
             </v-row>
             <v-row justify="center">
-              <v-col cols="3" md="1" align="center">
+              <v-col cols="4" md="" align="center">
                 <v-btn
                   :elevation="8"
                   color="red darken-1"
-                  block
                   x-large
                   class="white--text"
                   v-on:click="submit"

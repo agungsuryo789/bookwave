@@ -3,15 +3,15 @@
 		<NavbarSection />
 		<div class="container" v-for="item in blog" :key="item.id_blog">
 			<v-row class="mt-2 my-2">
-				<v-col sm="12" md="4">
+				<v-col cols="12" md="4">
 					<a @click="goDetail(item.id_blog)">
 						<h1 class="ungu"> {{ item.judul }} </h1>
 						<p class="blog-link"> {{ item.lokasi }} </p>
 					</a>
 				</v-col>
-				<v-col sm="12" md="4">
+				<v-col cols="12" md="4">
 				</v-col>
-				<v-col sm="12" md="4">
+				<v-col cols="12" md="4">
 					<v-img :src="item.img_flie" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
 				</v-col>
 			</v-row>

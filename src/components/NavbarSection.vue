@@ -1,7 +1,7 @@
 <template>
-  <v-container class="navbar-section px-0 mb-10" fluid>
+  <v-container class="navbar-section px-0 mb-md-10" fluid>
     <v-row>
-      <v-col class="mb-12">
+      <v-col class="mb-md-12">
         <nav v-if="userState" class="navbar navbar--auth" style="background-color:white;">
           <v-toolbar
             class="app-bar"
