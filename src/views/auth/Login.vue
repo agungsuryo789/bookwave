@@ -38,11 +38,7 @@
         </v-col>
       </v-row>
       <v-spacer></v-spacer>
-      <v-row justify="center">
-        <v-col cols="6" md="4" align="center" class="mt-12">
-          <a class="link" @click="forgot">Lupa Kata Sandi</a>
-        </v-col>
-      </v-row>
+		<ForgotLink />
       <v-snackbar v-model="snackbar">Mencoba Masuk...
         <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
       </v-snackbar>
@@ -52,12 +48,14 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import ForgotLink from "@/components/auth/ForgotLink.vue";
 
 /* eslint-disable */
 export default {
   name: "Login",
   components: {
-    NavbarSection
+	NavbarSection,
+	ForgotLink
   },
   data() {
     return {
@@ -77,17 +75,7 @@ export default {
     },
     logout() {
       Firebase.logout();
-	},
-	forgot() {
-		this.$router.push({
-        name: "ForgotPassword"
-      });
 	}
   }
 };
 </script>
-<style scoped>
-	.link {
-		color: #D84B5B;
-	}
-</style>

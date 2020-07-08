@@ -5,7 +5,7 @@
       <v-form>
         <v-row>
           <v-col cols="12" class="mt-2">
-            <v-row justify="center" class="mt-12">
+            <v-row justify="center" class="mt-10">
               <v-col cols="12" md="4" align="center">
                 <h2 class="font-weight-black">MASUK AKUN</h2>
               </v-col>
@@ -79,11 +79,7 @@
           </v-col>
         </v-row>
         <v-spacer></v-spacer>
-        <v-row justify="center">
-          <v-col cols="6" md="4" align="center" class="mt-12">
-            <router-link to="/forgot">Lupa Kata Sandi</router-link>
-          </v-col>
-        </v-row>
+        <ForgotLink />
       </v-form>
       <SnackbarToast />
     </v-container>
@@ -93,6 +89,7 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import SnackbarToast from "@/components/SnackbarToast.vue";
+import ForgotLink from "@/components/auth/ForgotLink.vue";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
 import { mapMutations } from "vuex";
@@ -110,7 +107,8 @@ export default {
   },
   components: {
 	NavbarSection,
-	SnackbarToast
+	SnackbarToast,
+	ForgotLink
   },
   data() {
     return {

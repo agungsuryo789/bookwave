@@ -5,7 +5,7 @@
       <v-container fluid>
         <v-row>
           <v-col cols="12" class="mt-2">
-            <v-row justify="center" class="mt-12">
+            <v-row justify="center" class="mt-10">
               <v-col cols="6" md="4" align="center">
                 <h2 class="font-weight-black">DAFTAR AKUN</h2>
               </v-col>
@@ -13,7 +13,7 @@
           </v-col>
           <v-col v-show="isShow" class="mt-8" cols="12">
             <v-row justify="center">
-              <v-col align="center">
+              <v-col cols="10" md="4" align="center">
                 <p class="red--text text--lighten-1">
                   <v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email
                 </p>
@@ -26,7 +26,6 @@
                   @blur="$v.email.$touch()"
                   solo
                   background-color="grey lighten-2"
-                  style="max-width:50%;"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -77,11 +76,7 @@
           </v-col>
         </v-row>
         <v-spacer></v-spacer>
-        <v-row justify="center">
-          <v-col cols="6" md="4" align="center" class="mt-12">
-            <router-link to="/login">Masuk</router-link>
-          </v-col>
-        </v-row>
+        <MasukLink />
 		<SnackbarToast />
       </v-container>
     </v-form>
@@ -90,6 +85,7 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import MasukLink from "@/components/auth/MasukLink.vue";
 import { validationMixin } from "vuelidate";
 import { mapMutations } from "vuex";
 import { required, email, minLength } from "vuelidate/lib/validators";
@@ -108,7 +104,8 @@ export default {
   },
   components: {
 	NavbarSection,
-	SnackbarToast
+	SnackbarToast,
+	MasukLink
   },
   data() {
     return {
