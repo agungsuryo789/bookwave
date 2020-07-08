@@ -9,7 +9,7 @@
             <v-col class="my-10 my-lg-0" cols="12" md="8">
               <v-text-field
                 solo
-                rounded="4"
+                rounded
                 label="Temukan yang anda cari disini"
                 prepend-inner-icon="mdi-magnify"
                 style="position:absolute;top:40%;left:15%;right:15%"
