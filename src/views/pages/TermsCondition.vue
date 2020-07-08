@@ -5,8 +5,8 @@
 		<div class="container">
 			<v-row class="mt-2 my-2">
 				<v-col sm="12" md="12" v-for="item in terms" :key="item.id_ketentuan_privasi">
-					<h2> {{ item.judul_ketentuan }} </h2>
-					<p> {{ item.ketentuan }} </p>
+					<h1> {{ item.judul_ketentuan }} </h1>
+					<p class="larger"> {{ item.ketentuan }} </p>
 				</v-col>
 			</v-row>
 			<v-spacer></v-spacer>
@@ -36,3 +36,9 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+	.larger {
+		font-size: larger;
+	}
+</style>

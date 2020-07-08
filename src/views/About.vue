@@ -8,7 +8,7 @@
 					<v-img src="@/assets/image/annie-spratt-mppDYKjJ7II-unsplash.png"></v-img>
 				</v-col>
 				<v-col sm="12" md="10">
-					<p> {{ item.deskripsi }}</p>
+					<p class="larger"> {{ item.deskripsi }}</p>
 				</v-col>
 			</v-row>
 		</v-container>
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style>
-	div .container{
+	.larger{
 		font-size: larger;
 	}
 	p {

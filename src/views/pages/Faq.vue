@@ -48,3 +48,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+	.larger{
+		font-size: larger;
+	}
+</style>

@@ -3,7 +3,7 @@
     <NavbarSection />
     <v-container fluid>
       <v-row>
-        <v-col cols="12" class="mt-12">
+        <v-col cols="12" class="mt-2">
           <v-row justify="center" class="mt-12">
             <v-col cols="6" md="4" align="center">
               <h2 class="font-weight-black">MASUK AKUN</h2>
@@ -40,7 +40,7 @@
       <v-spacer></v-spacer>
       <v-row justify="center">
         <v-col cols="6" md="4" align="center" class="mt-12">
-          <router-link to="/forgot">Lupa Kata Sandi</router-link>
+          <a class="link" @click="forgot">Lupa Kata Sandi</a>
         </v-col>
       </v-row>
       <v-snackbar v-model="snackbar">Mencoba Masuk...
@@ -77,7 +77,17 @@ export default {
     },
     logout() {
       Firebase.logout();
-    }
+	},
+	forgot() {
+		this.$router.push({
+        name: "ForgotPassword"
+      });
+	}
   }
 };
 </script>
+<style scoped>
+	.link {
+		color: #D84B5B;
+	}
+</style>

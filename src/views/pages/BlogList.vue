@@ -5,14 +5,14 @@
 			<v-row class="mt-2 my-2">
 				<v-col sm="12" md="4">
 					<a @click="goDetail(item.id_blog)">
-						<h2 class="ungu"> {{ item.judul }} </h2>
+						<h1 class="ungu"> {{ item.judul }} </h1>
 						<p class="blog-link"> {{ item.lokasi }} </p>
 					</a>
 				</v-col>
 				<v-col sm="12" md="4">
 				</v-col>
 				<v-col sm="12" md="4">
-					<v-img :src="item.img_flie"></v-img>
+					<v-img :src="item.img_flie" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
 				</v-col>
 			</v-row>
 			<hr/>

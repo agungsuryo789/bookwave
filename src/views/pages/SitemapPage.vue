@@ -5,36 +5,36 @@
 		<div class="container">
 			<v-row>
 				<v-col md="6">
-					<h1> General </h1>
+					<h1 class="larger"> General </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
 				<v-col xs="4" md="3">
-					<p> Home </p>
-					<p> Books </p>
-					<p> Pricing </p>
+					<p class="larger"> Home </p>
+					<p class="larger"> Books </p>
+					<p class="larger"> Pricing </p>
 				</v-col>
 				<v-col xs="4" md="3">
-					<p> Pricing for Teams </p>
-					<p> Magazine </p>
-					<p> Help & Contact </p>
+					<p class="larger"> Pricing for Teams </p>
+					<p class="larger"> Magazine </p>
+					<p class="larger"> Help & Contact </p>
 				</v-col>
 				<v-col xs="4" md="3">
-					<p> About </p>
-					<p> Careers </p>
-					<p> Partners </p>
+					<p class="larger"> About </p>
+					<p class="larger"> Careers </p>
+					<p class="larger"> Partners </p>
 				</v-col>
 			</v-row>
 
 			<hr>
 			<v-row class="mt-6">
 				<v-col md="6">
-					<h1> Top Articles </h1>
+					<h1 class="larger"> Top Articles </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
 				<v-col xs="12" md="4" v-for="item in blog" :key="item.id_blog">
-					<p>{{ item.judul }} </p>
+					<p class="larger">{{ item.judul }} </p>
 				</v-col>
 			</v-row>
 		</div>
@@ -64,8 +64,8 @@ export default {
 };
 </script>
 
-<style>
-	div .container{
+<style scoped>
+	.larger {
 		font-size: larger;
 	}
 </style>
