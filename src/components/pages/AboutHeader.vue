@@ -2,7 +2,7 @@
 	<div class="container mt-10">
 		<v-row justify="center">
 			<v-col md="5">
-					<h1 class="larger ungu"> {{ title }} </h1>
+					<h1 class="ungu"> {{ title }} </h1>
 					<p class="larger"> {{ subtitle }} </p>
 			</v-col>
 			<v-col md="6">
