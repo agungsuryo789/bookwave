@@ -5,7 +5,7 @@
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </template>
-    <template v-if="isBookmarked == true || isCollected == true">
+    <template v-else-if="isBookmarked == true || isCollected == true">
       <v-btn class="book-bookmark-button" icon @click="delBookmark">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>

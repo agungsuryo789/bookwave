@@ -7,15 +7,41 @@
             <v-btn
               depressed
               :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
-              @click="hasHistory() ? $router.go(-1) : $router.push('/')"
+              @click="gotoBook"
             >
               <v-icon>mdi-less-than</v-icon>
             </v-btn>
           </div>
           <div>
-            <v-btn icon depressed @click="toggleHighlight = !toggleHighlight">
-              <v-icon>mdi-grease-pencil</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="mx-3"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="saveChapterSingle"
+                  icon
+                  depressed
+                >
+                  <v-icon>mdi-bookmark-plus</v-icon>
+                </v-btn>
+              </template>
+              <span>Save this Chapter to Collection</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  depressed
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="toggleHighlight = !toggleHighlight"
+                >
+                  <v-icon>mdi-grease-pencil</v-icon>
+                </v-btn>
+              </template>
+              <span>Enable Highlight Text Feature</span>
+            </v-tooltip>
             <v-btn
               @click="showMenuTop = !showMenuTop, showTools = false, outlineMenu = false, shareMenu = false"
               depressed
@@ -246,14 +272,27 @@ export default {
     bookDetail: state => state.bookDetail
   }),
   methods: {
-    hasHistory() {
-      return window.history?.length > 2;
+    gotoBook() {
+      const urlName = this.bookDetail.data[0].judul;
+      this.$router.push({
+        name: "BookPage",
+        params: {
+          bookId: this.$route.params.bookId,
+          bookName: urlName.replace(/ /g, "-")
+        }
+      });
     },
     urlDownload(url) {
       window.open(url, "_blank");
     },
     currentUrl() {
       return window.location.href;
+    },
+    saveChapterSingle() {
+      const payload = {
+        id_chapter: this.$route.params.chapterId
+      };
+      this.$store.dispatch("saveChapterSingle", payload);
     }
   },
   created() {

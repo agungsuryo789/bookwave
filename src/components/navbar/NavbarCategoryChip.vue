@@ -35,8 +35,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/css/global_variables.scss";
 .btn-chip-main {
-  @include btn-chip-main();
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid rgb(165, 165, 165);
+  border-bottom: 4px solid rgb(165, 165, 165);
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="category-page">
     <NavbarSection />
-    <v-container fluid class="px-0 py-0 mx-0 my-0">
+    <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
       <template v-if="bookListByKategori.buku_populer && bookListByKategori.status == 1">
         <v-row>
-          <v-col class="category-page-title px-12" :style="{'background-color': warnaKategori}">
+          <v-col class="category-page-title" :style="{'background-color': warnaKategori}">
             <h1>{{ bookListByKategori.nama_kategori }}</h1>
           </v-col>
         </v-row>
@@ -140,7 +140,11 @@ export default {
 
 <style scoped lang="scss">
 .category-page {
+  .container-category-page {
+    margin-top: -50px;
+  }
   .category-page-title {
+    margin-top: -50px;
     height: 150px;
     padding: 4px 14px;
     color: white;

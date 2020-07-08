@@ -8,7 +8,7 @@
           <img src="@/assets/image/underline-2.svg" height="8" />
         </div>
       </v-col>
-      <v-col lg="6" md="12" sm="12" cols="12">
+      <v-col class="my-3" lg="6" md="12" sm="12" cols="12">
         <p>
           Dari kategori A-Z kami telah menyortirnya untuk
           Anda. Manfaatkan akses tak terbatas ke seluruh
@@ -41,7 +41,7 @@
               @click="gotoKategori(n.id_daftar_kategori)"
             >{{ n.nama_kategori }}</v-chip>
           </v-slide-item>
-        </v-slide-group> -->
+        </v-slide-group>-->
       </v-col>
     </v-row>
     <v-row v-if="loadSkeleton">
@@ -115,7 +115,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/css/global_variables.scss";
 .kategori-desc {
   h1 {
     font-size: 38px;
@@ -142,13 +141,20 @@ export default {
   }
 }
 .btnLihat {
-  @include btn-main-green();
+  text-transform: none;
+  padding: 6px 10px;
+  width: 150px;
+  color: white;
+  background-color: #39df8c;
   width: 20%;
   @media screen and (max-width: 450px) {
     width: 50%;
   }
 }
 .btn-chip-main {
-  @include btn-chip-main();
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid rgb(165, 165, 165);
+  border-bottom: 4px solid rgb(165, 165, 165);
 }
 </style>

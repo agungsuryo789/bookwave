@@ -42,6 +42,7 @@
             <p>Temukan Jutaan Buku Lainnya hanya di AHA</p>
             <v-btn
               :to="{name: 'Register'}"
+              class="px-12 py-5"
               rounded
               color="#39DF8C"
               depressed
@@ -116,7 +117,7 @@ export default {
     @media screen and (max-width: 360px) {
       height: 100%;
       width: 140%;
-	  margin-left: -5%;
+      margin-left: -5%;
     }
   }
   .banner-bg-img-2 {
