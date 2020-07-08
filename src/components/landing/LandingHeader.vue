@@ -1,20 +1,27 @@
 <template>
   <v-container v-if="bookTrending.data.length > 0">
     <div>
-      <v-row class="mx-auto mt-10" justify="center" align="center" style="max-width:50%;">
+      <v-row
+        class="landing-header-row mx-auto mt-10"
+        justify="center"
+        align="center"
+      >
         <v-col
           lg="6"
           md="6"
-          sm="12"
+          sm="6"
           cols="12"
           class="d-flex justify-center align-center"
           style="margin:0 auto;"
         >
-          <a @click="gotoBook(bookId = bookTrending.data[0].id_buku, bookName = bookTrending.data[0].judul)" style="text-decoration:none;color:black;">
+          <a
+            @click="gotoBook(bookId = bookTrending.data[0].id_buku, bookName = bookTrending.data[0].judul)"
+            style="text-decoration:none;color:black;"
+          >
             <h1>{{ bookTrending.data[0].judul }}</h1>
           </a>
         </v-col>
-        <v-col lg="6" md="6" sm="12" cols="12" style="margin:0 auto;">
+        <v-col lg="6" md="6" sm="6" cols="12" style="margin:0 auto;">
           <BookCard
             :idBuku="parseInt(bookTrending.data[0].id_buku)"
             :foto_sampul="bookTrending.data[0].foto_sampul"
@@ -58,5 +65,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+.landing-header-row {
+  @media screen and (min-width: 1024px) {
+    max-width: 50%;
+  }
+}
 </style>

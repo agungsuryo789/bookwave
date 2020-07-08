@@ -3,7 +3,7 @@
     <NavbarSection />
     <template v-if="!loadSkeleton">
       <v-container
-        class="my-3 justify-center align-center"
+        class="my-1 justify-center align-center"
         v-for="book in bookDetail.data"
         :key="book.id_buku"
       >
@@ -26,7 +26,7 @@
           </v-col>
           <v-col class="px-10 px-lg-0 my-0 py-0" lg="6" md="6" sm="12" cols="12">
             <v-row>
-              <v-col class="card--book-detail" lg="12" md="12" sm="12" cols="12">
+              <v-col class="card--book-detail pb-0 mb-0" lg="12" md="12" sm="12" cols="12">
                 <h1 class="my-3 book-title">{{ book.judul }}</h1>
                 <p class="my-1 book-sub-title">{{ book.sub_judul }}</p>
                 <p
@@ -34,8 +34,8 @@
                   style="font-size:15px;font-weight:600;color:gray;"
                 >{{ book.penulis }}</p>
               </v-col>
-              <v-col class="card--book-detail" lg="12" md="12" sm="12" cols="12">
-                <div class="d-flex flex-column flex-lg-row justify-space-between my-10">
+              <v-col class="card--book-detail py-0 my-0 mt-lg-8" lg="12" md="12" sm="12" cols="12">
+                <div class="d-flex flex-column flex-lg-row justify-space-between my-lg-12">
                   <template v-if="book.data_chapter.length < 1">
                     <div class="d-flex flex-row justify-space-between">
                       <v-btn
@@ -173,7 +173,7 @@ export default {
   computed: mapState({
     bookDetail: state => state.bookDetail
   }),
-  created() {
+  mounted() {
     this.callFunction();
     const pageTitle = this.$route.params.bookName;
     window.document.title =

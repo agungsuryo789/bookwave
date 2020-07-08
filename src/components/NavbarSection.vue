@@ -1,7 +1,7 @@
 <template>
-  <v-container class="navbar-section px-0 mb-10" fluid>
+  <v-container class="navbar-section px-0 mb-4" fluid>
     <v-row>
-      <v-col class="mb-12">
+      <v-col class="mb-10">
         <nav v-if="userState" class="navbar navbar--auth" style="background-color:white;">
           <v-toolbar
             class="app-bar"
@@ -10,14 +10,14 @@
             absolute
             light
             flat
-			elevation="3"
+            elevation="3"
             style="width:100%;"
           >
-            <v-toolbar-title>
+            <v-toolbar-title id="appLogo">
               <router-link to="/home">
                 <v-img
                   alt="Vuetify Logo"
-                  class="shrink ml-5 mr-2"
+                  class="shrink ml-5"
                   contain
                   src="@/assets/image/aha-red.svg"
                   transition="scale-transition"
@@ -91,8 +91,8 @@
                 </v-list>
               </v-menu>
             </v-toolbar-items>
-            <v-toolbar-items v-if="!showSearchBar" class="hide-on--lg">
-              <v-menu left bottom>
+            <v-toolbar-items v-if="!showSearchBar" class="hide-on--lg mobile-bar">
+              <v-menu right bottom offset-y>
                 <template v-slot:activator="{ on }">
                   <v-btn
                     class="button-dropdown-nav"
@@ -105,7 +105,7 @@
                   </v-btn>
                 </template>
                 <v-list style="z-index:3;width:200px;">
-                  <v-list-item @click="showSearchBar = !showSearchBar, showCategory = false">
+                  <v-list-item @click="toggleSearch">
                     <v-list-item-title>
                       <v-icon>mdi-magnify</v-icon>
                     </v-list-item-title>
@@ -121,7 +121,7 @@
                   </v-list-item>
                 </v-list>
               </v-menu>
-              <v-menu left bottom>
+              <v-menu left bottom offset-y>
                 <template v-slot:activator="{ on }">
                   <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                 </template>
@@ -161,7 +161,7 @@
                 </v-list>
               </v-menu>
             </v-toolbar-items>
-            <v-toolbar-items v-else style="width:100%;">
+            <v-toolbar-items v-else class="nav-search" style="width:100%;">
               <NavbarSearch @clicked="onCloseSearchBar" />
             </v-toolbar-items>
           </v-toolbar>
@@ -236,6 +236,8 @@ export default {
   methods: {
     onCloseSearchBar(e) {
       this.showSearchBar = e;
+      const appLogo = document.getElementById("appLogo");
+      appLogo.style.display = "block";
     },
     toPaymentHistory() {
       this.$router.push({
@@ -249,6 +251,12 @@ export default {
     },
     userLogout() {
       this.$store.dispatch("userLogout");
+    },
+    toggleSearch() {
+      const appLogo = document.getElementById("appLogo");
+      appLogo.style.display = "none";
+      this.showSearchBar = !this.showSearchBar;
+      this.showCategory = false;
     }
   },
   created() {
@@ -287,8 +295,9 @@ export default {
     width: 100%;
     padding: 0 5%;
     border-bottom: 2px solid black;
-	@media screen and (max-width: 425px) {
+    @media screen and (max-width: 425px) {
       padding: 0;
+      margin: 0;
     }
   }
   .app-bar--no-auth {
@@ -296,6 +305,7 @@ export default {
     padding: 0 11%;
     @media screen and (max-width: 425px) {
       padding: 0;
+      margin: 0;
     }
   }
   .category-chip--navbar {
@@ -306,6 +316,11 @@ export default {
     border-bottom: 6px solid rgb(184, 184, 184);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+  }
+}
+.nav-search {
+  @media screen and (max-width: 425px) {
+    width: 100%;
   }
 }
 .fade-enter-active,

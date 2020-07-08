@@ -19,12 +19,12 @@
             ></v-img>
           </v-col>
           <v-col class="col-hero-text" lg="6" md="6" sm="12" cols="12">
-            <h1 class="my-5" style="font-size:36px;">Apa yang AHA miliki ?</h1>
+            <h1 class="my-5 home-hero-title">Apa yang AHA miliki ?</h1>
             <div class="title-underline d-flex flex-row justify-start">
               <img src="@/assets/image/underline-1.svg" height="10" />
               <img src="@/assets/image/underline-2.svg" height="10" />
             </div>
-            <p class="pr-5" style="font-size:18px;width:450px;">
+            <p class="pr-5 home-hero-text" style="font-size:18px;">
               Lorem ipsum dolor sit amet, consectetur adipisicing
               elit. Nobis laborum ex atque in libero. Libero eum
               labore illum ipsa blanditiis earum, aliquid mollitia
@@ -162,13 +162,19 @@ export default {
         color: #4f2e53;
         font-weight: bold;
         text-decoration: none;
-        margin-right: 32%;
+        margin-right: 5%;
+      }
+      h1 {
+        font-size: 30px;
+        @media screen and (max-width: 425px) {
+          font-size: 28px;
+        }
       }
     }
   }
   .row-hero-2 {
-    margin-top: 150px;
-    margin-bottom: 150px;
+    margin-top: 5%;
+    margin-bottom: 5%;
   }
   .home-banner-hero {
     @media screen and (max-width: 900px) {
