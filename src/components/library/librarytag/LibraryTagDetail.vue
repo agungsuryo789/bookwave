@@ -3,7 +3,7 @@
     <v-col lg="12">
       <v-card flat>
         <div class="d-flex flex-row justify-space-between align-center">
-          <div style="width:90%;">
+          <div class="mx-5 mx-lg-0" style="width:90%;">
             <v-text-field
               v-model="inputTag"
               class="input-tag-disabled"

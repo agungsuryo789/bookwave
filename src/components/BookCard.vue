@@ -1,7 +1,14 @@
 <template>
   <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
-      <v-img class="book-card-img mx-auto" width="120px" height="120px" :src="foto_sampul"></v-img>
+      <v-img
+        lazy-src="https://www.tibs.org.tw/images/default.jpg"
+        class="book-card-img mx-auto"
+        width="120px"
+        height="120px"
+        @click="gotoBook"
+        :src="foto_sampul"
+      ></v-img>
       <template v-if="premiumStatus == '1' && !premiumMemberStatus">
         <v-icon class="icon-book-locked">mdi-lock-outline</v-icon>
       </template>
@@ -105,6 +112,11 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+  }
+  .book-card-img {
+    &:hover {
+      cursor: pointer;
     }
   }
   .icon-book-locked {

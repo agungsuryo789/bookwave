@@ -95,6 +95,9 @@ export default {
 <style scoped lang="scss">
 .navbar-search-form {
   width: 90%;
+  @media screen and (max-width: 425px) {
+    width: 120%;
+  }
   .search-result {
     position: absolute;
     top: 100%;
@@ -105,8 +108,8 @@ export default {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     @media screen and (max-width: 425px) {
-      margin-left: -25%;
-      width: 95%;
+      margin-left: 0%;
+      width: 90%;
     }
   }
 }
