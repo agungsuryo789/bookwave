@@ -133,11 +133,10 @@ const routes = [
         }
     },
     {
-        path: '/reset',
+        path: '/reset/:token',
         name: 'ResetPassword',
         component: ResetPassword,
         meta: {
-            requiresAuth: true,
             title: "Reset Password | Ahabaca"
         }
     },

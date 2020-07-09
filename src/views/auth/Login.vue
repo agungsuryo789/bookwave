@@ -42,6 +42,7 @@
       <v-snackbar v-model="snackbar">Mencoba Masuk...
         <v-btn color="blue" text @click="snackbar=false">Close</v-btn>
       </v-snackbar>
+		<SnackbarToast />
     </v-container>
   </div>
 </template>
@@ -49,12 +50,15 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import ForgotLink from "@/components/auth/ForgotLink.vue";
+import SnackbarToast from "@/components/SnackbarToast.vue";
+import { mapMutations } from "vuex";
 
 /* eslint-disable */
 export default {
   name: "Login",
   components: {
 	NavbarSection,
+	SnackbarToast,
 	ForgotLink
   },
   data() {
@@ -63,6 +67,7 @@ export default {
     };
   },
   methods: {
+	  ...mapMutations(["showSnackbar", "closeSnackbar"]),
     login() {
 	  this.$store.dispatch("loginFirebase");
 	  this.$store.dispatch("getMemberDetail");

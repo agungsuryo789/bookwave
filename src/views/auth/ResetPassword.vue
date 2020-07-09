@@ -23,24 +23,25 @@
 						</v-col>
 					</v-row>
         </v-col>-->
-        <v-col v-show="!isShow" class="mt-8" cols="12">
+        <v-col class="mt-8" cols="12">
           <v-row justify="center">
             <v-col cols="10" md="4" align="center">
               <p class="red--text text--lighten-1">
                 <v-icon class="red--text text--lighten-1 mr-3">mdi-lock-outline</v-icon>Kata Sandi
               </p>
               <v-text-field
-                class="centered-input"
-                v-model="password_repeat"
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[rules.required, rules.min]"
-                :type="show1 ? 'text' : 'password'"
-                hint="At least 8 characters"
-                counter
-                @click:append="show1 = !show1"
-                solo
-                background-color="grey lighten-2"
-              ></v-text-field>
+                  class="centered-input"
+                  v-model="passwordReset"
+                  :error-messages="passwordErrors"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show1 ? 'text' :'password'"
+                  counter
+                  @click:append="show1 = !show1"
+                  @input="$v.password.$touch()"
+                  @blur="$v.password.$touch()"
+                  solo
+                  background-color="grey lighten-2"
+                ></v-text-field>
             </v-col>
           </v-row>
           <v-row justify="center">
@@ -48,7 +49,6 @@
               <v-btn
                 :elevation="8"
                 color="red darken-1"
-                block
                 x-large
                 class="white--text"
                 v-on:click="submit"
@@ -57,6 +57,7 @@
           </v-row>
         </v-col>
       </v-row>
+		<SnackbarToast/>
       <v-spacer></v-spacer>
     </v-container>
   </div>
@@ -64,28 +65,51 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import { validationMixin } from "vuelidate";
+import { mapMutations } from "vuex";
+import { required, minLength } from "vuelidate/lib/validators";
+import SnackbarToast from "@/components/SnackbarToast.vue";
 
 /* eslint-disable */
 export default {
   name: "ResetPassword",
   components: {
-    NavbarSection
+	NavbarSection,
+	SnackbarToast
+  },
+  mixins: [validationMixin],
+  validations: {
+	passwordReset: {
+	required,
+	minLength: minLength(8)
+	}
   },
   data() {
     return {
       lazy: false,
-      show1: false,
-      rules: {
-        required: value => !!value || "Required."
-      }
+      show1: false
     };
   },
+  computed: {
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.passwordReset.$dirty) return errors;
+      !this.$v.passwordReset.minLength &&
+        errors.push("At least must be 8 character");
+      !this.$v.passwordReset.required && errors.push("Password is required");
+      return errors;
+    }
+  },
+  mounted() {
+    this.$store.dispatch("resetPassword", this.$route.params.token);
+  },
   methods: {
+	 ...mapMutations(["showSnackbar", "closeSnackbar"]),
     submit() {
       var data = {
-        password: this.password
+        password: this.passwordReset
       };
-      this.$store.dispatch("resetPassword", data);
+      this.$store.dispatch("goReset", data);
     }
   }
 };

@@ -205,7 +205,7 @@ export default new Vuex.Store({
             state.premiumStatus = null
             Object.assign(state)
             router.push('/')
-        },
+		},
         getMemberDetail_mutation: (state, response) => {
             state.memberDetail = response
             state.premiumStatus = response.data[0].premium_member
@@ -849,13 +849,23 @@ export default new Vuex.Store({
                         // console.log(response.data.message)
                 })
         },
-        resetPassword: ({ commit }, data) => {
-            axs.post('/ahaapi/lupa_password', data)
-                .then(response => {
-                    commit('notifMessage_mutation', response)
-                    console.log(response.data.message)
-                })
+        resetPassword: ({ commit }, token) => {
+			console.log(token)
+			localStorage.setItem('x-token', token)
         },
+		goReset: ({ commit }, data) => {
+			axs.post('/ahaapi/ubah_password', data)
+                .then(response => {
+                    console.log(response.data)
+					commit('showSnackbar', response.data.message)
+					localStorage.removeItem('x-token')
+					router.push('/login')
+                })
+                .catch(err => {
+					console.log(err.message)
+					commit('showSnackbar', err.message)
+                })
+		},
 
         // Footerpage action
         getTerms: ({ commit }) => {
@@ -957,7 +967,7 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message)
                 })
-        }
+		}
     },
     getters: {
         isLoggedIn: state => !!state.token,

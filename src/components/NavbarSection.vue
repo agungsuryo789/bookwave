@@ -191,7 +191,7 @@
             <v-toolbar-items>
               <div class="my-3">
                 <v-btn
-                  to="register"
+                  @click="toRegister"
                   class="button-subscribe"
                   rounded
                   color="#39DF8C"
@@ -199,7 +199,7 @@
                   depressed
                 >Start Trial</v-btn>
                 <v-btn
-                  to="login"
+                  @click="toLogin"
                   color="transparent"
                   depressed
                   style="text-transform:none;font-size:18px;font-weight:600;color:white;"
@@ -247,6 +247,16 @@ export default {
     toHelp() {
       this.$router.push({
         name: "HelpSupport"
+      });
+	},
+	toLogin() {
+      this.$router.push({
+        name: "Login"
+      });
+	},
+	toRegister() {
+      this.$router.push({
+        name: "Register"
       });
     },
     userLogout() {
