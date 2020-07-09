@@ -24,7 +24,7 @@
             :deskripsi="n.deskripsi"
             :warna_kategori="n.warna_kategori"
             :kategori_buku="n.nama_kategori"
-			:is_premium="n.is_premium"
+			:is_premium="n.is_premium.toString()"
             :isCollected="n.is_collected"
             :isFavorited="n.is_favorite"
           />

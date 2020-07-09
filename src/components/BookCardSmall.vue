@@ -12,7 +12,7 @@
               <small>{{penulis}}</small>
               <p>{{deskripsi}}</p>
             </a>
-            <template v-if="is_premium && !premiumMemberStatus">
+            <template v-if="is_premium == 'true' || is_premium == '1' && !premiumMemberStatus">
               <v-icon class="book-card-icon-lock">mdi-lock-outline</v-icon>
             </template>
           </div>

@@ -167,7 +167,7 @@
           </v-toolbar>
           <v-row>
             <transition name="fade" mode="out-in">
-              <v-col v-if="showCategory" class="category-chip--navbar ml-3 my-7">
+              <v-col v-show="showCategory" class="category-chip--navbar ml-3 my-8 my-lg-10">
                 <NavbarCategoryChip />
               </v-col>
             </transition>
@@ -309,7 +309,6 @@ export default {
     }
   }
   .category-chip--navbar {
-    position: fixed;
     z-index: 999;
     background-color: white;
     border: 2px solid rgb(184, 184, 184);

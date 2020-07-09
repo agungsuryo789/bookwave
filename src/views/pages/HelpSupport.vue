@@ -2,11 +2,11 @@
   <div>
     <NavbarSection />
     <v-container fluid>
-      <v-row>
+      <v-row style="margin-top:-20px;">
         <v-col class="d-flex align-center justify-center mx-0 px-0">
           <v-img src="@/assets/image/banner-sub.png" aspect-ratio="5.3">
             <!--<h1 style="position:absolute;top:45%;left:50%;color:white;">AHA</h1>-->
-            <v-col class="my-10 my-lg-0" cols="12" md="8">
+            <v-col class="my-12 my-lg-0" cols="12" md="8">
               <v-text-field
                 solo
                 rounded

@@ -126,12 +126,11 @@ export default {
   }
 }
 .col-kategori-chip {
-  max-width: 600px;
   padding: 50px 0;
   .chip-card {
     border-top: none;
     border-bottom: none;
-    width: 500px;
+    width: 700px;
   }
   .category-slide-group {
     border-top: none;
@@ -156,5 +155,6 @@ export default {
   border-radius: 5px;
   border: 2px solid rgb(165, 165, 165);
   border-bottom: 4px solid rgb(165, 165, 165);
+  height: 40px;
 }
 </style>

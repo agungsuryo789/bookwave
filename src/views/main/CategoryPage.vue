@@ -4,7 +4,10 @@
     <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
       <template v-if="bookListByKategori.buku_populer && bookListByKategori.status == 1">
         <v-row>
-          <v-col class="category-page-title text-center text-lg-left" :style="{'background-color': warnaKategori}">
+          <v-col
+            class="category-page-title text-center text-lg-left"
+            :style="{'background-color': warnaKategori}"
+          >
             <h1 class="my-12">{{ bookListByKategori.nama_kategori }}</h1>
           </v-col>
         </v-row>
@@ -151,6 +154,9 @@ export default {
     text-transform: uppercase;
     h1 {
       margin: 4% 0;
+    }
+    @media screen and (max-width: 860px) {
+      margin-top: 0;
     }
   }
 }

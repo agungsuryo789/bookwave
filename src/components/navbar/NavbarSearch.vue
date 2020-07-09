@@ -6,6 +6,8 @@
       </v-btn>
       <v-text-field
         v-model="payload.pencarian"
+        tabindex="0"
+        @keyup.esc="onClose"
         @keyup.enter="goSearch"
         @keyup="liveSearch"
         class="mt-4 mx-2"

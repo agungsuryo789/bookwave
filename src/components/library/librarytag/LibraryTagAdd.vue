@@ -11,6 +11,8 @@
       <v-combobox
         class="combobox-tag"
         v-model="tagModel"
+        :items="itemTag"
+        :search-input.sync="search"
         hide-selected
         label="Buat Tag baru"
         multiple
@@ -32,6 +34,17 @@
             <v-icon small @click="data.parent.selectItem(data.item)" color="black">mdi-close</v-icon>
           </v-chip>
         </template>
+        <template v-slot:no-data>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                No results matching "
+                <strong>{{ search }}</strong>". Press
+                <kbd>enter</kbd> to create a new one
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
       </v-combobox>
       <v-btn class="btn-add-tag" text @click="addTag">Tambah Tag</v-btn>
       <v-dialog v-model="dialog" width="300" hide-overlay>
@@ -49,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "LibraryTagAdd",
   data() {
@@ -58,7 +72,9 @@ export default {
         tag: ""
       },
       tagModel: "",
-      dialog: false
+      dialog: false,
+      search: null,
+      itemTag: []
     };
   },
   watch: {
@@ -68,6 +84,9 @@ export default {
       }
     }
   },
+  computed: mapState({
+    koleksiTag: state => state.koleksiTag
+  }),
   methods: {
     addTag() {
       const x = this.tagModel.toString();
@@ -78,6 +97,14 @@ export default {
       } else {
         this.dialog = true;
       }
+    }
+  },
+  mounted() {
+    this.$store.dispatch("koleksiTag");
+    const json = this.koleksiTag.data;
+
+    for (var i in json) {
+      this.itemTag.push(json[i].tag);
     }
   }
 };

@@ -186,10 +186,9 @@
                 depressed
                 rounded
                 :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.prev_chapter_id}}"
-                style="position:absolute;bottom:0;left:0;margin:0 10px;"
+                style="position:absolute;bottom:0;left:0;margin:0 10px;text-transform:none;"
               >
-                <v-icon x-small>mdi-less-than</v-icon>
-                <v-icon x-small>mdi-less-than</v-icon>
+                <v-icon class="ml-2">mdi-chevron-double-left</v-icon>Prev
               </v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
@@ -202,10 +201,10 @@
                 depressed
                 rounded
                 :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.next_chapter_id}}"
-                style="position:absolute;bottom:0;right:0;margin:0 10px;"
+                style="position:absolute;bottom:0;right:0;margin:0 10px;text-transform:none;"
               >
-                <v-icon x-small>mdi-greater-than</v-icon>
-                <v-icon x-small>mdi-greater-than</v-icon>
+                Next
+                <v-icon class="mr-2">mdi-chevron-double-right</v-icon>
               </v-btn>
             </div>
           </v-col>

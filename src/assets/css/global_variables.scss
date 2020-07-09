@@ -30,13 +30,19 @@ $mainColor: #E76464;
 }
 
 .hide-on--md {
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 860px) {
+        display: none;
+    }
+    @media screen and (max-width: 425px) {
+        display: none;
+    }
+    @media screen and (max-width: 320px) {
         display: none;
     }
 }
 
 .hide-on--lg {
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 860px) {
         display: none;
     }
 }
