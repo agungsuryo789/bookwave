@@ -3,11 +3,11 @@
 		<NavbarSection />
 		<div class="container" v-for="item in career" :key="item.id_karir">
 			<v-row class="mt-2 my-2">
-				<v-col sm="12" md="4">
+				<v-col sm="12" md="4" align-self="start">
 						<h1 class="merah"> {{ item.karir }} </h1>
 						<p> {{ item.created_at }} </p>
 						<v-spacer></v-spacer>
-						<p class="merah"> {{ item.sampai_tgl }} </p>
+						<p class="merah"> Sampai Dengan : {{ item.sampai_tgl }} </p>
 				</v-col>
 				<v-col cols="12" sm="12" md="8">
 					<v-img src="@/assets/image/blog.png" height="250px" width="auto" gradient="to right, rgba(255, 255, 255), transparent">

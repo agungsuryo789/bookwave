@@ -147,7 +147,7 @@ export default {
     submit() {
       this.$v.password.$touch();
       if (this.$v.password.$invalid) {
-        alert("kesalahan!");
+
       } else {
         var data = {
           email: this.email,
