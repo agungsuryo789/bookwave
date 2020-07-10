@@ -1,4 +1,5 @@
 {
+    "name": "projek-aha",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -15,6 +16,7 @@
         "firebaseui": "^4.5.0",
         "midtrans-client": "^1.1.0",
         "register-service-worker": "^1.7.1",
+        "roboto-fontface": "*",
         "vue": "^2.6.11",
         "vue-axios-cors": "^1.0.1",
         "vue-google-login": "^2.0.3",
