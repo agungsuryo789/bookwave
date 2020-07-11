@@ -51,7 +51,9 @@ export default {
     border-radius: 5px;
     border: 2px solid rgb(165, 165, 165);
     border-bottom: 4px solid rgb(165, 165, 165);
-    min-width: 130px;
+    @media screen and (min-width: 760px) {
+      min-width: 130px;
+    }
   }
 }
 </style>

@@ -81,13 +81,13 @@ export default {
       if (!newValue) {
         for (var i = 0; i < hgClass.length; i += 1) {
           hgClass[i].style.display = "none";
-		}
-		this.showPopAlert = true;
+        }
+        this.showPopAlert = true;
       } else {
         for (var j = 0; j < hgClass.length; j += 1) {
           hgClass[j].style.display = "block";
-		}
-		this.showPopAlert = false;
+        }
+        this.showPopAlert = false;
       }
     }
   },
@@ -262,6 +262,9 @@ export default {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
     }
+  }
+  #chapterText {
+    white-space: pre-line;
   }
   .showTooltip {
     display: block;

@@ -24,6 +24,7 @@
         <v-col lg="6" md="6" sm="6" cols="12" style="margin:0 auto;">
           <BookCard
             :idBuku="parseInt(bookTrending.data[0].id_buku)"
+            :title="bookTrending.data[0].judul"
             :foto_sampul="bookTrending.data[0].foto_sampul"
             :warna_kategori="bookTrending.data[0].warna_kategori"
             :is_premium="bookTrending.data[0].is_premium"
