@@ -1,38 +1,66 @@
 <template>
 	<div>
 		<NavbarSection />
-		<div class="container" v-for="item in career" :key="item.id_karir">
-			<v-row class="mt-2 my-2">
-				<v-col sm="12" md="4" align-self="start">
-						<h1 class="merah"> {{ item.karir }} </h1>
-						<p> {{ item.created_at }} </p>
-						<v-spacer></v-spacer>
-						<p class="merah"> Sampai Dengan : {{ item.sampai_tgl }} </p>
-				</v-col>
-				<v-col cols="12" sm="12" md="8">
-					<v-img src="@/assets/image/blog.png" height="250px" width="auto" gradient="to right, rgba(255, 255, 255), transparent">
-						<div class="fill-height left-gradient"></div>
-					</v-img>
-				</v-col>
-			</v-row>
-			<v-row>
-				<v-col sm="12" md="12">
-					<h1 class="ungu">Deskripsi Pekerjaan</h1>
-					<p>{{ item.deskripsi }}</p>
-				</v-col>
-			</v-row>
-			<v-row>
-				<v-col sm="12" md="12">
-					<h1 class="ungu">Spesifikasi Calon Pekerja</h1>
-					<p> {{ item.spesifikasi }} </p>
-				</v-col>
-			</v-row>
-			<v-row>
-				<v-col sm="12" md="12">
-					<v-btn rounded color="#62E6A4" dark>Kirim Lamaran<v-icon dark right>mdi-email-outline</v-icon></v-btn>
-				</v-col>
-			</v-row>
-		</div>
+		<template v-if="!loadSkeleton">
+			<div class="container" v-for="item in career" :key="item.id_karir">
+				<v-row class="mt-2 my-2">
+					<v-col sm="12" md="4" align-self="start">
+							<h1 class="merah"> {{ item.karir }} </h1>
+							<p> {{ item.created_at }} </p>
+							<v-spacer></v-spacer>
+							<p class="merah"> Sampai Dengan : {{ item.sampai_tgl }} </p>
+					</v-col>
+					<v-col cols="12" sm="12" md="8">
+						<v-img src="@/assets/image/blog.png" height="250px" width="auto" gradient="to right, rgba(255, 255, 255), transparent">
+							<div class="fill-height left-gradient"></div>
+						</v-img>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col sm="12" md="12">
+						<h1 class="ungu">Deskripsi Pekerjaan</h1>
+						<p>{{ item.deskripsi }}</p>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col sm="12" md="12">
+						<h1 class="ungu">Spesifikasi Calon Pekerja</h1>
+						<p> {{ item.spesifikasi }} </p>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col sm="12" md="12">
+						<v-btn rounded color="#62E6A4" dark>Kirim Lamaran<v-icon dark right>mdi-email-outline</v-icon></v-btn>
+					</v-col>
+				</v-row>
+			</div>
+		</template>
+		<template v-else>
+			<div>
+				<v-row class="mt-2 my-2">
+					<v-col sm="12" md="4" align-self="start">
+						<v-skeleton-loader type="list-item-three-line" tile></v-skeleton-loader>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col sm="12" md="12">
+						<v-skeleton-loader type="heading" tile="false" ></v-skeleton-loader>
+						<v-skeleton-loader type="paragraph" tile="false" ></v-skeleton-loader>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col sm="12" md="12">
+						<v-skeleton-loader type="heading" tile="false" ></v-skeleton-loader>
+						<v-skeleton-loader type="paragraph" tile="false" ></v-skeleton-loader>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col sm="12" md="12">
+						<v-skeleton-loader type="button" tile="false" ></v-skeleton-loader>
+					</v-col>
+				</v-row>
+			</div>
+		</template>
 		<FooterSection />
 	</div>
 </template>
@@ -42,14 +70,34 @@ import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
+/* eslint-disable */
 export default {
   name: "CareerDetail",
   components: {
     NavbarSection,
     FooterSection
   },
+  data() {
+    return {
+    	loadSkeleton: true
+    };
+  },
+  methods: {
+	callFunction: function() {
+		this.$store.dispatch("getCareerDetail", this.$route.params.idKarir);
+		var load = this.$store.state.loaderStatus;
+		var v = this;
+		setTimeout(function() {
+			if (load) {
+				v.loadSkeleton = false;
+			} else {
+				v.loadSkeleton = true;
+			}
+		}, 800);
+    }
+  },
   mounted() {
-    this.$store.dispatch("getCareerDetail", this.$route.params.idKarir);
+    this.callFunction();
   },
   computed: mapState({
 	career: state => state.detailCareer.data
