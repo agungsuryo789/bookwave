@@ -106,10 +106,14 @@ export default {
   methods: {
 	 ...mapMutations(["showSnackbar", "closeSnackbar"]),
     submit() {
-      var data = {
-        password: this.passwordReset
-      };
-      this.$store.dispatch("goReset", data);
+		if (this.$v.passwordReset.$invalid) {
+
+      } else {
+		var data = {
+			password: this.passwordReset
+		};
+      	this.$store.dispatch("goReset", data);
+	  };
     }
   }
 };

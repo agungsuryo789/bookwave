@@ -37,6 +37,8 @@ const BlogDetail = () =>
 	import ('../views/pages/BlogDetail.vue')
 const CareerDetail = () =>
 	import ('../views/pages/CareerDetail.vue')
+const Troubleshoot = () =>
+	import ('../views/pages/Troubleshoot.vue')
 
 // Auth Component
 const Login = () =>
@@ -271,7 +273,15 @@ const routes = [
 			requiresAuth: true,
             title: "Help & Support | Ahabaca"
         }
-    },
+	},
+	{
+        path: '/troubleshoot',
+        name: 'Troubleshoot',
+        component: Troubleshoot,
+        meta: {
+            title: "Troubleshoot | Ahabaca"
+        }
+	},
     // User Layout (Auth)
     // Landing Layout
     {

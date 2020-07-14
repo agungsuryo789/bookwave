@@ -281,6 +281,9 @@ export default {
         }
       });
     },
+	goBack() {
+		history.back();
+	},
     urlDownload(url) {
       window.open(url, "_blank");
     },
