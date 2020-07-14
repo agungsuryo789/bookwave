@@ -27,8 +27,11 @@
             filter
             outlined
             link
-            :color="n.warna_kategori"
-          >{{ n.nama_kategori }}</v-chip>
+            color="#D7D7D7"
+          >
+            <v-img :src="n.icon_file" class="mr-2"></v-img>
+            <p class="my-2" style="color:black;font-weight:bold;">{{ n.nama_kategori }}</p>
+          </v-chip>
         </v-card>
         <!-- <v-slide-group show-arrows>
           <v-slide-item v-for="n in daftarKategoriNoAuth" :key="n.id_daftar_kategori">

@@ -25,18 +25,17 @@
         >
           <v-row>
             <v-col cols="12" lg="4" md="4" sm="4">
-              <table class="table-footer-links text-center text-lg-left text-xl-left">
+              <table
+                v-if="daftarKategoriNoAuth.length > 0"
+                class="table-footer-links text-center text-lg-left text-xl-left"
+              >
                 <tr>
                   <th>Top Kategori</th>
                 </tr>
-                <tr>
-                  <td>Makanan</td>
-                </tr>
-                <tr>
-                  <td>Politik</td>
-                </tr>
-                <tr>
-                  <td>Komunikasi</td>
+                <tr v-for="item in daftarKategoriNoAuth.slice(0, 3)" :key="item.id_daftar_kategori">
+                  <td>
+                    <router-link :to="{ name: 'CategoryPage', params: { idKategori: item.id_daftar_kategori }}">{{ item.nama_kategori }}</router-link>
+                  </td>
                 </tr>
               </table>
             </v-col>
@@ -73,9 +72,9 @@
                   </td>
                 </tr>
                 <tr>
-					<td>
-						<router-link to="/career">Careers</router-link>
-					</td>
+                  <td>
+                    <router-link to="/career">Careers</router-link>
+                  </td>
                 </tr>
                 <tr>
                   <td>
@@ -99,7 +98,14 @@
         </v-col>
       </v-row>
       <v-row class="footer-foot-row">
-        <v-col class="text-center text-lg-left" lg="8" md="8" sm="12" cols="12" style="margin: 0 auto;">
+        <v-col
+          class="text-center text-lg-left"
+          lg="8"
+          md="8"
+          sm="12"
+          cols="12"
+          style="margin: 0 auto;"
+        >
           <ul class="footer-list-sitelink mt-2">
             <li>© AHA 2020 |</li>
             <li>
@@ -123,7 +129,14 @@
             </li>
           </ul>
         </v-col>
-        <v-col class="text-center text-lg-right" lg="4" md="4" sm="12" cols="12" style="margin: 0 auto;">
+        <v-col
+          class="text-center text-lg-right"
+          lg="4"
+          md="4"
+          sm="12"
+          cols="12"
+          style="margin: 0 auto;"
+        >
           <v-btn icon color="white">
             <v-icon>mdi-facebook</v-icon>
           </v-btn>
@@ -140,18 +153,25 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 /* eslint-disable */
 export default {
-  name: "FooterSection"
+  name: "FooterSection",
+  mounted() {
+    this.$store.dispatch("getKategoriNoAuth");
+  },
+  computed: mapState({
+    daftarKategoriNoAuth: state => state.daftarKategoriNoAuth
+  })
 };
 </script>
 
 <style lang="scss" scoped>
 .footer-body {
   .footer-container {
-	padding-bottom: 0;
-	background-color: #F7F7F7;
-	border-top: 4px solid #F0F0F0;
+    padding-bottom: 0;
+    background-color: #f7f7f7;
+    border-top: 4px solid #f0f0f0;
   }
   .footer-links {
     div {

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="book-card mx-auto" max-width="250" max-height="300" flat>
+  <v-card class="book-card mx-auto" width="220" height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
       <v-img
         lazy-src="https://www.tibs.org.tw/images/default.jpg"
@@ -9,15 +9,21 @@
         @click="gotoBook"
         :src="foto_sampul"
       ></v-img>
-      <template v-if="premiumStatus == '1' && !premiumMemberStatus">
-        <v-icon class="icon-book-locked">mdi-lock-outline</v-icon>
-      </template>
-      <ButtonBookmark :idBuku="parseInt(idBuku)" :isCollected="isCollected" />
     </div>
-    <a @click="gotoBook" class="book-card-title">
-      <v-card-title class="book-title">{{ title }}</v-card-title>
-      <v-card-subtitle>{{ penulis }}</v-card-subtitle>
-    </a>
+    <div class="d-flex flex-row">
+      <div>
+        <a @click="gotoBook" class="book-card-title m-0 p-0">
+          <v-card-title class="book-title">{{ title }}</v-card-title>
+          <v-card-subtitle>{{ penulis }}</v-card-subtitle>
+        </a>
+        <template v-if="premiumStatus == '1' && !premiumMemberStatus">
+          <span class="mx-4 my-0 p-0" style="color:red;">Premium</span>
+        </template>
+      </div>
+      <div class="my-4">
+        <ButtonBookmark :idBuku="parseInt(idBuku)" :isCollected="isCollected" />
+      </div>
+    </div>
   </v-card>
 </template>
 
@@ -93,9 +99,7 @@ export default {
   .book-card-color {
     height: 180px;
     position: relative;
-    border-radius: 8px;
-    border: 5px solid var(--color);
-    border-bottom: 10px solid var(--color);
+	background-color: var(--color);
     .book-bookmark-button {
       position: absolute;
       bottom: 5px;
@@ -108,7 +112,7 @@ export default {
     .book-title {
       font-size: 15px;
       font-weight: bold;
-      width: 250px;
+      width: 195px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -120,7 +124,7 @@ export default {
     }
   }
   .icon-book-locked {
-    margin-top: -14%;
+    margin-top: -4px;
   }
 }
 </style>
