@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<NavbarSection />
+		<SearchBlog />
 		<div class="container" v-for="item in blog" :key="item.id_blog">
 			<v-row class="mt-2 my-2">
 				<v-col cols="12" md="4">
@@ -23,6 +24,7 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
+import SearchBlog from "@/components/pages/SearchBlog.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
@@ -30,6 +32,7 @@ export default {
   name: "BlogList",
   components: {
     NavbarSection,
+	SearchBlog,
     FooterSection
   },
   created() {
