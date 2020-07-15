@@ -21,7 +21,7 @@
       </div>
       <div class="mx-1 episode-card-img-color">
         <div>
-          <v-img class="book-card-img mx-auto" width="40" height="40" :src="foto_sampul"></v-img>
+          <v-img class="book-card-img mx-auto" width="60" height="60" :src="foto_sampul"></v-img>
         </div>
       </div>
     </div>
@@ -94,8 +94,8 @@ export default {
 
 <style lang="scss">
 .div--episode-card {
-  border: 4px solid var(--color);
-  border-bottom: 8px solid var(--color);
+  border: 4px solid #D7D7D7;
+  border-bottom: 8px solid #D7D7D7;
   border-radius: 6px;
 }
 .episode-card-link {
@@ -106,9 +106,7 @@ export default {
 }
 .episode-card {
   .episode-card-img-color {
-    border-radius: 8px;
     padding: 9px;
-    background-color: var(--color);
   }
 }
 .episode-title {

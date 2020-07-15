@@ -7,15 +7,18 @@
         </v-col>
       </v-row>
       <v-row class="my-5 mx-auto" style="max-width:900px;">
-        <v-col v-for="n in daftarKategori" :key="n.id_daftar_kategori" cols="4">
+        <v-col v-for="n in daftarKategori" :key="n.id_daftar_kategori" cols="6" lg="4" md="4" sm="4">
           <v-chip
             class="btn-chip-main mx-1 my-1"
             @click="gotoKategori(n.id_daftar_kategori)"
             filter
             outlined
             link
-            :color="n.warna_kategori"
-          >{{ n.nama_kategori }}</v-chip>
+            color="#D7D7D7"
+          >
+            <v-img :src="n.icon_file" class="mr-2"></v-img>
+            <p class="my-2" style="color:black;font-weight:bold;">{{ n.nama_kategori }}</p>
+          </v-chip>
         </v-col>
       </v-row>
     </v-container>

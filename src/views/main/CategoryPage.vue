@@ -2,18 +2,18 @@
   <div class="category-page">
     <NavbarSection />
     <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
-      <template v-if="bookListByKategori.buku_populer && bookListByKategori.status == 1">
+      <template v-if="bookListByKategori.buku_terbaru && bookListByKategori.status == 1">
         <v-row>
           <v-col
             class="category-page-title text-center text-lg-left"
             :style="{'background-color': warnaKategori}"
           >
-            <h1 class="my-12">{{ bookListByKategori.nama_kategori }}</h1>
+            <h1 class="my-12 ml-lg-3">{{ bookListByKategori.nama_kategori }}</h1>
           </v-col>
         </v-row>
         <v-row>
           <v-col
-            v-for="n in bookListByKategori.buku_populer.slice(0, 4)"
+            v-for="n in bookListByKategori.buku_terbaru.slice(0, 4)"
             :key="n.id_buku"
             lg="3"
             md="6"
@@ -42,7 +42,7 @@
         </v-row>
         <v-row class="px-3" v-else>
           <v-col
-            v-for="n in bookListByKategori.buku_terbaru.slice(0, booksToShow)"
+            v-for="n in bookListByKategori.buku_terbaru.slice(4, booksToShow)"
             :key="n.id_buku"
             lg="4"
             md="6"

@@ -45,7 +45,7 @@ export default {
     return {
       highlightPayload: {
         kalimat: "",
-        warna: "#E76464",
+        warna: "#FEFE05",
         id_chapter: this.$route.params.chapterId,
         start_char: "",
         end_char: ""

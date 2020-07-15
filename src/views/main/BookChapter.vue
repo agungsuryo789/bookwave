@@ -185,7 +185,7 @@
                 v-if="parseInt(chapter.prev_chapter_id) > 0"
                 depressed
                 rounded
-                :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.prev_chapter_id}}"
+                :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.id_chapter - 1}}"
                 style="position:absolute;bottom:0;left:0;margin:0 10px;text-transform:none;"
               >
                 <v-icon class="ml-2">mdi-chevron-double-left</v-icon>Prev
