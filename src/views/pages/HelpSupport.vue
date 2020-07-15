@@ -41,7 +41,7 @@
             block
             outlined
             color="deep-purple accent-4"
-            to="/"
+            to="/troubleshoot"
           >Step-by-Step Guides & Troubleshooting</v-btn>
         </v-col>
       </v-row>
