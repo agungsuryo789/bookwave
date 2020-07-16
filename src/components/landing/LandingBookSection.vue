@@ -2,7 +2,9 @@
   <div>
     <NavbarSection />
     <v-container class="mt-12">
-      <h2 class="font-weight-black book-section-title">{{this.$route.params.sectionName.replace(/-/g, " ")}}</h2>
+      <h2
+        class="font-weight-black book-section-title"
+      >{{this.$route.params.sectionName.replace(/-/g, " ")}}</h2>
       <v-progress-linear v-model="underlineValue" color="#E76464"></v-progress-linear>
       <v-row v-if="loadSkeleton">
         <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
@@ -25,9 +27,13 @@
             :title="n.judul"
             :foto_sampul="n.foto_sampul"
             :deskripsi="n.deskripsi"
-			:penulis="n.penulis"
-            :warna_kategori="n.border_buku"
+            :penulis="n.penulis"
+            :is_premium="n.is_premium"
+            :warna_kategori="n.warna_sub"
+            :warna_border="n.warna_utama"
             :kategori_buku="n.nama_kategori"
+            :isCollected="n.is_collected"
+            :isFavorited="n.is_favorite"
           />
         </v-col>
       </v-row>
@@ -109,7 +115,7 @@ export default {
   letter-spacing: 1px;
   font-size: 24px;
   font-weight: bold;
-  color: #E76464;
+  color: #e76464;
   text-decoration: none;
   text-transform: uppercase;
 }

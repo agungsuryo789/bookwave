@@ -1,6 +1,7 @@
 <template>
   <v-card class="book-card mx-auto" width="220" height="300" flat>
-    <div class="book-card-color py-7" :style="cssVars">
+    <div class="book-card-color py-9" :style="cssVars">
+      <div class="top-border"></div>
       <v-img
         lazy-src="https://www.tibs.org.tw/images/default.jpg"
         class="book-card-img mx-auto"
@@ -8,7 +9,9 @@
         height="120px"
         @click="gotoBook"
         :src="foto_sampul"
+        style="z-index:2;"
       ></v-img>
+      <div class="bottom-border"></div>
     </div>
     <div class="d-flex flex-row">
       <div>
@@ -50,6 +53,9 @@ export default {
     warna_kategori: {
       type: String
     },
+    warna_border: {
+      type: String
+    },
     kategori_buku: {
       type: String
     },
@@ -87,7 +93,8 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--color": this.$props.warna_kategori
+        "--color": this.$props.warna_kategori,
+        "--colorBorder": this.$props.warna_border
       };
     }
   }
@@ -97,9 +104,29 @@ export default {
 <style lang="scss">
 .book-card {
   .book-card-color {
-    height: 180px;
+    height: 200px;
     position: relative;
-	background-color: var(--color);
+    background-color: var(--color);
+    .top-border {
+      position: absolute;
+      top: 8%;
+      left: 12%;
+      width: 60px;
+      height: 60px;
+      z-index: 0;
+      border-top-left-radius: 30px;
+      background-color: var(--colorBorder);
+    }
+    .bottom-border {
+      position: absolute;
+      bottom: 10%;
+      right: 14%;
+      width: 60px;
+      height: 60px;
+      z-index: 0;
+      border-bottom-right-radius: 30px;
+      background-color: var(--colorBorder);
+    }
     .book-bookmark-button {
       position: absolute;
       bottom: 5px;

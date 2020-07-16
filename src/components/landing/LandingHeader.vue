@@ -1,11 +1,7 @@
 <template>
   <v-container v-if="bookTrending.data.length > 0">
     <div>
-      <v-row
-        class="landing-header-row mx-auto mt-10"
-        justify="center"
-        align="center"
-      >
+      <v-row class="landing-header-row mx-auto mt-10" justify="center" align="center">
         <v-col
           lg="6"
           md="6"
@@ -26,7 +22,8 @@
             :idBuku="parseInt(bookTrending.data[0].id_buku)"
             :title="bookTrending.data[0].judul"
             :foto_sampul="bookTrending.data[0].foto_sampul"
-            :warna_kategori="bookTrending.data[0].warna_kategori"
+            :warna_kategori="bookTrending.data[0].warna_sub"
+            :warna_border="bookTrending.data[0].warna_utama"
             :is_premium="bookTrending.data[0].is_premium"
             :isCollected="bookTrending.data[0].is_collected"
             :isFavorited="bookTrending.data[0].is_favorite"

@@ -1,6 +1,6 @@
 {
-	"name": "projek-aha",
-    "version": "0.1.0",
+    "name": "ahabaca",
+    "version": "0.2.0",
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
@@ -70,17 +70,15 @@
             "dot-notation": 0,
             "space-before-function-paren": 0
         },
-        "overrides": [
-            {
-                "files": [
-                    "**/__tests__/*.{j,t}s?(x)",
-                    "**/tests/unit/**/*.spec.{j,t}s?(x)"
-                ],
-                "env": {
-                    "jest": true
-                }
+        "overrides": [{
+            "files": [
+                "**/__tests__/*.{j,t}s?(x)",
+                "**/tests/unit/**/*.spec.{j,t}s?(x)"
+            ],
+            "env": {
+                "jest": true
             }
-        ]
+        }]
     },
     "browserslist": [
         "> 1%",

@@ -12,10 +12,17 @@
             <v-card
               class="card--book-image"
               max-width="250"
-              :style="{backgroundColor: book.warna_kategori}"
+              :style="{backgroundColor: book.warna_sub}"
             >
               <div class="d-flex flex-column justify-end py-10">
-                <v-img class="book-card-img mx-auto" width="150" :src="book.foto_sampul"></v-img>
+                <div class="top-border" :style="{backgroundColor: book.warna_utama}"></div>
+                <v-img
+                  class="book-card-img mx-auto"
+                  width="150"
+                  :src="book.foto_sampul"
+                  style="z-index:2;"
+                ></v-img>
+                <div class="bottom-border" :style="{backgroundColor: book.warna_utama}"></div>
                 <ButtonBookmark
                   :idBuku="parseInt(book.id_buku)"
                   :isCollected="book.is_collected"
@@ -85,8 +92,13 @@
                     </div>
                   </template>
                   <ul class="list-book-detail my-3 my-lg-0 mx-0 px-0" style="font-size:12px;">
-                    <li><v-icon class="mr-2" small>mdi-clock-outline</v-icon> {{ book.durasi }} membaca</li>
-                    <li><v-icon class="mr-2" small>mdi-headphones</v-icon> Audio Available</li>
+                    <li>
+                      <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
+                      {{ book.durasi }} membaca
+                    </li>
+                    <li>
+                      <v-icon class="mr-2" small>mdi-headphones</v-icon>Audio Available
+                    </li>
                   </ul>
                 </div>
               </v-col>
@@ -187,6 +199,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card--book-image {
+  .top-border {
+    position: absolute;
+    top: 8%;
+    left: 12%;
+    width: 60px;
+    height: 60px;
+    z-index: 0;
+    border-top-left-radius: 30px;
+  }
+  .bottom-border {
+    position: absolute;
+    bottom: 8%;
+    right: 12%;
+    width: 60px;
+    height: 60px;
+    z-index: 0;
+    border-bottom-right-radius: 30px;
+  }
+}
 .card--book-detail {
   .list-book-detail {
     li {

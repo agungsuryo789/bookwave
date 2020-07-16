@@ -14,7 +14,7 @@
             filter
             outlined
             link
-            color="#D7D7D7"
+            :color="n.warna_kategori"
           >
             <v-img :src="n.icon_file" class="mr-2"></v-img>
             <p class="my-2" style="color:black;font-weight:bold;">{{ n.nama_kategori }}</p>

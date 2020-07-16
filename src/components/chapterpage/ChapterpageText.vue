@@ -191,7 +191,7 @@ export default {
           // Create Highlight span color
           span.classList.add("span-hg-color");
           const spanClass = document.getElementsByClassName("span-hg-color");
-          span.style.backgroundColor = x[i].warna;
+          span.style.backgroundColor = "#FEFE05";
           span.style.color = "black";
           span.style.position = "relative";
           span.style.zIndex = 2 + i;

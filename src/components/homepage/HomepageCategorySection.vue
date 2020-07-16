@@ -27,24 +27,12 @@
             filter
             outlined
             link
-            color="#D7D7D7"
+            :color="n.warna_kategori"
           >
             <v-img :src="n.icon_file" class="mr-2"></v-img>
             <p class="my-2" style="color:black;font-weight:bold;">{{ n.nama_kategori }}</p>
           </v-chip>
         </v-card>
-        <!-- <v-slide-group show-arrows>
-          <v-slide-item v-for="n in daftarKategoriNoAuth" :key="n.id_daftar_kategori">
-            <v-chip
-              class="btn-chip-main mx-1 my-1"
-              filter
-              outlined
-              link
-              :color="n.warna_kategori"
-              @click="gotoKategori(n.id_daftar_kategori)"
-            >{{ n.nama_kategori }}</v-chip>
-          </v-slide-item>
-        </v-slide-group>-->
       </v-col>
     </v-row>
     <v-row v-if="loadSkeleton">
@@ -77,7 +65,8 @@
           :foto_sampul="n.foto_sampul"
           :deskripsi="n.deskripsi"
           :penulis="n.penulis"
-          :warna_kategori="n.warna_kategori"
+          :warna_kategori="n.warna_sub"
+          :warna_border="n.warna_utama"
           :kategori_buku="n.nama_kategori"
         />
       </v-col>
