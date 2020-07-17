@@ -144,7 +144,7 @@ export default {
       const span = document.createElement("span");
       const tooltipSpan = document.getElementById("tooltip");
       span.textContent = selectionText;
-      span.style.backgroundColor = "#E76464";
+      span.style.backgroundColor = "#FEFE05";
       span.style.zIndex = "2";
       const charLength = selectionText.length;
 
@@ -162,7 +162,6 @@ export default {
       }
     },
     getHighlight() {
-      // const chapterText = document.getElementById("chapterText");
       const chapterBody = document.getElementById("chapterBody");
       const store = this.$store;
       var deletePayload = this.delHgPayload;
@@ -179,10 +178,15 @@ export default {
           hgText.style.position = "absolute";
           hgText.style.top = 0;
           hgText.style.left = 0;
+          hgText.style.whiteSpace = "pre-line";
           hgText.style.zIndex = 2 + i;
           hgText.id = "highlight-" + i;
           hgText.classList.add("highlight-data", "text-left", "mx-3", "my-3");
           hgText.onmouseup = function() {
+            const btHg = document.getElementById("btEnableHg");
+            btHg.classList.add("glowing-animation");
+            window.getSelection().removeAllRanges();
+            window.scrollTo(0, 0);
             alert("Click the Pencil Icon(Top Right) to enable Highlight Text");
           };
 
@@ -211,9 +215,7 @@ export default {
 
             const tooltip2 = document.createElement("button");
             tooltip2.classList.add("button-del-hg");
-            const tooltipClass = document.getElementsByClassName(
-              "button-del-hg"
-            );
+
             tooltip2.textContent = "Hapus Highlight";
             tooltip2.setAttribute("style", this.styleTooltipDelete);
             tooltip2.style.zIndex = 3 + i + j;
@@ -221,16 +223,7 @@ export default {
               deletePayload.id_highlight = parseInt(x[i].id_buku_highlight);
               store.dispatch("setDelChapterHighlight", deletePayload);
             };
-            spanClass[i].onmouseover = function() {
-              for (var i = 0; i < tooltipClass.length; i += 1) {
-                tooltipClass[i].style.display = "block";
-              }
-            };
-            spanClass[i].onmouseout = function() {
-              for (var i = 0; i < tooltipClass.length; i += 1) {
-                tooltipClass[i].style.display = "none";
-              }
-            };
+
             spanClass[i].appendChild(tooltip2);
           }
         }
@@ -240,6 +233,7 @@ export default {
   mounted() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
     this.getHighlight();
+    console.log(this.chapterText);
   }
 };
 </script>
@@ -265,6 +259,7 @@ export default {
   }
   #chapterText {
     white-space: pre-line;
+    color: black;
   }
   .showTooltip {
     display: block;
@@ -278,4 +273,5 @@ export default {
     }
   }
 }
+
 </style>

@@ -59,6 +59,11 @@
                     <router-link to="/contact">Contact & Help</router-link>
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    <router-link to="/troubleshoot">Troubleshoot</router-link>
+                  </td>
+                </tr>
               </table>
             </v-col>
             <v-col cols="12" lg="4" md="4" sm="4">

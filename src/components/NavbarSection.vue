@@ -51,7 +51,18 @@
             </v-toolbar-items>
             <v-spacer></v-spacer>
             <v-toolbar-items v-if="!showSearchBar" class="hide-on--md">
-              <div v-if="memberDetail.data">
+              <div v-if="isTroubleshoot">
+                <v-btn
+                  class="button-subscribe mx-5 my-3"
+                  rounded
+                  depressed
+                  color="white"
+                  elevation="2"
+                  to="/contact"
+                  style="text-transform:none;color:#1CB0F6;"
+                >Kirim Pertanyaan</v-btn>
+              </div>
+              <div v-if="memberDetail.data && !isTroubleshoot">
                 <v-btn
                   class="button-subscribe mx-5 my-3"
                   rounded
@@ -63,7 +74,7 @@
                   style="text-transform:none;color:white;"
                 >Upgrade Premium</v-btn>
               </div>
-              <template v-if="memberDetail.data">
+              <template v-if="memberDetail.data && !isTroubleshoot">
                 <v-chip
                   v-if="memberDetail.data[0].premium_member"
                   class="my-4"
@@ -126,7 +137,20 @@
                   <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                 </template>
                 <v-list>
-                  <template v-if="memberDetail.data">
+                  <template v-if="isTroubleshoot">
+                    <v-list-item to="/contact">
+                      <v-list-item-title>
+                        <v-btn
+                          class="button-subscribe"
+                          rounded
+                          depressed
+                          color="white"
+                          style="text-transform:none;color:#1CB0F6;"
+                        >Kirim Pertanyaan</v-btn>
+                      </v-list-item-title>
+                    </v-list-item>
+                  </template>
+                  <template v-if="memberDetail.data && !isTroubleshoot">
                     <v-list-item v-if="!memberDetail.data[0].premium_member" to="/plans">
                       <v-list-item-title>
                         <v-btn
@@ -139,7 +163,7 @@
                       </v-list-item-title>
                     </v-list-item>
                   </template>
-                  <template v-if="memberDetail.data">
+                  <template v-if="memberDetail.data && !isTroubleshoot">
                     <v-list-item v-if="memberDetail.data[0].premium_member">
                       <v-list-item-title>
                         <v-chip class="my-4" color="#E25757" outlined>
@@ -223,6 +247,11 @@ export default {
     NavbarCategoryChip,
     NavbarSearch
   },
+  props: {
+    isTroubleshoot: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       userState: this.$store.getters.isLoggedIn,
@@ -248,13 +277,13 @@ export default {
       this.$router.push({
         name: "HelpSupport"
       });
-	},
-	toLogin() {
+    },
+    toLogin() {
       this.$router.push({
         name: "Login"
       });
-	},
-	toRegister() {
+    },
+    toRegister() {
       this.$router.push({
         name: "Register"
       });

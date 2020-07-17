@@ -13,7 +13,7 @@
               <p>{{deskripsi}}</p>
             </a>
             <template v-if="is_premium == 'true' || is_premium == '1' && !premiumMemberStatus">
-              <v-icon class="book-card-icon-lock">mdi-lock-outline</v-icon>
+              <v-icon class="book-card-icon-lock" style="position:absolute;top:0;right:0;">mdi-lock-outline</v-icon>
             </template>
           </div>
           <div class="d-flex flex-row justify-space-between mt-1">
@@ -211,10 +211,5 @@ export default {
 .book-card-link {
   text-decoration: none;
   color: black;
-}
-.book-card-icon-lock {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 </style>

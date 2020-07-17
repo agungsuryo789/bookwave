@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<NavbarSection />
+		<NavbarSection :isTroubleshoot="true" />
 		<HeaderNoimage title="Bagaimana cara menyimpan kalimat terakhir yang saya baca pada AHA!"/>
 		<div class="container">
 		<v-row class="mt-2 my-2">

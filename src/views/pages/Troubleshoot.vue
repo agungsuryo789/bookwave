@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<NavbarSection />
+		<NavbarSection :isTroubleshoot="true" />
 		<HeaderNoimage title="Step By Step & Troubleshooting"/>
 		<div class="container">
 		<v-row class="mt-2 my-2">
