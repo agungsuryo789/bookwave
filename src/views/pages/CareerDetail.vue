@@ -60,6 +60,22 @@
 					</v-col>
 				</v-row>
 			</div>
+			<v-container>
+				<v-row>
+					<v-col cols="12" md="10">
+						<h1 class="ungu"> Kesempatan Kerja Lainnya </h1>
+					</v-col>
+				</v-row>
+				<v-row class="mt-2 my-2" v-for="items in careerlist" :key="items.id_karir">
+					<a @click="goDetail(items.id_karir)">
+						<v-col cols="12" md="12" class="my-3">
+							<h4 class="larger merah"> {{ items.karir }} </h4>
+							<p class="larger"> {{ items.deskripsi.substring(0,100)+"..." }} </p>
+						</v-col>
+					</a>
+				</v-row>
+				<hr/>
+			</v-container>
 		</template>
 		<FooterSection />
 	</div>
@@ -99,9 +115,16 @@ export default {
   mounted() {
     this.callFunction();
   },
-  computed: mapState({
+  computed: mapState(
+	{
 	career: state => state.detailCareer.data
-  })
+  },
+  {
+	  careerlist: state => state.career.data
+  }),
+  created() {
+    this.$store.dispatch("getCareer");
+  },
 };
 </script>
 

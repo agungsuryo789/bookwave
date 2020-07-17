@@ -106,6 +106,7 @@ export default {
   methods: {
 	 ...mapMutations(["showSnackbar", "closeSnackbar"]),
     submit() {
+		this.$v.passwordReset.$touch();
 		if (this.$v.passwordReset.$invalid) {
 
       } else {
