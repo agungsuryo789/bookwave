@@ -19,6 +19,7 @@
           <EpisodeCard
             :idBuku="parseInt(n.id_buku)"
             :idChapter="parseInt(n.id_chapter)"
+            :judul_buku="n.judul_buku"
             :episodeTitle="n.judul_chapter"
             :foto_sampul="n.foto_sampul"
             :warna_episode="n.warna_kategori"

@@ -10,14 +10,14 @@
   >
     <div class="d-flex flex-row justify-space-between align-center div--episode-card">
       <div class="mx-1">
-        <p style="font-size:12px;">
+        <p class="py-0" style="font-size:12px;color:red;">
           <span v-if="is_premium_chapter && !premiumMemberStatus">
             <v-icon>mdi-lock-outline</v-icon>
           </span>
           Baru
         </p>
-        <p class="my-3 episode-title font-weight-bold" style="font-size:15px;">{{ judul_buku }}</p>
-        <p class="my-0" style="font-size:15px;">{{ episodeTitle }}</p>
+        <p class="my-1 py-0 episode-title font-weight-bold" style="font-size:15px;">{{ judul_buku }}</p>
+        <p class="my-0 py-0" style="font-size:15px;">{{ episodeTitle }}</p>
       </div>
       <div class="mx-1 episode-card-img-color">
         <div>

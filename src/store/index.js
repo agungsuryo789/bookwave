@@ -124,6 +124,7 @@ export default new Vuex.Store({
             color: 'cyan darken-2'
         },
         termsCondition: [],
+        blogCategory: [],
         userPrivacy: [],
         applicationPrivacy: [],
         disclaimer: [],
@@ -132,6 +133,7 @@ export default new Vuex.Store({
         career: [],
         detailCareer: [],
         listBlog: [],
+        listSearchBlog: [],
         detailBlog: []
     },
     mutations: {
@@ -205,7 +207,7 @@ export default new Vuex.Store({
             state.premiumStatus = null
             Object.assign(state)
             router.push('/')
-		},
+        },
         getMemberDetail_mutation: (state, response) => {
             state.memberDetail = response
             state.premiumStatus = response.data[0].premium_member
@@ -255,6 +257,10 @@ export default new Vuex.Store({
             state.subList = response
             state.loaderStatus = true
         },
+        getBlogCategory_mutation: (state, response) => {
+            state.blogCategory = response
+            state.loaderStatus = true
+        },
         setChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
@@ -281,7 +287,6 @@ export default new Vuex.Store({
         setDelChapterHighlight_mutation: (state, response) => {
             state.chapterHighlight = response
             state.loaderStatus = true
-            alert("Berhasil hapus highligth text")
             location.reload()
         },
         koleksiBuku_mutation: (state, response) => {
@@ -365,6 +370,12 @@ export default new Vuex.Store({
             state.career = response
         },
         getBlog_mutation: (state, response) => {
+            state.listBlog = response
+        },
+        blogSearch_mutation: (state, response) => {
+            state.listSearchBlog = response
+        },
+        searchBlogByCategory_mutation: (state, response) => {
             state.listBlog = response
         },
         getBlogDetail_mutation: (state, response) => {
@@ -576,7 +587,7 @@ export default new Vuex.Store({
                     commit('setDelChapterHighlight_mutation', response.data);
                 })
                 .catch(err => {
-                    alert(err.message);
+                    console.log(err.message);
                 })
         },
         saveChapterSingle: ({ commit }, payload) => {
@@ -609,7 +620,6 @@ export default new Vuex.Store({
         deleteTagFromAll: ({ commit }, tagPayload) => {
             axs.post('/ahaapi/hapus_tag', tagPayload)
                 .then(response => {
-                    alert("Berhasil Hapus Tag");
                     router.push("/library/book");
                 })
                 .catch(err => {
@@ -619,7 +629,6 @@ export default new Vuex.Store({
         deleteTagByBook: ({ commit }, tagPayload) => {
             axs.post('/ahaapi/hapus_tag', tagPayload)
                 .then(response => {
-                    alert("Berhasil Hapus Buku dari Tag");
                     router.push("/home");
                 })
                 .catch(err => {
@@ -695,6 +704,33 @@ export default new Vuex.Store({
             axs.get('/ahaapi/banner')
                 .then(response => {
                     commit('getPromo_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getBlogCategory: ({ commit }) => {
+            axs.get('/ahaapi/blog_category')
+                .then(response => {
+                    commit('getBlogCategory_mutation', response.data.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        blogSearch: ({ commit }, payload) => {
+            axs.post('/ahaapi/pencarian_blog', payload)
+                .then(response => {
+                    commit('blogSearch_mutation', response.data.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        searchBlogByCategory: ({ commit }, payload) => {
+            axs.get('/ahaapi/blog_by_category?id_category=' + payload)
+                .then(response => {
+                    commit('searchBlogByCategory_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -850,22 +886,22 @@ export default new Vuex.Store({
                 })
         },
         resetPassword: ({ commit }, token) => {
-			console.log(token)
-			localStorage.setItem('x-token', token)
+            console.log(token)
+            localStorage.setItem('x-token', token)
         },
-		goReset: ({ commit }, data) => {
-			axs.post('/ahaapi/ubah_password', data)
+        goReset: ({ commit }, data) => {
+            axs.post('/ahaapi/ubah_password', data)
                 .then(response => {
                     console.log(response.data)
-					commit('showSnackbar', response.data.message)
-					localStorage.removeItem('x-token')
-					router.push('/login')
+                    commit('showSnackbar', response.data.message)
+                    localStorage.removeItem('x-token')
+                    router.push('/login')
                 })
                 .catch(err => {
-					console.log(err.message)
-					commit('showSnackbar', err.message)
+                    console.log(err.message)
+                    commit('showSnackbar', err.message)
                 })
-		},
+        },
 
         // Footerpage action
         getTerms: ({ commit }) => {
@@ -967,7 +1003,7 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message)
                 })
-		}
+        }
     },
     getters: {
         isLoggedIn: state => !!state.token,

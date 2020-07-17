@@ -16,7 +16,7 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  class="mx-3"
+                  class="mx-1"
                   v-bind="attrs"
                   v-on="on"
                   @click="saveChapterSingle"
@@ -28,16 +28,44 @@
               </template>
               <span>Save this Chapter to Collection</span>
             </v-tooltip>
+            <template v-if="enableDelToggle">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    class="mx-1"
+                    depressed
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="showDelTooltip"
+                  >
+                    <v-icon>mdi-pencil-remove</v-icon>
+                  </v-btn>
+                </template>
+                <span>Enable Delete Highlight</span>
+              </v-tooltip>
+            </template>
+            <template v-if="!enableDelToggle">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    class="mx-1"
+                    depressed
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="hideDelTooltip"
+                  >
+                    <v-icon>mdi-pencil-remove</v-icon>
+                  </v-btn>
+                </template>
+                <span>Enable Delete Highlight</span>
+              </v-tooltip>
+            </template>
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  icon
-                  depressed
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="toggleHighlight = !toggleHighlight"
-                >
-                  <v-icon>mdi-grease-pencil</v-icon>
+                <v-btn icon class="mx-1" depressed v-bind="attrs" v-on="on" @click="toggleHgAction">
+                  <v-icon id="btEnableHg">mdi-grease-pencil</v-icon>
                 </v-btn>
               </template>
               <span>Enable Highlight Text Feature</span>
@@ -253,6 +281,7 @@ export default {
       outlineMenu: false,
       shareMenu: false,
       showPopAlert: true,
+      enableDelToggle: true,
       toggleHighlight: true,
       min: 8,
       max: 72,
@@ -281,20 +310,43 @@ export default {
         }
       });
     },
-	goBack() {
-		history.back();
-	},
+    goBack() {
+      history.back();
+    },
     urlDownload(url) {
       window.open(url, "_blank");
     },
     currentUrl() {
       return window.location.href;
     },
+    toggleHgAction() {
+      if (this.toggleHighlight) {
+        this.toggleHighlight = false;
+      } else {
+        this.toggleHighlight = true;
+      }
+      var element = document.getElementById("btEnableHg");
+      element.classList.remove("glowing-animation");
+    },
     saveChapterSingle() {
       const payload = {
         id_chapter: this.$route.params.chapterId
       };
       this.$store.dispatch("saveChapterSingle", payload);
+    },
+    showDelTooltip() {
+      this.enableDelToggle = false;
+      const tooltipClass = document.getElementsByClassName("button-del-hg");
+      for (var i = 0; i < tooltipClass.length; i += 1) {
+        tooltipClass[i].style.display = "block";
+      }
+    },
+    hideDelTooltip() {
+      this.enableDelToggle = true;
+      const tooltipClass = document.getElementsByClassName("button-del-hg");
+      for (var i = 0; i < tooltipClass.length; i += 1) {
+        tooltipClass[i].style.display = "none";
+      }
     }
   },
   created() {
@@ -320,5 +372,24 @@ export default {
   border-radius: 50px;
   padding: 0 4px;
   background-color: rgb(75, 159, 255);
+}
+.glowing-animation {
+  animation: glowing 1500ms infinite;
+  border-radius: 50%;
+  z-index: 999;
+}
+@keyframes glowing {
+  0% {
+    background-color: transparent;
+    box-shadow: 0 0 3px #e27024;
+  }
+  50% {
+    background-color: transparent;
+    box-shadow: 0 0 40px #e27024;
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 3px #e27024;
+  }
 }
 </style>

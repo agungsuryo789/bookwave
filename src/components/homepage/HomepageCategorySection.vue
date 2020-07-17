@@ -19,19 +19,17 @@
     <v-row class="justify-center align-center my-10">
       <v-col class="col-kategori-chip d-flex flex-row justify-center align-center">
         <v-card class="chip-card py-7 px-5" flat outlined>
-          <v-chip
-            class="btn-chip-main mx-1 my-1"
+          <v-btn
+            class="mx-1 my-1"
             v-for="n in daftarKategoriNoAuth"
             :key="n.id_daftar_kategori"
             @click="gotoKategori(n.id_daftar_kategori)"
-            filter
-            outlined
-            link
-            :color="n.warna_kategori"
+            text
+            depressed
           >
             <v-img :src="n.icon_file" class="mr-2"></v-img>
-            <p class="my-2" style="color:black;font-weight:bold;">{{ n.nama_kategori }}</p>
-          </v-chip>
+            <p class="my-2" style="color:black;font-weight:bold;text-transform:none;">{{ n.nama_kategori }}</p>
+          </v-btn>
         </v-card>
       </v-col>
     </v-row>
