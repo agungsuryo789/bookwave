@@ -26,13 +26,13 @@
           <v-row>
             <v-col cols="12" lg="4" md="4" sm="4">
               <table
-                v-if="daftarKategoriNoAuth.length > 0"
+                v-if="topKategoriNoAuth.length > 0"
                 class="table-footer-links text-center text-lg-left text-xl-left"
               >
                 <tr>
                   <th>Top Kategori</th>
                 </tr>
-                <tr v-for="item in daftarKategoriNoAuth.slice(0, 3)" :key="item.id_daftar_kategori">
+                <tr v-for="item in topKategoriNoAuth.slice(0, 3)" :key="item.id_daftar_kategori">
                   <td>
                     <router-link :to="{ name: 'CategoryPage', params: { idKategori: item.id_daftar_kategori }}">{{ item.nama_kategori }}</router-link>
                   </td>
@@ -163,10 +163,10 @@ import { mapState } from "vuex";
 export default {
   name: "FooterSection",
   mounted() {
-    this.$store.dispatch("getKategoriNoAuth");
+    this.$store.dispatch("getTopKategoriNoAuth");
   },
   computed: mapState({
-    daftarKategoriNoAuth: state => state.daftarKategoriNoAuth
+    topKategoriNoAuth: state => state.topKategoriNoAuth
   })
 };
 </script>
