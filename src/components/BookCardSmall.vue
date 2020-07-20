@@ -3,7 +3,7 @@
     <v-card class="book-card--small mx-auto" max-width="350" max-height="150">
       <div class="d-flex flex-row justify-space-between align-center">
         <div>
-          <v-img class="book-card-img mx-auto" width="65" height="90" :src="foto_sampul"></v-img>
+          <v-img class="book-card-img mx-2" width="65" height="90" :src="foto_sampul"></v-img>
         </div>
         <div>
           <div>

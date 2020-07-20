@@ -74,6 +74,7 @@ export default new Vuex.Store({
     state: {
         loaderStatus: false,
         daftarKategoriNoAuth: [],
+        topKategoriNoAuth: [],
         daftarKategoriAuth: [],
         bookSectionList: [],
         bookTrending: [],
@@ -139,6 +140,10 @@ export default new Vuex.Store({
     mutations: {
         getKategoriNoAuth_mutation: (state, response) => {
             state.daftarKategoriNoAuth = response
+            state.loaderStatus = true
+        },
+        getTopKategoriNoAuth_mutation: (state, response) => {
+            state.topKategoriNoAuth = response
             state.loaderStatus = true
         },
         getSearchByDefault_mutation(state, response) {
@@ -391,6 +396,15 @@ export default new Vuex.Store({
             axs.get('/ahaapi/beranda_buku_noauth')
                 .then(response => {
                     commit('getKategoriNoAuth_mutation', response.data.daftar_kategori);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getTopKategoriNoAuth: ({ commit }) => {
+            axs.get('/ahaapi/beranda_buku_noauth')
+                .then(response => {
+                    commit('getTopKategoriNoAuth_mutation', response.data.top_kategori);
                 })
                 .catch(err => {
                     console.log(err.message);

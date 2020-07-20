@@ -22,7 +22,7 @@
               v-for="item in paymentHistoryList"
               :key="item.id_transaksi"
             >
-              <v-card @click="toDownloadInvoice(item.id_transaksi)">
+              <v-card @click="toDownloadInvoice(item.invoice_file)">
                 <v-row style="margin:0 auto;">
                   <v-col class="hide-on-sm" lg="3">
                     <v-img
@@ -82,16 +82,14 @@ export default {
     return {};
   },
   computed: mapState({
-    paymentHistoryList: state => state.paymentHistoryList
+    paymentHistoryList: state => state.paymentHistoryList,
+    invoiceDownloadDetail: state => state.invoiceDownloadDetail
   }),
   methods: {
     toDownloadInvoice(val) {
-      this.$store.dispatch("invoiceSubsDownload", val);
-      const getter = this.$store.getters;
-
+      const x = "https://backend.ahabaca.com/uploads/invoice/";
       setTimeout(function() {
-        const invoiceUrl = getter.invoiceDownloadDetail.data.invoice_file;
-        window.open(invoiceUrl);
+        window.open(x + val);
       }, 300);
     }
   },
