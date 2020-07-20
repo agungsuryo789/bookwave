@@ -33,7 +33,27 @@
 						<v-btn rounded color="#62E6A4" dark>Kirim Lamaran<v-icon dark right>mdi-email-outline</v-icon></v-btn>
 					</v-col>
 				</v-row>
+				<hr/>
 			</div>
+
+			<v-container>
+				<v-row>
+					<v-col cols="12" md="10">
+						<h1 class="ungu"> Kesempatan Kerja Lainnya </h1>
+					</v-col>
+				</v-row>
+				<v-row class="mt-2 my-2" v-for="items in careerlist" :key="items.id_karir">
+					<v-col cols="12">
+						<a @click="goDetail(items.id_karir)">
+							<v-col cols="12" md="12" class="my-3">
+								<h4 class="larger merah"> {{ items.karir }} </h4>
+								<p class="larger"> {{ items.lokasi_pekerjaan }} </p>
+							</v-col>
+						</a>
+					</v-col>
+					<hr />
+				</v-row>
+			</v-container>
 		</template>
 		<template v-else>
 			<div>
@@ -60,22 +80,6 @@
 					</v-col>
 				</v-row>
 			</div>
-			<v-container>
-				<v-row>
-					<v-col cols="12" md="10">
-						<h1 class="ungu"> Kesempatan Kerja Lainnya </h1>
-					</v-col>
-				</v-row>
-				<v-row class="mt-2 my-2" v-for="items in careerlist" :key="items.id_karir">
-					<a @click="goDetail(items.id_karir)">
-						<v-col cols="12" md="12" class="my-3">
-							<h4 class="larger merah"> {{ items.karir }} </h4>
-							<p class="larger"> {{ items.deskripsi.substring(0,100)+"..." }} </p>
-						</v-col>
-					</a>
-				</v-row>
-				<hr/>
-			</v-container>
 		</template>
 		<FooterSection />
 	</div>
@@ -117,10 +121,8 @@ export default {
   },
   computed: mapState(
 	{
-	career: state => state.detailCareer.data
-  },
-  {
-	  careerlist: state => state.career.data
+	career: state => state.detailCareer.data,
+	careerlist: state => state.career.data
   }),
   created() {
     this.$store.dispatch("getCareer");

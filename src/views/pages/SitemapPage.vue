@@ -10,19 +10,34 @@
 			</v-row>
 			<v-row class="mt-2 my-2">
 				<v-col xs="4" md="3">
-					<p class="larger"> Home </p>
-					<p class="larger"> Books </p>
-					<p class="larger"> Pricing </p>
+					<div v-for="item in topKategoriNoAuth.slice(0, 3)" :key="item.id_daftar_kategori">
+						<router-link :to="{ name: 'CategoryPage', params: { idKategori: item.id_daftar_kategori }}"><p class="larger"> {{ item.nama_kategori }} </p></router-link>
+					</div>
 				</v-col>
 				<v-col xs="4" md="3">
-					<p class="larger"> Pricing for Teams </p>
-					<p class="larger"> Magazine </p>
-					<p class="larger"> Help & Contact </p>
+					<router-link to="/promo">
+						<p class="larger"> Promotion </p>
+					</router-link>
+					<router-link to="/blog">
+						<p class="larger"> Blog </p>
+					</router-link>
+					<router-link to="/contact">
+						<p class="larger"> Contact & Help </p>
+					</router-link>
+					<router-link to="/troubleshoot">
+						<p class="larger">Troubleshoot</p>
+					</router-link>
 				</v-col>
 				<v-col xs="4" md="3">
-					<p class="larger"> About </p>
-					<p class="larger"> Careers </p>
-					<p class="larger"> Partners </p>
+					<router-link to="/about">
+						<p class="larger"> About </p>
+					</router-link>
+					<router-link to="/career">
+						<p class="larger"> Careers </p>
+					</router-link>
+					<router-link to="/partnership">
+						<p class="larger"> Partners </p>
+					</router-link>
 				</v-col>
 			</v-row>
 
@@ -33,8 +48,10 @@
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
-				<v-col cols="12" md="4" v-for="item in blog" :key="item.id_blog">
-					<p class="larger">{{ item.judul }} </p>
+				<v-col cols="12" md="4" v-for="item in blog" :key="item.id_blog_tbl">
+					<router-link :to="{ name: 'BlogDetail', params: { idBlog: item.id_blog_tbl }}">
+						<p class="larger">{{ item.judul }} </p>
+					</router-link>
 				</v-col>
 			</v-row>
 		</div>
@@ -55,12 +72,14 @@ export default {
     PageHeader,
     FooterSection
   },
-  created() {
-    this.$store.dispatch("getBlog");
-  },
   computed: mapState({
-	blog: state => state.listBlog.data
-  })
+	blog: state => state.listBlog.data,
+	topKategoriNoAuth: state => state.topKategoriNoAuth
+  }),
+  mounted() {
+	this.$store.dispatch("getBlog");
+	this.$store.dispatch("getTopKategoriNoAuth");
+  }
 };
 </script>
 
@@ -68,4 +87,8 @@ export default {
 	.larger {
 		font-size: larger;
 	}
+	a {
+      text-decoration: none;
+      color: black;
+    }
 </style>
