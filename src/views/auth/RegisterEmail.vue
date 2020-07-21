@@ -146,7 +146,7 @@ export default {
     submit() {
       this.$v.passwordReg.$touch();
       if (this.$v.passwordReg.$invalid) {
-
+		  this.$router.go(0)
       } else {
 		var data = {
           email: this.emailReg,
