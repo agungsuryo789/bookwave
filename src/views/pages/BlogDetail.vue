@@ -32,8 +32,8 @@
 				<v-skeleton-loader type="image" tile></v-skeleton-loader>
 			</v-container>
 			<v-container>
-				<v-skeleton-loader type="heading" tile="false" ></v-skeleton-loader>
-				<v-skeleton-loader type="paragraph" tile="false" ></v-skeleton-loader>
+				<v-skeleton-loader type="heading" :tile="false" ></v-skeleton-loader>
+				<v-skeleton-loader type="paragraph" :tile="false" ></v-skeleton-loader>
 			</v-container>
 		</template>
 		<FooterSection />
@@ -75,7 +75,8 @@ export default {
 	blog: state => state.detailBlog.data
   }),
   mounted() {
-    this.callFunction();
+	this.callFunction();
+	console.log(this.$route.params.idBlog);
   }
 };
 </script>

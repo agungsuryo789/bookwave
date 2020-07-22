@@ -233,7 +233,6 @@ export default {
   mounted() {
     this.$store.dispatch("getBookChapter", this.dispatchPayload);
     this.getHighlight();
-    console.log(this.chapterText);
   }
 };
 </script>
