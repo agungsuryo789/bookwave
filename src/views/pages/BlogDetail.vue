@@ -76,7 +76,6 @@ export default {
   }),
   mounted() {
 	this.callFunction();
-	console.log(this.$route.params.idBlog);
   }
 };
 </script>
