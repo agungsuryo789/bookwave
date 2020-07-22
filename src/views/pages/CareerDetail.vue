@@ -25,7 +25,7 @@
 				<v-row>
 					<v-col sm="12" md="12">
 						<h1 class="ungu">Spesifikasi Calon Pekerja</h1>
-						<p> {{ item.spesifikasi }} </p>
+						<p style="white-space:pre-line"> {{ item.spesifikasi }} </p>
 					</v-col>
 				</v-row>
 				<v-row>
@@ -117,10 +117,10 @@ export default {
     }
   },
   mounted() {
-    this.callFunction();
+	this.callFunction();
+
   },
-  computed: mapState(
-	{
+  computed: mapState({
 	career: state => state.detailCareer.data,
 	careerlist: state => state.career.data
   }),
