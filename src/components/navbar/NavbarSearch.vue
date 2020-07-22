@@ -79,11 +79,12 @@ export default {
       }
     },
     gotoBook(bookId, bookName) {
+      const urlname = bookName.toLowerCase();
       this.$router.push({
         name: "BookPage",
         params: {
           bookId: bookId,
-          bookName: bookName.toLowerCase()
+          bookName: urlname.replace(/ /g, "-")
         }
       });
     }
@@ -105,6 +106,7 @@ export default {
     top: 100%;
     width: 68%;
     margin-left: 5%;
+    z-index: 999;
     border: 3px solid rgb(160, 160, 160);
     border-bottom: 10px solid rgb(160, 160, 160);
     border-bottom-left-radius: 15px;

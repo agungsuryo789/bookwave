@@ -9,7 +9,7 @@
         height="140px"
         @click="gotoBook"
         :src="foto_sampul"
-        style="z-index:2;"
+        style="z-index:0;"
       ></v-img>
       <div class="bottom-border"></div>
     </div>
@@ -106,6 +106,7 @@ export default {
   .book-card-color {
     height: 200px;
     position: relative;
+	z-index: 0;
     background-color: var(--color);
     .top-border {
       position: absolute;
@@ -123,7 +124,7 @@ export default {
       right: 13%;
       width: 60px;
       height: 55px;
-      z-index: 0;
+      z-index: -1;
       border-bottom-right-radius: 30px;
       background-color: var(--colorBorder);
     }

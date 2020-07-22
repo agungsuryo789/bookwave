@@ -20,7 +20,7 @@
                   class="book-card-img mx-auto"
                   width="150"
                   :src="book.foto_sampul"
-                  style="z-index:2;"
+                  style="z-index:0;"
                 ></v-img>
                 <div class="bottom-border" :style="{backgroundColor: book.warna_utama}"></div>
                 <ButtonBookmark
@@ -200,6 +200,7 @@ export default {
 
 <style scoped lang="scss">
 .card--book-image {
+  z-index: 0;
   .top-border {
     position: absolute;
     top: 8%;
@@ -215,7 +216,7 @@ export default {
     right: 12%;
     width: 60px;
     height: 60px;
-    z-index: 0;
+    z-index: -1;
     border-bottom-right-radius: 30px;
   }
 }
