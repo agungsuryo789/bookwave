@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-search-form d-flex flex-column justify-center ml-lg-12">
-    <div class="d-flex flex-row justify-space-between px-4">
+    <div class="d-flex flex-row justify-space-between px-4 mt-4">
       <v-btn icon class="my-2" @click="goSearch">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -10,7 +10,8 @@
         @keyup.esc="onClose"
         @keyup.enter="goSearch"
         @keyup="liveSearch"
-        class="mt-4 mx-2"
+		@blur="hide"
+        class="mt-5 mx-2"
         clearable
         autofocus
         label="Temukan yang anda cari disini"
@@ -87,6 +88,9 @@ export default {
           bookName: urlname.replace(/ /g, "-")
         }
       });
+    },
+    hide: function() {
+      this.$emit("clicked", false);
     }
   },
   computed: mapState({

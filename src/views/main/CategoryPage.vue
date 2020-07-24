@@ -12,6 +12,21 @@
           </v-col>
         </v-row>
         <v-row>
+          <v-col class="d-flex flex-row ml-5" style="max-width:800px;">
+            <v-btn icon class="mt-4">
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+            <v-text-field
+              v-model="payload.search"
+              @keyup="liveFilter"
+              tabindex="0"
+              clearable
+              autofocus
+              label="Filter by Title/Author"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col
             v-for="n in bookListByKategori.buku_terbaru.slice(0, 4)"
             :key="n.id_buku"
@@ -130,15 +145,26 @@ export default {
   data() {
     return {
       loadSkeleton: false,
-      booksToShow: 9
+      booksToShow: 9,
+      payload: {
+        id_kategori: this.$route.params.idKategori,
+        search: ""
+      }
     };
+  },
+  methods: {
+    liveFilter() {
+      this.$store.dispatch("getBookByKategoriFilter", this.payload);
+    }
   },
   computed: mapState({
     bookListByKategori: state => state.bookListByKategori,
+    daftarKategoriAuth: state => state.bookListByKategori,
     warnaKategori: state => state.bookListByKategori.warna_kategori
   }),
   mounted() {
     this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
+    this.$store.dispatch("getDaftarKategoriAuth");
   }
 };
 </script>

@@ -1,33 +1,30 @@
 <template>
-  <v-card class="navbar-category-panel py-2 px-4" flat color="#F7F7F7">
-    <v-container>
-      <v-row class="mx-auto" style="max-width:900px;">
-        <v-col>
-          <h1 style="color:#E76464;">Temukan berdasar Kategori</h1>
-        </v-col>
-      </v-row>
-      <v-row class="my-5 mx-auto" style="max-width:900px;">
-        <v-col
-          v-for="n in daftarKategori"
-          :key="n.id_daftar_kategori"
-          cols="6"
-          lg="4"
-          md="4"
-          sm="4"
-        >
-          <v-btn
-            class="mx-1 my-1"
-            @click="gotoKategori(n.id_daftar_kategori)"
-            text
-            deppresed
-          >
-            <v-img :src="n.icon_file" class="mr-2"></v-img>
-            <p class="my-2" style="color:black;font-weight:bold;text-transform:none;">{{ n.nama_kategori }}</p>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
+  <v-container class="container-navbar-category">
+    <v-row class="mx-auto" style="max-width:800px;">
+      <v-col>
+        <h1 class="navbar-category-title" style="color:#E76464;">Temukan berdasar Kategori</h1>
+      </v-col>
+    </v-row>
+    <v-row class="my-5 mx-auto" style="max-width:800px;">
+      <v-col
+        v-for="n in daftarKategori"
+        :key="n.id_daftar_kategori"
+        class="px-2"
+        cols="6"
+        lg="4"
+        md="4"
+        sm="4"
+      >
+        <v-btn class="mx-0 mx-lg-1 my-1" @click="gotoKategori(n.id_daftar_kategori)" text deppresed>
+          <v-img :src="n.icon_file" class="mr-2"></v-img>
+          <p
+            class="my-2"
+            style="color:black;font-weight:bold;text-transform:none;"
+          >{{ n.nama_kategori }}</p>
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -52,15 +49,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.navbar-category-panel {
-  height: 600px;
-  .btn-chip-category {
-    p {
-      text-transform: none;
+.container-navbar-category {
+  .navbar-category-title {
+    @media screen and (max-width: 450px) {
+      font-size: 16px;
     }
-    @media screen and (min-width: 760px) {
-      min-width: 130px;
-    }
+  }
+}
+.btn-chip-category {
+  p {
+    text-transform: none;
+  }
+  @media screen and (min-width: 760px) {
+    min-width: 130px;
   }
 }
 </style>

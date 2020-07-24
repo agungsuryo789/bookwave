@@ -500,8 +500,16 @@ export default new Vuex.Store({
                     commit('getBookByKategori_mutation', response.data);
                 })
                 .catch(err => {
-                    var data = err.message;
-                    commit('getBookByKategori_mutation', data);
+                    console.log(err.message);
+                })
+        },
+        getBookByKategoriFilter: ({ commit }, payload) => {
+            axs.get('/ahaapi/buku_by_kategori?id_kategori=' + payload.id_kategori + '&search=' + payload.search)
+                .then(response => {
+                    commit('getBookByKategoriFilter_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
                 })
         },
         // Book n Chapter ACtion

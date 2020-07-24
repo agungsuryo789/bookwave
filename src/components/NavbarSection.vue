@@ -30,12 +30,20 @@
               <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>
-              <v-btn
-                color="transparent"
-                depressed
-                @click="showCategory = !showCategory"
-                style="text-transform:none;font-size:18px;font-weight:600;"
-              >Temukan</v-btn>
+              <v-dialog v-model="dialog">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="transparent"
+                    depressed
+                    v-bind="attrs"
+                    v-on="on"
+                    style="text-transform:none;font-size:18px;font-weight:600;"
+                  >Temukan</v-btn>
+                </template>
+                <v-card flat color="#F7F7F7">
+                  <NavbarCategoryChip />
+                </v-card>
+              </v-dialog>
               <v-btn
                 to="/library/book"
                 color="transparent"
@@ -122,7 +130,14 @@
                     </v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="showCategory = !showCategory">
-                    <v-list-item-title>Temukan</v-list-item-title>
+                    <v-dialog v-model="dialog">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-list-item-title v-bind="attrs" v-on="on">Temukan</v-list-item-title>
+                      </template>
+                      <v-card flat color="#F7F7F7">
+                        <NavbarCategoryChip />
+                      </v-card>
+                    </v-dialog>
                   </v-list-item>
                   <v-list-item to="/library/book">
                     <v-list-item-title>Library</v-list-item-title>
@@ -189,13 +204,6 @@
               <NavbarSearch @clicked="onCloseSearchBar" />
             </v-toolbar-items>
           </v-toolbar>
-          <v-row>
-            <transition name="fade" mode="out-in">
-              <v-col v-show="showCategory" class="category-chip--navbar ml-3 my-8 my-lg-10">
-                <NavbarCategoryChip />
-              </v-col>
-            </transition>
-          </v-row>
         </nav>
         <nav v-else class="navbar" style="background-color:#D84B5B;">
           <v-toolbar class="app-bar--no-auth" id="appBar" color="#D84B5B" absolute light flat style>
@@ -237,10 +245,11 @@
   </v-container>
 </template>
 
-<script>
+<script type="text/javascript">
 import NavbarCategoryChip from "@/components/navbar/NavbarCategoryChip.vue";
 import NavbarSearch from "@/components/navbar/NavbarSearch.vue";
 import { mapState } from "vuex";
+
 export default {
   name: "NavbarSection",
   components: {
@@ -256,7 +265,8 @@ export default {
     return {
       userState: this.$store.getters.isLoggedIn,
       showCategory: false,
-      showSearchBar: false
+      showSearchBar: false,
+      dialog: false
     };
   },
   computed: mapState({
@@ -295,6 +305,9 @@ export default {
       const appLogo = document.getElementById("appLogo");
       appLogo.style.display = "none";
       this.showSearchBar = !this.showSearchBar;
+      this.showCategory = false;
+    },
+    hide: function() {
       this.showCategory = false;
     }
   },
