@@ -30,20 +30,12 @@
               <v-btn icon @click="showSearchBar = !showSearchBar, showCategory = false">
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>
-              <v-dialog v-model="dialog">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    color="transparent"
-                    depressed
-                    v-bind="attrs"
-                    v-on="on"
-                    style="text-transform:none;font-size:18px;font-weight:600;"
-                  >Temukan</v-btn>
-                </template>
-                <v-card flat color="#F7F7F7">
-                  <NavbarCategoryChip />
-                </v-card>
-              </v-dialog>
+              <v-btn
+                color="transparent"
+                depressed
+                @click="showCategory = !showCategory"
+                style="text-transform:none;font-size:18px;font-weight:600;"
+              >Temukan</v-btn>
               <v-btn
                 to="/library/book"
                 color="transparent"
@@ -130,14 +122,7 @@
                     </v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="showCategory = !showCategory">
-                    <v-dialog v-model="dialog">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-list-item-title v-bind="attrs" v-on="on">Temukan</v-list-item-title>
-                      </template>
-                      <v-card flat color="#F7F7F7">
-                        <NavbarCategoryChip />
-                      </v-card>
-                    </v-dialog>
+                    <v-list-item-title>Temukan</v-list-item-title>
                   </v-list-item>
                   <v-list-item to="/library/book">
                     <v-list-item-title>Library</v-list-item-title>
@@ -204,6 +189,11 @@
               <NavbarSearch @clicked="onCloseSearchBar" />
             </v-toolbar-items>
           </v-toolbar>
+          <v-row>
+            <v-col v-show="showCategory" @click="hide" class="category-chip--navbar mx-0 px-0 py-0 my-10 my-lg-12">
+              <NavbarCategoryChip />
+            </v-col>
+          </v-row>
         </nav>
         <nav v-else class="navbar" style="background-color:#D84B5B;">
           <v-toolbar class="app-bar--no-auth" id="appBar" color="#D84B5B" absolute light flat style>
@@ -361,12 +351,12 @@ export default {
     }
   }
   .category-chip--navbar {
-    z-index: 999;
-    background-color: white;
-    border: 2px solid rgb(184, 184, 184);
-    border-bottom: 6px solid rgb(184, 184, 184);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    height: 94%;
+    position: absolute;
+    top: 16px;
+    left: 1px;
+    z-index: 998;
+	background-color: rgba(0,0,0,0.5);
   }
 }
 .nav-search {

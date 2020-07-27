@@ -89,6 +89,7 @@ export default new Vuex.Store({
         episodeListNew: [],
         detailKategori: {},
         bookListByKategori: [],
+        bookListByKategoriNoAuth: [],
         bookId: '',
         kategoriId: '',
         bookDetail: {},
@@ -220,6 +221,10 @@ export default new Vuex.Store({
         },
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response
+            state.loaderStatus = true
+        },
+        getBookByKategoriNoAuth_mutation: (state, response) => {
+            state.bookListByKategoriNoAuth = response
             state.loaderStatus = true
         },
         getBookDetailByID_mutation: (state, response) => {
@@ -498,6 +503,15 @@ export default new Vuex.Store({
             axs.get('/ahaapi/buku_by_kategori?id_kategori=' + categoryID)
                 .then(response => {
                     commit('getBookByKategori_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getBookByKategoriNoAuth: ({ commit }, categoryID) => {
+            axs.get('/ahaapi/buku_by_kategori_noauth?id_kategori=' + categoryID)
+                .then(response => {
+                    commit('getBookByKategoriNoAuth_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);

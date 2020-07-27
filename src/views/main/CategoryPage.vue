@@ -4,10 +4,7 @@
     <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
       <template v-if="bookListByKategori.buku_terbaru && bookListByKategori.status == 1">
         <v-row>
-          <v-col
-            class="category-page-title text-center text-lg-left"
-            :style="{'background-color': warnaKategori}"
-          >
+          <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
             <h1 class="my-12 ml-lg-3">{{ bookListByKategori.nama_kategori }}</h1>
           </v-col>
         </v-row>
@@ -21,7 +18,6 @@
               @keyup="liveFilter"
               tabindex="0"
               clearable
-              autofocus
               label="Filter by Title/Author"
             ></v-text-field>
           </v-col>
@@ -160,7 +156,12 @@ export default {
   computed: mapState({
     bookListByKategori: state => state.bookListByKategori,
     daftarKategoriAuth: state => state.bookListByKategori,
-    warnaKategori: state => state.bookListByKategori.warna_kategori
+    warnaKategori: state => state.bookListByKategori.warna_kategori,
+    cssVars() {
+      return {
+        backgroundImage: 'url(' + this.bookListByKategori.banner_image + ')'
+      };
+    }
   }),
   mounted() {
     this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
@@ -176,10 +177,12 @@ export default {
   }
   .category-page-title {
     margin-top: -50px;
-    height: 150px;
-    padding: 4px 14px;
-    color: white;
+    height: 200px;
+    padding: 30px 14px;
     text-transform: uppercase;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     h1 {
       margin: 4% 0;
     }
