@@ -73,6 +73,7 @@ export default new Vuex.Store({
     plugins: [vuexSession],
     state: {
         loaderStatus: false,
+        responseStatus: null,
         daftarKategoriNoAuth: [],
         topKategoriNoAuth: [],
         daftarKategoriAuth: [],
@@ -139,6 +140,9 @@ export default new Vuex.Store({
         detailBlog: []
     },
     mutations: {
+        setResponse_mutation: (state, response) => {
+            state.responseStatus = response
+        },
         getKategoriNoAuth_mutation: (state, response) => {
             state.daftarKategoriNoAuth = response
             state.loaderStatus = true
@@ -220,6 +224,10 @@ export default new Vuex.Store({
             state.loaderStatus = true
         },
         getBookByKategori_mutation: (state, response) => {
+            state.bookListByKategori = response
+            state.loaderStatus = true
+        },
+        getBookByKategoriFilter_mutation: (state, response) => {
             state.bookListByKategori = response
             state.loaderStatus = true
         },
@@ -505,7 +513,9 @@ export default new Vuex.Store({
                     commit('getBookByKategori_mutation', response.data);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    if (err.response) {
+                        commit('setResponse_mutation', err.response.status);
+                    }
                 })
         },
         getBookByKategoriNoAuth: ({ commit }, categoryID) => {

@@ -2,7 +2,7 @@
   <div class="category-page">
     <NavbarSection />
     <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
-      <template v-if="bookListByKategori.buku_terbaru && bookListByKategori.status == 1">
+      <template v-if="bookListByKategori.buku_terbaru">
         <v-row>
           <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
             <h1 class="my-12 ml-lg-3">{{ bookListByKategori.nama_kategori }}</h1>
@@ -104,7 +104,7 @@
           </v-col>
         </v-row>
       </template>
-      <template v-if="bookListByKategori && typeof bookListByKategori == 'string'">
+      <template v-if="searchResponse == 422">
         <v-row>
           <v-col lg="12" class="align-center justify-center text-center" style="margin: 100px 0;">
             <v-img
@@ -156,6 +156,7 @@ export default {
   computed: mapState({
     bookListByKategori: state => state.bookListByKategori,
     daftarKategoriAuth: state => state.bookListByKategori,
+    searchResponse: state => state.searchResponse,
     warnaKategori: state => state.bookListByKategori.warna_kategori,
     cssVars() {
       return {
