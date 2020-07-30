@@ -58,32 +58,38 @@
           </div>
           <v-card-text class="my-5">
             <div class="d-flex flex-row justify-center">
-              <v-btn-toggle v-model="btnReact" borderless mandatory>
-                <v-btn :value="1" @click="btnAction" text icon large>
-                  <v-icon>mdi-emoticon-frown-outline</v-icon>
+              <v-btn-toggle v-model="surveyReact" borderless>
+                <v-btn @click="reactAction1" text icon large>
+                  <v-icon :style="{ color: reactColor1 }">mdi-emoticon-frown-outline</v-icon>
                 </v-btn>
-                <v-btn :value="2" @click="btnAction" text icon large>
-                  <v-icon>mdi-emoticon-sad-outline</v-icon>
+                <v-btn @click="reactAction2" text icon large>
+                  <v-icon :style="{ color: reactColor2 }">mdi-emoticon-sad-outline</v-icon>
                 </v-btn>
-                <v-btn :value="3" @click="btnAction" text icon large>
-                  <v-icon>mdi-emoticon-neutral-outline</v-icon>
+                <v-btn @click="reactAction3" text icon large>
+                  <v-icon :style="{ color: reactColor3 }">mdi-emoticon-neutral-outline</v-icon>
                 </v-btn>
-                <v-btn :value="4" @click="btnAction" text icon large>
-                  <v-icon>mdi-emoticon-happy-outline</v-icon>
+                <v-btn @click="reactAction4" text icon large>
+                  <v-icon :style="{ color: reactColor4 }">mdi-emoticon-happy-outline</v-icon>
                 </v-btn>
-                <v-btn :value="5" @click="btnAction" text icon large>
-                  <v-icon>mdi-emoticon-outline</v-icon>
+                <v-btn @click="reactAction5" text icon large>
+                  <v-icon :style="{ color: reactColor5 }">mdi-emoticon-outline</v-icon>
                 </v-btn>
               </v-btn-toggle>
             </div>
           </v-card-text>
           <div class="mx-2">
-            <v-text-field label="ketik komentar kalian.." single-line solo-inverted flat></v-text-field>
+            <v-text-field
+              label="ketik komentar kalian.."
+              v-model="surveyText"
+              single-line
+              solo-inverted
+              flat
+            ></v-text-field>
           </div>
           <v-card-actions class="mx-3">
             <v-btn color="btn-second--review p-5" @click="dialog = false" large width="120px">Batal</v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="btn-main--review p-5" @click="dialog = false" large width="120px">Kirim</v-btn>
+            <v-btn color="btn-main--review p-5" @click="sendSurveyAction" large width="120px">Kirim</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -106,7 +112,13 @@ export default {
       payloadFav: {
         id_buku: this.$props.bookId
       },
-      btnReact: 2
+      surveyReact: undefined,
+      surveyText: "",
+      reactColor1: "#929292",
+      reactColor2: "#929292",
+      reactColor3: "#929292",
+      reactColor4: "#929292",
+      reactColor5: "#929292"
     };
   },
   methods: {
@@ -125,8 +137,47 @@ export default {
     currentUrl() {
       return window.location.href;
     },
-    btnAction() {
-      console.log(this.btnReact);
+    reactAction1() {
+      this.reactColor1 = "#E76464";
+      this.reactColor2 = "#929292";
+      this.reactColor3 = "#929292";
+      this.reactColor4 = "#929292";
+      this.reactColor5 = "#929292";
+    },
+    reactAction2() {
+      this.reactColor1 = "#929292";
+      this.reactColor2 = "#E76464";
+      this.reactColor3 = "#929292";
+      this.reactColor4 = "#929292";
+      this.reactColor5 = "#929292";
+    },
+    reactAction3() {
+      this.reactColor1 = "#929292";
+      this.reactColor2 = "#929292";
+      this.reactColor3 = "#E76464";
+      this.reactColor4 = "#929292";
+      this.reactColor5 = "#929292";
+    },
+    reactAction4() {
+      this.reactColor1 = "#929292";
+      this.reactColor2 = "#929292";
+      this.reactColor3 = "#929292";
+      this.reactColor4 = "#E76464";
+      this.reactColor5 = "#929292";
+    },
+    reactAction5() {
+      this.reactColor1 = "#929292";
+      this.reactColor2 = "#929292";
+      this.reactColor3 = "#929292";
+      this.reactColor4 = "#929292";
+      this.reactColor5 = "#E76464";
+    },
+    sendSurveyAction() {
+      if (!this.surveyReact === undefined && !this.surveyText === "") {
+		this.dialog = false;
+		console.log(this.surveyReact);
+        console.log(this.surveyText);
+      }
     }
   },
   computed: mapState({
