@@ -51,14 +51,39 @@
         </v-btn>
       </div>
       <v-btn class="btn-main" @click="dialog = true">Nilai Buku ini</v-btn>
-      <v-dialog v-model="dialog" max-width="290">
+      <v-dialog v-model="dialog" max-width="300">
         <v-card>
-          <v-card-title class="headline">Use Google's location service?</v-card-title>
-          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-          <v-card-actions>
+          <div class="py-3 review--title">
+            <p class="text-center py-0 my-0">Seberapa kesan kamu bersama AHA!</p>
+          </div>
+          <v-card-text class="my-5">
+            <div class="d-flex flex-row justify-center">
+              <v-btn-toggle v-model="btnReact" borderless mandatory>
+                <v-btn :value="1" @click="btnAction" text icon large>
+                  <v-icon>mdi-emoticon-frown-outline</v-icon>
+                </v-btn>
+                <v-btn :value="2" @click="btnAction" text icon large>
+                  <v-icon>mdi-emoticon-sad-outline</v-icon>
+                </v-btn>
+                <v-btn :value="3" @click="btnAction" text icon large>
+                  <v-icon>mdi-emoticon-neutral-outline</v-icon>
+                </v-btn>
+                <v-btn :value="4" @click="btnAction" text icon large>
+                  <v-icon>mdi-emoticon-happy-outline</v-icon>
+                </v-btn>
+                <v-btn :value="5" @click="btnAction" text icon large>
+                  <v-icon>mdi-emoticon-outline</v-icon>
+                </v-btn>
+              </v-btn-toggle>
+            </div>
+          </v-card-text>
+          <div class="mx-2">
+            <v-text-field label="ketik komentar kalian.." single-line solo-inverted flat></v-text-field>
+          </div>
+          <v-card-actions class="mx-3">
+            <v-btn color="btn-second--review p-5" @click="dialog = false" large width="120px">Batal</v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
-            <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
+            <v-btn color="btn-main--review p-5" @click="dialog = false" large width="120px">Kirim</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -80,7 +105,8 @@ export default {
       dialog: false,
       payloadFav: {
         id_buku: this.$props.bookId
-      }
+      },
+      btnReact: 2
     };
   },
   methods: {
@@ -98,6 +124,9 @@ export default {
     },
     currentUrl() {
       return window.location.href;
+    },
+    btnAction() {
+      console.log(this.btnReact);
     }
   },
   computed: mapState({
@@ -127,5 +156,26 @@ export default {
   border-radius: 50px;
   padding: 0 4px;
   background-color: rgb(75, 159, 255);
+}
+.review--title {
+  border-bottom: 2px solid rgb(201, 201, 201);
+  p {
+    color: $mainColor;
+    font-size: 12px;
+  }
+}
+.btn-second--review {
+  border: 2px solid gray;
+  border-bottom: 4px solid gray;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.btn-main--review {
+  border: 2px solid $mainColor;
+  border-bottom: 4px solid $mainColor;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>
