@@ -30,7 +30,7 @@
 				</v-row>
 				<v-row>
 					<v-col sm="12" md="12">
-						<v-btn rounded color="#62E6A4" dark>Kirim Lamaran<v-icon dark right>mdi-email-outline</v-icon></v-btn>
+						<v-btn :href="'mailto:support@ahabaca.com?subject=Surat Lamaran Pekerjaan '+ item.karir" rounded color="#62E6A4" dark>Kirim Lamaran<v-icon dark right>mdi-email-outline</v-icon></v-btn>
 					</v-col>
 				</v-row>
 				<hr/>
@@ -42,10 +42,10 @@
 						<h1 class="ungu"> Kesempatan Kerja Lainnya </h1>
 					</v-col>
 				</v-row>
-				<v-row class="mt-2 my-2" v-for="items in careerlist" :key="items.id_karir">
+				<v-row class="my-1" v-for="items in careerlist" :key="items.id_karir">
 					<v-col cols="12">
 						<a @click="goDetail(items.id_karir)">
-							<v-col cols="12" md="12" class="my-3">
+							<v-col cols="12" md="12">
 								<h4 class="larger merah"> {{ items.karir }} </h4>
 								<p class="larger"> {{ items.lokasi_pekerjaan }} </p>
 							</v-col>
@@ -88,7 +88,7 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 /* eslint-disable */
 export default {
@@ -99,11 +99,12 @@ export default {
   },
   data() {
     return {
-    	loadSkeleton: true
+		loadSkeleton: true
     };
   },
   methods: {
 	callFunction: function() {
+		this.$store.dispatch("getCareer");
 		this.$store.dispatch("getCareerDetail", this.$route.params.idKarir);
 		var load = this.$store.state.loaderStatus;
 		var v = this;
@@ -114,19 +115,21 @@ export default {
 				v.loadSkeleton = true;
 			}
 		}, 800);
+	},
+	goDetail(idKarir) {
+      this.$router.push({
+        name: "CareerDetail",
+        params: { idKarir: idKarir }
+      });
     }
   },
   mounted() {
 	this.callFunction();
 
   },
-  computed: mapState({
-	career: state => state.detailCareer.data,
-	careerlist: state => state.career.data
-  }),
-  created() {
-    this.$store.dispatch("getCareer");
-  },
+  computed: {
+	...mapGetters(['career', 'careerlist']),
+  }
 };
 </script>
 

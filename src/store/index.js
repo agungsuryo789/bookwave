@@ -132,7 +132,8 @@ export default new Vuex.Store({
         aboutUs: [],
         contactUs: [],
         career: [],
-        detailCareer: [],
+		detailCareer: [],
+		relatedCareer: [],
         listBlog: [],
         listSearchBlog: [],
         detailBlog: []
@@ -857,7 +858,7 @@ export default new Vuex.Store({
                     console.log(errorCode, errorMessage, email, credential);
                 })
         },
-        registerFirebase: ({ commit }) => {
+        registerFb: ({ commit }) => {
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider)
                 .then(function(result) {
@@ -869,6 +870,32 @@ export default new Vuex.Store({
                             email: email,
                             password: pass,
                             type: '2'
+                        })
+                        .then(response => {
+                            commit('authSuccess_mutation', response)
+                        })
+                })
+                .catch(function(error) {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.email;
+                    const credential = error.credential;
+                    const dataer = error.response.data;
+                    console.log(errorCode, errorMessage, email, credential, dataer);
+                })
+		},
+		registerFirebase: ({ commit }) => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then(function(result) {
+                    // const email = result.user.email
+                    const email = result.user.email
+                    const pass = result.user.uid
+                    console.log(result)
+                    axs.post('ahaapi/register_member', {
+                            email: email,
+                            password: pass,
+                            type: '3'
                         })
                         .then(response => {
                             commit('authSuccess_mutation', response)
@@ -1023,6 +1050,8 @@ export default new Vuex.Store({
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
         premiumStatus: state => state.premiumStatus,
-        invoiceDownloadDetail: state => state.invoiceDownloadDetail
+		invoiceDownloadDetail: state => state.invoiceDownloadDetail,
+		careerlist: state => state.career.data,
+		career: state => state.detailCareer.data
     }
 });
