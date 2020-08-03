@@ -1,47 +1,29 @@
 <template>
   <div class="subcription-page">
     <NavbarSection />
-    <v-container fluid>
+    <v-container class="container-sub-page" fluid>
       <v-row>
-        <v-col class="d-flex align-center justify-center mx-0 px-0">
-          <v-img src="@/assets/image/banner-sub.png" aspect-ratio="5.5"></v-img>
+        <v-col class="mx-0 px-0">
+          <v-img src="@/assets/image/banner-sub.png" aspect-ratio="5"></v-img>
         </v-col>
       </v-row>
-      <div class="d-flex flex-row justify-center align-center my-12">
-        <h2 style="font-weight:bold;letter-spacing:1px;">UPGRADE KE AHA PREMIUM</h2>
+      <div class="d-flex flex-row justify-center align-center text-center my-12">
+        <h2 style="font-weight:800;letter-spacing:1px;">UPGRADE KE AHA PREMIUM</h2>
       </div>
       <div class="d-flex flex-column flex-lg-row flex-xl-row">
         <v-row class="px-12">
-          <v-col lg="12" md="6" sm="12" cols="12">
-            <ul class="list-plans">
-              <li>
-                <img src="@/assets/image/icon-plans-book.svg" width="20" height="20" />Simpan lebih dari 256 buku bermanfaat
-              </li>
-              <li>
-                <img src="@/assets/image/icon-plans-book2.svg" width="20" height="20" />Baca pada semua perangkat
-              </li>
-              <li>
-                <img src="@/assets/image/icon-plans-play.svg" width="20" height="20" />Putar bacaan buku tanpa halangan
-              </li>
-              <li>
-                <img src="@/assets/image/icon-plans-pencil.svg" width="20" height="20" />Tandai dan simpan kalimat penting
-              </li>
-            </ul>
-          </v-col>
-        </v-row>
-        <v-row class="px-12">
           <v-col lg="6" md="6" sm="12" cols="12" v-for="item in subList" :key="item.id_langganan">
-            <v-card class="card-plans" shaped height="180px" flat>
+            <v-card class="card-plans" shaped>
               <div class="d-flex flex-row justify-space-between pt-2">
                 <div
                   v-if="item.id_langganan == 2"
                   class="subcription-page--price-badge justify-center align-center"
-                  style="background-color:#B2FF59;height:35px;padding:3px;color:white;"
                 >
                   <p>Hemat 20%</p>
                 </div>
                 <div v-else></div>
                 <v-btn
+                  class="btn-subs-pay"
                   color="#D32F2F"
                   elevation="3"
                   ripple
@@ -49,9 +31,13 @@
                   @click="pay(item.id_langganan)"
                 >Coba 7 hari gratis</v-btn>
               </div>
-              <v-card-title class="m-0 p-0">{{ item.nama_langganan }}</v-card-title>
-              <v-card-text class="m-0 p-0">
+              <v-card-title>{{ item.nama_langganan }}</v-card-title>
+              <v-card-text>
                 <h2>{{ item.harga }} / Bulan</h2>
+                <p
+                  class="my-3"
+                  style="color:black;font-size:14px;letter-spacing:1px;white-space:pre-line;"
+                >{{ item.deskripsi }}</p>
               </v-card-text>
             </v-card>
           </v-col>
@@ -92,6 +78,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-sub-page {
+  margin-top: -75px;
+  @media screen and (max-width: 450px) {
+    margin-top: -15px;
+  }
+}
 .list-plans {
   li {
     list-style-type: none;
@@ -103,10 +95,21 @@ export default {
   }
 }
 .card-plans {
-  border-bottom: 5px solid #DDDDDD;
-  border-top: 2px solid #DDDDDD;
-  border-left: 2px solid #DDDDDD;
-  border-right: 2px solid #DDDDDD;
+  border-bottom: 5px solid #dddddd;
+  border-top: 2px solid #dddddd;
+  border-left: 2px solid #dddddd;
+  border-right: 2px solid #dddddd;
   border-radius: 10px;
+  .subcription-page--price-badge {
+    background-color: #b2ff59;
+    height: 35px;
+    padding: 3px;
+    color: white;
+  }
+  .btn-subs-pay {
+    @media screen and (max-width: 450px) {
+      font-size: 10px;
+    }
+  }
 }
 </style>

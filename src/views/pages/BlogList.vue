@@ -3,10 +3,10 @@
     <NavbarSection />
     <SearchBlog @clicked="searchByCategory" />
     <template v-if="isDefaultList">
-      <v-container v-for="item in blog" :key="item.id_blog">
+      <v-container v-for="item in blog" :key="item.id_blog_tbl">
         <v-row class="mt-2 my-2">
           <v-col cols="12" md="4">
-            <a @click="goDetail(item.id_blog)">
+            <a @click="goDetail(item.id_blog_tbl)">
               <h1 class="ungu">{{ item.judul }}</h1>
               <p class="blog-link">{{ item.lokasi }}</p>
             </a>
@@ -21,10 +21,10 @@
     </template>
     <template v-else>
       <template v-if="blog.length > 0">
-        <v-container v-for="item in blog" :key="item.id_blog">
+        <v-container v-for="item in blog" :key="item.id_blog_tbl">
           <v-row class="mt-2 my-2">
             <v-col cols="12" md="4">
-              <a @click="goDetail(item.id_blog)">
+              <a @click="goDetail(item.id_blog_tbl)">
                 <h1 class="ungu">{{ item.judul }}</h1>
                 <p class="blog-link">{{ item.lokasi }}</p>
               </a>

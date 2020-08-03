@@ -73,6 +73,7 @@ export default new Vuex.Store({
     plugins: [vuexSession],
     state: {
         loaderStatus: false,
+        responseStatus: null,
         daftarKategoriNoAuth: [],
         topKategoriNoAuth: [],
         daftarKategoriAuth: [],
@@ -89,6 +90,7 @@ export default new Vuex.Store({
         episodeListNew: [],
         detailKategori: {},
         bookListByKategori: [],
+        bookListByKategoriNoAuth: [],
         bookId: '',
         kategoriId: '',
         bookDetail: {},
@@ -139,6 +141,9 @@ export default new Vuex.Store({
         detailBlog: []
     },
     mutations: {
+        setResponse_mutation: (state, response) => {
+            state.responseStatus = response
+        },
         getKategoriNoAuth_mutation: (state, response) => {
             state.daftarKategoriNoAuth = response
             state.loaderStatus = true
@@ -221,6 +226,14 @@ export default new Vuex.Store({
         },
         getBookByKategori_mutation: (state, response) => {
             state.bookListByKategori = response
+            state.loaderStatus = true
+        },
+        getBookByKategoriFilter_mutation: (state, response) => {
+            state.bookListByKategori = response
+            state.loaderStatus = true
+        },
+        getBookByKategoriNoAuth_mutation: (state, response) => {
+            state.bookListByKategoriNoAuth = response
             state.loaderStatus = true
         },
         getBookDetailByID_mutation: (state, response) => {
@@ -501,8 +514,27 @@ export default new Vuex.Store({
                     commit('getBookByKategori_mutation', response.data);
                 })
                 .catch(err => {
-                    var data = err.message;
-                    commit('getBookByKategori_mutation', data);
+                    if (err.response) {
+                        commit('setResponse_mutation', err.response.status);
+                    }
+                })
+        },
+        getBookByKategoriNoAuth: ({ commit }, categoryID) => {
+            axs.get('/ahaapi/buku_by_kategori_noauth?id_kategori=' + categoryID)
+                .then(response => {
+                    commit('getBookByKategoriNoAuth_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        getBookByKategoriFilter: ({ commit }, payload) => {
+            axs.get('/ahaapi/buku_by_kategori?id_kategori=' + payload.id_kategori + '&search=' + payload.search)
+                .then(response => {
+                    commit('getBookByKategoriFilter_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
                 })
         },
         // Book n Chapter ACtion
@@ -645,6 +677,15 @@ export default new Vuex.Store({
             axs.post('/ahaapi/hapus_tag', tagPayload)
                 .then(response => {
                     router.push("/home");
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        sendBookComment: ({ commit }, payload) => {
+            axs.post('/ahaapi/score_member', payload)
+                .then(response => {
+                    console.log(response.message)
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -948,7 +989,6 @@ export default new Vuex.Store({
         getTerms: ({ commit }) => {
             axs.get('/ahaapi/ketentuan')
                 .then(response => {
-                    console.log(response.data)
                     commit('getTerms_mutation', response.data)
                 })
                 .catch(err => {
@@ -958,7 +998,6 @@ export default new Vuex.Store({
         getUserPrivacy: ({ commit }) => {
             axs.get('/ahaapi/privasi_user')
                 .then(response => {
-                    console.log(response.data)
                     commit('getUserPrivacy_mutation', response.data)
                 })
                 .catch(err => {
@@ -968,7 +1007,6 @@ export default new Vuex.Store({
         getApplicationPrivacy: ({ commit }) => {
             axs.get('/ahaapi/privasi_aplikasi')
                 .then(response => {
-                    console.log(response.data)
                     commit('getApplicationPrivacy_mutation', response.data)
                 })
                 .catch(err => {
@@ -978,7 +1016,6 @@ export default new Vuex.Store({
         getDisclaimer: ({ commit }) => {
             axs.get('/ahaapi/disclaimer')
                 .then(response => {
-                    console.log(response.data)
                     commit('getDisclaimer_mutation', response.data)
                 })
                 .catch(err => {
@@ -988,7 +1025,6 @@ export default new Vuex.Store({
         getAbout: ({ commit }) => {
             axs.get('/ahaapi/about')
                 .then(response => {
-                    console.log(response.data)
                     commit('getAbout_mutation', response.data)
                 })
                 .catch(err => {
@@ -998,7 +1034,6 @@ export default new Vuex.Store({
         getContact: ({ commit }) => {
             axs.get('/ahaapi/contact')
                 .then(response => {
-                    console.log(response.data)
                     commit('getContact_mutation', response.data)
                 })
                 .catch(err => {
@@ -1008,7 +1043,6 @@ export default new Vuex.Store({
         getCareer: ({ commit }) => {
             axs.get('/ahaapi/karir')
                 .then(response => {
-                    console.log(response.data)
                     commit('getCareer_mutation', response.data)
                 })
                 .catch(err => {
@@ -1018,7 +1052,6 @@ export default new Vuex.Store({
         getBlog: ({ commit }) => {
             axs.get('/ahaapi/blog')
                 .then(response => {
-                    console.log(response.data)
                     commit('getBlog_mutation', response.data)
                 })
                 .catch(err => {
@@ -1028,7 +1061,6 @@ export default new Vuex.Store({
         getBlogDetail: ({ commit }, idBlog) => {
             axs.get('/ahaapi/detail_blog?id=' + idBlog)
                 .then(response => {
-                    console.log(response.data)
                     commit('getBlogDetail_mutation', response.data);
                 })
                 .catch(err => {
@@ -1038,7 +1070,6 @@ export default new Vuex.Store({
         getCareerDetail: ({ commit }, idKarir) => {
             axs.get('/ahaapi/detail_karir?id=' + idKarir)
                 .then(response => {
-                    console.log(response.data)
                     commit('getCareerDetail_mutation', response.data);
                 })
                 .catch(err => {

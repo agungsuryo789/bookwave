@@ -2,13 +2,24 @@
   <div class="category-page">
     <NavbarSection />
     <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
-      <template v-if="bookListByKategori.buku_terbaru && bookListByKategori.status == 1">
+      <template v-if="bookListByKategori.buku_terbaru">
         <v-row>
-          <v-col
-            class="category-page-title text-center text-lg-left"
-            :style="{'background-color': warnaKategori}"
-          >
+          <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
             <h1 class="my-12 ml-lg-3">{{ bookListByKategori.nama_kategori }}</h1>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="d-flex flex-row ml-5" style="max-width:800px;">
+            <v-btn icon class="mt-4">
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+            <v-text-field
+              v-model="payload.search"
+              @keyup="liveFilter"
+              tabindex="0"
+              clearable
+              label="Filter by Title/Author"
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -93,7 +104,7 @@
           </v-col>
         </v-row>
       </template>
-      <template v-if="bookListByKategori && typeof bookListByKategori == 'string'">
+      <template v-if="searchResponse == 422">
         <v-row>
           <v-col lg="12" class="align-center justify-center text-center" style="margin: 100px 0;">
             <v-img
@@ -130,15 +141,32 @@ export default {
   data() {
     return {
       loadSkeleton: false,
-      booksToShow: 9
+      booksToShow: 9,
+      payload: {
+        id_kategori: this.$route.params.idKategori,
+        search: ""
+      }
     };
+  },
+  methods: {
+    liveFilter() {
+      this.$store.dispatch("getBookByKategoriFilter", this.payload);
+    }
   },
   computed: mapState({
     bookListByKategori: state => state.bookListByKategori,
-    warnaKategori: state => state.bookListByKategori.warna_kategori
+    daftarKategoriAuth: state => state.bookListByKategori,
+    searchResponse: state => state.searchResponse,
+    warnaKategori: state => state.bookListByKategori.warna_kategori,
+    cssVars() {
+      return {
+        backgroundImage: 'url(' + this.bookListByKategori.banner_image + ')'
+      };
+    }
   }),
   mounted() {
     this.$store.dispatch("getBookByKategori", this.$route.params.idKategori);
+    this.$store.dispatch("getDaftarKategoriAuth");
   }
 };
 </script>
@@ -150,10 +178,12 @@ export default {
   }
   .category-page-title {
     margin-top: -50px;
-    height: 150px;
-    padding: 4px 14px;
-    color: white;
+    height: 200px;
+    padding: 30px 14px;
     text-transform: uppercase;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     h1 {
       margin: 4% 0;
     }

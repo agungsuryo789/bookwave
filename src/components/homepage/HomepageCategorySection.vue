@@ -23,12 +23,15 @@
             class="mx-1 my-1"
             v-for="n in daftarKategoriNoAuth"
             :key="n.id_daftar_kategori"
-            @click="gotoKategori(n.id_daftar_kategori)"
+            @click="filterCategory(n.id_daftar_kategori)"
             text
             depressed
           >
             <v-img :src="n.icon_file" class="mr-2"></v-img>
-            <p class="my-2" style="color:black;font-weight:bold;text-transform:none;">{{ n.nama_kategori }}</p>
+            <p
+              class="my-2"
+              style="color:black;font-weight:bold;text-transform:none;"
+            >{{ n.nama_kategori }}</p>
           </v-btn>
         </v-card>
       </v-col>
@@ -47,7 +50,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row v-if="!loadSkeleton" style="margin:0 auto;max-width:800px;">
+    <v-row v-if="!loadSkeleton && !filterByCategory" style="margin:0 auto;max-width:800px;">
       <v-col
         v-for="n in bookListTrendingNoAuth.slice(0, booksToShow)"
         :key="n.id_buku"
@@ -69,6 +72,46 @@
         />
       </v-col>
     </v-row>
+    <v-row
+      v-if="!loadSkeleton && filterByCategory && bookListByKategoriNoAuth.buku_populer"
+      style="margin:0 auto;max-width:800px;"
+    >
+      <v-col
+        v-for="n in bookListByKategoriNoAuth.buku_populer"
+        :key="n.id_buku"
+        lg="4"
+        md="12"
+        sm="12"
+        cols="12"
+        class="my-2"
+      >
+        <BookCard
+          :idBuku="parseInt(n.id_buku)"
+          :title="n.judul"
+          :foto_sampul="n.foto_sampul"
+          :deskripsi="n.deskripsi"
+          :penulis="n.penulis"
+          :warna_kategori="n.warna_sub"
+          :warna_border="n.warna_utama"
+          :kategori_buku="n.nama_kategori"
+        />
+      </v-col>
+    </v-row>
+    <v-row
+      v-if="!loadSkeleton && filterByCategory && !bookListByKategoriNoAuth.buku_populer"
+      style="margin:0 auto;max-width:800px;"
+    >
+      <v-col lg="4" md="12" sm="12" cols="12" class="my-2 text-center">
+        <v-img
+          src="@/assets/image/bookNotFound.svg"
+          aspect-ratio="1"
+          width="100px"
+          height="100px"
+          style="margin: 0 auto;"
+        ></v-img>
+        <p class="my-3" style="color:#DDDDDD;">Buku tidak ditemukan</p>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -81,20 +124,22 @@ export default {
   components: {
     BookCard
   },
-  data: () => ({
-    loadSkeleton: false,
-    booksToShow: 6
-  }),
+  data() {
+    return {
+      loadSkeleton: false,
+      filterByCategory: false,
+      booksToShow: 6
+    };
+  },
   computed: mapState({
     daftarKategoriNoAuth: state => state.daftarKategoriNoAuth,
-    bookListTrendingNoAuth: state => state.bookListTrendingNoAuth
+    bookListTrendingNoAuth: state => state.bookListTrendingNoAuth,
+    bookListByKategoriNoAuth: state => state.bookListByKategoriNoAuth
   }),
   methods: {
-    gotoKategori(idKategori) {
-      this.$router.push({
-        name: "CategoryPage",
-        params: { idKategori: idKategori }
-      });
+    filterCategory(idKategori) {
+      this.$store.dispatch("getBookByKategoriNoAuth", idKategori);
+      this.filterByCategory = true;
     }
   },
   created() {
