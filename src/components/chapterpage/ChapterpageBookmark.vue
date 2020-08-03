@@ -58,7 +58,7 @@
           </div>
           <v-card-text class="my-5">
             <div class="d-flex flex-row justify-center">
-              <v-btn-toggle v-model="surveyReact" borderless>
+              <v-btn-toggle v-model="payloadKomen.id_score" borderless>
                 <v-btn @click="reactAction1" text icon large>
                   <v-icon :style="{ color: reactColor1 }">mdi-emoticon-frown-outline</v-icon>
                 </v-btn>
@@ -80,7 +80,7 @@
           <div class="mx-2">
             <v-text-field
               label="ketik komentar kalian.."
-              v-model="surveyText"
+              v-model="payloadKomen.komentar"
               single-line
               solo-inverted
               flat
@@ -111,6 +111,11 @@ export default {
       dialog: false,
       payloadFav: {
         id_buku: this.$props.bookId
+      },
+      payloadKomen: {
+        id_buku: this.$props.bookId,
+        komentar: "",
+        id_score: null
       },
       surveyReact: undefined,
       surveyText: "",
@@ -173,10 +178,11 @@ export default {
       this.reactColor5 = "#E76464";
     },
     sendSurveyAction() {
-      if (!this.surveyReact === undefined && !this.surveyText === "") {
-		this.dialog = false;
-		console.log(this.surveyReact);
-        console.log(this.surveyText);
+      if (this.payloadKomen.id_score !== null && this.payloadKomen.komentar.length > 0) {
+		const x = this.payloadKomen.id_score + 1;
+		this.payloadKomen.id_score = x;
+		this.$store.dispatch("sendBookComment", this.payloadKomen);
+        this.dialog = false;
       }
     }
   },

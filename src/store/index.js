@@ -681,6 +681,15 @@ export default new Vuex.Store({
                     console.log(err.message);
                 })
         },
+        sendBookComment: ({ commit }, payload) => {
+            axs.post('/ahaapi/score_member', payload)
+                .then(response => {
+                    console.log(response.message)
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
         // Book Library GET
         koleksiBuku: ({ commit }) => {
             axs.get('/ahaapi/koleksi_buku_member')
