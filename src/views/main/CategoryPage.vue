@@ -1,26 +1,31 @@
 <template>
   <div class="category-page">
     <NavbarSection />
-    <v-container fluid class="container-category-page px-0 py-0 mx-0 my-0">
+    <v-container fluid class="container-category-page py-0 mx-0 my-0">
       <template v-if="bookListByKategori.buku_terbaru">
         <v-row>
-          <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
+          <v-col
+            class="category-page-title d-flex flex-row text-center text-lg-left"
+            :style="cssVars"
+          >
             <h1 class="my-12 ml-lg-3">{{ bookListByKategori.nama_kategori }}</h1>
+            <div class="d-flex flex-row my-12 mx-10" style="width:80%;">
+              <v-text-field
+                v-model="payload.search"
+                @keyup="liveFilter"
+                tabindex="0"
+                clearable
+                solo
+                label="Filter by Title/Author"
+              ></v-text-field>
+              <v-btn icon class="icon-search mt-2">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </div>
           </v-col>
         </v-row>
         <v-row>
-          <v-col class="d-flex flex-row ml-5" style="max-width:800px;">
-            <v-btn icon class="mt-4">
-              <v-icon>mdi-magnify</v-icon>
-            </v-btn>
-            <v-text-field
-              v-model="payload.search"
-              @keyup="liveFilter"
-              tabindex="0"
-              clearable
-              label="Filter by Title/Author"
-            ></v-text-field>
-          </v-col>
+          <v-col class="d-flex flex-row ml-5" style="max-width:800px;"></v-col>
         </v-row>
         <v-row>
           <v-col
@@ -160,7 +165,7 @@ export default {
     warnaKategori: state => state.bookListByKategori.warna_kategori,
     cssVars() {
       return {
-        backgroundImage: 'url(' + this.bookListByKategori.banner_image + ')'
+        backgroundImage: "url(" + this.bookListByKategori.banner_image + ")"
       };
     }
   }),
@@ -175,6 +180,7 @@ export default {
 .category-page {
   .container-category-page {
     margin-top: -50px;
+    padding: 0 6%;
   }
   .category-page-title {
     margin-top: -50px;
@@ -184,6 +190,16 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    div {
+      position: relative;
+      .icon-search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+      }
+    }
+
     h1 {
       margin: 4% 0;
     }
