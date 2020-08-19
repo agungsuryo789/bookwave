@@ -1,5 +1,5 @@
 <template>
-  <v-card class="book-card mx-auto" width="220" height="300" flat>
+  <v-card class="book-card " width="220" height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
       <div class="top-border"></div>
       <v-img
@@ -108,24 +108,27 @@ export default {
     position: relative;
 	z-index: 0;
     background-color: var(--color);
+	border: 3px solid var(--colorBorder);
+	border-bottom: 6px solid var(--colorBorder);
+	border-radius: 5px;
     .top-border {
       position: absolute;
       top: 6%;
       left: 12%;
-      width: 60px;
-      height: 55px;
+      width: 50px;
+      height: 40px;
       z-index: 0;
-      border-top-left-radius: 30px;
+      border-top-left-radius: 10px;
       background-color: var(--colorBorder);
     }
     .bottom-border {
       position: absolute;
       bottom: 6%;
       right: 13%;
-      width: 60px;
-      height: 55px;
+      width: 50px;
+      height: 40px;
       z-index: -1;
-      border-bottom-right-radius: 30px;
+      border-bottom-right-radius: 10px;
       background-color: var(--colorBorder);
     }
     .book-bookmark-button {

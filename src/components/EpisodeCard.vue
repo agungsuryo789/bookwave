@@ -1,28 +1,35 @@
 <template>
-  <v-card
-    class="episode-card mx-auto"
-    max-width="350"
-    max-height="250px"
-    flat
-    ripple
-    @click="toChapter"
-    :style="cssVars"
-  >
-    <div class="d-flex flex-row justify-space-between align-center div--episode-card">
-      <div class="mx-1">
-        <p class="py-0" style="font-size:12px;color:red;">
-          <span v-if="is_premium_chapter && !premiumMemberStatus">
+  <v-card class="book-card mx-auto" width="220" height="300" flat>
+    <div class="book-card-color py-7" :style="cssVars">
+      <div class="book-tag-new px-2">Baru</div>
+      <div class="top-border"></div>
+      <v-img
+        lazy-src="https://www.tibs.org.tw/images/default.jpg"
+        class="book-card-img mx-auto"
+        width="120px"
+        height="140px"
+        @click="toChapter"
+        :src="foto_sampul"
+        style="z-index:0;"
+      ></v-img>
+      <div class="bottom-border"></div>
+      <div class="book-card-playbtn px-2">
+        <v-btn  @click="toChapter" text icon x-small>
+          <v-icon>mdi-play-circle-outline</v-icon>
+        </v-btn>
+      </div>
+    </div>
+    <div class="d-flex flex-row">
+      <div>
+        <a @click="toChapter" class="book-card-title m-0 p-0">
+          <v-card-title class="book-title">{{ judul_buku }}</v-card-title>
+          <v-card-subtitle>{{ episodeTitle }}</v-card-subtitle>
+        </a>
+        <template v-if="is_premium_chapter && !premiumMemberStatus">
+          <span class="mx-4 my-0 p-0" style="color:red;">
             <v-icon>mdi-lock-outline</v-icon>
           </span>
-          Baru
-        </p>
-        <p class="my-1 py-0 episode-title font-weight-bold" style="font-size:15px;">{{ judul_buku }}</p>
-        <p class="my-0 py-0" style="font-size:15px;">{{ episodeTitle }}</p>
-      </div>
-      <div class="mx-1 episode-card-img-color">
-        <div>
-          <v-img class="book-card-img mx-auto" width="60" height="60" :src="foto_sampul"></v-img>
-        </div>
+        </template>
       </div>
     </div>
   </v-card>
@@ -53,9 +60,15 @@ export default {
     premium_member: {
       type: Boolean
     },
-    warna_episode: {
+    warna_kategori: {
       type: String
-    }
+    },
+    warna_border: {
+      type: String
+	},
+	is_new: {
+		type: Boolean
+	}
   },
   data() {
     return {
@@ -65,7 +78,8 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--color": this.warna_episode
+        "--color": this.$props.warna_kategori,
+        "--colorBorder": this.$props.warna_border
       };
     }
   },
@@ -93,26 +107,74 @@ export default {
 </script>
 
 <style lang="scss">
-.div--episode-card {
-  border: 4px solid #D7D7D7;
-  border-bottom: 8px solid #D7D7D7;
-  border-radius: 6px;
-}
-.episode-card-link {
-  text-decoration: none;
-  .div--episode-card {
+.book-card {
+  .book-card-color {
+    height: 200px;
+    position: relative;
+    z-index: 0;
+    background-color: var(--color);
+	border: 3px solid var(--colorBorder);
+	border-bottom: 6px solid var(--colorBorder);
+	border-radius: 5px;
+    .book-tag-new {
+      position: absolute;
+      top: 2%;
+      left: 41%;
+      font-size: 14px;
+      color: white;
+      background-color: var(--colorBorder);
+    }
+    .book-card-playbtn {
+      position: absolute;
+      bottom: 0;
+      left: 43%;
+      color: var(--colorBorder);
+    }
+    .top-border {
+      position: absolute;
+      top: 6%;
+      left: 12%;
+      width: 40px;
+      height: 35px;
+      z-index: 0;
+      border-top-left-radius: 10px;
+      background-color: var(--colorBorder);
+    }
+    .bottom-border {
+      position: absolute;
+      bottom: 6%;
+      right: 13%;
+      width: 40px;
+      height: 40px;
+      z-index: -1;
+      border-bottom-right-radius: 10px;
+      background-color: var(--colorBorder);
+    }
+    .book-bookmark-button {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
+  }
+  .book-card-title {
+    text-decoration: none;
     color: black;
+    .book-title {
+      font-size: 15px;
+      font-weight: bold;
+      width: 195px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
-}
-.episode-card {
-  .episode-card-img-color {
-    padding: 9px;
+  .book-card-img {
+    &:hover {
+      cursor: pointer;
+    }
   }
-}
-.episode-title {
-  width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  .icon-book-locked {
+    margin-top: -4px;
+  }
 }
 </style>

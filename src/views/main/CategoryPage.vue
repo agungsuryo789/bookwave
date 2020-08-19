@@ -4,62 +4,35 @@
     <v-container fluid class="container-category-page py-0 mx-0 my-0">
       <template v-if="bookListByKategori.buku_terbaru">
         <v-row>
-          <v-col
-            class="category-page-title d-flex flex-row text-center text-lg-left"
-            :style="cssVars"
-          >
-            <h1 class="my-12 ml-lg-3">{{ bookListByKategori.nama_kategori }}</h1>
-            <div class="d-flex flex-row my-12 mx-10" style="width:80%;">
+          <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
+            <div class="ml-lg-3 my-12">
+              <h1 class="my-0 py-0">Discover books on {{ bookListByKategori.nama_kategori }}</h1>
+              <small>
+                Everything you need to know about the different forms of goverments, as well as current and historical
+                political events- we’ve got you covered.
+              </small>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <div class="d-flex flex-row" style="width:80%;">
+              <v-btn icon class="icon-search my-4">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
               <v-text-field
                 v-model="payload.search"
                 @keyup="liveFilter"
                 tabindex="0"
                 clearable
-                solo
                 label="Filter by Title/Author"
               ></v-text-field>
-              <v-btn icon class="icon-search mt-2">
-                <v-icon>mdi-magnify</v-icon>
-              </v-btn>
             </div>
           </v-col>
         </v-row>
         <v-row>
-          <v-col class="d-flex flex-row ml-5" style="max-width:800px;"></v-col>
-        </v-row>
-        <v-row>
           <v-col
-            v-for="n in bookListByKategori.buku_terbaru.slice(0, 4)"
-            :key="n.id_buku"
-            lg="3"
-            md="6"
-            sm="6"
-            xs="12"
-            class="my-2"
-          >
-            <BookCard
-              :idBuku="parseInt(n.id_buku)"
-              :title="n.judul"
-              :foto_sampul="n.foto_sampul"
-              :deskripsi="n.deskripsi"
-              :penulis="n.penulis"
-              :warna_kategori="n.warna_sub"
-              :warna_border="n.warna_utama"
-              :kategori_buku="n.nama_kategori"
-              :is_premium="n.is_premium"
-              :isCollected="n.is_collected"
-              :isFavorited="n.is_favorite"
-            />
-          </v-col>
-        </v-row>
-        <v-row v-if="loadSkeleton">
-          <v-col v-for="n in 4" :key="n" lg="3" md="6" sm="12" xs="12" class="my-2">
-            <v-skeleton-loader class="mx-auto" width="250" type="card"></v-skeleton-loader>
-          </v-col>
-        </v-row>
-        <v-row class="px-3" v-else>
-          <v-col
-            v-for="n in bookListByKategori.buku_terbaru.slice(4, booksToShow)"
+            v-for="n in bookListByKategori.buku_terbaru.slice(0, booksToShow)"
             :key="n.id_buku"
             lg="4"
             md="6"
@@ -67,7 +40,7 @@
             xs="12"
             class="my-2"
           >
-            <BookCardSmall
+            <BookCard
               :idBuku="parseInt(n.id_buku)"
               :title="n.judul"
               :foto_sampul="n.foto_sampul"
@@ -131,7 +104,6 @@
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
 import BookCard from "@/components/BookCard.vue";
-import BookCardSmall from "@/components/BookCardSmall.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
@@ -139,14 +111,13 @@ export default {
   name: "CategoryPage",
   components: {
     BookCard,
-    BookCardSmall,
     NavbarSection,
     FooterSection
   },
   data() {
     return {
       loadSkeleton: false,
-      booksToShow: 9,
+      booksToShow: 6,
       payload: {
         id_kategori: this.$route.params.idKategori,
         search: ""
@@ -186,20 +157,15 @@ export default {
     margin-top: -50px;
     height: 200px;
     padding: 30px 14px;
-    text-transform: uppercase;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    h1 {
+      text-transform: uppercase;
+    }
     div {
       position: relative;
-      .icon-search {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 10;
-      }
     }
-
     h1 {
       margin: 4% 0;
     }
