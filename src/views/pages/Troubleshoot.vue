@@ -9,16 +9,10 @@
 					<v-expansion-panel-header>
 						<h2 class="ungu">{{ item.nama_kategori}}</h2>
 					</v-expansion-panel-header>
-					<v-expansion-panel-content>
-						<p>Some content</p>
-						<hr />
-					</v-expansion-panel-content>
-					<v-expansion-panel-content>
-						<p>Some content</p>
-						<hr />
-					</v-expansion-panel-content>
-					<v-expansion-panel-content>
-						<p>Some content</p>
+					<v-expansion-panel-content v-for="items in item.list_bantuan" :key="items.id_bantuan">
+						<a @click="goDetail(items.id_bantuan)">
+						<p> {{ items.judul }}</p>
+						</a>
 						<hr />
 					</v-expansion-panel-content>
 				</v-expansion-panel>
@@ -35,6 +29,7 @@ import HeaderNoimage from "@/components/pages/HeaderNoimage.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
+/* eslint-disable */
 export default {
   name: "Troubleshoot",
   components: {
@@ -46,9 +41,16 @@ export default {
 	this.$store.dispatch("getBantuan");
   },
   computed: mapState({
-	listBantuan: state => state.listBantuan.data,
-	itemBantuan: state => state.itemBantuan.data
-  })
+	listBantuan: state => state.listBantuan.data
+  }),
+  methods: {
+	  goDetail(idBantuan) {
+      this.$router.push({
+        name: "TroubleshootDetail",
+        params: { idBantuan: idBantuan }
+	  	});
+	  }
+  }
 };
 </script>
 

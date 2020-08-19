@@ -5,7 +5,6 @@ import router from "../router";
 import VuexPersist from 'vuex-persistedstate';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { schema, normalize } from 'normalizr';
 
 Vue.use(Vuex, axios);
 // AXIOS CONFIG
@@ -140,7 +139,7 @@ export default new Vuex.Store({
         listSearchBlog: [],
 		detailBlog: [],
 		listBantuan: [],
-		itemBantuan: {}
+		bantuanDetail: []
     },
     mutations: {
         setResponse_mutation: (state, response) => {
@@ -407,6 +406,9 @@ export default new Vuex.Store({
 		},
 		getBantuan_mutation: (state, response) => {
 			state.listBantuan = response
+		},
+		getBantuanDetail_mutation: (state, response) => {
+            state.bantuanDetail = response
 		}
     },
     actions: {
@@ -1096,14 +1098,21 @@ export default new Vuex.Store({
 		getBantuan: ({ commit }) => {
 			axs.get('/ahaapi/bantuan_category')
 				.then(response => {
-					const resp = response.data.data;
-					console.log(resp);
-					const lists = new schema.Entity('id_bantuan_kategori');
-					const mySchemas = { id_bantuan_kategori: [lists] };
-					const normalizedData = normalize(resp, mySchemas);
-					console.log(normalizedData)
+					const resp = response.data;
+					commit('getBantuan_mutation', resp);
+					console.log(resp)
 				})
 				.catch(err => {
+                    console.log(err.message)
+                })
+		},
+		getBantuanDetail: ({ commit }, idBantuan) => {
+            axs.get('/ahaapi/bantuan?id_bantuan=' + idBantuan)
+                .then(response => {
+					commit('getBantuanDetail_mutation', response.data);
+					console.log(response.data)
+                })
+                .catch(err => {
                     console.log(err.message)
                 })
 		}

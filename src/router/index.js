@@ -39,6 +39,8 @@ const CareerDetail = () =>
 	import ('../views/pages/CareerDetail.vue')
 const Troubleshoot = () =>
 	import ('../views/pages/Troubleshoot.vue')
+const TroubleshootDetail = () =>
+	import ('../views/pages/TroubleshootDetail.vue')
 
 // Auth Component
 const Login = () =>
@@ -282,6 +284,14 @@ const routes = [
             title: "Troubleshoot | Ahabaca"
         }
 	},
+	{
+        path: '/troubleshoot/:idBantuan',
+        name: 'TroubleshootDetail',
+        component: TroubleshootDetail,
+        meta: {
+            title: "Troubleshoot | Ahabaca"
+        }
+    },
     // User Layout (Auth)
     // Landing Layout
     {
