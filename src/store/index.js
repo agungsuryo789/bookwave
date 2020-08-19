@@ -5,9 +5,9 @@ import router from "../router";
 import VuexPersist from 'vuex-persistedstate';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { schema, normalize } from 'normalizr';
 
 Vue.use(Vuex, axios);
-
 // AXIOS CONFIG
 export const axs = axios.create({
     baseURL: "https://backend.ahabaca.com",
@@ -138,7 +138,9 @@ export default new Vuex.Store({
 		relatedCareer: [],
         listBlog: [],
         listSearchBlog: [],
-        detailBlog: []
+		detailBlog: [],
+		listBantuan: [],
+		itemBantuan: {}
     },
     mutations: {
         setResponse_mutation: (state, response) => {
@@ -402,7 +404,10 @@ export default new Vuex.Store({
         },
         getCareerDetail_mutation: (state, response) => {
             state.detailCareer = response
-        }
+		},
+		getBantuan_mutation: (state, response) => {
+			state.listBantuan = response
+		}
     },
     actions: {
         // No Auth Action
@@ -841,7 +846,19 @@ export default new Vuex.Store({
                     commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
                     console.log(err.message)
                 })
-        },
+		},
+		postPesan: ({ commit }, data) => {
+			axs.post('ahaapi/kirim_pesan', data)
+				.then(response => {
+					console.log(response)
+					commit('showSnackbar', response.data.message)
+				})
+				.catch(err => {
+                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
+                    commit('authError_mutation', 'Galat!')
+                    console.log(err.message)
+                })
+		},
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
@@ -1075,7 +1092,21 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message)
                 })
-        }
+		},
+		getBantuan: ({ commit }) => {
+			axs.get('/ahaapi/bantuan_category')
+				.then(response => {
+					const resp = response.data.data;
+					console.log(resp);
+					const lists = new schema.Entity('id_bantuan_kategori');
+					const mySchemas = { id_bantuan_kategori: [lists] };
+					const normalizedData = normalize(resp, mySchemas);
+					console.log(normalizedData)
+				})
+				.catch(err => {
+                    console.log(err.message)
+                })
+		}
     },
     getters: {
         isLoggedIn: state => !!state.token,
