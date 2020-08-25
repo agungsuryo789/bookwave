@@ -58,7 +58,9 @@ const ResetPassword = () =>
 
 // User Component
 const LandingUser = () =>
-    import ('../views/user/LandingUser.vue')
+	import ('../views/user/LandingUser.vue')
+const Profile = () =>
+	import ('../views/user/Profile.vue')
 
 // Main feature Component
 const BookPage = () =>
@@ -318,6 +320,15 @@ const routes = [
         meta: {
             requiresAuth: true,
             title: "Search AHA | Ahabaca"
+        }
+	},
+	{
+        path: '/profile',
+        name: 'Profile',
+        component: Profile,
+        meta: {
+            requiresAuth: true,
+            title: "My Account | Ahabaca"
         }
     },
     // Main Feature Layout

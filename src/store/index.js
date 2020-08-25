@@ -139,12 +139,16 @@ export default new Vuex.Store({
         listSearchBlog: [],
 		detailBlog: [],
 		listBantuan: [],
-		bantuanDetail: []
+		bantuanDetail: [],
+		accountDetail: []
     },
     mutations: {
         setResponse_mutation: (state, response) => {
             state.responseStatus = response
-        },
+		},
+		getAccountDetail_mutation: (state, response) => {
+			state.accountDetail = response
+		},
         getKategoriNoAuth_mutation: (state, response) => {
             state.daftarKategoriNoAuth = response
             state.loaderStatus = true
@@ -693,6 +697,16 @@ export default new Vuex.Store({
             axs.post('/ahaapi/score_member', payload)
                 .then(response => {
                     console.log(response.message)
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+		},
+		// GET account user
+		getAccountDetail: ({ commit }) => {
+            axs.get('/ahaapi/member')
+                .then(response => {
+                    commit('getAccountDetail_mutation', response.data);
                 })
                 .catch(err => {
                     console.log(err.message);
