@@ -6,11 +6,8 @@
         <v-row>
           <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
             <div class="ml-lg-3 my-12">
-              <h1 class="my-0 py-0">Discover books on {{ bookListByKategori.nama_kategori }}</h1>
-              <small>
-                Everything you need to know about the different forms of goverments, as well as current and historical
-                political events- we’ve got you covered.
-              </small>
+              <h1 class="my-0 py-0">{{ bookListByKategori.sub_judul }}</h1>
+              <small>{{ bookListByKategori.deskripsi_kategori }}</small>
             </div>
           </v-col>
         </v-row>
@@ -49,6 +46,7 @@
               :warna_kategori="n.warna_sub"
               :warna_border="n.warna_utama"
               :kategori_buku="n.nama_kategori"
+              :durasi="n.durasi"
               :is_premium="n.is_premium"
               :isCollected="n.is_collected"
               :isFavorited="n.is_favorite"

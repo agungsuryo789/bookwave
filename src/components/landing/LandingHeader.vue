@@ -21,9 +21,12 @@
           <BookCard
             :idBuku="parseInt(bookTrending.data[0].id_buku)"
             :title="bookTrending.data[0].judul"
+            :penulis="bookTrending.data[0].penulis"
+            :deskripsi="bookTrending.data[0].deskripsi"
             :foto_sampul="bookTrending.data[0].foto_sampul"
             :warna_kategori="bookTrending.data[0].warna_sub"
             :warna_border="bookTrending.data[0].warna_utama"
+            :durasi="bookTrending.data[0].durasi"
             :is_premium="bookTrending.data[0].is_premium"
             :isCollected="bookTrending.data[0].is_collected"
             :isFavorited="bookTrending.data[0].is_favorite"

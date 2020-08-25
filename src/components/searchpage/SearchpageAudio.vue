@@ -15,13 +15,14 @@
         xs="12"
         class="my-5"
       >
-        <EpisodeCard
+        <EpisodeCardSmall
           :idBuku="parseInt(n.id_buku)"
           :idChapter="parseInt(n.id_chapter)"
+          :judul_buku="n.judul_buku"
           :episodeTitle="n.judul_chapter"
           :foto_sampul="n.foto_sampul"
-          :judul_buku="n.judul_buku"
-          :warna_episode="n.warna_kategori"
+          :warna_kategori="n.warna_kategori"
+          :warna_border="n.border_buku"
           :is_premium_chapter="n.is_premium_chapter"
           :premium_member="n.premium_member"
         />
@@ -31,13 +32,13 @@
 </template>
 
 <script>
-import EpisodeCard from "@/components/EpisodeCard.vue";
+import EpisodeCardSmall from "@/components/EpisodeCardSmall.vue";
 import { mapState } from "vuex";
 
 export default {
   name: "SearchpageAudio",
   components: {
-    EpisodeCard
+    EpisodeCardSmall
   },
   data() {
     return {

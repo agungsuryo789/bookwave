@@ -37,7 +37,7 @@
             <small>By: {{ book.penulis }}</small>
             <div class="d-flex flex-row justify-space-between my-4 my-lg-8" style="font-size:12px;">
               <p>
-                <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
+                <v-icon class="mr-2 pb-1" small>mdi-clock-outline</v-icon>
                 {{ book.durasi }}
               </p>
               <p>|</p>
@@ -51,7 +51,7 @@
             </div>
           </v-col>
           <v-col
-            class="card--book-detail py-0 my-0 px-lg-3 mt-lg-8"
+            class="card--book-detail py-0 my-0 px-lg-3 mt-8"
             lg="4"
             md="12"
             sm="12"

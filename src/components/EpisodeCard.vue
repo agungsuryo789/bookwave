@@ -14,7 +14,7 @@
       ></v-img>
       <div class="bottom-border"></div>
       <div class="book-card-playbtn px-2">
-        <v-btn  @click="toChapter" text icon x-small>
+        <v-btn  @click="toChapter" text icon small>
           <v-icon>mdi-play-circle-outline</v-icon>
         </v-btn>
       </div>
@@ -126,8 +126,8 @@ export default {
     }
     .book-card-playbtn {
       position: absolute;
-      bottom: 0;
-      left: 43%;
+      bottom: -3px;
+      left: 40%;
       color: var(--colorBorder);
     }
     .top-border {
