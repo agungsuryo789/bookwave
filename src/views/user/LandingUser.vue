@@ -66,7 +66,9 @@
               :judul_buku="n.judul_buku"
               :is_premium_chapter="n.is_premium_chapter"
               :premium_member="n.premium_member"
-              :warna_episode="n.warna_kategori"
+              :warna_kategori="n.warna_sub"
+              :warna_border="n.warna_utama"
+              :is_new="true"
             />
           </v-col>
         </v-row>

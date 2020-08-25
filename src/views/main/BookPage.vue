@@ -7,11 +7,12 @@
         v-for="book in bookDetail.data"
         :key="book.id_buku"
       >
-        <v-row style="max-width:850px;margin:0 auto;">
-          <v-col lg="6" md="6" sm="12" cols="12">
+        <v-row style="margin:0 auto;">
+          <v-col lg="3" md="6" sm="12" cols="12">
             <v-card
               class="card--book-image"
-              max-width="250"
+              width="250"
+              flat
               :style="{backgroundColor: book.warna_sub}"
             >
               <div class="d-flex flex-column justify-end py-10">
@@ -31,81 +32,84 @@
               </div>
             </v-card>
           </v-col>
-          <v-col class="px-10 px-lg-0 my-0 py-0" lg="6" md="6" sm="12" cols="12">
-            <v-row>
-              <v-col class="card--book-detail pb-0 mb-0" lg="12" md="12" sm="12" cols="12">
-                <h1 class="my-3 book-title">{{ book.judul }}</h1>
-                <p class="my-1 book-sub-title">{{ book.sub_judul }}</p>
-                <p
-                  class="book-author"
-                  style="font-size:15px;font-weight:600;color:gray;"
-                >{{ book.penulis }}</p>
-              </v-col>
-              <v-col class="card--book-detail py-0 my-0 mt-lg-8" lg="12" md="12" sm="12" cols="12">
-                <div class="d-flex flex-column flex-lg-row justify-space-between my-lg-12">
-                  <template v-if="book.data_chapter.length < 1">
-                    <div class="d-flex flex-row justify-space-between">
-                      <v-btn
-                        rounded
-                        depressed
-                        color="#49E295"
-                        :to="{ name: 'MembershipPage'}"
-                        style="font-size:12px;text-transform:none;color:white;"
-                      >Chapter/Episode tidak ditemukan</v-btn>
-                    </div>
-                  </template>
-                  <template v-else-if="book.data_chapter.length > 0 && book.is_premium == 0">
-                    <div class="d-flex flex-row justify-space-between">
-                      <v-btn
-                        :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
-                        depressed
-                        rounded
-                        color="#49E295"
-                        style="font-size:12px;text-transform:none;color:white;"
-                      >Mulai Baca atau Dengarkan Audio</v-btn>
-                    </div>
-                  </template>
-                  <template
-                    v-if="book.data_chapter.length > 0 && book.is_premium == 1 && premiumMemberStatus"
-                  >
-                    <div class="d-flex flex-row justify-space-between">
-                      <v-btn
-                        :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
-                        depressed
-                        rounded
-                        color="#49E295"
-                        style="font-size:12px;text-transform:none;color:white;"
-                      >Mulai Baca atau Dengarkan Audio</v-btn>
-                    </div>
-                  </template>
-                  <template
-                    v-else-if="book.data_chapter.length > 0 && book.is_premium == 1 && !premiumMemberStatus"
-                  >
-                    <div class="d-flex flex-row justify-space-between">
-                      <v-btn
-                        rounded
-                        depressed
-                        color="#49E295"
-                        :to="{ name: 'MembershipPage'}"
-                        style="font-size:12px;text-transform:none;color:white;"
-                      >Upgrade now to read.</v-btn>
-                    </div>
-                  </template>
-                  <ul class="list-book-detail my-3 my-lg-0 mx-0 px-0" style="font-size:12px;">
-                    <li>
-                      <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                      {{ book.durasi }} membaca
-                    </li>
-                    <li>
-                      <v-icon class="mr-2" small>mdi-headphones</v-icon>Audio Available
-                    </li>
-                  </ul>
+          <v-col class="card--book-detail pb-0 mb-0" lg="5" md="12" sm="12" cols="12">
+            <h1 class="book-title">{{ book.judul }}</h1>
+            <small>By: {{ book.penulis }}</small>
+            <div class="d-flex flex-row justify-space-between my-4 my-lg-8" style="font-size:12px;">
+              <p>
+                <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
+                {{ book.durasi }}
+              </p>
+              <p>|</p>
+              <p>
+                <v-icon class="mr-2" small>mdi-format-list-bulleted</v-icon>
+                {{ book.data_chapter.length }} Chapter
+              </p>
+            </div>
+            <div class="book-sinopsis my-5 my-lg-10">
+              {{ book.deskripsi }}
+            </div>
+          </v-col>
+          <v-col
+            class="card--book-detail py-0 my-0 px-lg-3 mt-lg-8"
+            lg="4"
+            md="12"
+            sm="12"
+            cols="12"
+          >
+            <div class="div-btn">
+              <template v-if="book.data_chapter.length < 1">
+                <div class="d-flex flex-column justify-end">
+                  <v-btn
+                    depressed
+                    block
+                    color="#49E295"
+                    :to="{ name: 'MembershipPage'}"
+                    style="font-size:12px;text-transform:none;color:white;"
+                  >Chapter/Episode tidak ditemukan</v-btn>
                 </div>
-              </v-col>
-            </v-row>
+              </template>
+              <template v-else-if="book.data_chapter.length > 0 && book.is_premium == 0">
+                <div class="d-flex flex-column justify-end">
+                  <v-btn
+                    :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
+                    depressed
+                    block
+                    color="#49E295"
+                    style="font-size:12px;text-transform:none;color:white;"
+                  >Mulai Baca atau Dengarkan Audio</v-btn>
+                </div>
+              </template>
+              <template
+                v-if="book.data_chapter.length > 0 && book.is_premium == 1 && premiumMemberStatus"
+              >
+                <div class="d-flex flex-column justify-end">
+                  <v-btn
+                    :to="{ name: 'BookChapter', params: {bookId: book.id_buku, chapterId: book.data_chapter[0].id_chapter}}"
+                    depressed
+                    block
+                    color="#49E295"
+                    style="font-size:12px;text-transform:none;color:white;"
+                  >Mulai Baca atau Dengarkan Audio</v-btn>
+                </div>
+              </template>
+              <template
+                v-else-if="book.data_chapter.length > 0 && book.is_premium == 1 && !premiumMemberStatus"
+              >
+                <div class="d-flex flex-column justify-end">
+                  <v-btn
+                    depressed
+                    block
+                    color="#49E295"
+                    :to="{ name: 'MembershipPage'}"
+                    style="font-size:12px;text-transform:none;color:white;"
+                  >Upgrade now to read.</v-btn>
+                </div>
+              </template>
+            </div>
           </v-col>
         </v-row>
-        <v-row style="max-width:850px;margin:0 auto;">
+        <v-row style="margin:0 auto;">
           <v-col>
             <BookpageTabs
               :sinopsis="book.deskripsi"
@@ -205,26 +209,33 @@ export default {
     position: absolute;
     top: 8%;
     left: 12%;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 40px;
     z-index: 0;
-    border-top-left-radius: 30px;
+    border-top-left-radius: 15px;
   }
   .bottom-border {
     position: absolute;
     bottom: 8%;
     right: 12%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 40px;
     z-index: -1;
-    border-bottom-right-radius: 30px;
+    border-bottom-right-radius: 15px;
   }
 }
 .card--book-detail {
-  .list-book-detail {
-    li {
-      list-style-type: none;
-    }
+  position: relative;
+  .div-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  .book-sinopsis {
+    max-height: 50px;
+	text-overflow: ellipsis;
+	overflow: hidden;
   }
 }
 @media only screen and (max-width: 900px) {
