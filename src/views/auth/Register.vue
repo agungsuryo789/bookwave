@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch("registerFirebase");
+      this.$store.dispatch("loginFirebase");
 	  this.$store.dispatch("getMemberDetail");
     },
     loginfb() {

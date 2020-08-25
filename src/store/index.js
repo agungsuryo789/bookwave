@@ -7,7 +7,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 Vue.use(Vuex, axios);
-
 // AXIOS CONFIG
 export const axs = axios.create({
     baseURL: "https://backend.ahabaca.com",
@@ -134,15 +133,22 @@ export default new Vuex.Store({
         aboutUs: [],
         contactUs: [],
         career: [],
-        detailCareer: [],
+		detailCareer: [],
+		relatedCareer: [],
         listBlog: [],
         listSearchBlog: [],
-        detailBlog: []
+		detailBlog: [],
+		listBantuan: [],
+		bantuanDetail: [],
+		accountDetail: []
     },
     mutations: {
         setResponse_mutation: (state, response) => {
             state.responseStatus = response
-        },
+		},
+		getAccountDetail_mutation: (state, response) => {
+			state.accountDetail = response
+		},
         getKategoriNoAuth_mutation: (state, response) => {
             state.daftarKategoriNoAuth = response
             state.loaderStatus = true
@@ -401,7 +407,13 @@ export default new Vuex.Store({
         },
         getCareerDetail_mutation: (state, response) => {
             state.detailCareer = response
-        }
+		},
+		getBantuan_mutation: (state, response) => {
+			state.listBantuan = response
+		},
+		getBantuanDetail_mutation: (state, response) => {
+            state.bantuanDetail = response
+		}
     },
     actions: {
         // No Auth Action
@@ -689,6 +701,16 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message);
                 })
+		},
+		// GET account user
+		getAccountDetail: ({ commit }) => {
+            axs.get('/ahaapi/member')
+                .then(response => {
+                    commit('getAccountDetail_mutation', response.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
         },
         // Book Library GET
         koleksiBuku: ({ commit }) => {
@@ -840,7 +862,19 @@ export default new Vuex.Store({
                     commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
                     console.log(err.message)
                 })
-        },
+		},
+		postPesan: ({ commit }, data) => {
+			axs.post('ahaapi/kirim_pesan', data)
+				.then(response => {
+					console.log(response)
+					commit('showSnackbar', response.data.message)
+				})
+				.catch(err => {
+                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
+                    commit('authError_mutation', 'Galat!')
+                    console.log(err.message)
+                })
+		},
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
@@ -898,7 +932,7 @@ export default new Vuex.Store({
                     console.log(errorCode, errorMessage, email, credential);
                 })
         },
-        registerFirebase: ({ commit }) => {
+        registerFb: ({ commit }) => {
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider)
                 .then(function(result) {
@@ -910,6 +944,32 @@ export default new Vuex.Store({
                             email: email,
                             password: pass,
                             type: '2'
+                        })
+                        .then(response => {
+                            commit('authSuccess_mutation', response)
+                        })
+                })
+                .catch(function(error) {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.email;
+                    const credential = error.credential;
+                    const dataer = error.response.data;
+                    console.log(errorCode, errorMessage, email, credential, dataer);
+                })
+		},
+		registerFirebase: ({ commit }) => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then(function(result) {
+                    // const email = result.user.email
+                    const email = result.user.email
+                    const pass = result.user.uid
+                    console.log(result)
+                    axs.post('ahaapi/register_member', {
+                            email: email,
+                            password: pass,
+                            type: '3'
                         })
                         .then(response => {
                             commit('authSuccess_mutation', response)
@@ -1048,12 +1108,35 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err.message)
                 })
-        }
+		},
+		getBantuan: ({ commit }) => {
+			axs.get('/ahaapi/bantuan_category')
+				.then(response => {
+					const resp = response.data;
+					commit('getBantuan_mutation', resp);
+					console.log(resp)
+				})
+				.catch(err => {
+                    console.log(err.message)
+                })
+		},
+		getBantuanDetail: ({ commit }, idBantuan) => {
+            axs.get('/ahaapi/bantuan?id_bantuan=' + idBantuan)
+                .then(response => {
+					commit('getBantuanDetail_mutation', response.data);
+					console.log(response.data)
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+		}
     },
     getters: {
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
         premiumStatus: state => state.premiumStatus,
-        invoiceDownloadDetail: state => state.invoiceDownloadDetail
+		invoiceDownloadDetail: state => state.invoiceDownloadDetail,
+		careerlist: state => state.career.data,
+		career: state => state.detailCareer.data
     }
 });

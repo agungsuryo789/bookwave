@@ -39,6 +39,8 @@ const CareerDetail = () =>
 	import ('../views/pages/CareerDetail.vue')
 const Troubleshoot = () =>
 	import ('../views/pages/Troubleshoot.vue')
+const TroubleshootDetail = () =>
+	import ('../views/pages/TroubleshootDetail.vue')
 
 // Auth Component
 const Login = () =>
@@ -56,7 +58,9 @@ const ResetPassword = () =>
 
 // User Component
 const LandingUser = () =>
-    import ('../views/user/LandingUser.vue')
+	import ('../views/user/LandingUser.vue')
+const Profile = () =>
+	import ('../views/user/Profile.vue')
 
 // Main feature Component
 const BookPage = () =>
@@ -282,6 +286,14 @@ const routes = [
             title: "Troubleshoot | Ahabaca"
         }
 	},
+	{
+        path: '/troubleshoot/:idBantuan',
+        name: 'TroubleshootDetail',
+        component: TroubleshootDetail,
+        meta: {
+            title: "Troubleshoot | Ahabaca"
+        }
+    },
     // User Layout (Auth)
     // Landing Layout
     {
@@ -308,6 +320,15 @@ const routes = [
         meta: {
             requiresAuth: true,
             title: "Search AHA | Ahabaca"
+        }
+	},
+	{
+        path: '/profile',
+        name: 'Profile',
+        component: Profile,
+        meta: {
+            requiresAuth: true,
+            title: "My Account | Ahabaca"
         }
     },
     // Main Feature Layout

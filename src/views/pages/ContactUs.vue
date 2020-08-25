@@ -16,16 +16,19 @@
 					</v-col>
 					<v-spacer></v-spacer>
 					<v-col cols="12" sm="12" md="6">
+						<v-form>
 						<p class="red--text text--lighten-1">Alamat Email *</p>
-						<v-text-field solo w-75 label="Your email address"></v-text-field>
+						<v-text-field solo w-75 v-model="email" label="Your email address"></v-text-field>
 						<p class="red--text text--lighten-1">Subject Pesan *</p>
-						<v-text-field solo label="Subject"></v-text-field>
+						<v-text-field solo v-model="judul" label="Subject"></v-text-field>
 						<p class="red--text text--lighten-1">Masukan pesan Anda</p>
-						<v-textarea solo label="Description"></v-textarea>
+						<v-textarea solo v-model="deskripsi" label="Description"></v-textarea>
 						<v-spacer></v-spacer>
-						<v-btn :elevation="8" color="red darken-1" block x-large class="white--text">Kirim</v-btn>
+						<v-btn :elevation="8" color="red darken-1" block x-large class="white--text"  v-on:click="submit">Kirim</v-btn>
+						</v-form>
 					</v-col>
 				</v-row>
+				<SnackbarToast />
 			</div>
 		<FooterSection />
 	</div>
@@ -35,13 +38,36 @@
 import NavbarSection from "@/components/NavbarSection.vue";
 import SupportHeader from "@/components/pages/SupportHeader.vue";
 import FooterSection from "@/components/FooterSection.vue";
-
+import SnackbarToast from "@/components/SnackbarToast.vue";
+import { mapMutations } from "vuex";
+/* eslint-disable */
 export default {
   name: "ContactUs",
+  data() {
+	return {
+		email: "",
+		judul: "",
+		deskripsi: ""
+	}
+  },
   components: {
     NavbarSection,
-    SupportHeader,
+	SupportHeader,
+	SnackbarToast,
     FooterSection
+  },
+  methods: {
+	  ...mapMutations(["showSnackbar", "closeSnackbar"]),
+	  submit() {
+		  var data = {
+			email: this.email,
+			judul: this.judul,
+			deskripsi: this.deskripsi
+		  };
+		  this.$store.dispatch("postPesan", data);
+		  this.email = this.judul = this.deskripsi = ''
+		  event.target.reset();
+		}
   }
 };
 </script>

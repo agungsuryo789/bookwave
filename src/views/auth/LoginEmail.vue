@@ -114,7 +114,7 @@ export default {
       email: "",
       lazy: false,
       show1: false,
-	  password: ""
+	  password: "",
     };
   },
   computed: {
@@ -147,7 +147,7 @@ export default {
     submit() {
       this.$v.password.$touch();
       if (this.$v.password.$invalid) {
-
+		  this.$router.go(0)
       } else {
         var data = {
           email: this.email,

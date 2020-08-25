@@ -91,6 +91,9 @@
                     <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                   </template>
                   <v-list>
+					<v-list-item @click="toProfile">
+                      <v-list-item-title>My Account</v-list-item-title>
+                    </v-list-item>
                     <v-list-item @click="toPaymentHistory">
                       <v-list-item-title>Payment History</v-list-item-title>
                     </v-list-item>
@@ -174,6 +177,9 @@
                         </v-list-item-title>
                       </v-list-item>
                     </template>
+					<v-list-item @click="toProfile">
+                      <v-list-item-title>My Account</v-list-item-title>
+                    </v-list-item>
                     <v-list-item @click="toPaymentHistory">
                       <v-list-item-title>Payment History</v-list-item-title>
                     </v-list-item>
@@ -282,7 +288,12 @@ export default {
       this.showSearchBar = e;
       const appLogo = document.getElementById("appLogo");
       appLogo.style.display = "block";
-    },
+	},
+	toProfile() {
+		this.$router.push({
+			name: "Profile"
+		});
+	},
     toPaymentHistory() {
       this.$router.push({
         name: "PaymentHistoryView"
