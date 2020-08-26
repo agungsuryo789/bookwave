@@ -26,6 +26,7 @@
 					<h4> {{ item.nama_langganan }}</h4>
 				</v-col>
 			</v-row>
+			<hr />
 		</v-container>
 		<div class="container">
 
