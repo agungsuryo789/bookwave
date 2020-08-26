@@ -101,7 +101,7 @@
       v-if="!loadSkeleton && filterByCategory && !bookListByKategoriNoAuth.buku_populer"
       style="margin:0 auto;max-width:800px;"
     >
-      <v-col lg="4" md="12" sm="12" cols="12" class="my-2 text-center">
+      <v-col lg="4" md="12" sm="12" cols="12" class="my-2 text-center mx-auto">
         <v-img
           src="@/assets/image/bookNotFound.svg"
           aspect-ratio="1"

@@ -5,13 +5,13 @@
       <template v-if="bookListByKategori.buku_terbaru">
         <v-row>
           <v-col class="category-page-title text-center text-lg-left" :style="cssVars">
-            <div class="ml-lg-3 my-12">
+            <div class="ml-lg-3 my-12 px-12">
               <h1 class="my-0 py-0">{{ bookListByKategori.sub_judul }}</h1>
               <small>{{ bookListByKategori.deskripsi_kategori }}</small>
             </div>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row class="px-12">
           <v-col>
             <div class="d-flex flex-row" style="width:80%;">
               <v-btn icon class="icon-search my-4">
@@ -27,12 +27,12 @@
             </div>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row class="px-12">
           <v-col
             v-for="n in bookListByKategori.buku_terbaru.slice(0, booksToShow)"
             :key="n.id_buku"
-            lg="4"
-            md="6"
+            lg="3"
+            md="4"
             sm="6"
             xs="12"
             class="my-2"
@@ -149,7 +149,6 @@ export default {
 .category-page {
   .container-category-page {
     margin-top: -50px;
-    padding: 0 6%;
   }
   .category-page-title {
     margin-top: -50px;

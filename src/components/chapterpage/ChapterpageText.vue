@@ -258,7 +258,6 @@ export default {
   }
   #chapterText {
     white-space: pre-line;
-    color: black;
   }
   .showTooltip {
     display: block;
