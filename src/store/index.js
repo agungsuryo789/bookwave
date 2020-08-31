@@ -858,7 +858,6 @@ export default new Vuex.Store({
                     commit('showSnackbar', response.data.message)
                 })
                 .catch(err => {
-                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
                     commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
                     console.log(err.message)
                 })
@@ -870,7 +869,6 @@ export default new Vuex.Store({
 					commit('showSnackbar', response.data.message)
 				})
 				.catch(err => {
-                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
                     commit('authError_mutation', 'Galat!')
                     console.log(err.message)
                 })
@@ -996,12 +994,9 @@ export default new Vuex.Store({
                 .then(response => {
                     console.log(response.data)
                     commit('showSnackbar', response.data.message)
-                        // commit('notifMessage_mutation', response.data.message)
-                        // console.log(response.data.message)
                 })
         },
         resetPassword: ({ commit }, token) => {
-            console.log(token)
             localStorage.setItem('x-token', token)
         },
         goReset: ({ commit }, data) => {

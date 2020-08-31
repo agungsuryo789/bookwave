@@ -1,8 +1,9 @@
 <template>
-  <v-container class="container-navbar-category">
+  <v-container fluid class="container-navbar-category">
     <v-row class="mx-auto" style="max-width:800px;">
       <v-col>
-        <h1 class="navbar-category-title" style="color:#E76464;">Temukan berdasar Kategori</h1>
+        <h3 class="navbar-category-title px-5" style="color:#4285F4;">Discover by Category</h3>
+		<v-divider class="mt-8"></v-divider>
       </v-col>
     </v-row>
     <v-row class="my-5 mx-auto" style="max-width:800px;">

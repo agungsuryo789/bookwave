@@ -34,6 +34,7 @@
                 <v-btn
                   color="transparent"
                   depressed
+                  v-click-outside="hide"
                   @click="showCategory = !showCategory"
                   style="text-transform:none;font-size:18px;font-weight:600;"
                 >Temukan</v-btn>
@@ -91,7 +92,7 @@
                     <v-btn class="button-dropdown-nav" v-on="on" color="transparent" depressed>You</v-btn>
                   </template>
                   <v-list>
-					<v-list-item @click="toProfile">
+                    <v-list-item @click="toProfile">
                       <v-list-item-title>My Account</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="toPaymentHistory">
@@ -177,7 +178,7 @@
                         </v-list-item-title>
                       </v-list-item>
                     </template>
-					<v-list-item @click="toProfile">
+                    <v-list-item @click="toProfile">
                       <v-list-item-title>My Account</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="toPaymentHistory">
@@ -246,7 +247,6 @@
     <transition name="slide-y-transition">
       <v-container
         v-show="showCategory"
-        @click="hide"
         fluid
         class="category-chip--navbar mx-0 px-0 py-0 mt-10 mt-lg-12"
       >
@@ -259,6 +259,7 @@
 <script type="text/javascript">
 import NavbarCategoryChip from "@/components/navbar/NavbarCategoryChip.vue";
 import NavbarSearch from "@/components/navbar/NavbarSearch.vue";
+import ClickOutside from 'vue-click-outside';
 import { mapState } from "vuex";
 
 export default {
@@ -271,6 +272,9 @@ export default {
     isTroubleshoot: {
       type: Boolean
     }
+  },
+  directives: {
+    ClickOutside
   },
   data() {
     return {
@@ -370,7 +374,7 @@ export default {
   }
   .app-bar--no-auth {
     width: 100%;
-    padding: 0 11%;
+    padding: 0 3%;
     @media screen and (max-width: 425px) {
       padding: 0;
       margin: 0;
@@ -378,9 +382,8 @@ export default {
   }
 }
 .category-chip--navbar {
-  min-height: 94%;
   position: absolute;
-  top: 16px;
+  top: 18px;
   left: 1px;
   z-index: 998;
   background-color: rgba(0, 0, 0, 0.5);
