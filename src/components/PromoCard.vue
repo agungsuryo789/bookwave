@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .promo-card {
   border-radius: 20px;
   background-color: #e76464;

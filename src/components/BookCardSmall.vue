@@ -2,8 +2,10 @@
   <div>
     <v-card class="book-card--small mx-auto" max-width="350" max-height="150">
       <div class="d-flex flex-row justify-space-between align-center">
-        <div>
+        <div class="book-card-color" :style="cssVars">
+          <div class="top-border"></div>
           <v-img class="book-card-img mx-2" width="65" height="90" :src="foto_sampul"></v-img>
+          <div class="bottom-border"></div>
         </div>
         <div>
           <div>
@@ -13,7 +15,10 @@
               <p>{{deskripsi}}</p>
             </a>
             <template v-if="is_premium == 'true' || is_premium == '1' && !premiumMemberStatus">
-              <v-icon class="book-card-icon-lock" style="position:absolute;top:0;right:0;">mdi-lock-outline</v-icon>
+              <v-icon
+                class="book-card-icon-lock"
+                style="position:absolute;top:0;right:0;"
+              >mdi-lock-outline</v-icon>
             </template>
           </div>
           <div class="d-flex flex-row justify-space-between mt-1">
@@ -91,6 +96,9 @@ export default {
       type: String
     },
     warna_kategori: {
+      type: String
+	},
+	warna_border: {
       type: String
     },
     kategori_buku: {
@@ -172,7 +180,8 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--color": this.$props.warna_kategori
+		"--color": this.$props.warna_kategori,
+		"--colorBorder": this.$props.warna_border
       };
     }
   }
@@ -181,6 +190,31 @@ export default {
 
 <style scoped lang="scss">
 .book-card--small {
+  .book-card-color {
+    position: relative;
+    z-index: 0;
+    background-color: var(--color);
+    padding: 10px 5px;
+    .top-border {
+      position: absolute;
+      top: 2%;
+      left: 2%;
+      width: 20px;
+      height: 20px;
+      border-top-left-radius: 15px;
+      background-color: var(--colorBorder);
+    }
+    .bottom-border {
+      position: absolute;
+      bottom: 1%;
+      right: 2.5%;
+      width: 20px;
+      height: 20px;
+      z-index: -1;
+      border-bottom-right-radius: 15px;
+      background-color: var(--colorBorder);
+    }
+  }
   h2 {
     font-size: 14px;
     width: 200px;

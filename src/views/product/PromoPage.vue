@@ -89,4 +89,23 @@ export default {
   border-right: 2px solid #dddddd;
   border-radius: 10px;
 }
+.promo-card {
+  border-radius: 20px;
+  background-color: #e76464;
+  .promo-card-data {
+    color: white;
+    position: relative;
+    h1 {
+      margin-top: auto;
+    }
+    p {
+      padding: 5px 4px;
+      margin-top: 5px;
+      background-color: #d33131;
+    }
+    img {
+      position: absolute;
+    }
+  }
+}
 </style>

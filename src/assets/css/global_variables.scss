@@ -1,3 +1,6 @@
+// Variable
+$mainColor: #E76464;
+// 
 @mixin btn-main-green {
     text-transform: none;
     padding: 6px 10px;
@@ -13,7 +16,6 @@
     border-bottom: 4px solid rgb(165, 165, 165);
 }
 
-$mainColor: #E76464;
 .bgWhite {
     background-color: white !important;
     color: black !important;

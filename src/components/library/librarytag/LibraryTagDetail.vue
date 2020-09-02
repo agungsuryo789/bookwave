@@ -26,7 +26,9 @@
                   </v-btn>
                 </template>
                 <v-card>
-                  <v-card-title class="modal-hapus-title px-10"><h4 style="font-size:16px;">Hapus Tag "{{ inputTag }}" ?</h4></v-card-title>
+                  <v-card-title class="modal-hapus-title px-10">
+                    <h4 style="font-size:16px;">Hapus Tag "{{ inputTag }}" ?</h4>
+                  </v-card-title>
                   <v-card-actions
                     style="border:2px solid #DDDDDD;border-top:none;border-bottom:6px solid #DDDDDD;"
                   >
@@ -70,7 +72,8 @@
               :penulis="n.penulis"
               :foto_sampul="n.foto_sampul"
               :deskripsi="n.deskripsi"
-              :warna_kategori="n.warna_kategori"
+              :warna_kategori="n.warna_sub"
+              :warna_border="n.warna_utama"
               :kategori_buku="n.nama_kategori"
               :isCollected="n.is_collected"
               :isFavorited="n.is_favorite"

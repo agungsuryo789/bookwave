@@ -110,7 +110,8 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
-            ifLoggedIn: true
+			ifLoggedIn: true,
+			title: "Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -118,7 +119,7 @@ const routes = [
         name: 'About',
         component: About,
         meta: {
-            title: "About | Ahabaca"
+            title: "About | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -127,7 +128,7 @@ const routes = [
         component: Login,
         meta: {
             ifLoggedIn: true,
-            title: "Login | Ahabaca"
+            title: "Login | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -135,7 +136,7 @@ const routes = [
         name: 'ForgotPassword',
         component: ForgotPassword,
         meta: {
-            title: "Forgot Password | Ahabaca"
+            title: "Forgot Password | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -143,7 +144,7 @@ const routes = [
         name: 'ResetPassword',
         component: ResetPassword,
         meta: {
-            title: "Reset Password | Ahabaca"
+            title: "Reset Password | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -152,7 +153,7 @@ const routes = [
         component: LoginEmail,
         meta: {
             ifLoggedIn: true,
-            title: "Login | Ahabaca"
+            title: "Login | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -161,7 +162,7 @@ const routes = [
         component: Register,
         meta: {
             ifLoggedIn: true,
-            title: "Register | Ahabaca"
+            title: "Register | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -170,7 +171,7 @@ const routes = [
         component: RegisterEmail,
         meta: {
             ifLoggedIn: true,
-            title: "Register | Ahabaca"
+            title: "Register | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -178,7 +179,7 @@ const routes = [
         name: 'DisclaimerPage',
         component: DisclaimerPage,
         meta: {
-            title: "Disclaimer | Ahabaca"
+            title: "Disclaimer | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -186,7 +187,7 @@ const routes = [
         name: 'SitemapPage',
         component: SitemapPage,
         meta: {
-            title: "Sitemap | Ahabaca"
+            title: "Sitemap | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -194,7 +195,7 @@ const routes = [
         name: 'UsersPrivacy',
         component: UsersPrivacy,
         meta: {
-            title: "User Privacy | Ahabaca"
+            title: "User Privacy | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -202,7 +203,7 @@ const routes = [
         name: 'TermsCondition',
         component: TermsCondition,
         meta: {
-            title: "Term & Condition | Ahabaca"
+            title: "Term & Condition | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -210,7 +211,7 @@ const routes = [
         name: 'AppPrivacy',
         component: AppPrivacy,
         meta: {
-            title: "Privacy | Ahabaca"
+            title: "Privacy | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -218,7 +219,7 @@ const routes = [
         name: 'BlogList',
         component: BlogList,
         meta: {
-            title: "Blog | Ahabaca"
+            title: "Blog | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -226,7 +227,7 @@ const routes = [
         name: 'BlogDetail',
         component: BlogDetail,
         meta: {
-            title: "Blog | Ahabaca"
+            title: "Blog | Ahabaca: lets you read hundred of books collection"
         }
     },
 	{
@@ -234,7 +235,7 @@ const routes = [
         name: 'Career',
         component: Career,
         meta: {
-            title: "Career | Ahabaca"
+            title: "Career | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -242,7 +243,7 @@ const routes = [
         name: 'CareerDetail',
         component: CareerDetail,
         meta: {
-            title: "Career | Ahabaca"
+            title: "Career | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -250,7 +251,7 @@ const routes = [
         name: 'Faq',
         component: Faq,
         meta: {
-            title: "Faq | Ahabaca"
+            title: "Faq | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -258,7 +259,7 @@ const routes = [
         name: 'Contact',
         component: Contact,
         meta: {
-            title: "Contact AHA | Ahabaca"
+            title: "Contact AHA | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -266,7 +267,7 @@ const routes = [
         name: 'PartnersPage',
         component: PartnersPage,
         meta: {
-            title: "Partnership | Ahabaca"
+            title: "Partnership | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -275,7 +276,7 @@ const routes = [
         component: HelpSupport,
         meta: {
 			requiresAuth: true,
-            title: "Help & Support | Ahabaca"
+            title: "Help & Support | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -283,7 +284,7 @@ const routes = [
         name: 'Troubleshoot',
         component: Troubleshoot,
         meta: {
-            title: "Troubleshoot | Ahabaca"
+            title: "Troubleshoot | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -291,7 +292,7 @@ const routes = [
         name: 'TroubleshootDetail',
         component: TroubleshootDetail,
         meta: {
-            title: "Troubleshoot | Ahabaca"
+            title: "Troubleshoot | Ahabaca: lets you read hundred of books collection"
         }
     },
     // User Layout (Auth)
@@ -302,7 +303,7 @@ const routes = [
         component: LandingUser,
         meta: {
             requiresAuth: true,
-            title: "Home | Ahabaca"
+            title: "Home | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -319,7 +320,7 @@ const routes = [
         component: SearchPage,
         meta: {
             requiresAuth: true,
-            title: "Search AHA | Ahabaca"
+            title: "Search AHA | Ahabaca: lets you read hundred of books collection"
         }
 	},
 	{
@@ -328,7 +329,7 @@ const routes = [
         component: Profile,
         meta: {
             requiresAuth: true,
-            title: "My Account | Ahabaca"
+            title: "My Account | Ahabaca: lets you read hundred of books collection"
         }
     },
     // Main Feature Layout
@@ -338,7 +339,7 @@ const routes = [
         component: CategoryPage,
         meta: {
             requiresAuth: true,
-            title: "Category | Ahabaca"
+            title: "Category | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -347,7 +348,7 @@ const routes = [
         component: BookPage,
         meta: {
 			requiresAuth: true,
-			title: "Read Book | Ahabaca"
+			title: "Read Book | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -356,7 +357,7 @@ const routes = [
         component: BookChapter,
         meta: {
 			requiresAuth: true,
-			title: "Read Chapter | Ahabaca"
+			title: "Read Chapter | Ahabaca: lets you read hundred of books collection"
         }
     },
     // User Layout
@@ -366,7 +367,7 @@ const routes = [
         component: PaymentHistoryView,
         meta: {
             requiresAuth: true,
-            title: "Payment History | Ahabaca"
+            title: "Payment History | Ahabaca: lets you read hundred of books collection"
         }
     },
     // Promo etc Layout
@@ -375,7 +376,7 @@ const routes = [
         name: 'PromoPage',
         component: PromoPage,
         meta: {
-            title: "Promo AHA | Ahabaca"
+            title: "Promo AHA | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
@@ -383,7 +384,7 @@ const routes = [
         name: 'MembershipPage',
         component: MembershipPage,
         meta: {
-            title: "Membership AHA | Ahabaca"
+            title: "Membership AHA | Ahabaca: lets you read hundred of books collection"
         }
     },
 
@@ -394,14 +395,14 @@ const routes = [
         component: LibraryPage,
         meta: {
             requiresAuth: true,
-            title: "My Library | Ahabaca"
+            title: "My Library | Ahabaca: lets you read hundred of books collection"
         },
         children: [{
                 path: 'book',
                 component: LibraryBook,
                 meta: {
                     requiresAuth: true,
-                    title: "My Library | Ahabaca"
+                    title: "My Library | Ahabaca: lets you read hundred of books collection"
                 },
             },
             {
@@ -409,7 +410,7 @@ const routes = [
                 component: LibraryEpisode,
                 meta: {
                     requiresAuth: true,
-                    title: "My Library | Ahabaca"
+                    title: "My Library | Ahabaca: lets you read hundred of books collection"
                 },
             },
             {
@@ -417,7 +418,7 @@ const routes = [
                 component: LibraryColour,
                 meta: {
                     requiresAuth: true,
-                    title: "My Library | Ahabaca"
+                    title: "My Library | Ahabaca: lets you read hundred of books collection"
                 },
             },
             {
@@ -425,7 +426,7 @@ const routes = [
                 component: LibraryFav,
                 meta: {
                     requiresAuth: true,
-                    title: "My Library | Ahabaca"
+                    title: "My Library | Ahabaca: lets you read hundred of books collection"
                 },
             },
             {
@@ -433,7 +434,7 @@ const routes = [
                 component: LibraryTag,
                 meta: {
                     requiresAuth: true,
-                    title: "My Library | Ahabaca"
+                    title: "My Library | Ahabaca: lets you read hundred of books collection"
                 },
             },
             {
@@ -442,7 +443,7 @@ const routes = [
                 component: LibraryTagAdd,
                 meta: {
                     requiresAuth: true,
-                    title: "My Library | Ahabaca"
+                    title: "My Library | Ahabaca: lets you read hundred of books collection"
                 },
             }
         ]
@@ -454,7 +455,7 @@ const routes = [
         name: 'catchAll',
         component: PageNotFound,
         meta: {
-            title: "Not Found | Ahabaca"
+            title: "Not Found | Ahabaca: lets you read hundred of books collection"
         }
     }
 ]

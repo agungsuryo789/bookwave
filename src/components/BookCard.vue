@@ -1,5 +1,5 @@
 <template>
-  <v-card class="book-card " width="220" height="300" flat>
+  <v-card class="book-card mx-auto" width="220" height="300" flat>
     <div class="book-card-color py-7" :style="cssVars">
       <div class="top-border"></div>
       <v-img
@@ -17,7 +17,12 @@
       <div>
         <a @click="gotoBook" class="book-card-title m-0 p-0">
           <v-card-title class="book-title">{{ title }}</v-card-title>
-          <v-card-subtitle>{{ penulis }}</v-card-subtitle>
+          <v-card-subtitle class="d-flex flex-column">
+            <small>{{ penulis }}</small>
+            <small>
+              <v-icon class="mr-1 pb-1" small>mdi-clock-outline</v-icon>{{ durasi }}
+            </small>
+          </v-card-subtitle>
         </a>
         <template v-if="premiumStatus == '1' && !premiumMemberStatus">
           <span class="mx-4 my-0 p-0" style="color:red;">Premium</span>
@@ -57,6 +62,9 @@ export default {
       type: String
     },
     kategori_buku: {
+      type: String
+    },
+    durasi: {
       type: String
     },
     isCollected: {
@@ -106,11 +114,11 @@ export default {
   .book-card-color {
     height: 200px;
     position: relative;
-	z-index: 0;
+    z-index: 0;
     background-color: var(--color);
-	border: 3px solid var(--colorBorder);
-	border-bottom: 6px solid var(--colorBorder);
-	border-radius: 5px;
+    border: 3px solid var(--colorBorder);
+    border-bottom: 6px solid var(--colorBorder);
+    border-radius: 5px;
     .top-border {
       position: absolute;
       top: 6%;

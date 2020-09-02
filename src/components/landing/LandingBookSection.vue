@@ -32,6 +32,7 @@
             :warna_kategori="n.warna_sub"
             :warna_border="n.warna_utama"
             :kategori_buku="n.nama_kategori"
+            :durasi="n.durasi"
             :isCollected="n.is_collected"
             :isFavorited="n.is_favorite"
           />
