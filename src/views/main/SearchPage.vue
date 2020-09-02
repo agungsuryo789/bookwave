@@ -2,7 +2,7 @@
   <div class="book-search">
     <NavbarSection />
     <v-container class="mt-10">
-      <v-tabs fixed-tabs class="px-lg-12" v-model="tab" slider-color="#E76464" color="#E76464" style="margin-left:-45px;width:110%;">
+      <v-tabs fixed-tabs class="px-12" v-model="tab" slider-color="#E76464" color="#E76464" style="margin-left:-45px;width:110%;">
         <v-tab style="border-bottom:2px solid #DDDDDD;">Hasil Pencarian</v-tab>
         <v-tab class="mr-10" style="border-bottom:2px solid #DDDDDD;">Chapter Audio</v-tab>
         <v-tab style="border-bottom:2px solid #DDDDDD;">Book</v-tab>

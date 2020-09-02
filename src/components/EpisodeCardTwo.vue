@@ -43,7 +43,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .div--episode-card {
   border: 4px solid var(--color);
   border-bottom: 8px solid var(--color);
