@@ -38,6 +38,7 @@ axs.interceptors.response.use(
 const defaultState = () => {
 	return {
 		loaderStatus: false,
+		bookListByKategori: [],
 		searchResult: [],
 		searchResultAudio: [],
 		searchResultLive: [],
@@ -55,6 +56,7 @@ const getters = {
 	searchResultByPenulis: state => state.searchResultByPenulis,
 	searchResultByKategori: state => state.searchResultByKategori,
 	searchResultDefaultLive: state => state.searchResultLive,
+	bookListByKategori: state => state.bookListByKategori,
 	loaderStatus: state => state.loaderStatus
 };
 const actions = {
@@ -109,15 +111,6 @@ const actions = {
 			}
 		);
 	},
-	getBookByKategoriNoAuth: ({ commit }, categoryID) => {
-		axs.get(
-			"/ahaapi/buku_by_kategori_noauth?id_kategori=" + categoryID
-		).then(response => {
-			if (response.data) {
-				commit("getBookByKategoriNoAuth_mutation", response.data);
-			}
-		});
-	},
 	getBookByKategoriFilter: ({ commit }, payload) => {
 		axs.get(
 			"/ahaapi/buku_by_kategori?id_kategori=" +
@@ -165,10 +158,6 @@ const mutations = {
 	},
 	getBookByKategoriFilter_mutation: (state, response) => {
 		state.bookListByKategori = response;
-		state.loaderStatus = true;
-	},
-	getBookByKategoriNoAuth_mutation: (state, response) => {
-		state.bookListByKategoriNoAuth = response;
 		state.loaderStatus = true;
 	}
 };

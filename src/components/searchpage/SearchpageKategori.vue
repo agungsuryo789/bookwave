@@ -63,7 +63,7 @@
 						style="margin: 0 auto;"
 					></v-img>
 					<p class="my-3" style="color:#DDDDDD;">
-						Kategori tidak ditemukan
+						Buku dengan Kategori ini tidak ditemukan
 					</p>
 					<router-link
 						to="/home"

@@ -46,17 +46,9 @@
                 {{ book.data_chapter.length }} Chapter
               </p>
             </div>
-            <div class="book-sinopsis my-5 my-lg-10">
-              {{ book.deskripsi }}
-            </div>
+            <div class="book-sinopsis my-5 my-lg-10">{{ book.deskripsi }}</div>
           </v-col>
-          <v-col
-            class="card--book-detail py-0 my-0 px-lg-3 mt-8"
-            lg="4"
-            md="12"
-            sm="12"
-            cols="12"
-          >
+          <v-col class="card--book-detail py-0 my-0 px-lg-3 mt-8" lg="4" md="12" sm="12" cols="12">
             <div class="div-btn">
               <template v-if="book.data_chapter.length < 1">
                 <div class="d-flex flex-column justify-end">
@@ -123,12 +115,16 @@
     <template v-else>
       <v-container>
         <v-row style="max-width:850px;margin:0 auto;">
-          <v-col lg="6" md="6" sm="12" cols="12">
+          <v-col lg="4" md="4" sm="12" cols="12">
             <v-skeleton-loader class="mx-auto" max-width="250" type="card"></v-skeleton-loader>
           </v-col>
-          <v-col lg="6" md="6" sm="12" cols="12">
+          <v-col lg="4" md="4" sm="12" cols="12">
             <v-skeleton-loader class="mx-auto" max-width="600" type="list-item-three-line"></v-skeleton-loader>
+            <v-skeleton-loader class="mx-auto" max-width="600" type="list-item-two-line"></v-skeleton-loader>
+          </v-col>
+          <v-col lg="4" md="4" sm="12" cols="12">
             <v-skeleton-loader class="mx-auto" max-width="600" type="list-item-three-line"></v-skeleton-loader>
+			<v-skeleton-loader class="mx-auto" max-width="600" type="list-item-two-line"></v-skeleton-loader>
           </v-col>
         </v-row>
         <v-row style="max-width:850px;margin:0 auto;">
@@ -234,8 +230,8 @@ export default {
   }
   .book-sinopsis {
     max-height: 50px;
-	text-overflow: ellipsis;
-	overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 @media only screen and (max-width: 900px) {

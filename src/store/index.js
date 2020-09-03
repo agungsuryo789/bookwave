@@ -70,12 +70,8 @@ const vuexSession = new VuexPersist({
 	})
 });
 
-export default new Vuex.Store({
-	plugins: [vuexSession],
-	modules: {
-		BookSearch
-	},
-	state: {
+const defaultState = () => {
+	return {
 		loaderStatus: false,
 		responseStatus: null,
 		daftarKategoriNoAuth: [],
@@ -93,7 +89,6 @@ export default new Vuex.Store({
 		email: {},
 		episodeListNew: [],
 		detailKategori: {},
-		bookListByKategori: [],
 		bookListByKategoriNoAuth: [],
 		bookId: "",
 		kategoriId: "",
@@ -142,8 +137,19 @@ export default new Vuex.Store({
 		listBantuan: [],
 		bantuanDetail: [],
 		accountDetail: []
+	};
+};
+
+export default new Vuex.Store({
+	plugins: [vuexSession],
+	modules: {
+		BookSearch
 	},
+	state: defaultState(),
 	mutations: {
+		resetState_mutation(state) {
+			Object.assign(state, defaultState());
+		},
 		setResponse_mutation: (state, response) => {
 			state.responseStatus = response;
 		},
@@ -178,6 +184,10 @@ export default new Vuex.Store({
 		},
 		getDaftarKategoriAuth_mutation: (state, response) => {
 			state.daftarKategoriAuth = response;
+			state.loaderStatus = true;
+		},
+		getBookByKategoriNoAuth_mutation: (state, response) => {
+			state.bookListByKategoriNoAuth = response;
 			state.loaderStatus = true;
 		},
 		user_mutation: (state, response) => {
@@ -401,6 +411,18 @@ export default new Vuex.Store({
 				.catch(err => {
 					console.log(err.message);
 				});
+		},
+		getBookByKategoriNoAuth: ({ commit }, categoryID) => {
+			axs.get(
+				"/ahaapi/buku_by_kategori_noauth?id_kategori=" + categoryID
+			).then(response => {
+				if (response.data) {
+					commit("getBookByKategoriNoAuth_mutation", response.data);
+				}
+			})
+			.catch(err => {
+				console.log(err.message);
+			});
 		},
 		getTopKategoriNoAuth: ({ commit }) => {
 			axs.get("/ahaapi/beranda_buku_noauth")
