@@ -29,6 +29,8 @@ const PartnersPage = () =>
 	import ('../views/pages/PartnersPage.vue')
 const HelpSupport = () =>
 	import ('../views/pages/HelpSupport.vue')
+const HelpAccount = () =>
+	import ('../views/pages/HelpAccount.vue')
 const BlogList = () =>
 	import ('../views/pages/BlogList.vue')
 const Career = () =>
@@ -274,6 +276,15 @@ const routes = [
         path: '/help',
         name: 'HelpSupport',
         component: HelpSupport,
+        meta: {
+			requiresAuth: true,
+            title: "Help & Support | Ahabaca: lets you read hundred of books collection"
+        }
+	},
+	{
+        path: '/help-account',
+        name: 'HelpAccount',
+        component: HelpAccount,
         meta: {
 			requiresAuth: true,
             title: "Help & Support | Ahabaca: lets you read hundred of books collection"
