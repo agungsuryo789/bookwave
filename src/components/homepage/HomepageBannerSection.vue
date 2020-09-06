@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/assets/css/global_variables.scss";
 .row-banner-image {
   max-width: 1000px;

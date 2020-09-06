@@ -109,7 +109,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .book-card {
   .book-card-color {
     height: 200px;

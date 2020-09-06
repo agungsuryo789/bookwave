@@ -5,7 +5,7 @@
       <v-row>
         <v-col cols="12">
           <v-tabs
-            class="px-lg-12"
+            class="px-12"
             slider-color="#E76464"
             color="#E76464"
 			grow
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/assets/css/global_variables.scss";
 .btn-chip-main {
   @include btn-chip-main();

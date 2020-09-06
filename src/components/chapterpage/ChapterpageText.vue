@@ -237,7 +237,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/assets/css/global_variables.scss";
 
 #chapterBody {

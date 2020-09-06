@@ -4,7 +4,7 @@
 			<v-col lg="6" md="12" sm="12" cols="12">
 				<h1 style="max-width:400px;">Kategori yang sering di cari</h1>
 				<div
-					class="title-underline d-flex flex-row justify-start"
+					class="title-underline d-flex flex-row justify-start my-2"
 					style="margin-left: -4px;"
 				>
 					<img
@@ -67,7 +67,7 @@
 			<v-col>
 				<h1 style="color:#6c3f72;">Terpopuler di Kategori Semua</h1>
 				<div
-					class="title-underline d-flex flex-row justify-start"
+					class="title-underline d-flex flex-row justify-start my-3"
 					style="margin-left: -4px;"
 				>
 					<img
