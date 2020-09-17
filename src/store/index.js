@@ -412,9 +412,6 @@ export default new Vuex.Store({
 						response.data.daftar_kategori
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookByKategoriNoAuth: ({ commit }, categoryID) => {
 			axs.get(
@@ -436,9 +433,6 @@ export default new Vuex.Store({
 						response.data.top_kategori
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getListBookTrendingNoAuth: ({ commit }) => {
 			axs.get("/ahaapi/beranda_buku_noauth")
@@ -448,9 +442,6 @@ export default new Vuex.Store({
 						response.data.buku_trending
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// Auth Action
 		// Book GET
@@ -459,27 +450,18 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getBerandaBukuAuth_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookNew: ({ commit }) => {
 			axs.get("/ahaapi/buku_terbaru")
 				.then(response => {
 					commit("getBookNew_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookTrending: ({ commit }) => {
 			axs.get("/ahaapi/buku_trending")
 				.then(response => {
 					commit("getBookTrending_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getDaftarKategoriAuth: ({ commit }) => {
 			axs.get("/ahaapi/daftar_kategori")
@@ -489,9 +471,6 @@ export default new Vuex.Store({
 						response.data.data
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// Book Search Action
 		// Book n Chapter ACtion
@@ -500,9 +479,6 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getBookDetailByID_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookChapter: ({ commit }, dispatchPayload) => {
 			axs.get(
@@ -514,144 +490,96 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getBookChapter_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookOutline: ({ commit }, bookId) => {
 			axs.get("/ahaapi/outline_buku?id_buku=" + bookId)
 				.then(response => {
 					commit("getBookOutline_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookIntisari: ({ commit }, dispatchPayload) => {
 			axs.get("/ahaapi/intisari?id_buku=" + dispatchPayload)
 				.then(response => {
 					commit("getBookIntisari_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setBookDone: ({ commit }, payloadDone) => {
 			axs.post("/ahaapi/selesai_baca", payloadDone)
 				.then(response => {
 					commit("setBookDone_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setBookmark: ({ commit }, payloadBookmark) => {
 			axs.post("/ahaapi/simpan_buku", payloadBookmark)
 				.then(response => {
 					commit("setBookmark_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setDeleteKoleksi: ({ commit }, payloadFav) => {
 			axs.post("/ahaapi/hapus_koleksi_buku", payloadFav)
 				.then(response => {
 					commit("setDeleteKoleksi_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setBookFavorit: ({ commit }, payloadFav) => {
 			axs.post("/ahaapi/tambah_favorite", payloadFav)
 				.then(response => {
 					commit("setBookFavorit_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		delBookFavorit: ({ commit }, payloadFav) => {
 			axs.post("/ahaapi/hapus_favorite", payloadFav)
 				.then(response => {
 					commit("setBookFavorit_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setChapterHighlight: ({ commit }, highlightPayload) => {
 			axs.post("/ahaapi/highlight_chapter", highlightPayload)
 				.then(response => {
 					commit("setChapterHighlight_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setDelChapterHighlight: ({ commit }, delHighlightPayload) => {
 			axs.post("/ahaapi/hapus_highlight", delHighlightPayload)
 				.then(response => {
 					commit("setDelChapterHighlight_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		saveChapterSingle: ({ commit }, payload) => {
 			axs.post("/ahaapi/tambah_audio", payload)
 				.then(response => {
 					commit("saveChapterSingle_mutation");
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		addTag: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/tambah_tag", tagPayload)
 				.then(response => {
 					commit("addTag_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		editTagAll: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/ubah_tag", tagPayload)
 				.then(response => {
 					commit("editTagRes_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		deleteTagFromAll: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/hapus_tag", tagPayload)
 				.then(response => {
 					router.push("/library/book");
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		deleteTagByBook: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/hapus_tag", tagPayload)
 				.then(response => {
 					router.push("/home");
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		sendBookComment: ({ commit }, payload) => {
 			axs.post("/ahaapi/score_member", payload)
 				.then(response => {
 					console.log(response.message);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// GET account user
 		getAccountDetail: ({ commit }) => {
@@ -659,9 +587,6 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getAccountDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// Book Library GET
 		koleksiBuku: ({ commit }) => {
@@ -669,54 +594,36 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("koleksiBuku_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		koleksiBukuFav: ({ commit }) => {
 			axs.get("/ahaapi/koleksi_buku_favorit")
 				.then(response => {
 					commit("koleksiBukuFav_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		koleksiBukuHighlight: ({ commit }) => {
 			axs.get("/ahaapi/koleksi_buku_highlight")
 				.then(response => {
 					commit("koleksiBukuHighlight_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		koleksiAudio: ({ commit }) => {
 			axs.get("/ahaapi/koleksi_audio_member")
 				.then(response => {
 					commit("koleksiAudio_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		koleksiTag: ({ commit }) => {
 			axs.get("/ahaapi/list_tag")
 				.then(response => {
 					commit("koleksiTag_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		koleksiTagSingle: ({ commit }, tagPayload) => {
 			axs.get("/ahaapi/tag_buku?tag=" + tagPayload)
 				.then(response => {
 					commit("koleksiTagSingle_mutation", response.data.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// Payment n Plans
 		getSubsOption: ({ commit }) => {
@@ -724,45 +631,30 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getSubsOption_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getPromo: ({ commit }) => {
 			axs.get("/ahaapi/banner")
 				.then(response => {
 					commit("getPromo_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBlogCategory: ({ commit }) => {
 			axs.get("/ahaapi/blog_category")
 				.then(response => {
 					commit("getBlogCategory_mutation", response.data.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		blogSearch: ({ commit }, payload) => {
 			axs.post("/ahaapi/pencarian_blog", payload)
 				.then(response => {
 					commit("blogSearch_mutation", response.data.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		searchBlogByCategory: ({ commit }, payload) => {
 			axs.get("/ahaapi/blog_by_category?id_category=" + payload)
 				.then(response => {
 					commit("searchBlogByCategory_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		invoiceDetails: ({ commit }, data) => {
 			axs.post("/ahaapi/invoices", data)
@@ -771,27 +663,18 @@ export default new Vuex.Store({
 						"https://app.sandbox.midtrans.com/snap/v2/vtweb/" +
 						response.data.token;
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		invoiceSubsDownload: ({ commit }, payload) => {
 			axs.get("/ahaapi/download_invoice?id_transaksi=" + payload)
 				.then(response => {
 					commit("invoiceSubsDownload_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getPaymentHistory: ({ commit }) => {
 			axs.get("/ahaapi/riwayat_pembayaran")
 				.then(response => {
 					commit("getPaymentHistory_mutation", response.data.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// auth action
 		getMemberDetail: ({ commit }) => {
@@ -799,9 +682,6 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getMemberDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		userLogin: ({ commit }, user) => {
 			axs.post("ahaapi/login_member", user)
@@ -990,90 +870,60 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getTerms_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getUserPrivacy: ({ commit }) => {
 			axs.get("/ahaapi/privasi_user")
 				.then(response => {
 					commit("getUserPrivacy_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getApplicationPrivacy: ({ commit }) => {
 			axs.get("/ahaapi/privasi_aplikasi")
 				.then(response => {
 					commit("getApplicationPrivacy_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getDisclaimer: ({ commit }) => {
 			axs.get("/ahaapi/disclaimer")
 				.then(response => {
 					commit("getDisclaimer_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getAbout: ({ commit }) => {
 			axs.get("/ahaapi/about")
 				.then(response => {
 					commit("getAbout_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getContact: ({ commit }) => {
 			axs.get("/ahaapi/contact")
 				.then(response => {
 					commit("getContact_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getCareer: ({ commit }) => {
 			axs.get("/ahaapi/karir")
 				.then(response => {
 					commit("getCareer_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBlog: ({ commit }) => {
 			axs.get("/ahaapi/blog")
 				.then(response => {
 					commit("getBlog_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBlogDetail: ({ commit }, idBlog) => {
 			axs.get("/ahaapi/detail_blog?id=" + idBlog)
 				.then(response => {
 					commit("getBlogDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getCareerDetail: ({ commit }, idKarir) => {
 			axs.get("/ahaapi/detail_karir?id=" + idKarir)
 				.then(response => {
 					commit("getCareerDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBantuan: ({ commit }) => {
 			axs.get("/ahaapi/bantuan_category")
@@ -1082,9 +932,6 @@ export default new Vuex.Store({
 					commit("getBantuan_mutation", resp);
 					console.log(resp);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBantuanDetail: ({ commit }, idBantuan) => {
 			axs.get("/ahaapi/bantuan?id_bantuan=" + idBantuan)
@@ -1092,9 +939,6 @@ export default new Vuex.Store({
 					commit("getBantuanDetail_mutation", response.data);
 					console.log(response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		}
 	},
 	getters: {

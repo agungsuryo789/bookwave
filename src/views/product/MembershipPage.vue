@@ -29,7 +29,7 @@
                   ripple
                   style="color:white;font-weight:bold;"
                   @click="pay(item.id_langganan)"
-                >Coba 7 hari gratis</v-btn>
+                >Coba Sekarang</v-btn>
               </div>
               <v-card-title>{{ item.nama_langganan }}</v-card-title>
               <v-card-text>
