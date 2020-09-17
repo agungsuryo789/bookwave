@@ -31,11 +31,11 @@
                 elevation="3"
                 style="color:white;font-weight:bold;"
                 @click="pay(item.id_langganan)"
-              >Coba 7 hari gratis</v-btn>
+              >Coba Sekarang</v-btn>
             </div>
-            <v-card-title class="m-0 p-0">Tahunan</v-card-title>
+            <v-card-title class="m-0 p-0">{{item.satuan}}</v-card-title>
             <v-card-text class="m-0 p-0">
-              <h2>Rp. 99,999 / Bulan</h2>
+              <h2>{{item.harga}}</h2>
             </v-card-text>
           </v-card>
         </v-col>

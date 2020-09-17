@@ -66,7 +66,11 @@ const vuexSession = new VuexPersist({
 		bookBerandaAuth: state.bookBerandaAuth,
 		bookSectionList: state.bookSectionList,
 		bookTrending: state.bookTrending,
-		bookNew: state.bookNew
+		bookNew: state.bookNew,
+		koleksiBuku: state.koleksiBuku,
+		koleksiBukuFav: state.koleksiBukuFav,
+		koleksiBukuHighlight: state.koleksiBukuHighlight,
+		koleksiAudio: state.koleksiAudio
 	})
 });
 
@@ -148,7 +152,7 @@ export default new Vuex.Store({
 	state: defaultState(),
 	mutations: {
 		resetState_mutation(state) {
-			Object.assign(state, defaultState());
+			Object.assign(state);
 		},
 		setResponse_mutation: (state, response) => {
 			state.responseStatus = response;
