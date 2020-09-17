@@ -337,7 +337,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .navbar {
   .navbarChangeColor {
     background-color: white;
