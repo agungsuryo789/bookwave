@@ -800,7 +800,6 @@ export default new Vuex.Store({
         userLogin: ({ commit }, user) => {
             axs.post('ahaapi/login_member', user)
                 .then(response => {
-                    console.log(response)
                     commit('authSuccess_mutation', response)
                     commit('showSnackbar', response.data.message)
                 })
@@ -813,7 +812,6 @@ export default new Vuex.Store({
 		postPesan: ({ commit }, data) => {
 			axs.post("ahaapi/kirim_pesan", data)
 				.then(response => {
-					console.log(response);
 					commit("showSnackbar", response.data.message);
 				})
 				.catch(err => {
@@ -825,7 +823,6 @@ export default new Vuex.Store({
         userRegister: ({ commit }, user) => {
             axs.post('ahaapi/register_member', user)
                 .then(response => {
-                    console.log(response)
                     commit('authSuccess_mutation', response)
                     commit('showSnackbar', response.data.message)
                 })
@@ -941,10 +938,7 @@ export default new Vuex.Store({
         forgotPassword: ({ commit }, data) => {
             axs.post('/ahaapi/lupa_password', data)
                 .then(response => {
-                    console.log(response.data)
                     commit('showSnackbar', response.data.message)
-                        // commit('notifMessage_mutation', response.data.message)
-                        // console.log(response.data.message)
                 })
         },
         resetPassword: ({ commit }, token) => {
@@ -1061,7 +1055,6 @@ export default new Vuex.Store({
 				.then(response => {
 					const resp = response.data;
 					commit("getBantuan_mutation", resp);
-					console.log(resp);
 				})
 				.catch(err => {
 					console.log(err.message);
@@ -1071,7 +1064,6 @@ export default new Vuex.Store({
 			axs.get("/ahaapi/bantuan?id_bantuan=" + idBantuan)
 				.then(response => {
 					commit("getBantuanDetail_mutation", response.data);
-					console.log(response.data);
 				})
 				.catch(err => {
 					console.log(err.message);
