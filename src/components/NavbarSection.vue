@@ -259,7 +259,7 @@
 <script type="text/javascript">
 import NavbarCategoryChip from "@/components/navbar/NavbarCategoryChip.vue";
 import NavbarSearch from "@/components/navbar/NavbarSearch.vue";
-import ClickOutside from 'vue-click-outside';
+import ClickOutside from "vue-click-outside";
 import { mapState } from "vuex";
 
 export default {
@@ -285,19 +285,19 @@ export default {
     };
   },
   computed: mapState({
-    memberDetail: state => state.memberDetail
+    memberDetail: (state) => state.memberDetail
   }),
   methods: {
     onCloseSearchBar(e) {
       this.showSearchBar = e;
       const appLogo = document.getElementById("appLogo");
       appLogo.style.display = "block";
-	},
-	toProfile() {
-		this.$router.push({
-			name: "Profile"
-		});
-	},
+    },
+    toProfile() {
+      this.$router.push({
+        name: "Profile"
+      });
+    },
     toPaymentHistory() {
       this.$router.push({
         name: "PaymentHistoryView"
@@ -327,7 +327,7 @@ export default {
       this.showSearchBar = !this.showSearchBar;
       this.showCategory = false;
     },
-    hide: function() {
+    hide: function () {
       this.showCategory = false;
     }
   },
@@ -338,8 +338,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/global_variables.scss";
-
 .navbar {
   .navbarChangeColor {
     background-color: white;
@@ -348,7 +346,11 @@ export default {
   .app-bar--no-auth {
     color: white;
     .button-subscribe {
-      @include btn-main-green();
+      text-transform: none;
+      padding: 6px 10px;
+      width: 150px;
+      color: white;
+      background-color: #39df8c;
       @media screen and (max-width: 425px) {
         width: 50%;
       }
@@ -399,5 +401,23 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.hide-on--md {
+  @media screen and (max-width: 860px) {
+    display: none;
+  }
+  @media screen and (max-width: 425px) {
+    display: none;
+  }
+  @media screen and (max-width: 320px) {
+    display: none;
+  }
+}
+
+.hide-on--lg {
+  @media screen and (min-width: 860px) {
+    display: none;
+  }
 }
 </style>

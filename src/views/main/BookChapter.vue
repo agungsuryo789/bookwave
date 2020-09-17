@@ -179,16 +179,9 @@
       <v-container v-for="chapter in chapterDetail.data" :key="chapter.id_chapter">
         <v-carousel height="150" hide-delimiters touchless :show-arrows="false">
           <v-carousel-item>
-            <v-sheet
-              :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
-              color="white"
-              height="100%"
-              style="color:black;"
-            >
               <v-row class="fill-height" align="center" justify="center">
                 <div class="display-3 font-weight-bold px-5">{{ chapter.judul_chapter }}</div>
               </v-row>
-            </v-sheet>
           </v-carousel-item>
         </v-carousel>
         <v-row>
