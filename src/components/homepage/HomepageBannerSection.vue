@@ -4,8 +4,7 @@
       <v-col class="col-banner-text text-center text-lg-left" lg="6" md="12" sm="12" cols="12">
         <h1 class="my-2">Halo Saya AHA</h1>
         <p class="my-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Sapiente unde dolorum iste optio,
+          Ahabaca memungkinkan Anda membaca ratusan koleksi buku. Mulai uji coba gratis Anda hari ini dan cari tahu caranya.
         </p>
         <v-btn
           :to="{name: 'Register'}"

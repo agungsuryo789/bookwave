@@ -82,15 +82,10 @@ export default {
 	methods: {
 		callFunction: function() {
 			this.$store.dispatch("koleksiTag");
-			var load = this.$store.state.loaderStatus;
-			var v = this;
+			var _this = this;
 			setTimeout(function() {
-				if (load) {
-					v.loadSkeleton = false;
-				} else {
-					v.loadSkeleton = true;
-				}
-			}, 800);
+				_this.loadSkeleton = false;
+			}, 1000);
 		},
 		toTagDetail(tagName) {
 			this.showTagDetail = true;

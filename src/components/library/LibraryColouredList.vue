@@ -85,15 +85,10 @@ export default {
 	methods: {
 		callFunction: function() {
 			this.$store.dispatch("koleksiBukuHighlight");
-			var load = this.$store.state.loaderStatus;
-			var v = this;
+			var _this = this;
 			setTimeout(function() {
-				if (load) {
-					v.loadSkeleton = false;
-				} else {
-					v.loadSkeleton = true;
-				}
-			}, 800);
+				_this.loadSkeleton = false;
+			}, 1000);
 		},
 		toChapter(idBuku, idChapter, isPremium) {
 			if (!isPremium) {

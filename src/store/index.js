@@ -1,47 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 import router from "../router";
 import VuexPersist from "vuex-persistedstate";
 import * as firebase from "firebase/app";
 import BookSearch from "./modules/BookSearch";
 import "firebase/auth";
+import { axs, execute } from "./helper/api";
 
-Vue.use(Vuex, axios);
+execute();
 
-// AXIOS CONFIG
-export const axs = axios.create({
-	baseURL: "https://backend.ahabaca.com",
-	timeout: 30000
-});
-axs.interceptors.request.use(
-	config => {
-		const key = "C94D74AC6115211E9531D5082CA97F2C";
-		const token = window.localStorage.getItem("x-token");
-		config.headers["x-api-key"] = key;
-		if (token) {
-			config.headers["x-token"] = token;
-		}
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
-axs.interceptors.response.use(
-	config => {
-		const key = "C94D74AC6115211E9531D5082CA97F2C";
-		const token = window.localStorage.getItem("x-token");
-		config.headers["x-api-key"] = key;
-		if (token) {
-			config.headers["x-token"] = token;
-		}
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
+Vue.use(Vuex);
 
 // Firebase Config
 const firebaseConfig = {
@@ -60,6 +28,8 @@ firebase.initializeApp(firebaseConfig);
 const vuexSession = new VuexPersist({
 	key: "a7ac33d1966354c33537e0584f42d58d",
 	reducer: state => ({
+		isLoggedIn: state.isLoggedIn,
+		status: state.status,
 		daftarKategoriNoAuth: state.daftarKategoriNoAuth,
 		daftarKategoriAuth: state.daftarKategoriAuth,
 		bookListTrendingNoAuth: state.bookListTrendingNoAuth,
@@ -77,6 +47,7 @@ const vuexSession = new VuexPersist({
 const defaultState = () => {
 	return {
 		loaderStatus: false,
+		isLoggedIn: false,
 		responseStatus: null,
 		daftarKategoriNoAuth: [],
 		topKategoriNoAuth: [],
@@ -152,7 +123,7 @@ export default new Vuex.Store({
 	state: defaultState(),
 	mutations: {
 		resetState_mutation(state) {
-			Object.assign(state);
+			Object.assign(state, defaultState());
 		},
 		setResponse_mutation: (state, response) => {
 			state.responseStatus = response;
@@ -199,7 +170,7 @@ export default new Vuex.Store({
 		},
 		authSuccess_mutation: (state, response) => {
 			state.status = "success";
-			state.token = response.data.token;
+			state.isLoggedIn = true;
 			localStorage.setItem("x-token", response.data.token);
 			state.notifMessage = response.data.message;
 			router.push("/home");
@@ -217,10 +188,11 @@ export default new Vuex.Store({
 			// router.push({ name: 'Register' })
 		},
 		authDown_mutation: state => {
-			state.status = null;
-			state.token = null;
+			state.status = "";
+			state.isLoggedIn = false;
+			state.token = "";
 			state.premiumStatus = null;
-			Object.assign(state);
+			Object.assign(state, defaultState());
 			router.push("/");
 		},
 		getMemberDetail_mutation: (state, response) => {
@@ -693,9 +665,8 @@ export default new Vuex.Store({
 				.catch(err => {
 					commit(
 						"authError_mutation",
-						"Login Gagal! Periksa Email dan Password Anda"
+						err.message
 					);
-					console.log(err.message);
 				});
 		},
 		postPesan: ({ commit }, data) => {
@@ -705,8 +676,7 @@ export default new Vuex.Store({
 					commit("showSnackbar", response.data.message);
 				})
 				.catch(err => {
-					commit("authError_mutation", "Galat!");
-					console.log(err.message);
+					commit("authError_mutation", err.message);
 				});
 		},
 		userRegister: ({ commit }, user) => {
@@ -717,8 +687,7 @@ export default new Vuex.Store({
 					commit("showSnackbar", response.data.message);
 				})
 				.catch(err => {
-					commit("registerError_mutation", "Email Sudah Terdaftar!");
-					console.log(err.message);
+					commit("registerError_mutation", err.message);
 				});
 		},
 		loginFirebase: ({ commit }) => {
@@ -736,13 +705,6 @@ export default new Vuex.Store({
 						commit("authSuccess_mutation", response);
 					});
 				})
-				.catch(function(error) {
-					const errorCode = error.code;
-					const errorMessage = error.message;
-					const email = error.email;
-					const credential = error.credential;
-					console.log(errorCode, errorMessage, email, credential);
-				});
 		},
 		loginFacebook: ({ commit }) => {
 			const provider = new firebase.auth.FacebookAuthProvider();
@@ -760,13 +722,6 @@ export default new Vuex.Store({
 						commit("authSuccess_mutation", response);
 					});
 				})
-				.catch(function(error) {
-					const errorCode = error.code;
-					const errorMessage = error.message;
-					const email = error.email;
-					const credential = error.credential;
-					console.log(errorCode, errorMessage, email, credential);
-				});
 		},
 		registerFb: ({ commit }) => {
 			const provider = new firebase.auth.GoogleAuthProvider();
@@ -786,20 +741,6 @@ export default new Vuex.Store({
 						commit("authSuccess_mutation", response);
 					});
 				})
-				.catch(function(error) {
-					const errorCode = error.code;
-					const errorMessage = error.message;
-					const email = error.email;
-					const credential = error.credential;
-					const dataer = error.response.data;
-					console.log(
-						errorCode,
-						errorMessage,
-						email,
-						credential,
-						dataer
-					);
-				});
 		},
 		registerFirebase: ({ commit }) => {
 			const provider = new firebase.auth.GoogleAuthProvider();
@@ -819,20 +760,6 @@ export default new Vuex.Store({
 						commit("authSuccess_mutation", response);
 					});
 				})
-				.catch(function(error) {
-					const errorCode = error.code;
-					const errorMessage = error.message;
-					const email = error.email;
-					const credential = error.credential;
-					const dataer = error.response.data;
-					console.log(
-						errorCode,
-						errorMessage,
-						email,
-						credential,
-						dataer
-					);
-				});
 		},
 		userLogout: ({ commit }, user) => {
 			return new Promise((resolve, reject) => {
@@ -843,7 +770,6 @@ export default new Vuex.Store({
 		},
 		forgotPassword: ({ commit }, data) => {
 			axs.post("/ahaapi/lupa_password", data).then(response => {
-				console.log(response.data);
 				commit("showSnackbar", response.data.message);
 			});
 		},
@@ -859,7 +785,6 @@ export default new Vuex.Store({
 					router.push("/login");
 				})
 				.catch(err => {
-					console.log(err.message);
 					commit("showSnackbar", err.message);
 				});
 		},
@@ -937,12 +862,11 @@ export default new Vuex.Store({
 			axs.get("/ahaapi/bantuan?id_bantuan=" + idBantuan)
 				.then(response => {
 					commit("getBantuanDetail_mutation", response.data);
-					console.log(response.data);
 				})
 		}
 	},
 	getters: {
-		isLoggedIn: state => !!state.token,
+		isLoggedIn: state => state.isLoggedIn,
 		authStatus: state => state.status,
 		premiumStatus: state => state.premiumStatus,
 		invoiceDownloadDetail: state => state.invoiceDownloadDetail,
