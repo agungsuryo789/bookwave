@@ -1,47 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 import router from "../router";
 import VuexPersist from "vuex-persistedstate";
 import * as firebase from "firebase/app";
 import BookSearch from "./modules/BookSearch";
 import "firebase/auth";
+import { axs, execute } from "./helper/api";
 
-Vue.use(Vuex, axios);
+execute();
 
-// AXIOS CONFIG
-export const axs = axios.create({
-	baseURL: "https://backend.ahabaca.com",
-	timeout: 30000
-});
-axs.interceptors.request.use(
-	config => {
-		const key = "C94D74AC6115211E9531D5082CA97F2C";
-		const token = window.localStorage.getItem("x-token");
-		config.headers["x-api-key"] = key;
-		if (token) {
-			config.headers["x-token"] = token;
-		}
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
-axs.interceptors.response.use(
-	config => {
-		const key = "C94D74AC6115211E9531D5082CA97F2C";
-		const token = window.localStorage.getItem("x-token");
-		config.headers["x-api-key"] = key;
-		if (token) {
-			config.headers["x-token"] = token;
-		}
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
+Vue.use(Vuex);
 
 // Firebase Config
 const firebaseConfig = {
@@ -60,6 +28,8 @@ firebase.initializeApp(firebaseConfig);
 const vuexSession = new VuexPersist({
 	key: "a7ac33d1966354c33537e0584f42d58d",
 	reducer: state => ({
+		isLoggedIn: state.isLoggedIn,
+		status: state.status,
 		daftarKategoriNoAuth: state.daftarKategoriNoAuth,
 		daftarKategoriAuth: state.daftarKategoriAuth,
 		bookListTrendingNoAuth: state.bookListTrendingNoAuth,
@@ -77,6 +47,7 @@ const vuexSession = new VuexPersist({
 const defaultState = () => {
 	return {
 		loaderStatus: false,
+		isLoggedIn: false,
 		responseStatus: null,
 		daftarKategoriNoAuth: [],
 		topKategoriNoAuth: [],
@@ -152,7 +123,7 @@ export default new Vuex.Store({
 	state: defaultState(),
 	mutations: {
 		resetState_mutation(state) {
-			Object.assign(state);
+			Object.assign(state, defaultState());
 		},
 		setResponse_mutation: (state, response) => {
 			state.responseStatus = response;
@@ -199,7 +170,7 @@ export default new Vuex.Store({
 		},
 		authSuccess_mutation: (state, response) => {
 			state.status = "success";
-			state.token = response.data.token;
+			state.isLoggedIn = true;
 			localStorage.setItem("x-token", response.data.token);
 			state.notifMessage = response.data.message;
 			router.push("/home");
@@ -217,10 +188,11 @@ export default new Vuex.Store({
 			// router.push({ name: 'Register' })
 		},
 		authDown_mutation: state => {
-			state.status = null;
-			state.token = null;
+			state.status = "";
+			state.isLoggedIn = false;
+			state.token = "";
 			state.premiumStatus = null;
-			Object.assign(state);
+			Object.assign(state, defaultState());
 			router.push("/");
 		},
 		getMemberDetail_mutation: (state, response) => {
@@ -412,9 +384,6 @@ export default new Vuex.Store({
 						response.data.daftar_kategori
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookByKategoriNoAuth: ({ commit }, categoryID) => {
 			axs.get(
@@ -436,9 +405,6 @@ export default new Vuex.Store({
 						response.data.top_kategori
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getListBookTrendingNoAuth: ({ commit }) => {
 			axs.get("/ahaapi/beranda_buku_noauth")
@@ -448,9 +414,6 @@ export default new Vuex.Store({
 						response.data.buku_trending
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// Auth Action
 		// Book GET
@@ -459,27 +422,18 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getBerandaBukuAuth_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookNew: ({ commit }) => {
 			axs.get("/ahaapi/buku_terbaru")
 				.then(response => {
 					commit("getBookNew_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookTrending: ({ commit }) => {
 			axs.get("/ahaapi/buku_trending")
 				.then(response => {
 					commit("getBookTrending_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getDaftarKategoriAuth: ({ commit }) => {
 			axs.get("/ahaapi/daftar_kategori")
@@ -489,9 +443,6 @@ export default new Vuex.Store({
 						response.data.data
 					);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// Book Search Action
 		// Book n Chapter ACtion
@@ -500,9 +451,6 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getBookDetailByID_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookChapter: ({ commit }, dispatchPayload) => {
 			axs.get(
@@ -514,144 +462,96 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getBookChapter_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookOutline: ({ commit }, bookId) => {
 			axs.get("/ahaapi/outline_buku?id_buku=" + bookId)
 				.then(response => {
 					commit("getBookOutline_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBookIntisari: ({ commit }, dispatchPayload) => {
 			axs.get("/ahaapi/intisari?id_buku=" + dispatchPayload)
 				.then(response => {
 					commit("getBookIntisari_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setBookDone: ({ commit }, payloadDone) => {
 			axs.post("/ahaapi/selesai_baca", payloadDone)
 				.then(response => {
 					commit("setBookDone_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setBookmark: ({ commit }, payloadBookmark) => {
 			axs.post("/ahaapi/simpan_buku", payloadBookmark)
 				.then(response => {
 					commit("setBookmark_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setDeleteKoleksi: ({ commit }, payloadFav) => {
 			axs.post("/ahaapi/hapus_koleksi_buku", payloadFav)
 				.then(response => {
 					commit("setDeleteKoleksi_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setBookFavorit: ({ commit }, payloadFav) => {
 			axs.post("/ahaapi/tambah_favorite", payloadFav)
 				.then(response => {
 					commit("setBookFavorit_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		delBookFavorit: ({ commit }, payloadFav) => {
 			axs.post("/ahaapi/hapus_favorite", payloadFav)
 				.then(response => {
 					commit("setBookFavorit_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setChapterHighlight: ({ commit }, highlightPayload) => {
 			axs.post("/ahaapi/highlight_chapter", highlightPayload)
 				.then(response => {
 					commit("setChapterHighlight_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		setDelChapterHighlight: ({ commit }, delHighlightPayload) => {
 			axs.post("/ahaapi/hapus_highlight", delHighlightPayload)
 				.then(response => {
 					commit("setDelChapterHighlight_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		saveChapterSingle: ({ commit }, payload) => {
 			axs.post("/ahaapi/tambah_audio", payload)
 				.then(response => {
 					commit("saveChapterSingle_mutation");
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		addTag: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/tambah_tag", tagPayload)
 				.then(response => {
 					commit("addTag_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		editTagAll: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/ubah_tag", tagPayload)
 				.then(response => {
 					commit("editTagRes_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		deleteTagFromAll: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/hapus_tag", tagPayload)
 				.then(response => {
 					router.push("/library/book");
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		deleteTagByBook: ({ commit }, tagPayload) => {
 			axs.post("/ahaapi/hapus_tag", tagPayload)
 				.then(response => {
 					router.push("/home");
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		sendBookComment: ({ commit }, payload) => {
 			axs.post("/ahaapi/score_member", payload)
 				.then(response => {
 					console.log(response.message);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		// GET account user
 		getAccountDetail: ({ commit }) => {
@@ -969,90 +869,60 @@ export default new Vuex.Store({
 				.then(response => {
 					commit("getTerms_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getUserPrivacy: ({ commit }) => {
 			axs.get("/ahaapi/privasi_user")
 				.then(response => {
 					commit("getUserPrivacy_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getApplicationPrivacy: ({ commit }) => {
 			axs.get("/ahaapi/privasi_aplikasi")
 				.then(response => {
 					commit("getApplicationPrivacy_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getDisclaimer: ({ commit }) => {
 			axs.get("/ahaapi/disclaimer")
 				.then(response => {
 					commit("getDisclaimer_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getAbout: ({ commit }) => {
 			axs.get("/ahaapi/about")
 				.then(response => {
 					commit("getAbout_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getContact: ({ commit }) => {
 			axs.get("/ahaapi/contact")
 				.then(response => {
 					commit("getContact_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getCareer: ({ commit }) => {
 			axs.get("/ahaapi/karir")
 				.then(response => {
 					commit("getCareer_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBlog: ({ commit }) => {
 			axs.get("/ahaapi/blog")
 				.then(response => {
 					commit("getBlog_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBlogDetail: ({ commit }, idBlog) => {
 			axs.get("/ahaapi/detail_blog?id=" + idBlog)
 				.then(response => {
 					commit("getBlogDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getCareerDetail: ({ commit }, idKarir) => {
 			axs.get("/ahaapi/detail_karir?id=" + idKarir)
 				.then(response => {
 					commit("getCareerDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBantuan: ({ commit }) => {
 			axs.get("/ahaapi/bantuan_category")
@@ -1060,23 +930,17 @@ export default new Vuex.Store({
 					const resp = response.data;
 					commit("getBantuan_mutation", resp);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		},
 		getBantuanDetail: ({ commit }, idBantuan) => {
 			axs.get("/ahaapi/bantuan?id_bantuan=" + idBantuan)
 				.then(response => {
 					commit("getBantuanDetail_mutation", response.data);
 				})
-				.catch(err => {
-					console.log(err.message);
-				});
 		}
 	},
 	getters: {
-		isLoggedIn: state => !!state.token,
-		authStatus: state => state.status,
+		isLoggedIn: state => state.isLoggedIn,
+npm 		authStatus: state => state.status,
 		premiumStatus: state => state.premiumStatus,
 		invoiceDownloadDetail: state => state.invoiceDownloadDetail,
 		careerlist: state => state.career.data,

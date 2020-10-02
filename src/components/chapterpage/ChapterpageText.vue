@@ -187,7 +187,6 @@ export default {
             btHg.classList.add("glowing-animation");
             window.getSelection().removeAllRanges();
             window.scrollTo(0, 0);
-            alert("Click the Pencil Icon(Top Right) to enable Highlight Text");
           };
 
           chapterBody.appendChild(hgText);

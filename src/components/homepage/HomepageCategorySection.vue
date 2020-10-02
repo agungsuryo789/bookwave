@@ -190,7 +190,7 @@ export default {
 			this.filterByCategory = true;
 		}
 	},
-	created() {
+	mounted() {
 		this.$store.dispatch("getKategoriNoAuth");
 		this.$store.dispatch("getListBookTrendingNoAuth");
 	}
