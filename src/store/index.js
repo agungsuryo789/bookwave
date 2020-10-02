@@ -940,7 +940,7 @@ export default new Vuex.Store({
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
-npm 		authStatus: state => state.status,
+		authStatus: state => state.status,
 		premiumStatus: state => state.premiumStatus,
 		invoiceDownloadDetail: state => state.invoiceDownloadDetail,
 		careerlist: state => state.career.data,
