@@ -6,7 +6,7 @@ build prod:
   image: node:10.15.0-stretch
   stage: build
   only:
-    - master
+    - dev
     - tags
   script:
     # Install vuecli
@@ -27,7 +27,7 @@ deploy prod:
   image: python:latest
   stage: deploy
   only:
-    - master
+    - dev
     - tags
   script:
     - pip install awscli
