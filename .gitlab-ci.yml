@@ -8,8 +8,8 @@ build prod:
   only:
     - master
   script:
-    - npm install
-    - npm install -g @vue/cli@latest
+    - npm install --prefer-offline --no-audit
+    - npm install -g @vue/cli@latest --prefer-offline --no-audit
     - npm run build
   artifacts:
     paths:
