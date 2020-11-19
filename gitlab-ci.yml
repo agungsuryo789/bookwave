@@ -9,15 +9,11 @@ build prod:
     - dev
     - tags
   script:
-    # Install vuecli
     - npm install -g @vue/cli@latest
-    # Install dependencies
     - npm install
-    # Build App
     - npm run build
   artifacts:
     paths:
-      # Build folder
       - dist/
     expire_in: 1 hour
   tags:
