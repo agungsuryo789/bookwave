@@ -2,7 +2,7 @@ stages:
   - build
   - deploy
 
-build prod:
+build static-s3:
   image: node:10.15.0-stretch
   stage: build
   only:
@@ -18,7 +18,7 @@ build prod:
   tags:
     - aha-web-ec2-runner
 
-deploy prod:
+deploy static-s3:
   image: python:latest
   stage: deploy
   only:
