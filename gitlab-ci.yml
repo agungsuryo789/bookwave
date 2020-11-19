@@ -7,7 +7,6 @@ build prod:
   stage: build
   only:
     - dev
-    - tags
   script:
     - npm install -g @vue/cli@latest
     - npm install
@@ -24,7 +23,6 @@ deploy prod:
   stage: deploy
   only:
     - dev
-    - tags
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
