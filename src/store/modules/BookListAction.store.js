@@ -4,7 +4,7 @@ Vue.use(axios);
 
 // AXIOS CONFIG
 export const axs = axios.create({
-    baseURL: "https://backend.ahabaca.com",
+    baseURL: "http://backend.ahabaca.com",
     timeout: 30000
 });
 axs.interceptors.request.use(

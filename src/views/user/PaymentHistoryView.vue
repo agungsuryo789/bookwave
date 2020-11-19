@@ -87,7 +87,7 @@ export default {
   }),
   methods: {
     toDownloadInvoice(val) {
-      const x = "https://backend.ahabaca.com/uploads/invoice/";
+      const x = "http://backend.ahabaca.com/uploads/invoice/";
       setTimeout(function() {
         window.open(x + val);
       }, 300);
