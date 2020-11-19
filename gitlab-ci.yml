@@ -6,7 +6,7 @@ build prod:
   image: node:10.15.0-stretch
   stage: build
   only:
-    - dev
+    - master
   script:
     - npm install -g @vue/cli@latest
     - npm install
@@ -22,7 +22,7 @@ deploy prod:
   image: python:latest
   stage: deploy
   only:
-    - dev
+    - master
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
