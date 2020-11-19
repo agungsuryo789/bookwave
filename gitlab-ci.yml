@@ -19,6 +19,8 @@ build prod:
       # Build folder
       - dist/
     expire_in: 1 hour
+  tags:
+    - shared
 
 deploy prod:
   image: python:latest
@@ -28,6 +30,8 @@ deploy prod:
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
+  tags:
+    - shared
 
 build stage:
   image: node:10.15.0-stretch
@@ -46,6 +50,8 @@ build stage:
       # Build folder
       - dist/
     expire_in: 1 hour
+  tags:
+    - shared
 
 deploy stage:
   image: python:latest
@@ -55,3 +61,5 @@ deploy stage:
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
+  tags:
+    - shared
