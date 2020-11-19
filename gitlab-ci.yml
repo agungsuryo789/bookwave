@@ -6,6 +6,7 @@ build prod:
   image: node:10.15.0-stretch
   stage: build
   only:
+    - master
     - tags
   script:
     # Install vuecli
@@ -26,38 +27,8 @@ deploy prod:
   image: python:latest
   stage: deploy
   only:
+    - master
     - tags
-  script:
-    - pip install awscli
-    - aws s3 sync ./dist s3://aha-website-deployment
-  tags:
-    - aha-web-ec2-runner
-
-build stage:
-  image: node:10.15.0-stretch
-  stage: build
-  only:
-    - dev
-  script:
-    # Install vuecli
-    - npm install -g @vue/cli@latest
-    # Install dependencies
-    - npm install
-    # Build App
-    - npm run build-dev
-  artifacts:
-    paths:
-      # Build folder
-      - dist/
-    expire_in: 1 hour
-  tags:
-    - aha-web-ec2-runner
-
-deploy stage:
-  image: python:latest
-  stage: deploy
-  only:
-    - dev
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
