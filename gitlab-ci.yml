@@ -20,7 +20,7 @@ build prod:
       - dist/
     expire_in: 1 hour
   tags:
-    - shared
+    - aha-web-ec2-runner
 
 deploy prod:
   image: python:latest
@@ -31,7 +31,7 @@ deploy prod:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
   tags:
-    - shared
+    - aha-web-ec2-runner
 
 build stage:
   image: node:10.15.0-stretch
@@ -51,7 +51,7 @@ build stage:
       - dist/
     expire_in: 1 hour
   tags:
-    - shared
+    - aha-web-ec2-runner
 
 deploy stage:
   image: python:latest
@@ -62,4 +62,4 @@ deploy stage:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
   tags:
-    - shared
+    - aha-web-ec2-runner
