@@ -7,17 +7,12 @@ build prod:
   stage: build
   only:
     - master
-    - tags
   script:
-    # Install vuecli
     - npm install -g @vue/cli@latest
-    # Install dependencies
     - npm install
-    # Build App
     - npm run build
   artifacts:
     paths:
-      # Build folder
       - dist/
     expire_in: 1 hour
   tags:
@@ -28,7 +23,6 @@ deploy prod:
   stage: deploy
   only:
     - master
-    - tags
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://aha-website-deployment
