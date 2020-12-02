@@ -51,12 +51,20 @@ export default {
 
 <style scoped lang="scss">
 .container-navbar-category {
-  background-color: white;
-  border: 2px solid rgb(184, 184, 184);
-  border-bottom: 6px solid rgb(184, 184, 184);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background-color: #F5F5F5;
   z-index: 999;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  &::after{
+    position: fixed;
+    content: "";
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba($color: #000000, $alpha: .3);
+    z-index: -1;
+  }
   .navbar-category-title {
     @media screen and (max-width: 450px) {
       font-size: 16px;

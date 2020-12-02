@@ -1,7 +1,7 @@
 <template>
-  <v-container class>
-    <v-row class="row-banner-image d-flex flex-row justify-space-between mx-auto mt-lg-12">
-      <v-col class="col-banner-text text-center text-lg-left" lg="6" md="12" sm="12" cols="12">
+  <v-container class="main-container">
+    <v-row>
+      <v-col class="col-banner-text text-center text-md-left" md="6" sm="12" cols="12">
         <h1 class="my-2">Halo Saya AHA</h1>
         <p class="my-2">
           Ahabaca memungkinkan Anda membaca ratusan koleksi buku. Mulai uji coba gratis Anda hari ini dan cari tahu caranya.
@@ -16,7 +16,7 @@
           depressed
         >Start Free Trial</v-btn>
       </v-col>
-      <v-col class="col-banner-img" lg="6" md="12" sm="12" cols="12">
+      <v-col class="col-banner-img" md="6" sm="12" cols="12">
         <v-img src="@/assets/image/aha-homapage-banner.png" aspect-ratio="1.1" style="z-index:4;"></v-img>
       </v-col>
     </v-row>
@@ -47,7 +47,6 @@ export default {
   }
   p {
     font-size: 20px;
-    letter-spacing: 1px;
   }
   @media screen and (max-width: 720px) {
     h1 {
@@ -103,14 +102,9 @@ export default {
     top: 150px;
     z-index: 3;
   }
-  @media screen and (max-width: 1100px) {
+  @media (max-width: 991.98px) {
     display: none;
   }
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-  @media screen and (max-width: 600px) {
-    display: none;
-  }
+
 }
 </style>

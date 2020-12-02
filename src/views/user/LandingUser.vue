@@ -5,7 +5,7 @@
 			<LandingHeader />
 		</header>
 		<section>
-			<v-container v-if="!loadSkeleton">
+			<v-container v-if="!loadSkeleton" class="second-container">
 				<div v-if="bookBerandaAuth.buku_trending.length > 0">
 					<router-link
 						:to="{
@@ -127,7 +127,7 @@
 				</div>
 				<SnackbarToast />
 			</v-container>
-			<v-container v-else-if="loadSkeleton">
+			<v-container v-else-if="loadSkeleton" class="second-container">
 				<v-progress-linear
 					v-model="underlineValue"
 					color="#E76464"
@@ -144,7 +144,6 @@
 					>
 						<v-skeleton-loader
 							class="mx-auto"
-							width="250"
 							type="card"
 						></v-skeleton-loader>
 					</v-col>
@@ -165,7 +164,6 @@
 					>
 						<v-skeleton-loader
 							class="mx-auto"
-							width="250"
 							type="card"
 						></v-skeleton-loader>
 					</v-col>
@@ -186,7 +184,6 @@
 					>
 						<v-skeleton-loader
 							class="mx-auto"
-							width="250"
 							type="card"
 						></v-skeleton-loader>
 					</v-col>

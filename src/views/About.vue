@@ -1,8 +1,10 @@
 <template>
 	<div class="about">
 		<NavbarSection />
+
 		<AboutHeader title="About AHA" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, ed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-		<v-container>
+
+		<v-container style="margin-top:50px">
 			<v-row v-for="item in about" :key="item.id_about_us">
 				<v-col cols="12" md="2">
 					<v-img src="@/assets/image/annie-spratt-mppDYKjJ7II-unsplash.png"></v-img>

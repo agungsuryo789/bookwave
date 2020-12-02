@@ -19,20 +19,18 @@
                 </p>
                 <v-text-field
                   v-model="emailReg"
-                  class="centered-input"
+                  class="centered-input form-auth"
                   :error-messages="emailErrors"
                   required
                   @input="$v.email.$touch()"
                   @blur="$v.email.$touch()"
                   solo
-                  background-color="grey lighten-2"
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-row justify="center">
               <v-col align="center">
                 <v-btn
-                  :elevation="8"
                   color="red darken-1"
                   x-large
                   class="white--text"
@@ -48,7 +46,7 @@
                   <v-icon class="red--text text--lighten-1 mr-3">mdi-lock-outline</v-icon>Kata Sandi
                 </p>
                 <v-text-field
-                  class="centered-input"
+                  class="centered-input form-auth"
                   v-model="passwordReg"
                   :error-messages="passwordErrors"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -58,14 +56,12 @@
                   @input="$v.password.$touch()"
                   @blur="$v.password.$touch()"
                   solo
-                  background-color="grey lighten-2"
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-row justify="center">
               <v-col align="center">
                 <v-btn
-                  :elevation="8"
                   color="red darken-1"
                   x-large
                   class="white--text"

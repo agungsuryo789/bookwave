@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="grey-container">
     <NavbarSection />
-    <v-container>
+    <v-container class="second-container">
       <v-row>
         <v-col>
-          <h1>Payment History</h1>
+          <h1 class="mb-2">Payment History</h1>
           <div class="title-underline d-flex flex-row justify-start">
             <img src="@/assets/image/underline-1.svg" height="8" />
             <img class="mx-2" src="@/assets/image/underline-2.svg" height="8" />
@@ -22,24 +22,24 @@
               v-for="item in paymentHistoryList"
               :key="item.id_transaksi"
             >
-              <v-card @click="toDownloadInvoice(item.invoice_file)">
-                <v-row style="margin:0 auto;">
+              <v-card class="card-sd" @click="toDownloadInvoice(item.invoice_file)">
+                <v-row style="margin:0 auto;" class="align-items-center">
                   <v-col class="hide-on-sm" lg="3">
                     <v-img
                       src="@/assets/image/payment-image.png"
                       alt="AHA Payment history"
                       contain
                       width="150"
-                      height="150"
+                      height="110"
                       style="margin: 0 auto;"
                     ></v-img>
                   </v-col>
                   <v-col lg="8">
-                    <v-card-title style="font-weight:bold;">{{item.nama_langganan}}</v-card-title>
-                    <v-card-text style="font-weight:bold;">{{item.order_id}}</v-card-text>
-                    <v-card-subtitle>
-                      <span class="mx-1">{{item.tgl_bayar}}</span>|
-                      <span class="mx-1">Status: {{item.status_transaksi}}</span>
+                    <v-card-title class="py-0 px-0" style="font-weight:bold;">{{item.nama_langganan}}</v-card-title>
+                    <v-card-text class="py-0 px-0" style="font-weight:bold;">{{item.order_id}}</v-card-text>
+                    <v-card-subtitle class="pb-0 px-0" style="font-weight: 600;color: #4C4C4C;opacity:.6">
+                      <span>{{item.tgl_bayar}}</span><span class="mx-2">|</span>
+                      <span>Status: {{item.status_transaksi}}</span>
                     </v-card-subtitle>
                   </v-col>
                 </v-row>
@@ -104,5 +104,9 @@ export default {
   @media screen and (max-width: 450px) {
     display: none;
   }
+}
+.card-sd{
+  box-shadow: none;
+  margin-bottom: 15px;
 }
 </style>

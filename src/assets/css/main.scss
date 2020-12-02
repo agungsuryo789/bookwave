@@ -1,0 +1,124 @@
+.theme--light.v-application {
+    color: #4C4C4C;
+}
+.theme--light.v-btn {
+    color: #4C4C4C;
+}
+.theme--light.v-card {
+    color: #4C4C4C;
+}
+.main-container {
+    max-width: 1500px;
+    margin: auto;
+}
+
+.title-underline {
+    margin-bottom: 20px;
+    img {
+        margin: 0 4px;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+.img-fluid {
+    max-width: 100%;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.btn-auth {
+    background: #fff !important;
+    border: 2px #dddddd solid;
+    border-bottom: 4px #dddddd solid;
+    border-radius: 8px;
+    height: 52px !important;
+    text-transform: none;
+    font-weight: 700 !important;
+    color: #929292 !important;
+    .v-btn__content {
+        justify-content: flex-start;
+    }
+}
+.v-application .elevation-1.btn-auth {
+    box-shadow: none !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+
+.form-auth {
+    .v-input__slot {
+        background: #f2f2f2 !important;
+        border-radius: 16px;
+        box-shadow: none !important;
+        height: 55px !important;
+        input{
+            color: #6F6F6F !important;
+            font-weight: 600 !important;
+        }
+    }
+}
+
+.v-application .red.darken-1 {
+    background-color: #d84b5b !important;
+    border: 2px #D33131 solid !important;
+    border-bottom: 4px #D33131 solid !important;
+    font-size: 14px;
+    font-weight: 900;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 8px !important;
+}
+
+.v-btn--contained{
+    box-shadow: none;
+}
+.second-container {
+    max-width: 1785px;
+    margin: auto;
+}
+
+.v-tabs--grow > .v-tabs-bar .v-tab {
+    font-weight: 900;
+}
+
+.v-list-item{
+    padding: 0 28px;
+}
+.grey-container{
+    min-height: 100%;
+    background: #f7f7f7;
+}
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1366.98px) {
+    .main-container {
+        max-width: 1100px;
+    }
+    .second-container {
+        max-width: 1300px;
+    }
+}
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+    .main-container {
+        max-width: 928px;
+    }
+
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+    .home-banner-hero {
+        padding-right: 15px;
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+}

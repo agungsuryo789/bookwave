@@ -14,7 +14,7 @@
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
               <router-link to="/login/email" tag="button" style="width:100%;">
-                <v-btn :elevation="1" block>
+                <v-btn :elevation="1" block class="btn-auth">
                   <v-icon dark left>mdi-email-outline</v-icon>Sign in with Email
                 </v-btn>
               </router-link>
@@ -23,14 +23,14 @@
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
               <!--<section block id="firebaseui-auth-container"></section>-->
-              <v-btn :elevation="1" block @click="login">
+              <v-btn :elevation="1" block class="btn-auth" @click="login">
                 <v-icon dark left>mdi-google</v-icon>Sign in with Google
               </v-btn>
             </v-col>
           </v-row>
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
-              <v-btn :elevation="1" block @click="loginfb">
+              <v-btn :elevation="1" block class="btn-auth" @click="loginfb">
                 <v-icon dark left>mdi-facebook</v-icon>Sign in with Facebook
               </v-btn>
             </v-col>

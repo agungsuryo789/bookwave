@@ -5,38 +5,38 @@
 		<div class="container">
 			<v-row>
 				<v-col md="6">
-					<h1 class="larger"> General </h1>
+					<h1> General </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
 				<v-col xs="4" md="3">
 					<div v-for="item in topKategoriNoAuth.slice(0, 3)" :key="item.id_daftar_kategori">
-						<router-link :to="{ name: 'CategoryPage', params: { idKategori: item.id_daftar_kategori }}"><p class="larger"> {{ item.nama_kategori }} </p></router-link>
+						<router-link :to="{ name: 'CategoryPage', params: { idKategori: item.id_daftar_kategori }}"><p> {{ item.nama_kategori }} </p></router-link>
 					</div>
 				</v-col>
 				<v-col xs="4" md="3">
 					<router-link to="/promo">
-						<p class="larger"> Promotion </p>
+						<p> Promotion </p>
 					</router-link>
 					<router-link to="/blog">
-						<p class="larger"> Blog </p>
+						<p> Blog </p>
 					</router-link>
 					<router-link to="/contact">
-						<p class="larger"> Contact & Help </p>
+						<p> Contact & Help </p>
 					</router-link>
 					<router-link to="/troubleshoot">
-						<p class="larger">Troubleshoot</p>
+						<p>Troubleshoot</p>
 					</router-link>
 				</v-col>
 				<v-col xs="4" md="3">
 					<router-link to="/about">
-						<p class="larger"> About </p>
+						<p> About </p>
 					</router-link>
 					<router-link to="/career">
-						<p class="larger"> Careers </p>
+						<p> Careers </p>
 					</router-link>
 					<router-link to="/partnership">
-						<p class="larger"> Partners </p>
+						<p> Partners </p>
 					</router-link>
 				</v-col>
 			</v-row>
@@ -44,13 +44,13 @@
 			<hr>
 			<v-row class="mt-6">
 				<v-col md="6">
-					<h1 class="larger"> Top Articles </h1>
+					<h1> Top Articles </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
 				<v-col cols="12" md="4" v-for="item in blog" :key="item.id_blog_tbl">
 					<router-link :to="{ name: 'BlogDetail', params: { idBlog: item.id_blog_tbl }}">
-						<p class="larger">{{ item.judul }} </p>
+						<p>{{ item.judul }} </p>
 					</router-link>
 				</v-col>
 			</v-row>

@@ -17,9 +17,8 @@
                 <v-icon class="red--text text--lighten-1 mr-3">mdi-email-outline</v-icon>Alamat Email
               </p>
               <v-text-field
-                  class="centered-input"
+                  class="centered-input form-auth"
                   solo
-                  background-color="grey lighten-2"
                   v-model="email"
                   :error-messages="emailErrors"
                   required
@@ -29,11 +28,9 @@
             </v-col>
           </v-row>
           <v-row justify="center">
-            <v-col cols="3" md="1" align="center">
+            <v-col cols="4" align="center">
               <v-btn
-                :elevation="8"
                 color="red darken-1"
-                block
                 x-large
                 class="white--text"
                 v-on:click="submit"

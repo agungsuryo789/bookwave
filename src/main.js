@@ -8,6 +8,7 @@ import vuetify from "./plugins/vuetify";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 import "./assets/css/global_variables.scss";
+import "./assets/css/main.scss";
 import Vuelidate from 'vuelidate';
 import VueSocialSharing from 'vue-social-sharing'
 

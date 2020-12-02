@@ -1,5 +1,5 @@
 <template>
-  <v-card class="promo-card rounded-lg" shaped flat width="550px" height="150px">
+  <v-card class="promo-card rounded-lg" shaped flat max-width="765px" height="150px">
     <div
       class="promo-card-data d-flex flex-column justify-space-between align-center"
       style="height:100%;"
@@ -43,7 +43,7 @@ export default {
       margin-top: auto;
     }
     p {
-      padding: 5px 4px;
+      padding: 5px 14px;
       margin-top: 5px;
       background-color: #d33131;
     }

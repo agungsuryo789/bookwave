@@ -8,6 +8,7 @@
             <!--<h1 style="position:absolute;top:45%;left:50%;color:white;">AHA</h1>-->
             <v-col class="my-12 my-lg-0" cols="12" md="8">
               <v-text-field
+                class="form-rounded"
                 solo
                 rounded
                 label="Temukan yang anda cari disini"
@@ -63,8 +64,33 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 .larger {
   font-size: larger;
+}
+.form-rounded{
+  .v-input__slot{
+    box-shadow: none !important;
+  }
+  &.v-input--is-focused{
+    .primary--text{
+      color: rgba(0, 0, 0, 0.54) !important;
+    }
+  }
+}
+
+.v-application .deep-purple--text.text--accent-4 {
+    color: #522d5b !important;
+    caret-color: #522d5b !important;
+    border-color: #522d5b;
+    border-radius: 11px;
+    text-transform: none;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    height: 54px;
+    &:hover{
+      background: #522d5b ;
+      color:#fff !important;
+    }
 }
 </style>

@@ -10,11 +10,15 @@
             </v-col>
           </v-row>
         </v-col>
-		<v-col cols="12" class="mt-8">
+        <v-col cols="12" class="mt-8">
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
-              <router-link to="/register/email" tag="button" style="width:100%;">
-                <v-btn :elevation="1" block>
+              <router-link
+                to="/register/email"
+                tag="button"
+                style="width: 100%"
+              >
+                <v-btn :elevation="1" block class="btn-auth">
                   <v-icon dark left>mdi-email-outline</v-icon>Sign up with Email
                 </v-btn>
               </router-link>
@@ -22,22 +26,22 @@
           </v-row>
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
-              <v-btn :elevation="1" block @click="register">
+              <v-btn :elevation="1" block class="btn-auth" @click="register">
                 <v-icon dark left>mdi-google</v-icon>Sign up with Google
               </v-btn>
             </v-col>
           </v-row>
           <v-row justify="center">
             <v-col cols="12" md="4" align="center">
-              <v-btn :elevation="1" block @click="loginfb">
+              <v-btn :elevation="1" block class="btn-auth" @click="loginfb">
                 <v-icon dark left>mdi-facebook</v-icon>Sign up with Facebook
               </v-btn>
             </v-col>
           </v-row>
-		</v-col>
-		</v-row>
-          <v-spacer></v-spacer>
-          <MasukLink />
+        </v-col>
+      </v-row>
+      <v-spacer></v-spacer>
+      <MasukLink />
     </v-container>
   </div>
 </template>
@@ -50,21 +54,22 @@ import MasukLink from "@/components/auth/MasukLink.vue";
 export default {
   name: "Register",
   components: {
-	NavbarSection,
-	MasukLink
+    NavbarSection,
+    MasukLink,
   },
   methods: {
     register() {
       this.$store.dispatch("loginFirebase");
-	  this.$store.dispatch("getMemberDetail");
+      this.$store.dispatch("getMemberDetail");
     },
     loginfb() {
       this.$store.dispatch("loginFacebook");
-	  this.$store.dispatch("getMemberDetail");
+      this.$store.dispatch("getMemberDetail");
     },
     logout() {
       Firebase.logout();
-	}
-  }
+    },
+  },
 };
 </script>
+

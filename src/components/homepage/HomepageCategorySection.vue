@@ -1,6 +1,6 @@
 <template>
-	<v-container>
-		<v-row class="kategori-desc mx-auto" style="max-width:900px;">
+	<v-container class="main-container">
+		<v-row class="kategori-desc mx-auto">
 			<v-col lg="6" md="12" sm="12" cols="12">
 				<h1 style="max-width:400px;">Kategori yang sering di cari</h1>
 				<div
@@ -63,7 +63,7 @@
 				></v-skeleton-loader>
 			</v-col>
 		</v-row>
-		<v-row style="margin:0 auto;max-width:900px;">
+		<v-row class="mx-0">
 			<v-col>
 				<h1 style="color:#6c3f72;">Terpopuler di Kategori Semua</h1>
 				<div
@@ -203,6 +203,9 @@ export default {
 		font-size: 38px;
 		color: #d84b5b;
 		font-weight: 700;
+		@media (max-width: 767.98px) {
+			font-size: 28px;
+		}
 	}
 	p {
 		letter-spacing: 1px;
@@ -213,7 +216,7 @@ export default {
 	.chip-card {
 		border-top: none;
 		border-bottom: none;
-		width: 700px;
+		width: 88%;
 	}
 	.category-slide-group {
 		border-top: none;

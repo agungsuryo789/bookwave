@@ -21,7 +21,7 @@
 								(bookName = bookTrending.data[0].judul)
 							)
 						"
-						style="text-decoration:none;color:black;"
+						style="text-decoration:none;color:#4C4C4C;"
 					>
 						<h1>{{ bookTrending.data[0].judul }}</h1>
 					</a>

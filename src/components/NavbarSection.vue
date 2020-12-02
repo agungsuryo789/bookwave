@@ -1,28 +1,25 @@
 <template>
 	<div>
-		<v-container class="navbar-section px-0 mb-md-10" fluid>
+		<v-container class="navbar-section px-0 pt-0 mb-md-10" fluid>
 			<v-row>
-				<v-col class="mb-md-7">
+				<v-col class="py-0">
 					<nav
 						v-if="userState"
 						class="navbar navbar--auth"
 						style="background-color:white;"
 					>
 						<v-toolbar
-							class="app-bar"
+							class="app-bar second-container px-0 py-0"
 							id="appBar"
 							color="white"
-							absolute
 							light
 							flat
-							elevation="3"
-							style="width:100%;"
 						>
 							<v-toolbar-title id="appLogo">
 								<router-link to="/home">
 									<v-img
 										alt="Vuetify Logo"
-										class="shrink ml-5"
+										class="shrink"
 										contain
 										src="@/assets/image/aha-red.svg"
 										transition="scale-transition"
@@ -49,21 +46,21 @@
 									depressed
 									v-click-outside="hide"
 									@click="showCategory = !showCategory"
-									style="text-transform:none;font-size:18px;font-weight:600;"
-									>Temukan</v-btn
+									style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
+									>Temukan <v-icon dark right>mdi-chevron-down</v-icon></v-btn
 								>
 								<v-btn
 									to="/library/book"
 									color="transparent"
 									depressed
-									style="text-transform:none;font-size:18px;font-weight:600;"
+									style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
 									>Library</v-btn
 								>
 								<v-btn
 									to="/promo"
 									color="transparent"
 									depressed
-									style="text-transform:none;font-size:18px;font-weight:600;"
+									style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
 									>Promo</v-btn
 								>
 							</v-toolbar-items>
@@ -88,16 +85,15 @@
 									v-if="memberDetail.data && !isTroubleshoot"
 								>
 									<v-btn
-										class="button-subscribe mx-5 my-3"
+										class="button-subscribe my-3"
 										rounded
 										depressed
 										color="#39DF8C"
-										elevation="2"
 										v-if="
 											!memberDetail.data[0].premium_member
 										"
 										to="/plans"
-										style="text-transform:none;color:white;"
+										style="text-transform:none;color:white;font-size:18px;letter-spacing: 0.3px;font-weight: 800;"
 										>Upgrade Premium</v-btn
 									>
 								</div>
@@ -125,7 +121,8 @@
 											v-on="on"
 											color="transparent"
 											depressed
-											>You</v-btn
+											style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
+											>You <v-icon dark right>mdi-chevron-down</v-icon></v-btn
 										>
 									</template>
 									<v-list>
@@ -313,10 +310,9 @@
 						style="background-color:#D84B5B;"
 					>
 						<v-toolbar
-							class="app-bar--no-auth"
+							class="app-bar--no-auth main-container"
 							id="appBar"
 							color="#D84B5B"
-							absolute
 							light
 							flat
 							style
@@ -325,7 +321,7 @@
 								<router-link to="/">
 									<v-img
 										alt="Vuetify Logo"
-										class="shrink ml-5 mr-2"
+										class="shrink "
 										contain
 										src="@/assets/image/aha-white.svg"
 										transition="scale-transition"
@@ -343,13 +339,14 @@
 										color="#39DF8C"
 										elevation="2"
 										depressed
+										style="text-transform:none;color:white;font-size:18px;letter-spacing: 0.3px;font-weight: 800;"
 										>Start Trial</v-btn
 									>
 									<v-btn
 										@click="toLogin"
 										color="transparent"
 										depressed
-										style="text-transform:none;font-size:18px;font-weight:600;color:white;"
+										style="text-transform:none;font-size:18px;font-weight:800;color:white;letter-spacing: 0.3px;"
 										>Login</v-btn
 									>
 								</div>
@@ -459,6 +456,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.navbar-header{
+	background: #D84B5B;
+}
+
+.navbar--auth{
+-webkit-box-shadow: 0px 4px 0px 0px rgba(221,221,221,1);
+-moz-box-shadow: 0px 4px 0px 0px rgba(221,221,221,1);
+box-shadow: 0px 4px 0px 0px rgba(221,221,221,1);
+z-index: 999;
+position: relative;
+}
 .navbar {
 	.navbarChangeColor {
 		background-color: white;
@@ -469,7 +477,7 @@ export default {
 		.button-subscribe {
 			text-transform: none;
 			padding: 6px 10px;
-			width: 150px;
+			width: 212px;
 			color: white;
 			background-color: #39df8c;
 			@media screen and (max-width: 425px) {
@@ -488,7 +496,6 @@ export default {
 	}
 	.app-bar {
 		width: 100%;
-		padding: 0 5%;
 		border-bottom: 2px solid black;
 		@media screen and (max-width: 425px) {
 			padding: 0;
@@ -497,7 +504,6 @@ export default {
 	}
 	.app-bar--no-auth {
 		width: 100%;
-		padding: 0 3%;
 		@media screen and (max-width: 425px) {
 			padding: 0;
 			margin: 0;

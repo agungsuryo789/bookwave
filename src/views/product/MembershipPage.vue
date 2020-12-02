@@ -14,7 +14,7 @@
         <v-row class="px-12">
           <v-col lg="6" md="6" sm="12" cols="12" v-for="item in subList" :key="item.id_langganan">
             <v-card class="card-plans" shaped>
-              <div class="d-flex flex-row justify-space-between pt-2">
+              <div class="d-flex flex-row justify-space-between pt-2 pr-3">
                 <div
                   v-if="item.id_langganan == 2"
                   class="subcription-page--price-badge justify-center align-center"
@@ -24,19 +24,16 @@
                 <div v-else></div>
                 <v-btn
                   class="btn-subs-pay"
-                  color="#D32F2F"
-                  elevation="3"
+                  color="red darken-1"
                   ripple
                   style="color:white;font-weight:bold;"
                   @click="pay(item.id_langganan)"
                 >Coba Sekarang</v-btn>
               </div>
-              <v-card-title>{{ item.nama_langganan }}</v-card-title>
+              <v-card-title class="title-pre">{{ item.nama_langganan }}</v-card-title>
               <v-card-text>
-                <h2>{{ item.harga }} / Bulan</h2>
-                <p
-                  class="my-3"
-                  style="color:black;font-size:14px;letter-spacing:1px;white-space:pre-line;"
+                <h2 class="price">{{ item.harga }} / Bulan</h2>
+                <p class="price-desc"
                 >{{ item.deskripsi }}</p>
               </v-card-text>
             </v-card>
@@ -99,17 +96,38 @@ export default {
   border-top: 2px solid #dddddd;
   border-left: 2px solid #dddddd;
   border-right: 2px solid #dddddd;
-  border-radius: 10px;
+  border-radius: 16px;
+  box-shadow: none;
   .subcription-page--price-badge {
-    background-color: #b2ff59;
-    height: 35px;
-    padding: 3px;
+    background-color: #8EDF00;
+    padding: 5px 18px;
     color: white;
+    p{
+      margin-bottom: 0;
+      font-weight: 600;
+    }
   }
   .btn-subs-pay {
     @media screen and (max-width: 450px) {
       font-size: 10px;
     }
   }
+}
+.title-pre{
+  color: #6F6F6F;
+  font-weight: 800;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.price{
+  font-size: 24px;
+  font-weight: 900;
+  color: #E76464;
+}
+.price-desc{
+  color: #929292;
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 </style>

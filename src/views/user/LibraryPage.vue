@@ -1,26 +1,24 @@
 <template>
   <div class="library-page">
     <NavbarSection />
-    <v-container>
+    <v-container class="second-container">
       <v-row>
         <v-col cols="12">
           <v-tabs
-            class="px-12"
             slider-color="#E76464"
             color="#E76464"
 			grow
-            style="margin-left:-45px;width:110%;"
           >
-            <v-tab to="/library/book" style="border-bottom:2px solid #DDDDDD;">Buku</v-tab>
-            <v-tab to="/library/episode" style="border-bottom:2px solid #DDDDDD;">Episode</v-tab>
+            <v-tab to="/library/book" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">Buku</v-tab>
+            <v-tab to="/library/episode" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">Episode</v-tab>
             <v-spacer></v-spacer>
-            <v-tab to="/library/highlighted" style="border-bottom:2px solid #DDDDDD;">
+            <v-tab to="/library/highlighted" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">
               <v-icon left>mdi-pencil</v-icon>Warnai
             </v-tab>
-            <v-tab to="/library/favorite" style="border-bottom:2px solid #DDDDDD;">
+            <v-tab to="/library/favorite" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">
               <v-icon left>mdi-heart-outline</v-icon>Favorit
             </v-tab>
-            <v-tab to="/library/tag" style="border-bottom:2px solid #DDDDDD;">
+            <v-tab to="/library/tag" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">
               <v-icon left>mdi-tag-outline</v-icon>Tag
             </v-tab>
             <v-tabs-items class="ml-10 ml-lg-0 px-lg-5" style="width:95%;">

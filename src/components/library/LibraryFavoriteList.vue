@@ -49,9 +49,9 @@
 					<v-img
 						src="@/assets/image/bookNotFound.svg"
 						aspect-ratio="1"
-						width="100px"
-						height="100px"
-						style="margin: 0 auto;"
+						width="150px"
+						height="150px"
+						style="margin: 0 auto;margin-top:40px"
 					></v-img>
 					<p class="my-3" style="color:#DDDDDD;">
 						Buku tidak ditemukan
