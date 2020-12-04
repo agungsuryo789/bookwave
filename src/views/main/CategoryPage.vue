@@ -1,7 +1,7 @@
 <template>
 	<div class="category-page">
 		<NavbarSection />
-		<v-container fluid class="container-category-page py-0 mx-0 my-0">
+		<v-container fluid class="py-0 mx-0 my-0">
 			<template
 				v-if="
 					bookListByKategori.buku_terbaru &&
@@ -10,7 +10,7 @@
 			>
 				<v-row>
 					<v-col class="category-page-title d-flex align-center" :style="cssVars">
-						<div class="px-12">
+						<div class="category-content">
 							<h1>
 								{{ bookListByKategori.sub_judul }}
 							</h1>
@@ -20,9 +20,19 @@
 						</div>
 					</v-col>
 				</v-row>
-				<v-row class="px-12">
-					<v-col>
-						<div class="d-flex flex-row" style="width:80%;">
+				<v-row class="second-container">
+					<v-col class="mt-5">
+						<v-text-field
+								v-model="payload.search"
+								@keyup="liveFilter"
+								class="form-rounded"
+								tabindex="0"
+								solo
+								rounded
+								label="Search by title or anothers"
+								prepend-inner-icon="mdi-magnify"
+							></v-text-field>
+						<!-- <div class="d-flex flex-row" style="width:80%;">
 							<v-btn icon class="icon-search my-4">
 								<v-icon>mdi-magnify</v-icon>
 							</v-btn>
@@ -33,10 +43,10 @@
 								clearable
 								label="Filter by Title/Author"
 							></v-text-field>
-						</div>
+						</div> -->
 					</v-col>
 				</v-row>
-				<v-row class="px-12">
+				<v-row class="second-container">
 					<v-col
 						v-for="n in bookListByKategori.buku_terbaru.slice(
 							0,
@@ -184,7 +194,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.category-content {
+    padding-left: 69px;
+}
 .category-page {
 	.container-category-page {
 		margin-top: -50px;
@@ -208,6 +221,16 @@ export default {
 				font-size: 20px;
 			}
 		}
+	}
+}
+.form-rounded.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot {
+	box-shadow: none !important;
+	padding-left: 0;
+	.v-label{
+		font-weight: 700;
+	}
+	.v-input__prepend-inner {
+		padding-right: 21px;
 	}
 }
 </style>

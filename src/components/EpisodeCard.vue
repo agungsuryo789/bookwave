@@ -1,13 +1,11 @@
 <template>
-	<v-card class="book-card mx-auto" width="220" height="300" flat>
-		<div class="book-card-color py-7" :style="cssVars">
+	<v-card class="book-card mx-auto" flat>
+		<div class="book-card-color " :style="cssVars">
 			<div class="book-tag-new px-2">Baru</div>
 			<div class="top-border"></div>
 			<v-img
 				lazy-src="https://www.tibs.org.tw/images/default.jpg"
 				class="book-card-img mx-auto"
-				width="120px"
-				height="140px"
 				@click="toChapter"
 				:src="foto_sampul"
 				style="z-index:0;"
@@ -20,15 +18,15 @@
 			</div>
 		</div>
 		<div class="d-flex flex-row">
-			<div>
+			<div class="book-desc">
 				<a @click="toChapter" class="book-card-title m-0 p-0">
-					<v-card-title class="book-title">{{
+					<v-card-title class="book-title px-0">{{
 						judul_buku
 					}}</v-card-title>
-					<v-card-subtitle>{{ episodeTitle }}</v-card-subtitle>
+					<v-card-subtitle class="px-0">{{ episodeTitle }}</v-card-subtitle>
 				</a>
 				<template v-if="is_premium_chapter && !premiumMemberStatus">
-					<span class="mx-4 my-0 p-0" style="color:red;">
+					<span class="my-0 p-0" style="color:red;">
 						<v-icon>mdi-lock-outline</v-icon>
 					</span>
 				</template>
@@ -114,33 +112,50 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.v-card > :first-child:not(.v-btn):not(.v-chip){
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+}
 .book-card {
 	.book-card-color {
-		height: 200px;
 		position: relative;
 		z-index: 0;
 		background-color: var(--color);
 		border: 3px solid var(--colorBorder);
 		border-bottom: 6px solid var(--colorBorder);
-		border-radius: 5px;
+		border-radius: 16px;
+		padding-bottom: 87%;
+		.book-card-img{
+			position: absolute;
+			left: 50%;
+			right: auto;
+			top: 50%;
+			bottom: auto;
+			transform: translate(-50%,-50%);
+			position: absolute;
+			width: 58%;
+			height: 77%;
+		}
 		.book-tag-new {
 			position: absolute;
 			top: 2%;
-			left: 41%;
+			left: 50%;
+			transform: translateX(-50%);
 			font-size: 14px;
 			color: white;
 			background-color: var(--colorBorder);
 		}
 		.book-card-playbtn {
 			position: absolute;
-			bottom: -3px;
-			left: 40%;
+			bottom: 1%;
+			left: 50%;
+			transform: translateX(-50%);
 			color: var(--colorBorder);
 		}
 		.top-border {
 			position: absolute;
 			top: 6%;
-			left: 12%;
+			left: 16%;
 			width: 40px;
 			height: 35px;
 			z-index: 0;
@@ -150,7 +165,7 @@ export default {
 		.bottom-border {
 			position: absolute;
 			bottom: 6%;
-			right: 13%;
+			right: 16%;
 			width: 40px;
 			height: 40px;
 			z-index: -1;
@@ -183,5 +198,8 @@ export default {
 	.icon-book-locked {
 		margin-top: -4px;
 	}
+}
+.book-desc{
+	width: 100%;
 }
 </style>

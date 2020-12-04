@@ -3,15 +3,14 @@
 		<NavbarSection />
 		<template v-if="!loadSkeleton">
 			<v-container
-				class="my-1 justify-center align-center"
+				class="my-1 justify-center align-center second-container"
 				v-for="book in bookDetail.data"
 				:key="book.id_buku"
 			>
 				<v-row style="margin:0 auto;">
-					<v-col lg="3" md="6" sm="12" cols="12">
+					<v-col lg="3" md="6" sm="12" cols="12" class="pb-0">
 						<v-card
 							class="card--book-image"
-							width="250"
 							flat
 							:style="{ backgroundColor: book.warna_sub }"
 						>
@@ -24,7 +23,6 @@
 								></div>
 								<v-img
 									class="book-card-img mx-auto"
-									width="150"
 									:src="book.foto_sampul"
 									style="z-index:0;"
 								></v-img>
@@ -50,18 +48,15 @@
 						cols="12"
 					>
 						<h1 class="book-title">{{ book.judul }}</h1>
-						<small>By: {{ book.penulis }}</small>
-						<div
-							class="d-flex flex-row justify-space-between my-4 my-lg-8"
-							style="font-size:12px;"
-						>
+						<p>By: {{ book.penulis }}</p>
+						<div class="d-flex" >
 							<p>
 								<v-icon class="mr-2 pb-1" small
 									>mdi-clock-outline</v-icon
 								>
 								{{ book.durasi }}
 							</p>
-							<p>|</p>
+							<p class="mx-5">|</p>
 							<p>
 								<v-icon class="mr-2" small
 									>mdi-format-list-bulleted</v-icon
@@ -86,9 +81,9 @@
 									<v-btn
 										depressed
 										block
-										color="#49E295"
+										color="#27AE60"
 										:to="{ name: 'MembershipPage' }"
-										style="font-size:12px;text-transform:none;color:white;"
+										style="text-transform:uppercase;color:white;letter-spacing:0.3px;font-weight:700;font-size:15px;height:46px"
 										>Chapter/Episode tidak ditemukan</v-btn
 									>
 								</div>
@@ -112,8 +107,8 @@
 										}"
 										depressed
 										block
-										color="#49E295"
-										style="font-size:12px;text-transform:none;color:white;"
+										color="#27AE60"
+										style="text-transform:uppercase;color:white;letter-spacing:0.3px;font-weight:700;font-size:15px;height:46px"
 										>Mulai Baca atau Dengarkan Audio</v-btn
 									>
 								</div>
@@ -138,8 +133,8 @@
 										}"
 										depressed
 										block
-										color="#49E295"
-										style="font-size:12px;text-transform:none;color:white;"
+										color="#27AE60"
+										style="text-transform:uppercase;color:white;letter-spacing:0.3px;font-weight:700;font-size:15px;height:46px"
 										>Mulai Baca atau Dengarkan Audio</v-btn
 									>
 								</div>
@@ -155,9 +150,9 @@
 									<v-btn
 										depressed
 										block
-										color="#49E295"
+										color="#27AE60"
 										:to="{ name: 'MembershipPage' }"
-										style="font-size:12px;text-transform:none;color:white;"
+										style="text-transform:uppercase;color:white;letter-spacing:0.3px;font-weight:700;font-size:15px;height:46px"
 										>Upgrade now to read.</v-btn
 									>
 								</div>
@@ -165,7 +160,7 @@
 						</div>
 					</v-col>
 				</v-row>
-				<v-row style="margin:0 auto;">
+				<v-row style="margin:0 auto;margin-top:100px">
 					<v-col>
 						<BookpageTabs
 							:sinopsis="book.deskripsi"
@@ -287,12 +282,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.v-card > :first-child:not(.v-btn):not(.v-chip){
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+}
 .card--book-image {
 	z-index: 0;
+	position: relative;
+	border-radius: 16px;
+	padding-bottom: 87%;
+	height: 0;
+	.book-card-img{
+		position: absolute;
+		left: 50%;
+		right: auto;
+		top: 50%;
+		bottom: auto;
+		transform: translate(-50%,-50%);
+		position: absolute;
+		width: 58%;
+		height: 77%;
+	}
 	.top-border {
 		position: absolute;
 		top: 8%;
-		left: 12%;
+		left: 16%;
 		width: 45px;
 		height: 40px;
 		z-index: 0;
@@ -301,7 +315,7 @@ export default {
 	.bottom-border {
 		position: absolute;
 		bottom: 8%;
-		right: 12%;
+		right: 16%;
 		width: 50px;
 		height: 40px;
 		z-index: -1;

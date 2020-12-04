@@ -17,14 +17,14 @@
 					<v-spacer></v-spacer>
 					<v-col cols="12" sm="12" md="6">
 						<v-form>
-						<p class="red--text text--lighten-1">Alamat Email *</p>
-						<v-text-field solo w-75 v-model="email" label="Your email address"></v-text-field>
-						<p class="red--text text--lighten-1">Subject Pesan *</p>
-						<v-text-field solo v-model="judul" label="Subject"></v-text-field>
-						<p class="red--text text--lighten-1">Masukan pesan Anda</p>
-						<v-textarea solo v-model="deskripsi" label="Description"></v-textarea>
+						<p class="label-form">Alamat Email *</p>
+						<v-text-field class="contact-form" solo w-75 v-model="email" label="Your email address"></v-text-field>
+						<p class="label-form">Subject Pesan *</p>
+						<v-text-field class="contact-form" solo v-model="judul" label="Subject"></v-text-field>
+						<p class="label-form">Masukan pesan Anda</p>
+						<v-textarea class="contact-form" solo v-model="deskripsi" label="Description"></v-textarea>
 						<v-spacer></v-spacer>
-						<v-btn :elevation="8" color="red darken-1" block x-large class="white--text"  v-on:click="submit">Kirim</v-btn>
+						<v-btn color="red darken-1" block x-large class="white--text"  v-on:click="submit">Kirim</v-btn>
 						</v-form>
 					</v-col>
 				</v-row>
@@ -72,8 +72,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 	.larger{
 		font-size: larger;
+	}
+	.label-form{
+		color:  #baadbe;
+	}
+	.contact-form{
+		.v-input__control > .v-input__slot{
+			box-shadow: none !important;
+			border: 1px #baadbe solid;
+			border-radius: 45px;
+			padding-left: 30px !important;
+			padding-right: 30px !important;
+		}
 	}
 </style>

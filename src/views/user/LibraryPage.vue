@@ -21,7 +21,7 @@
             <v-tab to="/library/tag" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">
               <v-icon left>mdi-tag-outline</v-icon>Tag
             </v-tab>
-            <v-tabs-items class="ml-10 ml-lg-0 px-lg-5" style="width:95%;">
+            <v-tabs-items class="ml-lg-0 pt-5">
               <router-view></router-view>
             </v-tabs-items>
           </v-tabs>

@@ -41,12 +41,16 @@ export default {
   },
   data: () => ({
     tab: null,
-    styleTab: `margin-left:-50px;`
+    styleTab: null
   })
 };
 </script>
 <style scoped lang="scss">
 .book-tab-items {
-  margin-left: -30px;
+  .v-card__text{
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 30px;
+  }
 }
 </style>

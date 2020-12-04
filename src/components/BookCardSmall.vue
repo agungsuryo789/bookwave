@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-card class="book-card--small mx-auto" max-width="350" max-height="150">
-      <div class="d-flex flex-row justify-space-between align-center">
+    <v-card class="book-card--small mx-auto" max-height="150">
+      <div class="d-flex flex-row align-center">
         <div class="book-card-color" :style="cssVars">
           <div class="top-border"></div>
-          <v-img class="book-card-img mx-2" width="65" height="90" :src="foto_sampul"></v-img>
+          <v-img class="book-card-img mx-2" width="76" height="90" :src="foto_sampul"></v-img>
           <div class="bottom-border"></div>
         </div>
-        <div>
+        <div class="book-list-decs">
           <div>
             <a @click="gotoBook" class="book-card-link">
               <h2 class="book-card--title font-weight-bold">{{title}}</h2>
@@ -35,7 +35,7 @@
                     <v-icon>mdi-dots-vertical</v-icon>
                   </v-btn>
                 </template>
-                <v-list>
+                <v-list class="dropdown-list">
                   <v-list-item @click="addTag(idBuku)">
                     <v-list-item-title>Tambah Tag</v-list-item-title>
                   </v-list-item>
@@ -190,15 +190,19 @@ export default {
 
 <style scoped lang="scss">
 .book-card--small {
+  box-shadow: none !important;
+  padding-bottom: 20px;
+  border-bottom: 1px #dddddd solid;
+  border-radius: 0 !important;
   .book-card-color {
     position: relative;
     z-index: 0;
     background-color: var(--color);
-    padding: 10px 5px;
+    padding: 19px 20px;
     .top-border {
       position: absolute;
-      top: 2%;
-      left: 2%;
+      top: 8%;
+      left: 14%;
       width: 20px;
       height: 20px;
       border-top-left-radius: 15px;
@@ -206,8 +210,8 @@ export default {
     }
     .bottom-border {
       position: absolute;
-      bottom: 1%;
-      right: 2.5%;
+      bottom: 6%;
+      right: 13.5%;
       width: 20px;
       height: 20px;
       z-index: -1;
@@ -216,11 +220,12 @@ export default {
     }
   }
   h2 {
-    font-size: 14px;
-    width: 200px;
+    font-size: 16px;
+    width: 91%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #424242;
   }
   small {
     font-size: 12px;
@@ -228,15 +233,16 @@ export default {
   }
   p {
     margin: 0;
+    margin-top: 11px;
     font-size: 14px;
-    width: 250px;
+    width: 91%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .book-card-category {
     font-size: 8px;
-    color: black !important;
+    color: #424242 !important;
     height: 25px;
     margin: 6px 0;
     border: 2px solid var(--color);
@@ -244,6 +250,22 @@ export default {
 }
 .book-card-link {
   text-decoration: none;
-  color: black;
+  color: #424242;
+}
+.book-list-decs {
+    width: calc(100% - 132px);
+    padding-left: 28px;
+}
+.v-menu__content.theme--light.menuable__content__active{
+  box-shadow: none !important;
+}
+.dropdown-list{
+  border: 1px #dddddd solid;
+  border-bottom: 4px #dddddd solid;
+  border-radius: 8px;
+  padding: 0;
+  .v-list-item{
+    border-bottom: 1px #dddddd solid;
+  }
 }
 </style>

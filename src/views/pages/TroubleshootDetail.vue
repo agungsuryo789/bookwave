@@ -3,15 +3,10 @@
 		<NavbarSection :isTroubleshoot="true" />
 		<v-container class="mt-10">
 			<v-row align="center" justify="between">
-				<v-col cols="12" md="9">
-					<h1> {{ bantuan.judul }}</h1>
-					<v-row>
-						<v-img lazy-src="@/assets/image/underline-1.svg" class="ml-3 mr-4" max-width="80px"></v-img>
-						<v-img lazy-src="@/assets/image/underline-1.svg" max-width="20px"></v-img>
-					</v-row>
+				<v-col cols="12" md="12">
+					<h1 style="color:#7D6183"> {{ bantuan.judul }}</h1>
 				</v-col>
 			</v-row>
-			<hr class="mt-5">
 			<v-row class="mt-2 my-2">
 				<v-col>
 					<p style="white-space:pre-line"> {{ bantuan.isi_bantuan }} </p>

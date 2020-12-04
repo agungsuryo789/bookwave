@@ -4,29 +4,26 @@
       <v-col cols="12" md="6">
         <v-text-field
           solo
-          rounded
           v-model="payload.pencarian"
           tabindex="0"
           @keyup.esc="onClose"
           @keyup="liveSearch"
-          class="mt-4 mx-2"
+          class="form-tag"
           clearable
-          autofocus
           label="Temukan yang anda cari"
           prepend-inner-icon="mdi-magnify"
         ></v-text-field>
       </v-col>
       <v-col v-if="isResult" cols="12" class="search-result">
-        <v-list elevation="2">
+        <v-list>
           <v-list-item-group>
-            <v-list-item
+            <v-list-item class="list-search"
               v-for="item in listSearchBlog"
               :key="item.id_blog_tbl"
               @click="goToBlog(item.id_blog_tbl)"
             >
               <div style="width:100%;">
                 {{ item.judul }}
-                <v-divider></v-divider>
               </div>
             </v-list-item>
           </v-list-item-group>
@@ -35,7 +32,7 @@
       <v-col
         cols="12"
         md="6"
-        class="d-flex flex-row justify-space-between"
+        class="d-flex flex-row justify-space-between menu-blog"
         style="overflow-x:auto;"
       >
         <v-btn
@@ -100,7 +97,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .row-parent-blog {
   position: relative;
 }
@@ -109,5 +106,39 @@ export default {
   top: 65px;
   left: 0;
   z-index: 4;
+}
+.form-tag{
+	.v-input__slot{
+		box-shadow: none !important;
+		padding-left: 0 !important;
+		margin-bottom: 0 !important;
+	}
+	.v-input__control{
+		height: 48px;
+  }
+  .v-input__prepend-inner{
+    padding-right: 12px !important;
+  }
+}
+.menu-blog{
+  .v-btn{
+    font-size: 16px;
+    letter-spacing: .1px;
+    font-weight: 600;
+  }
+}
+.list-search{
+  padding:0;
+  font-size: 18px;
+  font-weight: 700;
+  &:hover{
+    color: #000
+  }
+  &:hover::before {
+    opacity: 0 !important;
+  }
+  &.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+    color: #2e004e !important;
+  }
 }
 </style>

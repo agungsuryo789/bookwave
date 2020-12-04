@@ -28,7 +28,7 @@
 						md="4"
 						sm="2"
 						cols="6"
-						class="my-5 mx-12 col-tag"
+						class="my-5 col-tag"
 					>
 						<v-btn
 							class="btn-tag"
@@ -104,8 +104,17 @@ export default {
 <style scoped lang="scss">
 .col-tag {
 	border-bottom: 1px solid #dddddd;
+	margin-left: 12px;
+	margin-right: 12px;
+	padding-left: 0;
+	padding-right: 0;
 	.btn-tag {
 		text-transform: none;
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: .3px;
+		justify-content: start;
+		width: 100%;
 	}
 }
 </style>

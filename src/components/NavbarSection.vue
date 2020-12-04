@@ -71,13 +71,12 @@
 							>
 								<div v-if="isTroubleshoot">
 									<v-btn
-										class="button-subscribe mx-5 my-3"
+										class="button-subscribe btn-question mx-5 my-3"
 										rounded
 										depressed
 										color="white"
-										elevation="2"
 										to="/contact"
-										style="text-transform:none;color:#1CB0F6;"
+										style="text-transform:none;color:#1CB0F6;font-size:18px;letter-spacing: 0.3px;font-weight: 800;border:1px #1CB0F6 solid !important;border-bottom:3px #1CB0F6 solid !important"
 										>Kirim Pertanyaan</v-btn
 									>
 								</div>
@@ -209,11 +208,11 @@
 											<v-list-item to="/contact">
 												<v-list-item-title>
 													<v-btn
-														class="button-subscribe"
+														class="button-subscribe "
 														rounded
 														depressed
 														color="white"
-														style="text-transform:none;color:#1CB0F6;"
+														style="text-transform:none;color:#1CB0F6;font-size:18px;letter-spacing: 0.3px;font-weight: 800;"
 														>Kirim Pertanyaan</v-btn
 													>
 												</v-list-item-title>
@@ -547,4 +546,5 @@ position: relative;
 		display: none;
 	}
 }
+
 </style>

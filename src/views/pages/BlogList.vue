@@ -16,7 +16,7 @@
             <v-img :src="item.img_flie" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
           </v-col>
         </v-row>
-        <hr />
+        <div class="blog-divider"></div>
       </v-container>
     </template>
     <template v-else>
@@ -34,7 +34,7 @@
               <v-img :src="item.img_flie" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
             </v-col>
           </v-row>
-          <hr />
+          <div class="blog-divider"></div>
         </v-container>
       </template>
       <template v-else>
@@ -89,5 +89,9 @@ export default {
 }
 .blog-link {
   color: black;
+}
+.blog-divider{
+  height: 2px;
+  background: #def1ef;
 }
 </style>

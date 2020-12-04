@@ -1,12 +1,10 @@
 <template>
-	<v-card class="book-card mx-auto" width="220" height="300" flat>
-		<div class="book-card-color py-7" :style="cssVars">
+	<v-card class="book-card mx-auto" flat>
+		<div class="book-card-color" :style="cssVars">
 			<div class="top-border"></div>
 			<v-img
 				lazy-src="https://www.tibs.org.tw/images/default.jpg"
 				class="book-card-img mx-auto"
-				width="120px"
-				height="140px"
 				@click="gotoBook"
 				:src="foto_sampul"
 				style="z-index:0;"
@@ -14,10 +12,10 @@
 			<div class="bottom-border"></div>
 		</div>
 		<div class="d-flex flex-row">
-			<div>
+			<div class="book-desc">
 				<a @click="gotoBook" class="book-card-title m-0 p-0">
-					<v-card-title class="book-title">{{ title }}</v-card-title>
-					<v-card-subtitle class="d-flex flex-column">
+					<v-card-title class="book-title px-0">{{ title }}</v-card-title>
+					<v-card-subtitle class="d-flex flex-column px-0">
 						<small>{{ penulis }}</small>
 						<small>
 							<v-icon class="mr-1 pb-1" small
@@ -27,7 +25,7 @@
 					</v-card-subtitle>
 				</a>
 				<template v-if="isPremiumBook == '1' && !premiumMemberStatus">
-					<span class="mx-4 my-0 p-0" style="color:red;"
+					<span class="my-0 p-0" style="color:red;"
 						>Premium</span
 					>
 				</template>
@@ -126,19 +124,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.v-card > :first-child:not(.v-btn):not(.v-chip){
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+}
 .book-card {
 	.book-card-color {
-		height: 200px;
+		height: 0;
 		position: relative;
 		z-index: 0;
 		background-color: var(--color);
 		border: 3px solid var(--colorBorder);
 		border-bottom: 6px solid var(--colorBorder);
-		border-radius: 5px;
+		border-radius: 16px;
+		padding-bottom: 87%;
+		.book-card-img{
+			position: absolute;
+			left: 50%;
+			right: auto;
+			top: 50%;
+			bottom: auto;
+			transform: translate(-50%,-50%);
+			position: absolute;
+			width: 58%;
+			height: 77%;
+		}
 		.top-border {
 			position: absolute;
 			top: 6%;
-			left: 12%;
+			left: 16%;
 			width: 50px;
 			height: 40px;
 			z-index: 0;
@@ -148,7 +162,7 @@ export default {
 		.bottom-border {
 			position: absolute;
 			bottom: 6%;
-			right: 13%;
+			right: 16%;
 			width: 50px;
 			height: 40px;
 			z-index: -1;
@@ -181,5 +195,8 @@ export default {
 	.icon-book-locked {
 		margin-top: -4px;
 	}
+}
+.book-desc{
+	width: 100%;
 }
 </style>

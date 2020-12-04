@@ -81,7 +81,7 @@
 		</v-row>
 		<v-row
 			v-if="!loadSkeleton && !filterByCategory"
-			style="margin:0 auto;max-width:800px;"
+			style="margin:0 auto;"
 		>
 			<v-col
 				v-for="n in bookListTrendingNoAuth.slice(0, booksToShow)"
@@ -110,7 +110,7 @@
 					filterByCategory &&
 					bookListByKategoriNoAuth.buku_populer
 			"
-			style="margin:0 auto;max-width:800px;"
+			style="margin:0 auto;"
 		>
 			<v-col
 				v-for="n in bookListByKategoriNoAuth.buku_populer"
@@ -141,7 +141,7 @@
 					filterByCategory &&
 					!bookListByKategoriNoAuth.buku_populer
 			"
-			style="margin:0 auto;max-width:800px;"
+			style="margin:0 auto;"
 		>
 			<v-col
 				lg="4"

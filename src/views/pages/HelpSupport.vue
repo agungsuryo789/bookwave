@@ -71,6 +71,7 @@ export default {
 .form-rounded{
   .v-input__slot{
     box-shadow: none !important;
+    padding-left: 15px;
   }
   &.v-input--is-focused{
     .primary--text{

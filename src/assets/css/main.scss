@@ -91,6 +91,9 @@
     min-height: 100%;
     background: #f7f7f7;
 }
+.no-shadow{
+    box-shadow: none !important;
+}
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1366.98px) {
     .main-container {
