@@ -35,7 +35,7 @@
 						text
 						depressed
 					>
-						<v-img :src="n.icon_file" class="mr-2"></v-img>
+						<v-img :src="n.icon_file" class="mr-2 img-icon"></v-img>
 						<p
 							class="my-2"
 							style="color:black;font-weight:bold;text-transform:none;"
@@ -210,6 +210,10 @@ export default {
 	p {
 		letter-spacing: 1px;
 	}
+}
+.img-icon{
+	width: 20px;
+	height: 20px;
 }
 .col-kategori-chip {
 	padding: 50px 0;
