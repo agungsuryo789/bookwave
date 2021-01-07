@@ -5,7 +5,8 @@ Vue.use(axios);
 // AXIOS CONFIG
 export const axs = axios.create({
     baseURL: "https://api.ahabaca.com",
-    timeout: 30000
+    timeout: 30000,
+    withCredentials: false
 });
 axs.interceptors.request.use(
     config => {

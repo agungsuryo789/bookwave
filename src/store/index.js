@@ -846,10 +846,6 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('showSnackbar', response.data.message)
 				})
-				// .catch(err => {
-				// 	console.log(err.message)
-                //     commit('showSnackbar', err.message)
-				// })
         },
         resetPassword: ({ commit }, token) => {
             console.log(token)
