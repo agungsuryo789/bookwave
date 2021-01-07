@@ -88,7 +88,7 @@
 							elevation="2"
 							depressed
 							style="text-transform:none;color:white;"
-							@click="booksToShow += 3"
+							@click="booksToShow += 4"
 							>Lihat lebih banyak</v-btn
 						>
 					</v-col>
@@ -106,7 +106,7 @@
 							elevation="2"
 							depressed
 							style="text-transform:none;color:white;"
-							@click="booksToShow -= 3"
+							@click="booksToShow -= 4"
 							>Lihat lebih Sedikit</v-btn
 						>
 					</v-col>
@@ -158,7 +158,7 @@ export default {
 	data() {
 		return {
 			loadSkeleton: false,
-			booksToShow: 6,
+			booksToShow: 8,
 			payload: {
 				id_kategori: this.$route.params.idKategori,
 				search: ""

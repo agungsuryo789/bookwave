@@ -6,7 +6,7 @@
         <v-col cols="12">
           <v-tabs
             slider-color="#E76464"
-            color="#E76464"
+            color="#E76464" class="tab-ss"
 			grow
           >
             <v-tab to="/library/book" style="border-bottom:2px solid #DDDDDD;justify-content: start;padding:0">Buku</v-tab>
@@ -53,5 +53,32 @@ export default {
 @import "@/assets/css/global_variables.scss";
 .btn-chip-main {
   @include btn-chip-main();
+}
+
+@media (max-width: 575.98px) {
+.tabs-scroller {
+    width: 100%;
+    display: flex;
+    .v-slide-group__prev{
+      display: none;
+    }
+  }
+}
+
+.v-slide-group__wrapper {
+    overflow: scroll;
+}
+.tab-ss{
+  .v-slide-group__prev--disabled {
+    width: 0;
+    min-width: 0;
+    flex: 0;
+  }
+}
+.v-tabs--grow.tab-ss > .v-tabs-bar .v-tab {
+    flex: 1 0 auto;
+    max-width: none;
+    min-width: 105px;
+    padding-right: 20px !important;
 }
 </style>
