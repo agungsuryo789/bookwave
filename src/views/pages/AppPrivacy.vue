@@ -6,7 +6,7 @@
 		<v-row class="mt-2 my-2">
 			<v-col cols="12" v-for="item in appprivacy" :key="item.id_privasi_aplikasi">
 				<h1> {{ item.judul }} </h1>
-				<p class="larger"> {{ item.deskripsi }}</p>
+				<p class="larger" v-html="item.deskripsi"> {{ item.deskripsi }}</p>
 			</v-col>
 		</v-row>
 		</div>

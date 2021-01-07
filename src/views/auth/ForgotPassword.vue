@@ -87,11 +87,11 @@ export default {
     submit() {
 		this.$v.email.$touch();
 		if (this.$v.email.$invalid) {
-
+      
 		}
 		else{
 			var data = {
-			email: this.email
+			email: this.email,
 		};
 		this.$store.dispatch("forgotPassword", data);
 		this.showSnackbar()

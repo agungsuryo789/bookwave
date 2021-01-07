@@ -29,7 +29,7 @@
           <v-btn large block outlined color="deep-purple accent-4" to="/plans">Subscription</v-btn>
         </v-col>
         <v-col cols="12" md="4">
-          <v-btn large block outlined color="deep-purple accent-4" to="/help-account">My Account</v-btn>
+          <v-btn large block outlined color="deep-purple accent-4" to="/profile">My Account</v-btn>
         </v-col>
       </v-row>
       <v-row class="mt-2 my-2">

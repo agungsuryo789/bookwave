@@ -144,7 +144,7 @@ export default {
       if (this.$v.passwordReg.$invalid) {
 		  this.$router.go(0)
       } else {
-		var data = {
+		  var data = {
           email: this.emailReg,
           password: this.passwordReg,
           type: 1

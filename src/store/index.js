@@ -185,6 +185,7 @@ export default new Vuex.Store({
 		registerError_mutation: (state, response) => {
 			state.snackbar.text = response;
 			state.snackbar.visible = true;
+			state.snackbar.timeout = 3000;
 			location.reload();
 			// router.push({ name: 'Register' })
 		},
@@ -844,7 +845,11 @@ export default new Vuex.Store({
             axs.post('/ahaapi/lupa_password', data)
                 .then(response => {
                     commit('showSnackbar', response.data.message)
-                })
+				})
+				// .catch(err => {
+				// 	console.log(err.message)
+                //     commit('showSnackbar', err.message)
+				// })
         },
         resetPassword: ({ commit }, token) => {
             console.log(token)

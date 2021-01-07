@@ -1,7 +1,7 @@
 <template>
 	<div class="container mt-10">
-		<v-row justify="center">
-			<v-col md="5">
+		<v-row justify="center" class="relative">
+			<v-col md="5" class="text-heading">
 					<h1 class="ungu"> {{ title }} </h1>
 					<p> {{ subtitle }} </p>
 			</v-col>
@@ -24,8 +24,18 @@ export default {
 }
 </script>
 
-<style>
-	.ungu {
-		color: rgb(46, 0, 78);
-	}
+<style lang="scss">
+.ungu {
+	color: rgb(46, 0, 78);
+}
+.text-heading {
+	position: absolute;
+	z-index: 9;
+	width: 70%;
+	left: 0;
+	top: 17px;
+}
+.relative{
+	position: relative;
+}
 </style>

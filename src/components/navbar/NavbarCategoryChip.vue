@@ -17,7 +17,7 @@
         sm="4"
       >
         <v-btn class="mx-0 mx-lg-1 my-1" @click="gotoKategori(n.id_daftar_kategori)" text deppresed>
-          <v-img :src="n.icon_file" class="mr-2"></v-img>
+          <v-img :src="n.icon_file" class="mr-2 icon-category"></v-img>
           <p
             class="my-2"
             style="color:black;font-weight:bold;text-transform:none;"
@@ -50,6 +50,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.icon-category{
+  width: 23px;
+  height: 23px;
+}
 .container-navbar-category {
   background-color: #F5F5F5;
   z-index: 999;
