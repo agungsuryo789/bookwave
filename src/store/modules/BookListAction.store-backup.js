@@ -6,6 +6,7 @@ Vue.use(axios);
 export const axs = axios.create({
     baseURL: "https://api.ahabaca.com",
     timeout: 30000
+    // withCredentials: false
 });
 axs.interceptors.request.use(
     config => {
@@ -44,28 +45,13 @@ const state = {
     episodeListNew: []
 }
 
-const mutations = {
-    getBookTrending_mutation: (state, response) => {
-        state.bookTrending = response
-        state.loaderStatus = true
-    },
-    getBookNew_mutation: (state, response) => {
-        state.bookList = response
-        state.loaderStatus = true
-    },
-    getListBookTrending_mutation: (state, response) => {
-        state.bookListTrending = response
-        state.loaderStatus = true
-    },
-    getListBookNew_mutation: (state, response) => {
-        state.bookListNew = response
-        state.loaderStatus = true
-    },
-    getListEpisodeNew_mutation: (state, response) => {
-        state.episodeListNew = response
-        state.loaderStatus = true
-    }
-}
+const getters = {
+    bookList: state => state.bookList,
+    bookTrending: state => state.bookTrending,
+    bookListTrending: state => state.bookListTrending,
+    bookListNew: state => state.bookListNew,
+    episodeListNew: state => state.episodeListNew
+};
 
 const actions = {
     getListBookTrending: ({ commit }) => {
@@ -115,9 +101,33 @@ const actions = {
     }
 }
 
+const mutations = {
+    getBookTrending_mutation: (state, response) => {
+        state.bookTrending = response
+        state.loaderStatus = true
+    },
+    getBookNew_mutation: (state, response) => {
+        state.bookList = response
+        state.loaderStatus = true
+    },
+    getListBookTrending_mutation: (state, response) => {
+        state.bookListTrending = response
+        state.loaderStatus = true
+    },
+    getListBookNew_mutation: (state, response) => {
+        state.bookListNew = response
+        state.loaderStatus = true
+    },
+    getListEpisodeNew_mutation: (state, response) => {
+        state.episodeListNew = response
+        state.loaderStatus = true
+    }
+}
+
 export default {
     namespaced: true,
     state,
     actions,
+    getters,
     mutations
 }

@@ -236,8 +236,8 @@ export default {
 			this.underlineValue = 100;
 		},
 		fetchData() {
-			const _this = this;
 			this.$store.dispatch("getBerandaBukuAuth");
+			const _this = this;
 			setTimeout(function() {
 				_this.loadSkeleton = false;
 			}, 1200);
@@ -247,7 +247,7 @@ export default {
 		...mapState(["bookBerandaAuth"]),
 		...mapMutations(["showSnackbar", "closeSnackbar"])
 	},
-	created() {
+	mounted() {
 		this.fetchData();
 	}
 };
