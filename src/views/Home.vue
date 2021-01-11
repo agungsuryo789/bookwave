@@ -91,6 +91,7 @@ export default {
   position: relative;
   padding: 0;
   margin: 0;
+  padding-top: 96px;
   h1 {
     @media (max-width: 767.98px) {
 		font-size: 32px;

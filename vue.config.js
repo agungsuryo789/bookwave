@@ -8,5 +8,9 @@ module.exports = {
         'vuetify'
     ],
 
-    productionSourceMap: false
+    productionSourceMap: false,
+    devServer: {
+		proxy: 'https://api.ahabaca.com',
+        headers: { 'Access-Control-Allow-Origin': '*' },
+    }
 }
