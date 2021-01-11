@@ -8,8 +8,5 @@ module.exports = {
         'vuetify'
     ],
 
-    productionSourceMap: false,
-    devServer: {
-        headers: { 'Access-Control-Allow-Origin': '*' },
-    }
+    productionSourceMap: false
 }
