@@ -14,8 +14,8 @@ Vue.use(Vuex);
 // Firebase Config
 const firebaseConfig = {
 	apiKey: "AIzaSyCZKqh1-bs_9iS2HHx6YDZ159MAw0CxRJ4",
-	authDomain: "ahabaca.com",
-	// authDomain: "aha-project-d39ef.firebaseapp.com",
+	// authDomain: "ahabaca.com",
+	authDomain: "aha-project-d39ef.firebaseapp.com",
 	databaseURL: "https://aha-project-d39ef.firebaseio.com",
 	projectId: "aha-project-d39ef",
 	storageBucket: "aha-project-d39ef.appspot.com",
