@@ -454,7 +454,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .navbar-header{
 	background: #D84B5B;
 }

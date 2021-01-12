@@ -8,10 +8,13 @@
     color: #4C4C4C;
 }
 .main-container {
-    max-width: 1500px;
+    max-width: 1500px !important;
     margin: auto;
 }
-
+.navbar-section {
+    z-index: 99;
+    position: relative;
+}
 .title-underline {
     margin-bottom: 20px;
     img {

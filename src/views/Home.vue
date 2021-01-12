@@ -97,6 +97,9 @@ export default {
 		font-size: 32px;
     }
   }
+  @media screen and (max-width: 767.98px) {
+      padding-top: 0;
+  }
   @media screen and (max-width: 450px) {
     height: 300px;
   }
