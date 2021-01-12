@@ -8,13 +8,6 @@
 			</p>
 			<hr />
 			<!-- <v-text-field label="Buat Tag baru"  v-on:keyup.enter="addTag" v-model="tagModel" :value="data.tag"></v-text-field> -->
-			<!-- <div>
-				<ul>
-					<li v-for="data in koleksiTag.data" :key="data.id_tag">
-						{{ data.tag }}
-					</li>
-				</ul>
-			</div> -->
 			<v-combobox
 				class="combobox-tag"
 				v-model="tagModel"
@@ -26,7 +19,9 @@
 				chips
 				deletable-chips
 				color="gray"
+				eager
 				return-object
+				@focus="comboActive"
 			>
 				<template v-slot:selection="data">
 					<v-chip
@@ -98,9 +93,9 @@ export default {
 		};
 	},
 	watch: {
-		model(val) {
+		tagModel(val) {
 			if (val.length > 5) {
-				this.$nextTick(() => this.model.pop());
+				this.$nextTick(() => this.tagModel.pop());
 			}
 		}
 	},
@@ -117,14 +112,19 @@ export default {
 			} else {
 				this.dialog = true;
 			}
+		},
+		comboActive(event) {
+			const y = this.koleksiTag.data;
+			for (var i in y) {
+				this.itemTag.push(y[i].tag);
+			}
 		}
 	},
 	mounted() {
 		this.$store.dispatch("koleksiTag");
-		const json = this.koleksiTag.data;
-
-		for (var i in json) {
-			this.itemTag.push(json[i].tag);
+		const y = this.koleksiTag.data;
+		for (var i in y) {
+			this.itemTag.push(y[i].tag);
 		}
 	}
 };

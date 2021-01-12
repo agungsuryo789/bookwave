@@ -115,7 +115,7 @@ const defaultState = () => {
 		accountDetail: []
 	};
 };
-
+// const queryString = require('query-string');
 export default new Vuex.Store({
 	plugins: [vuexSession],
 	modules: {
@@ -669,7 +669,7 @@ export default new Vuex.Store({
         invoiceDetails: ({ commit }, data) => {
             axs.post('/ahaapi/invoices', data)
                 .then(response => {
-                    window.location = 'https://app.sandbox.midtrans.com/snap/v2/vtweb/' + response.data.token;
+                    window.location = 'https://app.midtrans.com/snap/v2/vtweb/ ' + response.data.token;
                 })
                 .catch(err => {
                     console.log(err.message);

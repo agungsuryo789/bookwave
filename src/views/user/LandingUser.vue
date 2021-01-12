@@ -247,7 +247,7 @@ export default {
 		...mapState(["bookBerandaAuth"]),
 		...mapMutations(["showSnackbar", "closeSnackbar"])
 	},
-	mounted() {
+	created() {
 		this.fetchData();
 	}
 };
