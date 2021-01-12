@@ -7,7 +7,14 @@
 				>Tag Baru
 			</p>
 			<hr />
-			<!-- <v-text-field label="Buat Tag baru" v-on:keyup.enter="addTag" v-model="tagPayload.tag"></v-text-field> -->
+			<!-- <v-text-field label="Buat Tag baru"  v-on:keyup.enter="addTag" v-model="tagModel" :value="data.tag"></v-text-field> -->
+			<!-- <div>
+				<ul>
+					<li v-for="data in koleksiTag.data" :key="data.id_tag">
+						{{ data.tag }}
+					</li>
+				</ul>
+			</div> -->
 			<v-combobox
 				class="combobox-tag"
 				v-model="tagModel"
@@ -19,6 +26,7 @@
 				chips
 				deletable-chips
 				color="gray"
+				return-object
 			>
 				<template v-slot:selection="data">
 					<v-chip
