@@ -541,6 +541,13 @@ position: relative;
 	}
 }
 
+.mobile-bar{
+	display: none;
+	@media screen and (max-width: 860px) {
+		display: inline-flex;
+	}
+}
+
 .hide-on--lg {
 	@media screen and (min-width: 860px) {
 		display: none;
