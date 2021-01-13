@@ -6,10 +6,12 @@ import * as firebase from "firebase/app";
 import BookSearch from "./modules/BookSearch";
 import "firebase/auth";
 import { axs, execute } from "./helper/api";
+import AxiosPlugin from 'vue-axios-cors';
 
 execute();
 
 Vue.use(Vuex);
+Vue.use(AxiosPlugin);
 
 // Firebase Config
 const firebaseConfig = {
@@ -669,7 +671,7 @@ export default new Vuex.Store({
         invoiceDetails: ({ commit }, data) => {
             axs.post('/ahaapi/invoices', data)
                 .then(response => {
-                    window.location = 'https://app.midtrans.com/snap/v2/vtweb/ ' + response.data.token;
+                    window.location = 'https://app.midtrans.com/snap/v2/vtweb/' + response.data.token;
                 })
                 .catch(err => {
                     console.log(err.message);
