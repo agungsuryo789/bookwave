@@ -542,9 +542,9 @@ position: relative;
 }
 
 .mobile-bar{
-	display: none;
+	display: none !important;
 	@media screen and (max-width: 860px) {
-		display: inline-flex;
+		display: inline-flex !important;
 	}
 }
 
