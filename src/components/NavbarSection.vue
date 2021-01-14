@@ -546,9 +546,6 @@ position: relative;
 	@media screen and (max-width: 860px) {
 		display: inline-flex !important;
 	}
-	.hide-on--md {
-		display: none !important;
-	}
 }
 
 @media screen and (max-width: 860px) {
