@@ -91,6 +91,7 @@ const defaultState = () => {
 		editTagRes: {},
 		paymentHistoryList: [],
 		invoiceDetails: {},
+		invoiceDetailsTrial: {},
 		midtransToken: "",
 		snackbar: {
 			visible: false,
@@ -302,6 +303,7 @@ export default new Vuex.Store({
 		},
 		invoiceDetail_mutation: (state, response) => {
 			state.invoiceDetails = response;
+			state.invoiceDetailsTrial = response;
 			state.loaderStatus = true;
 		},
 		getPaymentHistory_mutation: (state, response) => {
@@ -554,7 +556,8 @@ export default new Vuex.Store({
 		sendBookComment: ({ commit }, payload) => {
 			axs.post("/ahaapi/score_member", payload)
 				.then(response => {
-					console.log(response.message);
+					commit('showSnackbar', response.data.message)
+					// console.log(response.message);
 				})
 		},
 		// GET account user
@@ -672,6 +675,15 @@ export default new Vuex.Store({
             axs.post('/ahaapi/invoices', data)
                 .then(response => {
                     window.location = 'https://app.midtrans.com/snap/v2/vtweb/' + response.data.token;
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        },
+        invoiceDetailsTrial: ({ commit }, data) => {
+            axs.post('/ahaapi/invoices', data)
+                .then(response => {
+					location.reload();
                 })
                 .catch(err => {
                     console.log(err.message);

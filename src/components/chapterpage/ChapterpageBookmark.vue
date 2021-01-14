@@ -94,14 +94,20 @@
         </v-card>
       </v-dialog>
     </div>
+    <SnackbarToast />
   </v-card>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import SnackbarToast from "@/components/SnackbarToast.vue";
+
 export default {
   name: "ChapterpageBookmark",
   props: ["bookId", "chapterId"],
+  components: {
+    SnackbarToast
+  },
   data() {
     return {
       payloadDone: {
@@ -127,6 +133,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["showSnackbar", "closeSnackbar"]),
     setBookDone() {
       this.$store.dispatch("setBookDone", this.payloadDone);
     },
@@ -179,11 +186,12 @@ export default {
     },
     sendSurveyAction() {
       if (this.payloadKomen.id_score !== null && this.payloadKomen.komentar.length > 0) {
-		const x = this.payloadKomen.id_score + 1;
-		this.payloadKomen.id_score = x;
-		this.$store.dispatch("sendBookComment", this.payloadKomen);
+        const x = this.payloadKomen.id_score + 1;
+        this.payloadKomen.id_score = x;
+        this.$store.dispatch("sendBookComment", this.payloadKomen);
         this.dialog = false;
       }
+      this.showSnackbar()
     }
   },
   computed: mapState({

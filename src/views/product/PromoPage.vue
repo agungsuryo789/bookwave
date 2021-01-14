@@ -27,6 +27,16 @@
                     <p>Hemat 20%</p>
                   </div>
                   <div v-else></div>
+                  <div v-if="item.id_langganan == 3">
+                    <v-btn
+                    class="btn-subs-pay"
+                    color="red darken-1"
+                    ripple
+                    style="color:white;font-weight:bold;"
+                    @click="paytrial(item.id_langganan)"
+                  >Coba Sekarang</v-btn>
+                  </div>
+                  <div v-else>
                   <v-btn
                     class="btn-subs-pay"
                     color="red darken-1"
@@ -34,6 +44,7 @@
                     style="color:white;font-weight:bold;"
                     @click="pay(item.id_langganan)"
                   >Coba Sekarang</v-btn>
+                  </div>
               </div>
               <v-card-title class="m-0 p-0 title-pre">{{item.satuan}}</v-card-title>
               <v-card-text class="m-0 p-0 pb-0">
@@ -75,6 +86,12 @@ export default {
         id_langganan: value
       };
       this.$store.dispatch("invoiceDetails", data);
+    },
+    paytrial(value) {
+      var data = {
+        id_langganan: value
+      };
+      this.$store.dispatch("invoiceDetailsTrial", data);
     }
   },
   data: () => ({

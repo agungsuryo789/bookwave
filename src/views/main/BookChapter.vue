@@ -13,21 +13,39 @@
             </v-btn>
           </div>
           <div>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  class="mx-1"
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="saveChapterSingle"
-                  icon
-                  depressed
-                >
-                  <v-icon>mdi-bookmark-plus</v-icon>
-                </v-btn>
-              </template>
-              <span>Save this Chapter to Collection</span>
-            </v-tooltip>
+            <template v-if="chapterDetail.data[0].is_collected == true">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    class="mx-1"
+                    v-bind="attrs"
+                    v-on="on"
+                    icon
+                    depressed
+                  >
+                    <v-icon color="red">mdi-bookmark-plus</v-icon>
+                  </v-btn>
+                </template>
+                <span>Chapter saved</span>
+              </v-tooltip>
+            </template>
+            <template v-if="chapterDetail.data[0].is_collected == false">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    class="mx-1"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="saveChapterSingle"
+                    icon
+                    depressed
+                  >
+                    <v-icon>mdi-bookmark-plus</v-icon>
+                  </v-btn>
+                </template>
+                <span>Save this Chapter to Collection</span>
+              </v-tooltip>
+            </template>
             <template v-if="enableDelToggle">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
