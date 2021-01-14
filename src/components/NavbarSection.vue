@@ -551,6 +551,12 @@ position: relative;
 	}
 }
 
+@media screen and (max-width: 860px) {
+	.hide-on--md {
+		display: none !important;
+	}
+}
+
 .hide-on--lg {
 	@media screen and (min-width: 860px) {
 		display: none;
