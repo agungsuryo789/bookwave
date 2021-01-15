@@ -117,7 +117,7 @@ export default {
 		},
 		...mapGetters(["premiumStatus"])
 	},
-	mounted() {
+	created() {
 		this.fetchData();
 	}
 };

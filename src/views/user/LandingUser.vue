@@ -127,7 +127,7 @@
 				</div>
 				<SnackbarToast />
 			</v-container>
-			<v-container v-else-if="loadSkeleton" class="second-container">
+			<!-- <v-container v-else-if="loadSkeleton" class="second-container">
 				<v-progress-linear
 					v-model="underlineValue"
 					color="#E76464"
@@ -188,7 +188,7 @@
 						></v-skeleton-loader>
 					</v-col>
 				</v-row>
-			</v-container>
+			</v-container> -->
 		</section>
 		<FooterSection />
 	</div>

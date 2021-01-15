@@ -1,11 +1,11 @@
 <template>
   <div v-if="this.$store.getters.isLoggedIn">
-    <template v-if="isBookmarked == false || isCollected == false">
+    <template v-if="isCollected == false">
       <v-btn class="book-bookmark-button" icon @click="setBookmark">
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </template>
-    <template v-else-if="isBookmarked == true || isCollected == true">
+    <template v-else-if="isCollected == true">
       <v-btn class="book-bookmark-button" icon @click="delBookmark">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
@@ -34,15 +34,15 @@ export default {
   },
   methods: {
     setBookmark() {
-      this.isBookmarked = true;
       this.$store.dispatch("setBookmark", this.payloadBookmark);
+      this.isBookmarked = true;
     },
     delBookmark() {
-      this.isBookmarked = false;
       this.$store.dispatch("setDeleteKoleksi", this.payloadBookmark);
+      this.isBookmarked = false;
     }
   },
-  mounted() {
+  created() {
     if (this.isCollected) {
       this.isBookmarked = true;
     }

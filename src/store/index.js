@@ -59,7 +59,7 @@ const defaultState = () => {
 		bookTrending: [],
 		bookNew: [],
 		bookListTrendingNoAuth: [],
-		bookBerandaAuth: {},
+		bookBerandaAuth: [],
 		status: "",
 		premiumStatus: null,
 		memberDetail: {},
