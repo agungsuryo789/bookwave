@@ -9,7 +9,7 @@
 						style="background-color:white;"
 					>
 						<v-toolbar
-							class="app-bar container px-0 py-0"
+							class="app-bar px-0 py-0 container"
 							id="appBar"
 							color="white"
 							light
@@ -527,6 +527,10 @@ position: relative;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
 	opacity: 0;
+}
+
+.v-toolbar{
+	max-width: auto;
 }
 
 .hide-on--md {

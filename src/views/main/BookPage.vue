@@ -3,7 +3,7 @@
 		<NavbarSection />
 		<template v-if="!loadSkeleton">
 			<v-container
-				class="my-1 justify-center align-center second-container"
+				class="my-1 justify-center align-center container"
 				v-for="book in bookDetail.data"
 				:key="book.id_buku"
 			>

@@ -24,19 +24,21 @@
 					<v-col
 						v-for="n in koleksiTag.data"
 						:key="n.id_tag"
-						lg="3"
+						lg="4"
 						md="4"
 						sm="2"
 						cols="6"
-						class="my-5 col-tag"
+						class="my-5"
 					>
-						<v-btn
-							class="btn-tag"
-							depressed
-							text
-							@click="toTagDetail(n.tag)"
-							>{{ n.tag }}</v-btn
-						>
+						<div class="col-tag">
+							<v-btn
+								class="btn-tag"
+								depressed
+								text
+								@click="toTagDetail(n.tag)"
+								>{{ n.tag }}</v-btn
+							>
+						</div>
 					</v-col>
 				</template>
 				<template v-if="showTagDetail">
@@ -104,8 +106,6 @@ export default {
 <style scoped lang="scss">
 .col-tag {
 	border-bottom: 1px solid #dddddd;
-	margin-left: 12px;
-	margin-right: 12px;
 	padding-left: 0;
 	padding-right: 0;
 	.btn-tag {
