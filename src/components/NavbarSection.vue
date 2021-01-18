@@ -528,9 +528,27 @@ position: relative;
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
 	opacity: 0;
 }
+.v-toolbar.container {
+    width: 100%;
+    padding: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 960px){
+	.v-toolbar.container {
+		max-width: 900px;
+	}
+}
+@media (min-width: 1264px){
+	.v-toolbar.container {
+		max-width: 1185px;
+	}
+}
 
-.v-toolbar{
-	max-width: auto;
+@media (min-width: 1904px){
+	.v-toolbar.container {
+		max-width: 1785px;
+	}
 }
 
 .hide-on--md {
