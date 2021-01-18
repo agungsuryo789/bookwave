@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="book-card--small mx-auto" max-width="350" max-height="150">
+    <v-card class="book-card--small mx-auto" max-height="150">
       <div class="d-flex flex-row">
         <div class="book-card-color" :style="cssVars">
           <v-img class="book-card-img mx-2" width="60" height="80" :src="foto_sampul"></v-img>
