@@ -81,6 +81,7 @@
 .second-container {
     max-width: 1785px;
     margin: auto;
+    
 }
 
 .v-tabs--grow > .v-tabs-bar .v-tab {
@@ -106,6 +107,7 @@
         max-width: 1300px;
     }
 }
+
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) {
     .main-container {

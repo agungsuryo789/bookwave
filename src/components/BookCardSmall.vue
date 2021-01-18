@@ -111,7 +111,7 @@ export default {
       type: Boolean
     },
     is_premium: {
-      type: String
+      type: Boolean
     },
     isTagged: {
       type: Boolean

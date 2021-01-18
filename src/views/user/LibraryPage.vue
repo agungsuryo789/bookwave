@@ -1,7 +1,7 @@
 <template>
   <div class="library-page">
     <NavbarSection />
-    <v-container class="second-container">
+    <v-container class="container">
       <v-row>
         <v-col cols="12">
           <v-tabs

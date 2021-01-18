@@ -9,7 +9,7 @@
 						style="background-color:white;"
 					>
 						<v-toolbar
-							class="app-bar second-container px-0 py-0"
+							class="app-bar container px-0 py-0"
 							id="appBar"
 							color="white"
 							light

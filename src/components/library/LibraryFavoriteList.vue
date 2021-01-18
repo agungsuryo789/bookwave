@@ -38,7 +38,7 @@
 						:warna_kategori="n.warna_sub"
 						:warna_border="n.warna_utama"
 						:kategori_buku="n.nama_kategori"
-						:is_premium="n.is_premium.toString()"
+						:is_premium="n.is_premium"
 						:isCollected="n.is_collected"
 						:isFavorited="n.is_favorite"
 					/>

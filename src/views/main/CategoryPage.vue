@@ -10,7 +10,7 @@
 			>
 				<v-row>
 					<v-col class="category-page-title d-flex align-center" :style="cssVars">
-						<div class="category-content">
+						<div class="container">
 							<h1>
 								{{ bookListByKategori.sub_judul }}
 							</h1>
@@ -20,7 +20,8 @@
 						</div>
 					</v-col>
 				</v-row>
-				<v-row class="second-container">
+				<v-container>
+					<v-row class="second-container">
 					<v-col class="mt-5">
 						<v-text-field
 								v-model="payload.search"
@@ -46,7 +47,7 @@
 						</div> -->
 					</v-col>
 				</v-row>
-				<v-row class="second-container">
+					<v-row class="second-container">
 					<v-col
 						v-for="n in bookListByKategori.buku_terbaru.slice(
 							0,
@@ -111,6 +112,7 @@
 						>
 					</v-col>
 				</v-row>
+				</v-container>
 			</template>
 			<template
 				v-if="
