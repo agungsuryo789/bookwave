@@ -51,6 +51,8 @@ export default {
 			isResult: false
 		};
 	},
+	ready: function() {
+	},
 	methods: {
 		onClose(event) {
 			this.isResult = false;

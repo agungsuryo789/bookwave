@@ -198,7 +198,7 @@
         <v-carousel height="150" hide-delimiters touchless :show-arrows="false">
           <v-carousel-item>
               <v-row class="fill-height" align="center" justify="center">
-                <div class="display-3 font-weight-bold px-5">{{ chapter.judul_chapter }}</div>
+                <div class="title-chapter font-weight-bold px-5" v-bind:style="{fontSize: (parseInt(slider)+36) + 'px' }">{{ chapter.judul_chapter }}</div>
               </v-row>
           </v-carousel-item>
         </v-carousel>
@@ -388,6 +388,10 @@ export default {
     @media (min-width:1904px){
       max-width: 1620px;
   }
+}
+
+.title-chapter {
+  font-size: 60px;
 }
 .social-links {
   color: white;
