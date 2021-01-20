@@ -17,11 +17,11 @@
         sm="4"
       >
         <v-btn class="mx-0 mx-lg-1 my-1" @click="gotoKategori(n.id_daftar_kategori)" text deppresed>
-          <v-img :src="n.icon_file" class="mr-2 icon-category"></v-img>
-          <p
-            class="my-2"
-            style="color:black;font-weight:bold;text-transform:none;"
-          >{{ n.nama_kategori }}</p>
+            <v-img :src="n.icon_file" class="mr-2 icon-category"></v-img>
+            <p
+              class="my-2"
+              style="color:black;font-weight:bold;text-transform:none;"
+            >{{ n.nama_kategori }}</p>
         </v-btn>
       </v-col>
     </v-row>
@@ -82,5 +82,16 @@ export default {
   @media screen and (min-width: 760px) {
     min-width: 130px;
   }
+}
+
+.btn-asd {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: inherit;
+    line-height: normal;
+    position: relative;
+    text-align: left;
 }
 </style>

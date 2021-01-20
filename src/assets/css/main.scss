@@ -98,6 +98,16 @@
 .no-shadow{
     box-shadow: none !important;
 }
+
+.container-navbar-category{
+    .v-btn{
+        white-space: normal;
+        span.v-btn__content {
+        flex: auto;
+          text-align: left;
+        }
+    }
+}
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1500.98px) {
     .main-container {

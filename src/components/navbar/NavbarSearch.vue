@@ -10,7 +10,6 @@
 				@keyup.esc="onClose"
 				@keyup.enter="goSearch"
 				@keyup="liveSearch"
-				@blur="hide"
 				class="mt-5 mx-2"
 				clearable
 				autofocus

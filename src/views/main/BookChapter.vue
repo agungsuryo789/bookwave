@@ -194,7 +194,7 @@
       </v-row>
     </v-container>
     <template v-if="!outlineMenu">
-      <v-container v-for="chapter in chapterDetail.data" :key="chapter.id_chapter">
+      <v-container class="container-text" v-for="chapter in chapterDetail.data" :key="chapter.id_chapter">
         <v-carousel height="150" hide-delimiters touchless :show-arrows="false">
           <v-carousel-item>
               <v-row class="fill-height" align="center" justify="center">
@@ -218,21 +218,27 @@
             >
               <ChapterpageBookmark :bookId="chapter.id_buku" :chapterId="chapter.id_chapter" />
             </div>
-            <div class="d-flex flex-row justify-space-between mt-12 mb-2">
+          </v-col>
+        </v-row>
+        <div class="audioplayer-section">
+          <div class="d-flex flex-row justify-space-between" style="z-index: 9999;position: relative;background: #fff;height: 37px;">
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 v-if="parseInt(chapter.prev_chapter_id) > 0"
                 depressed
                 rounded
                 :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.id_chapter - 1}}"
-                style="position:absolute;bottom:0;left:0;margin:0 10px;text-transform:none;"
+                style="text-transform:none;"
               >
-                <v-icon class="ml-2">mdi-chevron-double-left</v-icon>Prev
+                <v-icon>mdi-chevron-double-left</v-icon>Prev
+              </v-btn>
+              <v-btn v-else :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }" style="visibility: hidden;">
+                 <v-icon>mdi-chevron-double-left</v-icon>Prev
               </v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 depressed
-                style="position:absolute;bottom:0;left:45%;font-weight:bold;"
+                style="font-weight:bold;"
               >{{ chapter.page_number }}</v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
@@ -240,15 +246,16 @@
                 depressed
                 rounded
                 :to="{ name: 'BookChapter', params: {bookId: chapter.id_buku, chapterId: chapter.next_chapter_id}}"
-                style="position:absolute;bottom:0;right:0;margin:0 10px;text-transform:none;"
+                style="text-transform:none;"
               >
                 Next
-                <v-icon class="mr-2">mdi-chevron-double-right</v-icon>
+                <v-icon>mdi-chevron-double-right</v-icon>
+              </v-btn>
+              <v-btn v-else :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }" style="visibility: hidden;">
+                 Next
+                <v-icon>mdi-chevron-double-right</v-icon>
               </v-btn>
             </div>
-          </v-col>
-        </v-row>
-        <div class="audioplayer-section mt-10" style="position:sticky;bottom:0;left:0;width:100%;">
           <div class="d-flex flex-column">
             <vuetify-audio :file="chapter.audio_chapter" :autoPlay="false" color="#FF8A80"></vuetify-audio>
           </div>
@@ -375,7 +382,12 @@ export default {
 
 <style lang="scss">
 @import "@/assets/css/global_variables.scss";
-
+.container-text{
+    padding-bottom: 198px;
+    @media (min-width:1904px){
+      max-width: 1620px;
+  }
+}
 .social-links {
   color: white;
   text-decoration: none;
@@ -388,6 +400,24 @@ export default {
   animation: glowing 1500ms infinite;
   border-radius: 50%;
   z-index: 999;
+}
+.audioplayer-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    z-index: 999;
+    @media (min-width: 960px) {
+        max-width: 877px;
+    }
+    @media (min-width: 1264px) {
+        max-width: 1166px;
+    }
+    @media (min-width:1904px){
+        max-width: 1599px;
+    }
 }
 @keyframes glowing {
   0% {
