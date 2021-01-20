@@ -221,7 +221,7 @@
           </v-col>
         </v-row>
         <div class="audioplayer-section">
-          <div class="d-flex flex-row justify-space-between" style="z-index: 9999;position: relative;background: #fff;height: 37px;">
+          <div class="d-flex flex-row justify-space-between" style="z-index: 9999;position: relative;background: #fff;padding-top: 5px; padding-bottom: 5px;">
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 v-if="parseInt(chapter.prev_chapter_id) > 0"
@@ -384,9 +384,12 @@ export default {
 <style lang="scss">
 @import "@/assets/css/global_variables.scss";
 .container-text{
-    padding-bottom: 198px;
-    @media (min-width:1904px){
-      max-width: 1620px;
+  padding-bottom: 198px;
+  @media (min-width:1264px){
+    max-width: 1100px;
+  }
+  @media (min-width:1904px){
+    max-width: 1620px;
   }
 }
 
@@ -418,7 +421,7 @@ export default {
         max-width: 877px;
     }
     @media (min-width: 1264px) {
-        max-width: 1166px;
+        max-width: 1079px;
     }
     @media (min-width:1904px){
         max-width: 1599px;
