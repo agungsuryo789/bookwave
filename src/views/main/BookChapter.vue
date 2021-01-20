@@ -239,7 +239,8 @@
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 depressed
                 style="font-weight:bold;"
-              >{{ chapter.page_number }}</v-btn>
+                v-if="chapter.page_number != 1"
+              >{{ chapter.page_number - 1}}</v-btn>
               <v-btn
                 :class="{ bgWhite: bgWhite, bgGrey: bgGrey, bgBlack: bgBlack }"
                 v-if="parseInt(chapter.next_chapter_id) > 0"
