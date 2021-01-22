@@ -10,8 +10,7 @@
 				@keyup.esc="onClose"
 				@keyup.enter="goSearch"
 				@keyup="liveSearch"
-				class="mt-5 mx-2"
-				clearable
+				class="mt-5 mx-2 text-inp"
 				autofocus
 				label="Temukan yang anda cari disini"
 			></v-text-field>
@@ -117,22 +116,37 @@ export default {
 <style scoped lang="scss">
 .navbar-search-form {
 	width: 90%;
+	position: relative;
+	@media screen and (max-width: 860px) {
+		width: 100%;
+	}
 	@media screen and (max-width: 425px) {
-		width: 120%;
+		width: 100%;
 	}
 	.search-result {
 		position: absolute;
 		top: 100%;
 		width: 68%;
-		margin-left: 5%;
 		z-index: 999;
 		border: 3px solid rgb(160, 160, 160);
 		border-bottom: 10px solid rgb(160, 160, 160);
 		border-bottom-left-radius: 15px;
 		border-bottom-right-radius: 15px;
+		width: 96%;
+		margin: auto;
+		left: 0;
+		right: 0;
+		.v-list-item {
+			padding: 0 38px;
+		}
+		@media screen and (max-width: 1903px) {
+			width: 93.5%;
+		}
+		@media screen and (max-width: 1263px) {
+			width: 91%;
+		}
 		@media screen and (max-width: 425px) {
-			margin-left: 0%;
-			width: 90%;
+			width: 84%;
 		}
 	}
 }
