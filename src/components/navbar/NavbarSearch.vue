@@ -53,6 +53,9 @@ export default {
 	},
 	ready: function() {
 	},
+	computed: {
+		...mapGetters("BookSearch", ["searchResultDefaultLive"])
+	},
 	methods: {
 		onClose(event) {
 			this.isResult = false;
@@ -73,17 +76,22 @@ export default {
 			}
 		},
 		liveSearch() {
-			if (this.payload.pencarian !== "") {
-				this.$store.dispatch(
-					"BookSearch/getSearchByDefaultLive",
-					this.payload
-				);
-				this.isResult = true;
-			} else {
-				this.payload.pencarian = "";
-				this.isResult = false;
-				return false;
-			}
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+				if (this.payload.pencarian !== "") {
+					this.$store.dispatch(
+						"BookSearch/getSearchByDefaultLive",
+						this.payload
+					);
+					this.isResult = true;
+				} else {
+					this.payload.pencarian = "";
+					this.isResult = false;
+					return false;
+				}
+				resolve()
+				}, 1000)
+			})
 		},
 		gotoBook(bookId, bookName) {
 			const urlname = bookName.toLowerCase();
@@ -98,9 +106,6 @@ export default {
 		hide: function() {
 			this.$emit("clicked", false);
 		}
-	},
-	computed: {
-		...mapGetters("BookSearch", ["searchResultDefaultLive"])
 	},
 	destroyed() {
 		this.$store.commit("BookSearch/resetState_mutation");

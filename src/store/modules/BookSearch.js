@@ -50,16 +50,7 @@ const defaultState = () => {
 };
 
 const state = defaultState();
-const getters = {
-	searchResultDefault: state => state.searchResult,
-	searchResultDefaultAudio: state => state.searchResultAudio,
-	searchResultByBook: state => state.searchResultByBook,
-	searchResultByPenulis: state => state.searchResultByPenulis,
-	searchResultByKategori: state => state.searchResultByKategori,
-	searchResultDefaultLive: state => state.searchResultLive,
-	bookListByKategori: state => state.bookListByKategori,
-	loaderStatus: state => state.loaderStatus
-};
+
 const actions = {
 	getSearchByDefault: ({ commit }, payload) => {
 		axs.post("/ahaapi/pencarian", payload).then(response => {
@@ -162,7 +153,16 @@ const mutations = {
 		state.loaderStatus = true;
 	}
 };
-
+const getters = {
+	searchResultDefault: state => state.searchResult,
+	searchResultDefaultAudio: state => state.searchResultAudio,
+	searchResultByBook: state => state.searchResultByBook,
+	searchResultByPenulis: state => state.searchResultByPenulis,
+	searchResultByKategori: state => state.searchResultByKategori,
+	searchResultDefaultLive: state => state.searchResultLive,
+	bookListByKategori: state => state.bookListByKategori,
+	loaderStatus: state => state.loaderStatus
+};
 export default {
 	namespaced: true,
 	state,
