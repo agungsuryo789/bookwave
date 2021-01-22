@@ -91,6 +91,7 @@ export default {
 				}
 				resolve()
 				}, 1000)
+				return false;
 			})
 		},
 		gotoBook(bookId, bookName) {
