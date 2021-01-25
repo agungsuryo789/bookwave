@@ -98,7 +98,10 @@ export default {
 					params: { bookId: this.idBuku, chapterId: this.idChapter }
 				});
 			} else if (this.is_premium_chapter && !this.premiumMemberStatus) {
-				return false;
+				// return false;
+				this.$router.push({
+					name: "MembershipPage"
+				})
 			}
 		},
 		fetchData() {

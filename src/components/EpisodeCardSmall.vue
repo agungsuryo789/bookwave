@@ -93,7 +93,10 @@ export default {
         this.is_premium_chapter &&
         !this.$store.getters.premiumStatus
       ) {
-        return false;
+        // return false;
+        this.$router.push({
+					name: "MembershipPage"
+				})
       }
     }
   }
