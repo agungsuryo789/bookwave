@@ -142,6 +142,15 @@
 												Support</v-list-item-title
 											>
 										</v-list-item>
+										<template
+											v-if="memberDetail.data && !isTroubleshoot"
+										>
+											<v-list-item @click="changePass" v-if="memberDetail.data[0].type == 1">
+												<v-list-item-title
+													>Change Password</v-list-item-title
+												>
+											</v-list-item>
+										</template>
 										<v-list-item @click="userLogout">
 											<v-list-item-title
 												>Log Out</v-list-item-title
@@ -418,6 +427,11 @@ export default {
 			this.$router.push({
 				name: "HelpSupport"
 			});
+		},
+		changePass() {
+			this.$router.push({
+				name: "ChangePassword"
+			})
 		},
 		toLogin() {
 			this.$router.push({

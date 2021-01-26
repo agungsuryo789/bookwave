@@ -861,6 +861,13 @@ export default new Vuex.Store({
                     commit('showSnackbar', response.data.message)
 				})
         },
+        changePassword: ({ commit }, data) => {
+			axs.post("/ahaapi/ubah_password", data)
+			.then(response => {
+				commit('showSnackbar', response.data.message)
+				router.push('/home')
+			});
+		},
         resetPassword: ({ commit }, token) => {
             console.log(token)
             localStorage.setItem('x-token', token)

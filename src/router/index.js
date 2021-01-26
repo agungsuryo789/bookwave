@@ -57,6 +57,8 @@ const ForgotPassword = () =>
     import ('../views/auth/ForgotPassword.vue')
 const ResetPassword = () =>
     import ('../views/auth/ResetPassword.vue')
+const ChangePassword = () =>
+    import ('../views/auth/ChangePassword.vue')
 
 // User Component
 const LandingUser = () =>
@@ -147,6 +149,14 @@ const routes = [
         component: ResetPassword,
         meta: {
             title: "Reset Password | Ahabaca: lets you read hundred of books collection"
+        }
+    },
+    {
+        path: '/change-password',
+        name: 'ChangePassword',
+        component: ChangePassword,
+        meta: {
+            title: "Change Password | Ahabaca: lets you read hundred of books collection"
         }
     },
     {
