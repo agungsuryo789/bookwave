@@ -211,7 +211,7 @@
               :toggleHg="toggleHighlight"
             />
             <v-row v-if="!parseInt(chapter.prev_chapter_id) > 0">
-              <ChapterpageIntisari :bookId="parseInt(chapter.id_buku)" />
+              <ChapterpageIntisari :bookId="parseInt(chapter.id_buku)" :fontSize="parseInt(slider)" />
             </v-row>
             <div
               v-if="parseInt(chapter.prev_chapter_id) > 0 && parseInt(chapter.next_chapter_id) <= 0 "

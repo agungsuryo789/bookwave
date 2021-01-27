@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-col class="col-intisari">
-      <ul>
+    <v-col class="col-intisari" :style="styleObject">
+      <ul >
         <li v-for="item in intisariDetail.data" :key="item.id_intisari">{{ item.intisari }}</li>
       </ul>
     </v-col>
@@ -15,10 +15,18 @@ export default {
   props: {
     bookId: {
       type: Number
+    },
+    fontSize: {
+      type: Number
     }
   },
   computed: mapState({
-    intisariDetail: state => state.intisariDetail
+    intisariDetail: state => state.intisariDetail,
+    styleObject() {
+      return {
+        fontSize: this.$props.fontSize + "px"
+      };
+    }
   }),
   mounted() {
     this.$store.dispatch("getBookIntisari", this.bookId);
