@@ -10,8 +10,9 @@ import "@mdi/font/css/materialdesignicons.css";
 import "./assets/css/global_variables.scss";
 import "./assets/css/main.scss";
 import Vuelidate from 'vuelidate';
-import VueSocialSharing from 'vue-social-sharing'
-
+import VueSocialSharing from 'vue-social-sharing';
+import Meta from 'vue-meta';
+Vue.use(Meta);
 Vue.use(VueSocialSharing);
 Vue.config.productionTip = false;
 Vue.config.performance = false;
