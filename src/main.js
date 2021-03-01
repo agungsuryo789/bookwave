@@ -10,12 +10,21 @@ import "@mdi/font/css/materialdesignicons.css";
 import "./assets/css/global_variables.scss";
 import "./assets/css/main.scss";
 import Vuelidate from 'vuelidate';
-import VueSocialSharing from 'vue-social-sharing'
+import VueSocialSharing from 'vue-social-sharing';
+import VueMeta from 'vue-meta'
 
+Vue.use(VueMeta, {
+    keyName: 'head',
+    attribute: "data-vue-meta",
+    ssrAttribute: "data-vue-meta-server-rendered",
+    tagIDKeyName: "vmid",
+    refreshOnceOnNavigation: true
+})
 Vue.use(VueSocialSharing);
 Vue.config.productionTip = false;
 Vue.config.performance = false;
 Vue.use(Vuelidate)
+
 
 new Vue({
     router,

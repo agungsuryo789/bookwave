@@ -2,8 +2,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
+import VueMeta from 'vue-meta'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta)
 
 // Lazy load route level
 // No-Auth Component

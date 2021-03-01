@@ -270,14 +270,54 @@ export default {
 	}),
 	mounted() {
 		this.callFunction();
-		const pageTitle = this.$route.params.bookName;
-		window.document.title =
-			"Read " +
-			this.$route.params.bookName
-				.replace(/^./, pageTitle[0].toUpperCase())
-				.replace(/-/g, " ") +
-			" | Ahabaca";
-	}
+		// const pageTitle = this.$route.params.bookName;
+		// window.document.title =
+		// 	"Read " +
+		// 	this.$route.params.bookName
+		// 		.replace(/^./, pageTitle[0].toUpperCase())
+		// 		.replace(/-/g, " ") +
+		// 	" | Ahabaca";
+	},
+	metaInfo() {
+			const book = this.bookDetail;
+			return {
+				title: `Read ${book.data[0].judul} | Ahabaca`,
+				meta: [
+					{
+					name: 'description',
+					content: `${book.data[0].deskripsi}`
+					},
+					{
+					property: 'og:description',
+					content: `${book.data[0].deskripsi}`
+					},
+					{
+					property: 'og:title',
+					content: `Read ${book.data[0].judul}`
+					},
+					{
+					property: 'og:site_name',
+					content: 'Ahabaca'
+					},
+					{
+					property: 'og:type',
+					content: 'website'
+					},
+					{
+					property: 'og:image:secure',
+					content: `${book.data[0].foto_sampul}`
+					},
+					{
+					property: 'twitter:title',
+					content: `${book.data[0].judul}`
+					},
+					{
+					property: 'twitter:description',
+					content: `${book.data[0].deskripsi}`
+					}
+				]
+			}
+		}
 };
 </script>
 
