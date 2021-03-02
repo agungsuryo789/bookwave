@@ -20,7 +20,7 @@
 		</div>
 		<div v-if="isResult" class="search-result">
 			<v-list>
-				<v-list-item-group>
+				<v-list-item-group v-if="searchResultDefaultLive.length > 0">
 					<v-list-item
 						v-for="item in searchResultDefaultLive"
 						:key="item.id_buku"
@@ -31,6 +31,11 @@
 							<v-divider></v-divider>
 						</div>
 					</v-list-item>
+				</v-list-item-group>
+				<v-list-item-group v-if="searchResultDefaultLive.length < 1">
+					<div class="search-empty">
+						Buku tidak ditemukan
+					</div>
 				</v-list-item-group>
 			</v-list>
 		</div>
@@ -149,5 +154,9 @@ export default {
 			width: 84%;
 		}
 	}
+}
+.search-empty {
+    padding: 13px 38px;
+    color: #b5b5b5;
 }
 </style>
