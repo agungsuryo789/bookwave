@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-container class="navbar-section px-0 pt-0 mb-md-10" fluid>
+		<v-container class="navbar-section px-0 mb-md-10" fluid>
 			<v-row>
 				<v-col class="py-0">
 					<nav

@@ -435,6 +435,7 @@ export default {
 
 .title-chapter {
   font-size: 60px;
+  color: #000;
 }
 .social-links {
   color: white;
