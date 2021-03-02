@@ -18,7 +18,9 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-text style="font-size:15px;">{{ author }}</v-card-text>
+          <v-card-text style="font-size:15px;">
+            {{ author[0] }}
+          </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>

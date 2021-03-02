@@ -65,7 +65,7 @@
 							</p>
 						</div>
 						<div class="book-sinopsis my-5 my-lg-10">
-							{{ book.sinopsis }}
+							{{ book.deskripsi }}
 						</div>
 					</v-col>
 					<v-col
@@ -163,7 +163,7 @@
 				<v-row style="margin:0 auto;margin-top:100px">
 					<v-col>
 						<BookpageTabs
-							:sinopsis="book.deskripsi"
+							:sinopsis="book.sinopsis"
 							:tujuan="book.tujuan"
 							:author="book.tentang_penulis"
 						/>
