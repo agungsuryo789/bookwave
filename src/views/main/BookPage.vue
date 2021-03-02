@@ -65,7 +65,7 @@
 							</p>
 						</div>
 						<div class="book-sinopsis my-5 my-lg-10">
-							{{ book.deskripsi }}
+							{{ book.sinopsis }}
 						</div>
 					</v-col>
 					<v-col

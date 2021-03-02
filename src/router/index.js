@@ -370,7 +370,7 @@ const routes = [
         name: 'BookPage',
         component: BookPage,
         meta: {
-			requiresAuth: true,
+			// requiresAuth: true,
 			title: "Read Book | Ahabaca: lets you read hundred of books collection"
         }
     },

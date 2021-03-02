@@ -36,7 +36,7 @@ export default {
       type: String
     },
     author: {
-      type: String
+      type: Array
     }
   },
   data: () => ({
