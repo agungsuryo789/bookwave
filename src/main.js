@@ -14,7 +14,7 @@ import VueSocialSharing from 'vue-social-sharing';
 import VueMeta from 'vue-meta'
 
 Vue.use(VueMeta, {
-    keyName: 'head',
+    keyName: 'metaInfo',
     attribute: "data-vue-meta",
     ssrAttribute: "data-vue-meta-server-rendered",
     tagIDKeyName: "vmid",

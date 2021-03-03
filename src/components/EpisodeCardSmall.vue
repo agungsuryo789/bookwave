@@ -5,7 +5,7 @@
         <div class="book-card-color" :style="cssVars">
           <v-img class="book-card-img mx-2" width="60" height="80" :src="foto_sampul"></v-img>
         </div>
-        <div class="mx-3">
+        <div class="mx-3 card-e-content">
           <div>
             <a @click="toChapter" class="book-card-link">
               <h2 class="book-card--title font-weight-bold">{{episodeTitle}}</h2>
@@ -21,7 +21,7 @@
             </template>
           </div>
           <div>
-            <v-btn class="mt-4" icon @click="toChapter" small ripple><v-icon large>mdi-play-circle-outline</v-icon></v-btn>
+            <v-btn icon @click="toChapter" small ripple><v-icon large>mdi-play-circle-outline</v-icon></v-btn>
           </div>
         </div>
       </div>
@@ -143,5 +143,12 @@ export default {
 .book-card-link {
   text-decoration: none;
   color: black;
+}
+.card-e-content{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  button{
+    margin-top: 10px;
+  }
 }
 </style>

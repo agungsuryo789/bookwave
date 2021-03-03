@@ -11,7 +11,7 @@
           <div>
             <a @click="gotoBook" class="book-card-link">
               <h2 class="book-card--title font-weight-bold">{{title}}</h2>
-              <small>{{penulis}}</small>
+              <small class="author">{{penulis}}</small>
               <p>{{deskripsi}}</p>
             </a>
             <template v-if="is_premium == 'true' || is_premium == '1' && !premiumMemberStatus">
@@ -240,12 +240,23 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .author {
+    width: 91%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
   .book-card-category {
     font-size: 8px;
     color: #424242 !important;
-    height: 25px;
+    min-height: 25px;
+    height: auto;
     margin: 6px 0;
     border: 2px solid var(--color);
+    max-width: 135px !important;
+    display: unset ;
+    white-space: normal;
   }
 }
 .book-card-link {
