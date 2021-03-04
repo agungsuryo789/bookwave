@@ -181,10 +181,12 @@ export default {
 		.book-title {
 			font-size: 15px;
 			font-weight: bold;
-			width: 195px;
-			overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis;
+			// width: 195px;
+			// overflow: hidden;
+			// white-space: nowrap;
+			// text-overflow: ellipsis;
+			line-height: 22px;
+			margin-bottom: 10px;
 		}
 	}
 	.book-card-img {
