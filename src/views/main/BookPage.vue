@@ -1,6 +1,6 @@
 <template>
 	<div class="book-page">
-		<NavbarSection />
+		<NavbarSectionDetail />
 		<template v-if="!loadSkeleton">
 			<v-container
 				class="my-1 justify-center align-center container"
@@ -226,14 +226,14 @@
 
 <script>
 import BookpageTabs from "@/components/bookpage/BookpageTabs.vue";
-import NavbarSection from "@/components/NavbarSection.vue";
+import NavbarSectionDetail from "@/components/NavbarSectionDetail.vue";
 import ButtonBookmark from "@/components/ButtonBookmark.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
 export default {
 	components: {
-		NavbarSection,
+		NavbarSectionDetail,
 		BookpageTabs,
 		ButtonBookmark,
 		FooterSection
