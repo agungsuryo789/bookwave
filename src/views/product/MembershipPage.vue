@@ -120,6 +120,7 @@ export default {
   border-right: 2px solid #dddddd;
   border-radius: 16px;
   box-shadow: none;
+  overflow: hidden;
   .subcription-page--price-badge {
     background-color: #8EDF00;
     padding: 5px 18px;
