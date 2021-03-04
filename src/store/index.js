@@ -209,6 +209,10 @@ export default new Vuex.Store({
 			state.bookDetail = response;
 			state.loaderStatus = true;
 		},
+		getBookDetailByIDnoAuth_mutation: (state, response) => {
+			state.bookDetail = response;
+			state.loaderStatus = true;
+		},
 		getBookOutline_mutation: (state, response) => {
 			state.bookOutline = response;
 			state.loaderStatus = true;
@@ -453,9 +457,15 @@ export default new Vuex.Store({
 		// Book Search Action
 		// Book n Chapter ACtion
 		getBookDetailByID: ({ commit }, bookId) => {
-			axs.get("/ahaapi/buku?id_buku=" + bookId)
+			axs.get("/ahaapi/buku_noauth?id_buku=" + bookId)
 				.then(response => {
 					commit("getBookDetailByID_mutation", response.data);
+				})
+		},
+		getBookDetailByIDnoAuth: ({ commit }, bookId) => {
+			axs.get("/ahaapi/buku_noauth?id_buku=" + bookId)
+				.then(response => {
+					commit("getBookDetailByIDnoAuth_mutation", response.data);
 				})
 		},
 		getBookChapter: ({ commit }, dispatchPayload) => {

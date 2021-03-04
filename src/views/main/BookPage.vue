@@ -94,7 +94,7 @@
 										book.is_premium == 0
 								"
 							>
-								<div class="d-flex flex-column justify-end">
+								<div class="d-flex flex-column justify-end" v-if="userState">
 									<v-btn
 										:to="{
 											name: 'BookChapter',
@@ -241,7 +241,8 @@ export default {
 	data() {
 		return {
 			premiumMemberStatus: this.$store.getters.premiumStatus,
-			loadSkeleton: true
+			loadSkeleton: true,
+			userState: ""
 		};
 	},
 	methods: {
@@ -263,6 +264,7 @@ export default {
 			setTimeout(function() {
 				_this.loadSkeleton = false;
 			}, 1000);
+			this.userState = this.$store.getters.isLoggedIn;
 		}
 	},
 	computed: mapState({
