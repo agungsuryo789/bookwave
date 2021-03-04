@@ -193,6 +193,7 @@ export default {
 			// text-overflow: ellipsis;
 			line-height: 22px;
 			margin-bottom: 10px;
+			word-break: unset;
 		}
 	}
 	.book-card-img {
