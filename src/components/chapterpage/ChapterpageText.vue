@@ -121,6 +121,9 @@ export default {
       const tooltipSpan = document.getElementById("tooltip");
 
       if (selection && anchorSelection > 0) {
+        tooltipSpan.display = "none";
+      } else {
+        console.log('as');
         const x = e.clientX;
         const y = e.clientY;
         tooltipSpan.style.display = "flex";
@@ -129,8 +132,6 @@ export default {
         tooltipSpan.style.zIndex = "3";
         tooltipSpan.style.top = y - 60 + "px";
         tooltipSpan.style.left = x + -100 + "px";
-      } else {
-        tooltipSpan.display = "none";
       }
     },
     setHighlight() {
