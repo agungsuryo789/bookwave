@@ -256,15 +256,22 @@ export default {
 			});
 		},
 		callFunction: function() {
-			this.$store.dispatch(
-				"getBookDetailByID",
-				this.$route.params.bookId
-			);
+			this.userState = this.$store.getters.isLoggedIn;
+			if (!this.userState) {
+				this.$store.dispatch(
+					"getBookDetailByIDnoAuth",
+					this.$route.params.bookId
+				);
+			} else {
+				this.$store.dispatch(
+					"getBookDetailByID",
+					this.$route.params.bookId
+				);
+			}
 			var _this = this;
 			setTimeout(function() {
 				_this.loadSkeleton = false;
 			}, 1000);
-			this.userState = this.$store.getters.isLoggedIn;
 		}
 	},
 	computed: mapState({
