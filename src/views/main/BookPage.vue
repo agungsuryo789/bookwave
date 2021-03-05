@@ -380,7 +380,6 @@ export default {
 		width: 100%;
 	}
 	.book-sinopsis {
-		max-height: 50px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 	}
