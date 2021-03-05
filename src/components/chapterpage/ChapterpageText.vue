@@ -123,7 +123,6 @@ export default {
       if (selection && anchorSelection > 0) {
         tooltipSpan.display = "none";
       } else {
-        console.log('as');
         const x = e.clientX;
         const y = e.clientY;
         tooltipSpan.style.display = "flex";

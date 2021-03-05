@@ -453,6 +453,9 @@ export default {
   border-radius: 50%;
   z-index: 999;
 }
+.mdi-heart::before {
+    color: #e76464;
+}
 .audioplayer-section {
     position: fixed;
     bottom: 0;
@@ -460,7 +463,7 @@ export default {
     right: 0;
     margin: auto;
     width: 100%;
-    z-index: 999;
+    z-index: 99;
     @media (min-width: 960px) {
         max-width: 877px;
     }
