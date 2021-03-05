@@ -437,6 +437,9 @@ export default {
   font-size: 60px;
   color: #000;
 }
+.bgBlack .title-chapter {
+  color: #fff;
+}
 .social-links {
   color: white;
   text-decoration: none;
