@@ -94,7 +94,7 @@ export default {
 			email: this.email,
 		};
 		this.$store.dispatch("forgotPassword", data);
-		this.showSnackbar()
+    setTimeout(() => this.showSnackbar(), 2000);
 		}
 	}
   }

@@ -869,8 +869,10 @@ export default new Vuex.Store({
         forgotPassword: ({ commit }, data) => {
             axs.post('/ahaapi/lupa_password', data)
                 .then(response => {
-                    commit('showSnackbar', response.data.message)
-				})
+                    commit('showSnackbar', 'Berhasil dikirim')
+				}).catch(err => {
+                    commit('showSnackbar', err.message)
+                })
         },
         changePassword: ({ commit }, data) => {
 			axs.post("/ahaapi/ubah_password", data)

@@ -101,16 +101,20 @@
                 sm="3"
                 cols="12"
               >
-                <img
-                  class="my-2"
-                  src="@/assets/image/playstore-icon.svg"
-                  alt="AHA Google Playstore"
-                />
-                <img
-                  class="my-2"
-                  src="@/assets/image/iosstore-icon.svg"
-                  alt="AHA IOS Store"
-                />
+                <a href="https://play.google.com/store/apps/details?id=com.aha.ahaandroid" target="_blank">
+                  <img
+                    class="my-2"
+                    src="@/assets/image/playstore-icon.svg"
+                    alt="AHA Google Playstore"
+                  />
+                </a>
+                <a href="https://apps.apple.com/id/app/aha-audiobook/id1524840117?l=id" target="_blank">
+                  <img
+                    class="my-2"
+                    src="@/assets/image/iosstore-icon.svg"
+                    alt="AHA IOS Store"
+                  />
+                </a>
               </v-col>
             </v-row>
           </v-col>
@@ -179,15 +183,21 @@
             cols="12"
             style="margin: 0 auto"
           >
-            <v-btn icon color="white">
-              <v-icon>mdi-facebook</v-icon>
-            </v-btn>
-            <v-btn icon color="white">
-              <v-icon>mdi-instagram</v-icon>
-            </v-btn>
-            <v-btn icon color="white">
-              <v-icon>mdi-twitter</v-icon>
-            </v-btn>
+            <a href="https://facebook.com" target="_blank">
+              <v-btn icon color="white">
+                <v-icon>mdi-facebook</v-icon>
+              </v-btn>
+            </a>
+            <a href="https://instagram.com" target="_blank">
+              <v-btn icon color="white">
+                <v-icon>mdi-instagram</v-icon>
+              </v-btn>
+            </a>
+            <a href="https://twitter.com" target="_blank">
+              <v-btn icon color="white">
+                <v-icon>mdi-twitter</v-icon>
+              </v-btn>
+            </a>
           </v-col>
         </v-row>
       </v-container>
