@@ -5,7 +5,7 @@
 		<div class="container">
 			<v-row>
 				<v-col md="6">
-					<h1> General </h1>
+					<h1> Umum </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">
@@ -16,27 +16,27 @@
 				</v-col>
 				<v-col xs="4" md="3">
 					<router-link to="/promo">
-						<p> Promotion </p>
+						<p> Promosi </p>
 					</router-link>
 					<router-link to="/blog">
 						<p> Blog </p>
 					</router-link>
 					<router-link to="/contact">
-						<p> Contact & Help </p>
+						<p> Kontak & Bantuan </p>
 					</router-link>
 					<router-link to="/troubleshoot">
-						<p>Troubleshoot</p>
+						<p>Pertanyaan</p>
 					</router-link>
 				</v-col>
 				<v-col xs="4" md="3">
 					<router-link to="/about">
-						<p> About </p>
+						<p> Tentang </p>
 					</router-link>
 					<router-link to="/career">
-						<p> Careers </p>
+						<p> Karir </p>
 					</router-link>
 					<router-link to="/partnership">
-						<p> Partners </p>
+						<p> Rekan </p>
 					</router-link>
 				</v-col>
 			</v-row>
@@ -44,7 +44,7 @@
 			<hr>
 			<v-row class="mt-6">
 				<v-col md="6">
-					<h1> Top Articles </h1>
+					<h1> Top Artikel </h1>
 				</v-col>
 			</v-row>
 			<v-row class="mt-2 my-2">

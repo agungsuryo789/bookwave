@@ -54,7 +54,7 @@
 									color="transparent"
 									depressed
 									style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
-									>Library</v-btn
+									>Koleksi</v-btn
 								>
 								<v-btn
 									to="/promo"
@@ -93,7 +93,7 @@
 										"
 										to="/plans"
 										style="text-transform:none;color:white;font-size:18px;letter-spacing: 0.3px;font-weight: 800;"
-										>Upgrade Premium</v-btn
+										>Jadikan Premium</v-btn
 									>
 								</div>
 								<template
@@ -121,25 +121,23 @@
 											color="transparent"
 											depressed
 											style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
-											>You <v-icon dark right>mdi-chevron-down</v-icon></v-btn
+											>Saya <v-icon dark right>mdi-chevron-down</v-icon></v-btn
 										>
 									</template>
 									<v-list>
 										<v-list-item @click="toProfile">
 											<v-list-item-title
-												>My Account</v-list-item-title
+												>Akun Saya</v-list-item-title
 											>
 										</v-list-item>
 										<v-list-item @click="toPaymentHistory">
 											<v-list-item-title
-												>Payment
-												History</v-list-item-title
+												>Riwayat Pembayaran</v-list-item-title
 											>
 										</v-list-item>
 										<v-list-item @click="toHelp">
 											<v-list-item-title
-												>Help &
-												Support</v-list-item-title
+												>Bantuan & Dukungan</v-list-item-title
 											>
 										</v-list-item>
 										<template
@@ -147,13 +145,13 @@
 										>
 											<v-list-item @click="changePass" v-if="memberDetail.data[0].type == 1">
 												<v-list-item-title
-													>Change Password</v-list-item-title
+													>Ubah Password</v-list-item-title
 												>
 											</v-list-item>
 										</template>
 										<v-list-item @click="userLogout">
 											<v-list-item-title
-												>Log Out</v-list-item-title
+												>Keluar</v-list-item-title
 											>
 										</v-list-item>
 									</v-list>
@@ -192,7 +190,7 @@
 										</v-list-item>
 										<v-list-item to="/library/book">
 											<v-list-item-title
-												>Library</v-list-item-title
+												>Koleksi</v-list-item-title
 											>
 										</v-list-item>
 										<v-list-item to="/promo">
@@ -209,7 +207,7 @@
 											v-on="on"
 											color="transparent"
 											depressed
-											>You</v-btn
+											>Saya</v-btn
 										>
 									</template>
 									<v-list>
@@ -247,7 +245,7 @@
 														depressed
 														color="#39DF8C"
 														style="text-transform:none;color:white;"
-														>Upgrade Premium</v-btn
+														>Jadikan Premium</v-btn
 													>
 												</v-list-item-title>
 											</v-list-item>
@@ -347,14 +345,14 @@
 										elevation="2"
 										depressed
 										style="text-transform:none;color:white;font-size:18px;letter-spacing: 0.3px;font-weight: 800;"
-										>Start Trial</v-btn
+										>Mulai Sekarang</v-btn
 									>
 									<v-btn
 										@click="toLogin"
 										color="transparent"
 										depressed
 										style="text-transform:none;font-size:18px;font-weight:800;letter-spacing: 0.3px;"
-										>Login</v-btn
+										>Masuk</v-btn
 									>
 								</div>
 							</v-toolbar-items>

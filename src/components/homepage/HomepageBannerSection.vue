@@ -14,7 +14,7 @@
           rounded
           color="#39DF8C"
           depressed
-        >Start Free Trial</v-btn>
+        >Uji Coba Gratis</v-btn>
       </v-col>
       <v-col class="col-banner-img" md="6" sm="12" cols="12">
         <v-img src="@/assets/image/aha-homapage-banner.png" aspect-ratio="1.1" style="z-index:4;"></v-img>

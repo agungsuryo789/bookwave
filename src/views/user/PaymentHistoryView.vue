@@ -60,7 +60,7 @@
       <v-row v-else>
         <v-col>
           <p>Anda belum mempunyai riwayat pembayaran</p>
-          <v-btn rounded dark color="#49E295" to="/plans">Explore more</v-btn>
+          <v-btn rounded dark color="#49E295" to="/plans">Jelajahi lebih lanjut</v-btn>
         </v-col>
       </v-row>
     </v-container>

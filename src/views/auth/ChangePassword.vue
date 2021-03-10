@@ -13,7 +13,7 @@
         <v-col class="mt-8" cols="12">
           <v-row justify="center">
             <v-col cols="10" md="4" align="center">
-              <label style="display: inline-block;margin-bottom:15px">New Password</label>
+              <label style="display: inline-block;margin-bottom:15px">Password Baru</label>
               <v-text-field
                 v-model="password"
                 :rules="[rules.required, rules.min]"
@@ -23,7 +23,7 @@
                 class="centered-input form-auth"
                 solo
               ></v-text-field>
-              <label style="display: inline-block;margin-bottom:15px">Confirm Password</label>
+              <label style="display: inline-block;margin-bottom:15px">Konfirmasi Password</label>
               <v-text-field
                 v-model="confirmPassword"
                 :rules="[

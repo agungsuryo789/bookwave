@@ -49,7 +49,7 @@
               color="#39DF8C"
               depressed
               style="text-transform: capitalize; color: white"
-              >Start Free Trial</v-btn
+              >Uji Coba Gratis</v-btn
             >
           </v-col>
         </v-row>

@@ -2,7 +2,7 @@
   <v-container fluid class="container-navbar-category">
     <v-row class="mx-auto" style="max-width:800px;">
       <v-col>
-        <h3 class="navbar-category-title px-5" style="color:#4285F4;">Discover by Category</h3>
+        <h3 class="navbar-category-title px-5" style="color:#4285F4;">Temukan Berdasarkan Kategori</h3>
 		<v-divider class="mt-8"></v-divider>
       </v-col>
     </v-row>

@@ -18,11 +18,11 @@
 					<v-col cols="12" sm="12" md="6">
 						<v-form>
 						<p class="label-form">Alamat Email *</p>
-						<v-text-field class="contact-form" solo w-75 v-model="email" label="Your email address"></v-text-field>
+						<v-text-field class="contact-form" solo w-75 v-model="email" label="Alamat email anda"></v-text-field>
 						<p class="label-form">Subject Pesan *</p>
-						<v-text-field class="contact-form" solo v-model="judul" label="Subject"></v-text-field>
+						<v-text-field class="contact-form" solo v-model="judul" label="Subjek"></v-text-field>
 						<p class="label-form">Masukan pesan Anda</p>
-						<v-textarea class="contact-form" solo v-model="deskripsi" label="Description"></v-textarea>
+						<v-textarea class="contact-form" solo v-model="deskripsi" label="Deskripsi"></v-textarea>
 						<v-spacer></v-spacer>
 						<v-btn color="red darken-1" block x-large class="white--text"  v-on:click="submit">Kirim</v-btn>
 						</v-form>

@@ -30,7 +30,7 @@
 								tabindex="0"
 								solo
 								rounded
-								label="Search by title or anothers"
+								label="Cari berdasarkan judul atau lainnya"
 								prepend-inner-icon="mdi-magnify"
 							></v-text-field>
 						<!-- <div class="d-flex flex-row" style="width:80%;">

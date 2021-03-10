@@ -23,18 +23,18 @@
     <div class="container">
       <v-row class="mt-2 my-2">
         <v-col cols="12" md="4">
-          <v-btn large block outlined color="deep-purple accent-4" to="/about">About</v-btn>
+          <v-btn large block outlined color="deep-purple accent-4" to="/about">Tentang</v-btn>
         </v-col>
         <v-col cols="12" md="4">
-          <v-btn large block outlined color="deep-purple accent-4" to="/plans">Subscription</v-btn>
+          <v-btn large block outlined color="deep-purple accent-4" to="/plans">Langganan</v-btn>
         </v-col>
         <v-col cols="12" md="4">
-          <v-btn large block outlined color="deep-purple accent-4" to="/profile">My Account</v-btn>
+          <v-btn large block outlined color="deep-purple accent-4" to="/profile">Akun Saya</v-btn>
         </v-col>
       </v-row>
       <v-row class="mt-2 my-2">
         <v-col cols="12" md="4">
-          <v-btn large block outlined color="deep-purple accent-4" to="/">Our Apps & Our Site</v-btn>
+          <v-btn large block outlined color="deep-purple accent-4" to="/">Aplikasi Kami & Website Kami</v-btn>
         </v-col>
         <v-col cols="12" md="8">
           <v-btn
@@ -43,7 +43,7 @@
             outlined
             color="deep-purple accent-4"
             to="/troubleshoot"
-          >Step-by-Step Guides & Troubleshooting</v-btn>
+          >Panduan & Pertanyaan</v-btn>
         </v-col>
       </v-row>
     </div>

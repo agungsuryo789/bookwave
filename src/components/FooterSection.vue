@@ -46,11 +46,11 @@
                   class="table-footer-links text-center text-lg-left text-xl-left"
                 >
                   <tr>
-                    <th>Useful Links</th>
+                    <th>Link AHA</th>
                   </tr>
                   <tr>
                     <td>
-                      <router-link to="/promo">Promotion</router-link>
+                      <router-link to="/promo">Promosi</router-link>
                     </td>
                   </tr>
                   <tr>
@@ -60,12 +60,12 @@
                   </tr>
                   <tr>
                     <td>
-                      <router-link to="/contact">Contact & Help</router-link>
+                      <router-link to="/contact">Kontak & Bantuan</router-link>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <router-link to="/troubleshoot">Troubleshoot</router-link>
+                      <router-link to="/troubleshoot">Pertanyaan</router-link>
                     </td>
                   </tr>
                 </table>
@@ -75,21 +75,21 @@
                   class="table-footer-links text-center text-lg-left text-xl-left"
                 >
                   <tr>
-                    <th>Company</th>
+                    <th>AHA Baca </th>
                   </tr>
                   <tr>
                     <td>
-                      <router-link to="/about">About</router-link>
+                      <router-link to="/about">Tentang</router-link>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <router-link to="/career">Careers</router-link>
+                      <router-link to="/career">Karir</router-link>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <router-link to="/partnership">Partners</router-link>
+                      <router-link to="/partnership">Rekan</router-link>
                     </td>
                   </tr>
                 </table>
@@ -154,7 +154,7 @@
                 <router-link
                   to="/usersprivacy"
                   style="text-decoration: none; color: white"
-                  >User Privacy</router-link
+                  >Privasi Pengguna</router-link
                 >
                 <span>|</span>
               </li>
@@ -162,7 +162,7 @@
                 <router-link
                   to="/terms"
                   style="text-decoration: none; color: white"
-                  >Terms</router-link
+                  >Ketentuan</router-link
                 >
                 <span>|</span>
               </li>
@@ -170,7 +170,7 @@
                 <router-link
                   to="/privacy"
                   style="text-decoration: none; color: white"
-                  >Applicant Privacy</router-link
+                  >Kebijakan Aplikasi</router-link
                 >
               </li>
             </ul>

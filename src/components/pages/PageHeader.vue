@@ -9,7 +9,7 @@
 				</div>
 			</v-col>
 			<v-col md="6">
-				<p class="text-left text-md-right text-secondary"> Last Updated 12 March 2020 </p>
+				<p class="text-left text-md-right text-secondary"> Terakhir Diperbaharui 12 March 2020 </p>
 			</v-col>
 		</v-row>
 		<hr class="mt-5">
