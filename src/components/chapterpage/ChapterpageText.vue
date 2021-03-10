@@ -101,28 +101,23 @@ export default {
   }),
   methods: {
     getSelected() {
+      var t = '';
       if (window.getSelection) {
-        return window.getSelection();
+          t = window.getSelection();
       } else if (document.getSelection) {
-        return document.getSelection();
-      } else {
-        const selection =
-          document.selection && document.selection.createRange();
-        if (selection.text) {
-          return selection.text;
-        }
-        return false;
+          t = document.getSelection();
+      } else if (document.selection) {
+          t = document.selection.createRange().text;
       }
+      return t;
     },
     showHighlightTool(e) {
       // Show the highlight tool button on selection
       const selection = this.getSelected();
-      const anchorSelection = selection.extentOffset - selection.anchorOffset;
+      const anchorSelection = selection.focusOffset - selection.anchorOffset;
       const tooltipSpan = document.getElementById("tooltip");
 
       if (selection && anchorSelection > 0) {
-        tooltipSpan.display = "none";
-      } else {
         const x = e.clientX;
         const y = e.clientY;
         tooltipSpan.style.display = "flex";
@@ -131,6 +126,8 @@ export default {
         tooltipSpan.style.zIndex = "3";
         tooltipSpan.style.top = y - 60 + "px";
         tooltipSpan.style.left = x + -100 + "px";
+      } else {
+        tooltipSpan.style.display = "none";
       }
     },
     setHighlight() {
