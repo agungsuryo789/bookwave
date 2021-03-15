@@ -87,9 +87,9 @@ export default {
   }),
   methods: {
     toDownloadInvoice(val) {
-      const x = "https://ahabaca-dev.s3-ap-southeast-1.amazonaws.com/";
+      // const x = "https://ahabaca-dev.s3-ap-southeast-1.amazonaws.com/";
       setTimeout(function() {
-        window.open(x + val);
+        window.open(val);
       }, 300);
     }
   },
