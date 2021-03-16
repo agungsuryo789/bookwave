@@ -4,7 +4,7 @@
     <v-container class="second-container">
       <v-row>
         <v-col>
-          <h1 class="mb-2">Payment History</h1>
+          <h1 class="mb-2">Riwayat Pembayaran</h1>
           <div class="title-underline d-flex flex-row justify-start">
             <img src="@/assets/image/underline-1.svg" height="8" />
             <img class="mx-2" src="@/assets/image/underline-2.svg" height="8" />

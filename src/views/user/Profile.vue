@@ -4,7 +4,7 @@
 		<v-container class="mt-10">
 			<v-row align="center" justify="between">
 				<v-col md="6">
-					<h1> My Account </h1>
+					<h1> Akun Saya </h1>
 					<v-row>
 						<v-img lazy-src="@/assets/image/underline-1.svg" class="ml-3 mr-4" max-width="80px"></v-img>
 						<v-img lazy-src="@/assets/image/underline-1.svg" max-width="20px"></v-img>
