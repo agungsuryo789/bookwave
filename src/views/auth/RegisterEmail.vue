@@ -149,9 +149,9 @@ export default {
           password: this.passwordReg,
           type: 1
         };
-		this.$store.dispatch("userRegister", data);
-		this.$store.dispatch("getMemberDetail");
-		this.showSnackbar()
+        this.$store.dispatch("userRegister", data);
+        this.$store.dispatch("getMemberDetail");
+        this.showSnackbar()
       }
     }
   }

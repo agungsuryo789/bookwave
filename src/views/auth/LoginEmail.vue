@@ -150,11 +150,11 @@ export default {
           password: this.password,
           type: 1
         };
-		this.$store.dispatch("userLogin", data);
-		this.$store.dispatch("getMemberDetail");
-		this.showSnackbar()
+      this.$store.dispatch("userLogin", data);
+      this.$store.dispatch("getMemberDetail");
+      this.showSnackbar()
       }
-	}
+	  }
   }
 };
 </script>
