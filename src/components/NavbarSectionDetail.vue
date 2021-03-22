@@ -345,7 +345,7 @@
 										elevation="2"
 										depressed
 										style="text-transform:none;color:white;font-size:18px;letter-spacing: 0.3px;font-weight: 800;"
-										>Mulai Sekarang</v-btn
+										>Mulai <span class="on-mobile">Sekarang</span></v-btn
 									>
 									<v-btn
 										@click="toLogin"
@@ -491,7 +491,7 @@ position: relative;
 			color: white;
 			background-color: #39df8c;
 			@media screen and (max-width: 425px) {
-				width: 50%;
+				width: 43%;
 			}
 			@media screen and (max-width: 340px) {
 				width: 40%;
@@ -545,11 +545,18 @@ position: relative;
     margin-right: auto;
     margin-left: auto;
 }
+@media (max-width: 544px){
+	.on-mobile{
+		display: none;
+	}
+}
+
 @media (min-width: 960px){
 	.v-toolbar.container {
 		max-width: 900px;
 	}
 }
+
 @media (min-width: 1264px){
 	.v-toolbar.container {
 		max-width: 1185px;
