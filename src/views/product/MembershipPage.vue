@@ -43,7 +43,7 @@
               </div>
               <v-card-title class="title-pre">{{ item.nama_langganan }}</v-card-title>
               <v-card-text>
-                <h2 class="price">{{ item.harga }} {{item.satuan}}</h2>
+                <h2 class="price">{{ item.harga }} / {{item.satuan}}</h2>
                 <p class="price-desc"
                 >{{ item.deskripsi }}</p>
               </v-card-text>
