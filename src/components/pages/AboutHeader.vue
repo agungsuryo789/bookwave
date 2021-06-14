@@ -7,7 +7,7 @@
 					<p class="larger"> {{ subtitle }} </p>
 				</div>
 			</v-col>
-			<v-col md="7" class="px-0 py-0">
+			<v-col md="7" class="px-0 py-3">
 				<v-img src="@/assets/image/Group21.png" height="240px" width="auto" position="right 25%" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
 			</v-col>
 		</v-row>
