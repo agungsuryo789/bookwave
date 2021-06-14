@@ -2,7 +2,7 @@
 	<div class="about">
 		<NavbarSection />
 		<div v-for="item in carrerSetting" :key="item.id_setting_career">
-			<CareerHeader :title="item.judul" :subtitle="item.deskripsi_judul" :banner="item.banner_img"/>
+			<AboutHeader :title="item.judul" :subtitle="item.deskripsi_judul" :banner="item.banner_img"/>
 		</div>
 		<!-- <v-container>
 			<v-row>
@@ -12,6 +12,8 @@
 			</v-row>
 		</v-container> -->
 		<v-container>
+		<hr class="mt-5 mb-5">
+
 			<!-- <v-row>
 				<v-col cols="12" md="10">
 				<h1 class="ungu"> Tentang Kami </h1>
@@ -54,7 +56,7 @@
 
 <script>
 import NavbarSection from "@/components/NavbarSection.vue";
-import CareerHeader from "@/components/pages/CareerHeader.vue";
+import AboutHeader from "@/components/pages/AboutHeader.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import { mapState } from "vuex";
 
@@ -62,7 +64,7 @@ export default {
   name: "AppPrivacy",
   components: {
     NavbarSection,
-    CareerHeader,
+    AboutHeader,
     FooterSection
   },
   created() {

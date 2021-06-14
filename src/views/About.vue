@@ -17,7 +17,7 @@
 		</v-container>
 		<v-container fluid>
 			<v-row v-for="item in about" :key="item.id_about_us">
-				<v-img :src="item.img_file" max-height="300px" class="img-fluid my-4"></v-img>
+				<v-img :src="item.footer_img" max-height="300px" class="img-fluid my-4"></v-img>
 			</v-row>
 		</v-container>
 		<FooterSection />
