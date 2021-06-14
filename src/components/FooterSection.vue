@@ -183,17 +183,17 @@
             cols="12"
             style="margin: 0 auto"
           >
-            <a href="https://facebook.com" target="_blank">
+            <a href="https://www.facebook.com/Ahabaca-105791011647934" target="_blank">
               <v-btn icon color="white">
                 <v-icon>mdi-facebook</v-icon>
               </v-btn>
             </a>
-            <a href="https://instagram.com" target="_blank">
+            <a href="https://www.instagram.com/ahaaudiobook/" target="_blank">
               <v-btn icon color="white">
                 <v-icon>mdi-instagram</v-icon>
               </v-btn>
             </a>
-            <a href="https://twitter.com" target="_blank">
+            <a href="https://twitter.com/ahabaca" target="_blank">
               <v-btn icon color="white">
                 <v-icon>mdi-twitter</v-icon>
               </v-btn>

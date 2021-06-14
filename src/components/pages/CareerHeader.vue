@@ -7,7 +7,7 @@
 			</v-col>
 			<v-col md="2"></v-col>
 			<v-col md="4">
-				<v-img src="@/assets/image/career.png" height="240px" position="right 25%" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
+				<v-img :src="banner" height="240px" position="right 25%" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
 			</v-col>
 		</v-row>
 		<hr class="mt-5">
@@ -19,7 +19,8 @@ export default {
   name: "CareerHeader",
   props: {
     title: String,
-    subtitle: String
+    subtitle: String,
+	banner: String
   }
 }
 </script>

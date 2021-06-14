@@ -1,7 +1,9 @@
 <template>
 	<div class="about">
 		<NavbarSection />
-		<AboutHeader title="Bergabunglah dengan Program Mitra AHA" subtitle=""/>
+		<div v-for="item in partner" :key="item.id_rekan">
+			<AboutHeader v-bind:title="item.judul" v-bind:subtitle="item.deskripsi_judul" v-bind:banner="item.banner_img"/>
+		</div>
 		<v-container>
 			<v-row>
 				<v-col cols="12" md="12">
@@ -54,14 +56,21 @@
 import NavbarSection from "@/components/NavbarSection.vue";
 import AboutHeader from "@/components/pages/AboutHeader.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import { mapState } from 'vuex';
 
 export default {
-  name: "PartnersPage",
-  components: {
-    NavbarSection,
-    AboutHeader,
-    FooterSection
-  }
+	name: "PartnersPage",
+	components: {
+	NavbarSection,
+	AboutHeader,
+	FooterSection
+	},
+	created() {
+		this.$store.dispatch("getPartnership");
+	},
+	computed: mapState({
+		partner: state => state.partnerShip.data
+	})
 };
 </script>
 

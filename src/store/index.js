@@ -107,8 +107,10 @@ const defaultState = () => {
 		applicationPrivacy: [],
 		disclaimer: [],
 		aboutUs: [],
+		partnerShip: [],
 		contactUs: [],
 		career: [],
+		careerSetting: [],
 		detailCareer: [],
 		relatedCareer: [],
 		listBlog: [],
@@ -229,7 +231,7 @@ export default new Vuex.Store({
 		setBookDone_mutation: (state, response) => {
 			state.bookStatus = response;
 			state.loaderStatus = true;
-			router.push("/", () => {});
+			router.push("/", () => { });
 		},
 		setDeleteKoleksi_mutation: (state, response) => {
 			state.bookStatus = response;
@@ -357,11 +359,17 @@ export default new Vuex.Store({
 		getAbout_mutation: (state, response) => {
 			state.aboutUs = response;
 		},
+		getPartnership_mutation: (state, response) => {
+			state.partnerShip = response;
+		},
 		getContact_mutation: (state, response) => {
 			state.contactUs = response;
 		},
 		getCareer_mutation: (state, response) => {
 			state.career = response;
+		},
+		getCareerSetting_mutation: (state, response) => {
+			state.careerSetting = response;
 		},
 		getBlog_mutation: (state, response) => {
 			state.listBlog = response;
@@ -404,9 +412,9 @@ export default new Vuex.Store({
 					commit("getBookByKategoriNoAuth_mutation", response.data);
 				}
 			})
-			.catch(err => {
-				console.log(err.message);
-			});
+				.catch(err => {
+					console.log(err.message);
+				});
 		},
 		getTopKategoriNoAuth: ({ commit }) => {
 			axs.get("/ahaapi/beranda_buku_noauth")
@@ -472,9 +480,9 @@ export default new Vuex.Store({
 		getBookChapter: ({ commit }, dispatchPayload) => {
 			axs.get(
 				"/ahaapi/chapter?id_buku=" +
-					dispatchPayload.bookId +
-					"&id_chapter=" +
-					dispatchPayload.chapterId
+				dispatchPayload.bookId +
+				"&id_chapter=" +
+				dispatchPayload.chapterId
 			)
 				.then(response => {
 					commit("getBookChapter_mutation", response.data);
@@ -573,172 +581,172 @@ export default new Vuex.Store({
 		},
 		// GET account user
 		getAccountDetail: ({ commit }) => {
-            axs.get('/ahaapi/member')
-                .then(response => {
-                    commit('getAccountDetail_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        // Book Library GET
-        koleksiBuku: ({ commit }) => {
-            axs.get('/ahaapi/koleksi_buku_member')
-                .then(response => {
-                    commit('koleksiBuku_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        koleksiBukuFav: ({ commit }) => {
-            axs.get('/ahaapi/koleksi_buku_favorit')
-                .then(response => {
-                    commit('koleksiBukuFav_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        koleksiBukuHighlight: ({ commit }) => {
-            axs.get('/ahaapi/koleksi_buku_highlight')
-                .then(response => {
-                    commit('koleksiBukuHighlight_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        koleksiAudio: ({ commit }) => {
-            axs.get('/ahaapi/koleksi_audio_member')
-                .then(response => {
-                    commit('koleksiAudio_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        koleksiTag: ({ commit }) => {
-            axs.get('/ahaapi/list_tag')
-                .then(response => {
-                    commit('koleksiTag_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        koleksiTagSingle: ({ commit }, tagPayload) => {
-            axs.get('/ahaapi/tag_buku?tag=' + tagPayload)
-                .then(response => {
-                    commit('koleksiTagSingle_mutation', response.data.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        // Payment n Plans
-        getSubsOption: ({ commit }) => {
-            axs.get('/ahaapi/list_subscription')
-                .then(response => {
-                    commit('getSubsOption_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        getPromo: ({ commit }) => {
-            axs.get('/ahaapi/banner')
-                .then(response => {
-                    commit('getPromo_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        getBlogCategory: ({ commit }) => {
-            axs.get('/ahaapi/blog_category')
-                .then(response => {
-                    commit('getBlogCategory_mutation', response.data.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        blogSearch: ({ commit }, payload) => {
-            axs.post('/ahaapi/pencarian_blog', payload)
-                .then(response => {
-                    commit('blogSearch_mutation', response.data.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        searchBlogByCategory: ({ commit }, payload) => {
-            axs.get('/ahaapi/blog_by_category?id_category=' + payload)
-                .then(response => {
-                    commit('searchBlogByCategory_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        invoiceDetails: ({ commit }, data) => {
-            axs.post('/ahaapi/invoices', data)
-                .then(response => {
-                    window.location = 'https://app.midtrans.com/snap/v2/vtweb/' + response.data.token;
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        invoiceDetailsTrial: ({ commit }, data) => {
-            axs.post('/ahaapi/invoices', data)
-                .then(response => {
+			axs.get('/ahaapi/member')
+				.then(response => {
+					commit('getAccountDetail_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		// Book Library GET
+		koleksiBuku: ({ commit }) => {
+			axs.get('/ahaapi/koleksi_buku_member')
+				.then(response => {
+					commit('koleksiBuku_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		koleksiBukuFav: ({ commit }) => {
+			axs.get('/ahaapi/koleksi_buku_favorit')
+				.then(response => {
+					commit('koleksiBukuFav_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		koleksiBukuHighlight: ({ commit }) => {
+			axs.get('/ahaapi/koleksi_buku_highlight')
+				.then(response => {
+					commit('koleksiBukuHighlight_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		koleksiAudio: ({ commit }) => {
+			axs.get('/ahaapi/koleksi_audio_member')
+				.then(response => {
+					commit('koleksiAudio_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		koleksiTag: ({ commit }) => {
+			axs.get('/ahaapi/list_tag')
+				.then(response => {
+					commit('koleksiTag_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		koleksiTagSingle: ({ commit }, tagPayload) => {
+			axs.get('/ahaapi/tag_buku?tag=' + tagPayload)
+				.then(response => {
+					commit('koleksiTagSingle_mutation', response.data.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		// Payment n Plans
+		getSubsOption: ({ commit }) => {
+			axs.get('/ahaapi/list_subscription')
+				.then(response => {
+					commit('getSubsOption_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		getPromo: ({ commit }) => {
+			axs.get('/ahaapi/banner')
+				.then(response => {
+					commit('getPromo_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		getBlogCategory: ({ commit }) => {
+			axs.get('/ahaapi/blog_category')
+				.then(response => {
+					commit('getBlogCategory_mutation', response.data.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		blogSearch: ({ commit }, payload) => {
+			axs.post('/ahaapi/pencarian_blog', payload)
+				.then(response => {
+					commit('blogSearch_mutation', response.data.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		searchBlogByCategory: ({ commit }, payload) => {
+			axs.get('/ahaapi/blog_by_category?id_category=' + payload)
+				.then(response => {
+					commit('searchBlogByCategory_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		invoiceDetails: ({ commit }, data) => {
+			axs.post('/ahaapi/invoices', data)
+				.then(response => {
+					window.location = 'https://app.midtrans.com/snap/v2/vtweb/' + response.data.token;
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		invoiceDetailsTrial: ({ commit }, data) => {
+			axs.post('/ahaapi/invoices', data)
+				.then(response => {
 					location.reload();
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        invoiceSubsDownload: ({ commit }, payload) => {
-            axs.get('/ahaapi/download_invoice?id_transaksi=' + payload)
-                .then(response => {
-                    commit('invoiceSubsDownload_mutation', response.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        getPaymentHistory: ({ commit }) => {
-            axs.get('/ahaapi/riwayat_pembayaran')
-                .then(response => {
-                    commit('getPaymentHistory_mutation', response.data.data);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        // auth action
-        getMemberDetail: ({ commit }) => {
-            axs.get('ahaapi/member')
-                .then(response => {
-                    commit('getMemberDetail_mutation', response.data)
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
-        },
-        userLogin: ({ commit }, user) => {
-            axs.post('ahaapi/login_member', user)
-                .then(response => {
-                    commit('authSuccess_mutation', response)
-                    commit('showSnackbar', response.data.message)
-                })
-                .catch(err => {
-                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
-                    commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
-                    console.log(err.message)
-                })
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		invoiceSubsDownload: ({ commit }, payload) => {
+			axs.get('/ahaapi/download_invoice?id_transaksi=' + payload)
+				.then(response => {
+					commit('invoiceSubsDownload_mutation', response.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		getPaymentHistory: ({ commit }) => {
+			axs.get('/ahaapi/riwayat_pembayaran')
+				.then(response => {
+					commit('getPaymentHistory_mutation', response.data.data);
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		// auth action
+		getMemberDetail: ({ commit }) => {
+			axs.get('ahaapi/member')
+				.then(response => {
+					commit('getMemberDetail_mutation', response.data)
+				})
+				.catch(err => {
+					console.log(err.message);
+				})
+		},
+		userLogin: ({ commit }, user) => {
+			axs.post('ahaapi/login_member', user)
+				.then(response => {
+					commit('authSuccess_mutation', response)
+					commit('showSnackbar', response.data.message)
+				})
+				.catch(err => {
+					// commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
+					commit('authError_mutation', 'Login Gagal! Periksa Email dan Password Anda')
+					console.log(err.message)
+				})
 		},
 		postPesan: ({ commit }, data) => {
 			axs.post("ahaapi/kirim_pesan", data)
@@ -746,158 +754,158 @@ export default new Vuex.Store({
 					commit("showSnackbar", response.data.message);
 				})
 				.catch(err => {
-                    // commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
-                    commit('authError_mutation', 'Galat!')
-                    console.log(err.message)
-                })
+					// commit('showSnackbar', 'Login Gagal! Periksa Email dan Password Anda')
+					commit('authError_mutation', 'Galat!')
+					console.log(err.message)
+				})
 		},
-        userRegister: ({ commit }, user) => {
-            axs.post('ahaapi/register_member', user)
-                .then(response => {
-                    commit('authSuccess_mutation', response)
-                    commit('showSnackbar', response.data.message)
-                })
-                .catch(err => {
-                    commit('registerError_mutation', 'Email Sudah Terdaftar!')
-                    console.log(err.message)
-                })
-        },
-        loginFirebase: ({ commit }) => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider)
-                .then(function(result) {
-                    const email = result.user.email
-                    axs.post('ahaapi/login_member', {
-                            email: email,
-                            password: '',
-                            type: '3'
-                        })
-                        .then(response => {
-                            commit('authSuccess_mutation', response)
-                        })
-                })
-                .catch(function(error) {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    const email = error.email;
-                    const credential = error.credential;
-                    console.log(errorCode, errorMessage, email, credential);
-                })
-        },
-        loginFacebook: ({ commit }) => {
-            const provider = new firebase.auth.FacebookAuthProvider();
-            firebase.auth().signInWithPopup(provider)
-                .then(function(result) {
-                    console.log(result)
-                    const email = result.user.email
-                    axs.post('ahaapi/login_member', {
-                            email: email,
-                            password: '',
-                            type: '2'
-                        })
-                        .then(response => {
-                            commit('authSuccess_mutation', response)
-                        })
-                })
-                .catch(function(error) {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    const email = error.email;
-                    const credential = error.credential;
-                    console.log(errorCode, errorMessage, email, credential);
-                })
-        },
-        registerFb: ({ commit }) => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider)
-                .then(function(result) {
-                    // const email = result.user.email
-                    const email = result.user.email
-                    const pass = result.user.uid
-                    console.log(result)
-                    axs.post('ahaapi/register_member', {
-                            email: email,
-                            password: pass,
-                            type: '2'
-                        })
-                        .then(response => {
-                            commit('authSuccess_mutation', response)
-                        })
-                })
-                .catch(function(error) {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    const email = error.email;
-                    const credential = error.credential;
-                    const dataer = error.response.data;
-                    console.log(errorCode, errorMessage, email, credential, dataer);
-                })
+		userRegister: ({ commit }, user) => {
+			axs.post('ahaapi/register_member', user)
+				.then(response => {
+					commit('authSuccess_mutation', response)
+					commit('showSnackbar', response.data.message)
+				})
+				.catch(err => {
+					commit('registerError_mutation', 'Email Sudah Terdaftar!')
+					console.log(err.message)
+				})
+		},
+		loginFirebase: ({ commit }) => {
+			const provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithPopup(provider)
+				.then(function (result) {
+					const email = result.user.email
+					axs.post('ahaapi/login_member', {
+						email: email,
+						password: '',
+						type: '3'
+					})
+						.then(response => {
+							commit('authSuccess_mutation', response)
+						})
+				})
+				.catch(function (error) {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					const email = error.email;
+					const credential = error.credential;
+					console.log(errorCode, errorMessage, email, credential);
+				})
+		},
+		loginFacebook: ({ commit }) => {
+			const provider = new firebase.auth.FacebookAuthProvider();
+			firebase.auth().signInWithPopup(provider)
+				.then(function (result) {
+					console.log(result)
+					const email = result.user.email
+					axs.post('ahaapi/login_member', {
+						email: email,
+						password: '',
+						type: '2'
+					})
+						.then(response => {
+							commit('authSuccess_mutation', response)
+						})
+				})
+				.catch(function (error) {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					const email = error.email;
+					const credential = error.credential;
+					console.log(errorCode, errorMessage, email, credential);
+				})
+		},
+		registerFb: ({ commit }) => {
+			const provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithPopup(provider)
+				.then(function (result) {
+					// const email = result.user.email
+					const email = result.user.email
+					const pass = result.user.uid
+					console.log(result)
+					axs.post('ahaapi/register_member', {
+						email: email,
+						password: pass,
+						type: '2'
+					})
+						.then(response => {
+							commit('authSuccess_mutation', response)
+						})
+				})
+				.catch(function (error) {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					const email = error.email;
+					const credential = error.credential;
+					const dataer = error.response.data;
+					console.log(errorCode, errorMessage, email, credential, dataer);
+				})
 		},
 		registerFirebase: ({ commit }) => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider)
-                .then(function(result) {
-                    // const email = result.user.email
-                    const email = result.user.email
-                    const pass = result.user.uid
-                    console.log(result)
-                    axs.post('ahaapi/register_member', {
-                            email: email,
-                            password: pass,
-                            type: '3'
-                        })
-                        .then(response => {
-                            commit('authSuccess_mutation', response)
-                        })
-                })
-                .catch(function(error) {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    const email = error.email;
-                    const credential = error.credential;
-                    const dataer = error.response.data;
-                    console.log(errorCode, errorMessage, email, credential, dataer);
-                })
-        },
-        userLogout: ({ commit }, user) => {
-            return new Promise((resolve, reject) => {
-                commit('authDown_mutation')
-                localStorage.removeItem('x-token')
-                resolve()
-            })
-        },
-        forgotPassword: ({ commit }, data) => {
-            axs.post('/ahaapi/lupa_password', data)
-                .then(response => {
-                    commit('showSnackbar', 'Berhasil dikirim')
-				}).catch(err => {
-                    commit('showSnackbar', err.message)
-                })
-        },
-        changePassword: ({ commit }, data) => {
-			axs.post("/ahaapi/ubah_password", data)
-			.then(response => {
-				commit('showSnackbar', response.data.message)
-				router.push('/home')
-			});
+			const provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithPopup(provider)
+				.then(function (result) {
+					// const email = result.user.email
+					const email = result.user.email
+					const pass = result.user.uid
+					console.log(result)
+					axs.post('ahaapi/register_member', {
+						email: email,
+						password: pass,
+						type: '3'
+					})
+						.then(response => {
+							commit('authSuccess_mutation', response)
+						})
+				})
+				.catch(function (error) {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					const email = error.email;
+					const credential = error.credential;
+					const dataer = error.response.data;
+					console.log(errorCode, errorMessage, email, credential, dataer);
+				})
 		},
-        resetPassword: ({ commit }, token) => {
-            console.log(token)
-            localStorage.setItem('x-token', token)
-        },
-        goReset: ({ commit }, data) => {
-            axs.post('/ahaapi/ubah_password', data)
-                .then(response => {
-                    console.log(response.data)
-                    commit('showSnackbar', response.data.message)
-                    localStorage.removeItem('x-token')
-                    router.push('/login')
-                })
-                .catch(err => {
-                    console.log(err.message)
-                    commit('showSnackbar', err.message)
-                })
-        },
+		userLogout: ({ commit }, user) => {
+			return new Promise((resolve, reject) => {
+				commit('authDown_mutation')
+				localStorage.removeItem('x-token')
+				resolve()
+			})
+		},
+		forgotPassword: ({ commit }, data) => {
+			axs.post('/ahaapi/lupa_password', data)
+				.then(response => {
+					commit('showSnackbar', 'Berhasil dikirim')
+				}).catch(err => {
+					commit('showSnackbar', err.message)
+				})
+		},
+		changePassword: ({ commit }, data) => {
+			axs.post("/ahaapi/ubah_password", data)
+				.then(response => {
+					commit('showSnackbar', response.data.message)
+					router.push('/home')
+				});
+		},
+		resetPassword: ({ commit }, token) => {
+			console.log(token)
+			localStorage.setItem('x-token', token)
+		},
+		goReset: ({ commit }, data) => {
+			axs.post('/ahaapi/ubah_password', data)
+				.then(response => {
+					console.log(response.data)
+					commit('showSnackbar', response.data.message)
+					localStorage.removeItem('x-token')
+					router.push('/login')
+				})
+				.catch(err => {
+					console.log(err.message)
+					commit('showSnackbar', err.message)
+				})
+		},
 
 		// Footerpage action
 		getTerms: ({ commit }) => {
@@ -930,6 +938,13 @@ export default new Vuex.Store({
 					commit("getAbout_mutation", response.data);
 				})
 		},
+		getPartnership: ({ commit }) => {
+			axs.get("/ahaapi/partner")
+				.then(response => {
+					commit("getPartnership_mutation", response.data);
+					console.log(response.data);
+				})
+		},
 		getContact: ({ commit }) => {
 			axs.get("/ahaapi/contact")
 				.then(response => {
@@ -940,6 +955,12 @@ export default new Vuex.Store({
 			axs.get("/ahaapi/karir")
 				.then(response => {
 					commit("getCareer_mutation", response.data);
+				})
+		},
+		getCareerSetting: ({ commit }) => {
+			axs.get("/ahaapi/setting_career")
+				.then(response => {
+					commit("getCareerSetting_mutation", response.data);
 				})
 		},
 		getBlog: ({ commit }) => {
@@ -981,5 +1002,5 @@ export default new Vuex.Store({
 		invoiceDownloadDetail: state => state.invoiceDownloadDetail,
 		careerlist: state => state.career.data,
 		career: state => state.detailCareer.data
-    }
+	}
 });
