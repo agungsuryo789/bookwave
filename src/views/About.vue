@@ -2,13 +2,13 @@
 	<div class="about">
 		<NavbarSection />
 		<div v-for="item in about" :key="item.id_about_us">
-			<AboutHeader v-bind:title="item.judul" v-bind:subtitle="item.deskripsi_judul"/>
+			<AboutHeader v-bind:title="item.judul" v-bind:subtitle="item.deskripsi_judul" v-bind:banner="item.banner_img"/>
 		</div>
 
 		<v-container style="margin-top:50px">
 			<v-row v-for="item in about" :key="item.id_about_us">
 				<v-col cols="12" md="2">
-					<v-img src="@/assets/image/annie-spratt-mppDYKjJ7II-unsplash.png"></v-img>
+					<v-img :src="item.deskripsi_img"></v-img>
 				</v-col>
 				<v-col cols="12" md="10">
 					<p class="larger"> {{ item.deskripsi }}</p>

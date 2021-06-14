@@ -8,7 +8,8 @@
 				</div>
 			</v-col>
 			<v-col md="7" class="px-0 py-3">
-				<v-img src="@/assets/image/Group21.png" height="240px" width="auto" position="right 25%" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
+				<v-img :src="banner" height="240px" width="auto" position="right 25%" gradient="to right, rgba(255, 255, 255), transparent"></v-img>
+				<!-- <v-img src="@/assets/image/Group21.png" height="240px" width="auto" position="right 25%" gradient="to right, rgba(255, 255, 255), transparent"></v-img> -->
 			</v-col>
 		</v-row>
 	</div>
@@ -19,7 +20,8 @@ export default {
   name: "AboutHeader",
   props: {
     title: String,
-    subtitle: String
+    subtitle: String,
+	banner: String
   }
 }
 </script>
